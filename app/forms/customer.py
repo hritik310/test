@@ -10,15 +10,7 @@ class CustomerCreateForm(ModelForm):
         'placeholder':'Enter passport_id'
         }
     ))
-    passport_upload = forms.FileField(required = True)
-
-    passport_expiry = forms.DateField(required = True,widget=forms.DateInput(
-        attrs={
-        'class':'form-control',
-        'type': 'date',
-        'placeholder':'Enter Passport Expiry date'
-        }
-    ))
+    
     name = forms.CharField(required = True,widget=forms.TextInput(
         attrs={
         'class':'form-control',
@@ -45,10 +37,38 @@ class CustomerCreateForm(ModelForm):
         }
     ))
 
+    rfc = forms.CharField(required = False,widget=forms.TextInput(
+        attrs={
+        'class':'form-control',
+        'placeholder':'Enter rfc'
+        }
+    ))
+
+    curp = forms.CharField(required = False,widget=forms.TextInput(
+        attrs={
+        'class':'form-control',
+        'placeholder':'Enter your curp'
+        }
+    ))
+
+    state = forms.CharField(required = True,widget=forms.TextInput(
+        attrs={
+        'class':'form-control',
+        'placeholder':'Enter State'
+        }
+    ))
+
+    city= forms.CharField(required = True,widget=forms.TextInput(
+        attrs={
+        'class':'form-control',
+        #'placeholder':'Enter your curp'
+        }
+    ))
+
 
     class Meta:
         model = Customer
-        fields = ["passport_id","passport_upload","passport_expiry","name","country","phone","address"]
+        fields = ["passport_id","name","country","phone","address","city","state","rfc","curp"]
 
 
     def clean(self):

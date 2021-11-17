@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 
 from django.db import models
-import datetime
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
@@ -10,6 +9,7 @@ from django.utils import timezone
 from .manager import CustomUserManager
 from django_countries.fields import CountryField
 from phone_field import PhoneField
+from cities_light.models import City,Country
 # from multiselectfield import MultiSelectField
 # Create your models here.
 class User(AbstractBaseUser,PermissionsMixin):
@@ -40,15 +40,19 @@ class User(AbstractBaseUser,PermissionsMixin):
 # Create your models here.
 
 
+
 class Customer(models.Model):
 	passport_id	= models.PositiveIntegerField(default=1)
-	passport_upload = models.FileField(null=True, blank=True)
-	passport_expiry = models.DateField(_('Date'), default=datetime.date.today)
 	name 		= models.CharField(max_length=255,default="")
 	country 	= models.CharField(max_length=255,default="")
 	phone 		= PhoneField(blank=True, help_text='Contact phone number',default="")
 	address		= models.CharField(max_length=255,default="")
-
+	rfc         = models.IntegerField(max_length=12,default="")
+	curp        = models.CharField(max_length=255,default="")
+	city        = models.CharField(max_length=255,default="")
+	state       = models.CharField(max_length=255,default="")
+	
+	
 
 class Agencies(models.Model):
 	INACTIVE = 0

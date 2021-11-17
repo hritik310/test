@@ -9,7 +9,7 @@ from app.forms.customer import *
 @login_required
 def create(request):
     if request.method == 'POST':
-        customerform = CustomerCreateForm(request.POST,request.FILES)
+        customerform = CustomerCreateForm(request.POST)
         if customerform.is_valid():
             if customerform.save():
                 messages.success(request,'Customer Added Successfully.')
@@ -32,15 +32,15 @@ def update(request,id):
     customer = Customer.objects.get(id=id)
     print(customer)
     if request.method == 'POST':
-        if (request.FILES.get('pass_image',None)):
-            img = request.FILES['pass_image'];
-            customer.passport_upload = img
         customer.passport_id = request.POST.get('passport_Id')
-        customer.passport_expiry = request.POST.get('passport_expiry')
         customer.name = request.POST.get('name')
         customer.country = request.POST.get('country')
         customer.phone = request.POST.get('number')
         customer.address = request.POST.get('address')
+        customer.city    =request.POST.get('city')
+        customer.rfc     =request.POST.get('rfc')
+        customer.state   =request.POST.get('state')
+        customer.curp   =request.POST.get('curp')
         
         
         customer.save()
