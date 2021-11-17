@@ -11,6 +11,9 @@ class CustomerCreateForm(ModelForm):
         }
     ))
     
+    
+    #ghhjhbjhjjhkj///
+    
     name = forms.CharField(required = True,widget=forms.TextInput(
         attrs={
         'class':'form-control',
