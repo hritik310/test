@@ -10,10 +10,15 @@ class CustomerCreateForm(ModelForm):
         'placeholder':'Enter passport_id'
         }
     ))
-    
-    
-    #ghhjhbjhjjhkj///
-    
+    passport_upload = forms.FileField(required = True)
+
+    passport_expiry = forms.DateField(required = True,widget=forms.DateInput(
+        attrs={
+        'class':'form-control',
+        'type': 'date',
+        'placeholder':'Enter Passport Expiry date'
+        }
+    ))
     name = forms.CharField(required = True,widget=forms.TextInput(
         attrs={
         'class':'form-control',
@@ -43,7 +48,7 @@ class CustomerCreateForm(ModelForm):
 
     class Meta:
         model = Customer
-        fields = ["passport_id","name","country","phone","address"]
+        fields = ["passport_id","passport_upload","passport_expiry","name","country","phone","address"]
 
 
     def clean(self):

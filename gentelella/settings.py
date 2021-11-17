@@ -30,6 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['184.168.122.169']
 
+# ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -95,6 +97,20 @@ DATABASES = {
     }
 }
 
+
+# DATABASES = {
+#     'default': {
+#        'ENGINE': 'django.db.backends.mysql', 
+#        'NAME': 'py_db',
+#        'HOST': 'localhost',
+#        'PORT': '3306',
+#        'USER': 'py_db',
+#        'PASSWORD': 'It6j90h#',
+#        'OPTIONS': {
+#             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
+#         }
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

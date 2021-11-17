@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+import datetime
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
@@ -41,6 +42,8 @@ class User(AbstractBaseUser,PermissionsMixin):
 
 class Customer(models.Model):
 	passport_id	= models.PositiveIntegerField(default=1)
+	passport_upload = models.FileField(null=True, blank=True)
+	passport_expiry = models.DateField(_('Date'), default=datetime.date.today)
 	name 		= models.CharField(max_length=255,default="")
 	country 	= models.CharField(max_length=255,default="")
 	phone 		= PhoneField(blank=True, help_text='Contact phone number',default="")

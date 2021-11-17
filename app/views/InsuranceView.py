@@ -17,6 +17,7 @@ def create(request):
     if request.method == 'POST':
         insurance=Insurance()
         print(request.POST)
+        #jfgjffjgfhh
         insurance.Type = request.POST.get('type')
         insurance.policy_number = request.POST.get('policy_number')
         insurance.date = request.POST.get('ins_date')

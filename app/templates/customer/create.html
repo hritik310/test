@@ -13,7 +13,7 @@
           <div class="x_panel">
             <div class="x_content">
 
-              <form class="form-horizontal form-label-left" method="POST" novalidate>
+              <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data"novalidate>
                 {% csrf_token %}
 
                 <!--p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
@@ -27,6 +27,35 @@
                   {{form.passport_id}}
                    {% if form.passport_id.errors %}
                   {% for error in form.passport_id.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+                  </div>
+                </div>
+                <div class="item form-group  {% if form.passport_upload.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Upload Passort Image <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  {{form.passport_upload}}
+                   {% if form.passport_upload.errors %}
+                  {% for error in form.passport_upload.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+                  </div>
+                </div>
+
+                <div class="item form-group  {% if form.passport_expiry.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Passport Expiry <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  {{form.passport_expiry}}
+                   {% if form.passport_expiry.errors %}
+                  {% for error in form.passport_expiry.errors %}
                     <span class="error text-danger">
                       <strong>{{ error|escape }}</strong>
                     </span>
