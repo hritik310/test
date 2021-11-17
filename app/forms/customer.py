@@ -10,6 +10,7 @@ class CustomerCreateForm(ModelForm):
         'placeholder':'Enter passport_id'
         }
     ))
+    
     name = forms.CharField(required = True,widget=forms.TextInput(
         attrs={
         'class':'form-control',
