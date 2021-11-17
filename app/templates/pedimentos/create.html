@@ -1,0 +1,322 @@
+{% extends "layouts/admin.html" %}
+
+{% block title %} Create Pedimentos {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+
+  <style>
+    .boxes {
+    display: flex;
+    width: 85%;
+   margin-left: 45px;
+}
+input#lock1 {
+    width: 140px;
+}
+
+input#lock2 {
+    width: 140px;
+}
+
+input#lock3 {
+    width: 140px;
+}
+input#lock4 {
+    width: 140px;
+}
+input#lock5 {
+    width: 140px;
+}
+input#lock6 {
+    width: 140px;
+}
+input#lock7 {
+    width: 140px;
+}
+input#lock8 {
+    width: 140px;
+}
+
+label.control-label.col-md-3.col-sm-3.col-xs-12 {
+    text-align: left;
+}
+textarea#address {
+    width: 800px;
+    margin-left: 5px !important;
+}
+
+select#supplier {
+    width: 760px;
+    margin-left: 48px;
+}
+input[type="file"] {
+    margin-left: 49px;
+    width: 760px;
+}
+
+hr.border {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.row.mtop {
+    margin-top: 30px;
+}
+  </style>
+  <link href="/static/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+
+              <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data"novalidate>
+                {% csrf_token %}
+
+                <!--p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
+                </p-->
+                <span class="section">Create Pedimentos</span>
+                <div class="row box-1">
+                <div class="col-md-6">
+                  <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Reference Id <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input id="passport_Id" class="form-control col-md-7 col-xs-12" name="passport_Id"
+                       value = "" required="required" type="number">
+                    </div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Pedimento No <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="name" class="form-control col-md-7 col-xs-12" name="name"
+                    value = "" 
+                    required="required" type="number">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row box-2">
+               <div class="col-md-6">
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Date <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" id="address" name="address" value = ""required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+              </div>
+               <div class="col-md-6">
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Importer<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select class="form-control col-md-7 col-xs-12" name="country" id="country" required="required">
+                      <option value="" >Choose Customer</option>
+                      {% for a in custom %}
+                      <option value="{{a.name}}">{{a.name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Office<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="office" name="office" value = ""required="required"class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Signature<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="signature" name="signature" value = ""required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="col-md-6">
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Payment<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="number" id="payment" name="payment" value = ""required="required"class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+              </div>
+               <div class="col-md-6">
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Cove<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="cove" name="cove" value = ""required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+               <div class="col-md-6">
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Doda<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="doda" name="doda" value = ""required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Ready<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="ready" name="ready" value = ""required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+              </div>
+              </div>
+              <hr class="border">
+              <div class="row mtop">
+              <div class="item form-group">
+                  <label class="control-label col-md-1 col-sm-3 col-xs-12" for="number">Supplier<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select class="form-control col-md-7 col-xs-12" name="supplier" id="supplier" required="required">
+                      <option value="" >Choose Supplier</option>
+                      {% for provider in provide %}
+                      <option value="{{provider.name}}">{{provider.name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mtop">
+                <div class="item form-group">
+                  <label class="control-label col-md-1 col-sm-3 col-xs-12" for="number">Document<span class="required">*</span>
+                  </label>
+                  <div class="col-md-2 col-sm-2 col-xs-12">
+                    <input type="file" class="form-control" name="file"  multiple>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row mtop">
+               <div class="boxes">
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">lock1<span class="required">*</span>
+                  </label>
+                  <div class="col-md-2 col-sm-2 col-xs-12">
+                    <input type="text" id="lock1" name="lock1" value = ""class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">lock2<span class="required">*</span>
+                  </label>
+                  <div class="col-md-2 col-sm-2 col-xs-12">
+                    <input type="text" id="lock2" name="lock2" value = ""class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">lock3<span class="required">*</span>
+                  </label>
+                  <div class="col-md-2 col-sm-2 col-xs-12">
+                    <input type="text" id="lock3" name="lock3" value = ""class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">lock4<span class="required">*</span>
+                  </label>
+                  <div class="col-md-2 col-sm-2 col-xs-12">
+                    <input type="text" id="lock4" name="lock4" value = ""class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="boxes">
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">lock5<span class="required">*</span>
+                  </label>
+                  <div class="col-md-2 col-sm-2 col-xs-12">
+                    <input type="text" id="lock5" name="lock5" value = ""class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">lock6<span class="required">*</span>
+                  </label>
+                  <div class="col-md-2 col-sm-2 col-xs-12">
+                    <input type="text" id="lock6" name="lock6" value = ""class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">lock7<span class="required">*</span>
+                  </label>
+                  <div class="col-md-2 col-sm-2 col-xs-12">
+                    <input type="text" id="lock7" name="lock7" value = "" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">lock8<span class="required">*</span>
+                  </label>
+                  <div class="col-md-2 col-sm-2 col-xs-12">
+                    <input type="text" id="lock8" name="lock8" value = ""class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mtop">
+                <div class="item form-group">
+                  <label class="control-label col-md-1 col-sm-3 col-xs-12" for="email">Remarks <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <textarea  rows="4" cols="50" id="address" name="remark" value = ""required="required" class="form-control col-md-7 col-xs-12"></textarea>
+                  </div>
+                </div>
+              </div>
+               
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-6 col-md-offset-3">
+                    <button type="submit" class="btn btn-primary"><a href="{% url 'pedimentos'%}"style="color:white">Cancel</a></button>
+                    <button id="send" type="submit" class="btn btn-success">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block javascripts %}
+  {{ block.super }}
+  <!-- validator -->
+  <script src="/static/vendors/validator/validator.js"></script>
+    
+{% endblock javascripts %}
+
+
+

@@ -1,0 +1,95 @@
+
+{% extends "layouts/admin.html" %}
+
+{% block title %} Create Provider {% endblock title %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+
+              <form class="form-horizontal form-label-left" method="POST" novalidate>
+                {% csrf_token %}
+
+                <!--p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
+                </p-->
+                <span class="section">Provider Add</span>
+
+                <div class="item form-group {% if form.name.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                   {{form.name}}
+                   {% if form.name.errors %}
+                  {% for error in form.name.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+                  </div>
+                </div>
+                <div class="item form-group {% if form.owner.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email"> Owner <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{form.owner}}
+                   {% if form.owner.errors %}
+                  {% for error in form.owner.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+                  </div>
+                </div>
+                <div class="item form-group {% if form.email.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Address<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  {{form.email}}
+                  {% if form.email.errors %}
+                  {% for error in form.email.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+                  </div>
+                </div>
+                <div class="item form-group {% if form.tax_id.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Tax ID<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  {{form.tax_id}}
+                  {% if form.tax_id.errors %}
+                  {% for error in form.tax_id.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+                  </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-6 col-md-offset-3">
+                    <button type="submit" class="btn btn-primary"><a href="{% url 'provider'%}"style="color:white">Cancel</a></button>
+                    <button id="send" type="submit" class="btn btn-success">Add</a></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+

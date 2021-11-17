@@ -1,0 +1,14 @@
+{% if messages %}
+    {% for message in messages %}
+    <div {% if message.tags %} class="top_nav alert alert-{{ message.tags }} alert-block" id="messages" {% endif %}>
+	<button type="button" class="close" data-dismiss="alert">×</button>	
+        <strong>{{ message }}</strong>
+    </div>
+    {% endfor %}
+{% endif %}
+<script>
+    var message_ele = document.getElementById("messages");
+    setTimeout(function(){ 
+        message_ele.style.display = "none"; 
+    }, 5000);
+</script>

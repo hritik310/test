@@ -1,0 +1,99 @@
+{% extends "layouts/admin.html" %}
+
+{% block title %} Update Inventory {% endblock title %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+
+              <form class="form-horizontal form-label-left" method="POST" novalidate>
+                {% csrf_token %}
+
+                <!--p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
+                </p-->
+                <span class="section">Update Inventory</span>
+
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Order No <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="order_no" class="form-control col-md-7 col-xs-12"name="order_no"
+                     value = "{{inventory_id.order_no}}"   required="required" type="number">
+                  </div>
+                </div>
+
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Quantity <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="quantity" class="form-control col-md-7 col-xs-12" name="quantity"
+                    value = "{{inventory_id.quantity}}" 
+                    required="required" type="number">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Unit Type <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="number" id="unit_type" name="unit_type" value = "{{inventory_id.unit_type}}"required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Vehicle<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="vechicle" name="vechicle" value = "{{inventory_id.vechicle}}"  required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Description<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="description" name="description" value = "{{inventory_id.description}}"required="required"class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Price<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="number" id="price" name="price" value = "{{inventory_id.price}}"required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Price Total<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="number" id="price_total" name="price_total" value = "{{inventory_id.price_total}}"required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-6 col-md-offset-3">
+                    <button type="submit" class="btn btn-primary"><a href="{% url 'inventory'%}"style="color:white">Cancel</a></button>
+                    <button id="send" type="submit" class="btn btn-success">Update</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block javascripts %}
+  {{ block.super }}
+  <!-- validator -->
+  <script src="/static/vendors/validator/validator.js"></script>
+{% endblock javascripts %}
+
+
+
