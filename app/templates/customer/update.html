@@ -13,7 +13,7 @@
           <div class="x_panel">
             <div class="x_content">
 
-              <form class="form-horizontal form-label-left" method="POST" novalidate>
+              <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
 
                 <!--p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
@@ -28,6 +28,26 @@
                      value = "{{customer.passport_id}}"   required="required" type="number">
                   </div>
                 </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Upload Passport Image <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    {% if customer.passport_upload %}
+                    <img  src ="{{ customer.passport_upload.url}}" width = "40px" height="40px"/><br/>
+                    {% endif %}
+                    <input id="pass_image" class="form-control col-md-7 col-xs-12" name="pass_image"
+                      type="file">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Passport Expiry <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="passport_expiry" class="form-control col-md-7 col-xs-12" name="passport_expiry"
+                     value = "{{customer.passport_expiry|date:'Y-m-d'}}"   required="required" type="date">
+                  </div>
+                </div>
+          
 
                 <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
@@ -46,27 +66,24 @@
                   </div>
                 </div>
 
-                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">City<span class="required">*</span>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">City <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select name="city" class="form-control">
-                    <option value="">{{customer.city}}</option>
-                    <option value="Indian">Indian</option>
-                    </select>
+                    <input id="city" class="form-control col-md-7 col-xs-12" name="city"
+                    value = "{{customer.city}}" 
+                    required="required" type="text">
                   </div>
                 </div>
 
                 
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">State<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">State <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select name="state" class="form-control">
-                    <option value="">{{customer.state}}</option>
-                    <option value="Punjab">Punjab</option>
-                    <option value="Haryana">Haryana</option>
-                    </select>
+                    <input id="state" class="form-control col-md-7 col-xs-12" name="state"
+                    value = "{{customer.state}}" 
+                    required="required" type="text">
                   </div>
                 </div>
 
