@@ -7,7 +7,16 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def shipper(request):
-    context = {'shipper_list':Shipper_Exports.objects.all()}
+    startDate = request.GET.get('start_date',False)
+    endDate = request.GET.get('end_date',False)
+    shipper = Shipper_Exports.objects.all()
+
+    if startDate and endDate:
+        shipper = Shipper_Exports.objects.filter(created_at__range=(startDate, endDate))
+        print(shipper)
+
+
+    context = {'shipper_list':shipper}
     return render(request,"shipper/index.html", context)
 
 
