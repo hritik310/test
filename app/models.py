@@ -140,6 +140,8 @@ class Insurance(models.Model):
 		make 	= models.CharField(max_length=255,default="")
 		paid = models.IntegerField(blank=True, null=True)
 		year 	= models.IntegerField(max_length=255,default="")
+		created_at = models.DateTimeField(auto_now_add=True,null=True)
+		updated_at =  models.DateTimeField(auto_now=True)
 		note	= models.CharField(max_length=255,default="")
 
 class Temporary_Permits(models.Model):
