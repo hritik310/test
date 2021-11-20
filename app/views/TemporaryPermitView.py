@@ -7,7 +7,21 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    context = {'permits_list':Temporary_Permits.objects.all()}
+    startDate = request.GET.get('start_date',False)
+    endDate = request.GET.get('end_date',False)
+    paid = request.GET.get('paid',False)
+    temp_permits=Temporary_Permits.objects.all()
+
+    if startDate and endDate:
+        temp_permits = Temporary_Permits.objects.filter(created_at__date__range=(startDate, endDate))
+        print(temp_permits.query)
+
+    if paid:
+        temp_permits = temp_permits.filter(paid=paid)
+        print(temp_permits.query)
+
+
+    context = {'permits_list':temp_permits}
     return render(request,"temp_permits/index.html", context)
 
 def create(request):

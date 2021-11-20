@@ -7,20 +7,23 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def shipper(request):
-    if request.method == "POST":
-        startDate = request.POST.get('start_date',False)
-        endDate = request.POST.get('end_date',False)
+    startDate = request.GET.get('start_date',False)
+    endDate = request.GET.get('end_date',False)
+    paid = request.GET.get('paid',False)
+    shipper=Shipper_Exports.objects.all()
 
-        if startDate and endDate:
-            shipper = Shipper_Exports.objects.filter(created_at__date__range=(startDate, endDate))
-            print(shipper.query)
+    if startDate and endDate:
+        shipper = Shipper_Exports.objects.filter(created_at__date__range=(startDate, endDate))
+        print(shipper.query)
+
+    if paid:
+        shipper = shipper.filter(paid=paid)
+        print(shipper.query)
 
 
-        context = {'shipper_list':shipper}
-        return render(request,"shipper/index.html", context)
 
-    context = {'shipper_list':Shipper_Exports.objects.all()}
-    return render(request,"shipper/index.html", context)
+    context = {'shipper_list':shipper}
+    return render(request,"shipper/index.html",context)
 
 
 @login_required

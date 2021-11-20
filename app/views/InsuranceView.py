@@ -7,19 +7,21 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def insurance(request):
-    if request.method == "POST":
-        startDate=request.POST.get('start_date',False)
-        endDate=request.POST.get('end_date',False)
-        insurance=Insurance.objects.all()
+    startDate=request.GET.get('start_date',False)
+    endDate=request.GET.get('end_date',False)
+    paid = request.GET.get('paid',False)
+    insurance=Insurance.objects.all()
 
-        if startDate and endDate:
-            insurance = Insurance.objects.filter(created_at__date__range=(startDate, endDate))
+    if startDate and endDate:
+        insurance = Insurance.objects.filter(created_at__date__range=(startDate, endDate))
 
-        context = {'insurance_list':insurance}
-        return render(request,"insurance/index.html",context)
+    if paid:
+        insurance = insurance.filter(paid=paid)
+        print(insurance.query)
 
-    context = {'insurance_list':Insurance.objects.all()}
-    return render(request,"insurance/index.html",context) 
+    context = {'insurance_list':insurance}
+    return render(request,"insurance/index.html",context)
+
 
 
 

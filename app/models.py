@@ -120,7 +120,7 @@ class Shipper_Exports(models.Model):
 	make 		= models.CharField(max_length=255,default="")
 	year 		= models.IntegerField(max_length=255,default="")
 	note	 	= models.CharField(max_length=255,default="")
-	paid        = models.IntegerField(blank=True, null=True)
+	paid        = models.IntegerField(default=0)
 	created_at = models.DateTimeField(auto_now_add=True,null=True)
 	updated_at =  models.DateTimeField(auto_now=True)
 
@@ -138,7 +138,7 @@ class Insurance(models.Model):
 		days 	= models.IntegerField(max_length=255,default="")
 		vin 	= models.CharField(max_length=255,default="")
 		make 	= models.CharField(max_length=255,default="")
-		paid = models.IntegerField(blank=True, null=True)
+		paid = models.IntegerField(default=0)
 		year 	= models.IntegerField(max_length=255,default="")
 		created_at = models.DateTimeField(auto_now_add=True,null=True)
 		updated_at =  models.DateTimeField(auto_now=True)
@@ -159,7 +159,9 @@ class Temporary_Permits(models.Model):
 		permit_make 	= models.CharField(max_length=255,default="")
 		permit_year 	= models.IntegerField(max_length=255,default="")
 		permit_note		= models.CharField(max_length=255,default="")
-		paid            = models.IntegerField(blank=True, null=True)
+		paid            = models.IntegerField(default=0)
+		created_at = models.DateTimeField(auto_now_add=True,null=True)
+		updated_at =  models.DateTimeField(auto_now=True)
 
 
 class Released(models.Model):
@@ -171,7 +173,9 @@ class Released(models.Model):
 	make = models.CharField(max_length=255,default="")
 	year = models.PositiveIntegerField()
 	note = models.TextField()
-	paid  = models.IntegerField(blank=True, null=True)
+	paid  = models.IntegerField(default=0)
+	created_at = models.DateTimeField(auto_now_add=True,null=True)
+	updated_at =  models.DateTimeField(auto_now=True)
 
 
 

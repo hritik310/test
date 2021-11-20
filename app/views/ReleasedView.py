@@ -7,8 +7,22 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def released(request):
-    context = {'released_list':Released.objects.all()}
+    startDate = request.GET.get('start_date',False)
+    endDate = request.GET.get('end_date',False)
+    paid = request.GET.get('paid',False)
+    released=Released.objects.all()
+
+    if startDate and endDate:
+        released = Released.objects.filter(created_at__date__range=(startDate, endDate))
+        print(released.query)
+
+    if paid:
+        released = released.filter(paid=paid)
+        print(released.query)
+
+    context = {'released_list':released}
     return render(request,"released/index.html", context)
+
 
 @login_required
 def create(request):
