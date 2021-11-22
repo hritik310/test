@@ -23,7 +23,14 @@ def create(request):
 
 @login_required
 def customer(request):
-    context = {'employee_list':Customer.objects.all()}
+    startDate = request.GET.get('start_date',False)
+    endDate = request.GET.get('end_date',False)
+    customer=Customer.objects.all()
+
+    if startDate and endDate:
+        customer = Customer.objects.filter(created_at__date__range=(startDate, endDate))
+        print(customer.query)
+    context = {'employee_list':customer}
     return render(request,"customer/index.html",context)
 
 

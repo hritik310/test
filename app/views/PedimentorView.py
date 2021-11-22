@@ -7,9 +7,17 @@ from django.urls import reverse
 from app.helper import *
 
 
+
 @login_required
 def index(request):
-    context = {'pedimentos_list':Pedimentos.objects.all()}
+    startDate = request.GET.get('start_date',False)
+    endDate = request.GET.get('end_date',False)
+    pedimentor=Pedimentos.objects.all()
+
+    if startDate and endDate:
+        pedimentor = Pedimentos.objects.filter(created_at__date__range=(startDate, endDate))
+        print(pedimentor.query)
+    context = {'pedimentos_list':pedimentor}
     return render(request,"pedimentos/index.html",context )
 
 @login_required
@@ -50,6 +58,56 @@ def create(request):
         return redirect('/pedimentos')
 
     return render(request,"pedimentos/create.html",{'custom':customer,'provide':provider})
+    #     pedimentorform = PedimentorCreateForm(request.POST,request.FILES)
+    #     if pedimentorform.is_valid():
+    #         if pedimentorform.save():
+    #             messages.success(request,'Pedimentos Added Successfully.')
+    #             return redirect('/pedimentos')
+
+    #     else:
+    #         return render(request,"pedimentos/create.html",{'form':pedimentorform})
+
+    # form = PedimentorCreateForm()
+    # return render(request,"pedimentos/create.html",{'form':form,'custom':customer,'provide':provider})
+
+
+@login_required    
+def update(request, id):
+    customer=Customer.objects.all()
+    provider = User.objects.all()
+    pedi = Pedimentos.objects.get(id=id)
+    if request.method == 'POST':
+
+
+        if (request.FILES.get('files',None)):
+            img = request.FILES['files'];
+            pedi.document = img
+        pedi.refrence_id = request.POST.get('refrence_id')
+        pedi.pedimento_no = request.POST.get('name')
+        pedi.date = request.POST.get('address')
+        pedi.importer = request.POST.get('country')
+        pedi.office = request.POST.get('office')
+        pedi.signature = request.POST.get('signature')
+        pedi.payment = request.POST.get('payment')
+        pedi.cove = request.POST.get('cove')
+        pedi.doda = request.POST.get('doda')
+        pedi.ready = request.POST.get('ready')
+        pedi.remarks = request.POST.get('remark')
+        pedi.lock1 = request.POST.get('lock1')
+        pedi.lock2 = request.POST.get('lock2')
+        pedi.lock3 = request.POST.get('lock3')
+        pedi.lock4 = request.POST.get('lock4')
+        pedi.lock5 = request.POST.get('lock5')
+        pedi.lock6 = request.POST.get('lock6')
+        pedi.lock7 = request.POST.get('lock7')
+        pedi.lock8 = request.POST.get('lock8')
+        pedi.supplier = request.POST.get('supplier')
+
+        pedi.save()
+        messages.success(request,'Pedimentos details updated Successfully.')
+        return redirect('/pedimentos')
+
+    return render(request,"pedimentos/update.html",{'pedimentos_id':pedi,'custom':customer,'provide':provider})
 
 @login_required    
 def update(request, id):

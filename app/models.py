@@ -30,6 +30,9 @@ class User(AbstractBaseUser,PermissionsMixin):
 	is_active 	= models.BooleanField(default=True,
 		help_text='Designates whether this user should be treated as active.\
 		Unselect this instead of deleting accounts.')
+	created_at = models.DateTimeField(auto_now_add=True,null=True)
+	updated_at =  models.DateTimeField(auto_now=True)
+
 
 	#date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
@@ -54,6 +57,9 @@ class Customer(models.Model):
 	curp        = models.CharField(max_length=255,default="")
 	city        = models.CharField(max_length=255,default="")
 	state       = models.CharField(max_length=255,default="")
+	created_at = models.DateTimeField(auto_now_add=True,null=True)
+	updated_at =  models.DateTimeField(auto_now=True)
+
 	
 	
 
@@ -68,6 +74,9 @@ class Agencies(models.Model):
 	domain 	= models.CharField(max_length=255,default="")
 	active  = models.IntegerField(default=0, choices=STATUS)
 	patente = models.CharField(max_length=255,default="")
+	created_at = models.DateTimeField(auto_now_add=True,null=True)
+	updated_at =  models.DateTimeField(auto_now=True)
+
 
 class Pedimentos(models.Model):
 	refrence_id 	= models.IntegerField(max_length=11,default="")
@@ -92,6 +101,8 @@ class Pedimentos(models.Model):
 	supplier        = models.CharField(max_length=255,default="")
 
 	document        = models.ImageField(upload_to='profilepic/', null=True, blank=True)
+	created_at = models.DateTimeField(auto_now_add=True,null=True)
+	updated_at =  models.DateTimeField(auto_now=True)
 
 class Inventories(models.Model):
 
