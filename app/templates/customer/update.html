@@ -28,6 +28,26 @@
                      value = "{{customer.passport_id}}"   required="required" type="number">
                   </div>
                 </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Upload Passport Image <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    {% if customer.passport_upload %}
+                    <img  src ="{{ customer.passport_upload.url}}" width = "40px" height="40px"/><br/>
+                    {% endif %}
+                    <input id="pass_image" class="form-control col-md-7 col-xs-12" name="pass_image"
+                      type="file">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Passport Expiry <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="passport_expiry" class="form-control col-md-7 col-xs-12" name="passport_expiry"
+                     value = "{{customer.passport_expiry|date:'Y-m-d'}}"   required="required" type="date">
+                  </div>
+                </div>
+          
 
                 <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Upload Passport Image<span class="required">*</span>
@@ -63,19 +83,34 @@
                 </div>
 
                 <div class="item form-group">
+<<<<<<< HEAD
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">City <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" id="city" name="city" value = "{{customer.city}}"required="required" class="form-control col-md-7 col-xs-12">
+=======
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">City <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="city" class="form-control col-md-7 col-xs-12" name="city"
+                    value = "{{customer.city}}" 
+                    required="required" type="text">
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
                   </div>
                 </div>
 
                 
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">State<span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">State <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
+<<<<<<< HEAD
                     <input type="text" id="state" name="state" value = "{{customer.state}}"required="required" class="form-control col-md-7 col-xs-12">
+=======
+                    <input id="state" class="form-control col-md-7 col-xs-12" name="state"
+                    value = "{{customer.state}}" 
+                    required="required" type="text">
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
                   </div>
                 </div>  
                 

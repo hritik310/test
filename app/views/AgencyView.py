@@ -21,7 +21,14 @@ def create(request):
     
 @login_required
 def agencies(request):
-    context = {'employee_list':Agencies.objects.all()}
+    startDate = request.GET.get('start_date',False)
+    endDate = request.GET.get('end_date',False)
+    agency=Agencies.objects.all()
+
+    if startDate and endDate:
+        agency = Agencies.objects.filter(created_at__date__range=(startDate, endDate))
+        print(agency.query)
+    context = {'employee_list':agency}
     return render(request,"agency/index.html",context)
 
 

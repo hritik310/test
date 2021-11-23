@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
+import datetime
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
@@ -9,7 +10,10 @@ from .manager import CustomUserManager
 from django_countries.fields import CountryField
 from phone_field import PhoneField
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
 # from multiselectfield import MultiSelectField
 # Create your models here.
 class User(AbstractBaseUser,PermissionsMixin):
@@ -29,6 +33,9 @@ class User(AbstractBaseUser,PermissionsMixin):
 	is_active 	= models.BooleanField(default=True,
 		help_text='Designates whether this user should be treated as active.\
 		Unselect this instead of deleting accounts.')
+	created_at = models.DateTimeField(auto_now_add=True,null=True)
+	updated_at =  models.DateTimeField(auto_now=True)
+
 
 	#date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
@@ -43,6 +50,8 @@ class User(AbstractBaseUser,PermissionsMixin):
 
 class Customer(models.Model):
 	passport_id	= models.PositiveIntegerField(default=1)
+	passport_upload = models.FileField(null=True, blank=True)
+	passport_expiry = models.DateField(_('Date'), default=datetime.date.today)
 	name 		= models.CharField(max_length=255,default="")
 	country 	= models.CharField(max_length=255,default="")
 	phone 		= PhoneField(blank=True, help_text='Contact phone number',default="")
@@ -51,9 +60,16 @@ class Customer(models.Model):
 	curp        = models.CharField(max_length=255,default="")
 	city        = models.CharField(max_length=255,default="")
 	state       = models.CharField(max_length=255,default="")
+<<<<<<< HEAD
 	passport_expiry	 =models.DateField(null=True)	
 	upload_passport_image=models.ImageField(upload_to='profilepic/')
 
+=======
+	created_at = models.DateTimeField(auto_now_add=True,null=True)
+	updated_at =  models.DateTimeField(auto_now=True)
+
+	
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
 	
 
 class Agencies(models.Model):
@@ -67,6 +83,9 @@ class Agencies(models.Model):
 	domain 	= models.CharField(max_length=255,default="")
 	active  = models.IntegerField(default=0, choices=STATUS)
 	patente = models.CharField(max_length=255,default="")
+	created_at = models.DateTimeField(auto_now_add=True,null=True)
+	updated_at =  models.DateTimeField(auto_now=True)
+
 
 class Pedimentos(models.Model):
 	refrence_id 	= models.IntegerField(max_length=11,default="")
@@ -90,6 +109,8 @@ class Pedimentos(models.Model):
 	lock8           = models.CharField(max_length=255,default="")
 	supplier        = models.CharField(max_length=255,default="")
 	document        = models.ImageField(upload_to='profilepic/', null=True, blank=True)
+	created_at = models.DateTimeField(auto_now_add=True,null=True)
+	updated_at =  models.DateTimeField(auto_now=True)
 
 class Inventories(models.Model):
 
@@ -120,12 +141,18 @@ class Shipper_Exports(models.Model):
 	make 		= models.CharField(max_length=255,default="")
 	year 		= models.IntegerField(max_length=255,default="")
 	note	 	= models.CharField(max_length=255,default="")
+<<<<<<< HEAD
 	paid        = models.IntegerField(blank=True,null=True)
 	created_at=models.DateTimeField(auto_now_add=True)
 	updated_at=models.DateTimeField(auto_now=True)
 	
 	
 
+=======
+	paid        = models.IntegerField(default=0)
+	created_at = models.DateTimeField(auto_now_add=True,null=True)
+	updated_at =  models.DateTimeField(auto_now=True)
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
 
 class Insurance(models.Model):
 		INACTIVE = 0
@@ -141,8 +168,14 @@ class Insurance(models.Model):
 		days 	= models.IntegerField(max_length=255,default="")
 		vin 	= models.CharField(max_length=255,default="")
 		make 	= models.CharField(max_length=255,default="")
+<<<<<<< HEAD
 		paid =   models.IntegerField(blank=True, null=True)
+=======
+		paid = models.IntegerField(default=0)
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
 		year 	= models.IntegerField(max_length=255,default="")
+		created_at = models.DateTimeField(auto_now_add=True,null=True)
+		updated_at =  models.DateTimeField(auto_now=True)
 		note	= models.CharField(max_length=255,default="")
 		created_at = models.DateTimeField(auto_now_add=True)
 		updated_at =  models.DateTimeField(auto_now=True)
@@ -163,7 +196,9 @@ class Temporary_Permits(models.Model):
 		permit_make 	= models.CharField(max_length=255,default="")
 		permit_year 	= models.IntegerField(max_length=255,default="")
 		permit_note		= models.CharField(max_length=255,default="")
-		paid            = models.IntegerField(blank=True, null=True)
+		paid            = models.IntegerField(default=0)
+		created_at = models.DateTimeField(auto_now_add=True,null=True)
+		updated_at =  models.DateTimeField(auto_now=True)
 
 
 class Released(models.Model):
@@ -175,7 +210,9 @@ class Released(models.Model):
 	make = models.CharField(max_length=255,default="")
 	year = models.PositiveIntegerField()
 	note = models.TextField()
-	paid  = models.IntegerField(blank=True, null=True)
+	paid  = models.IntegerField(default=0)
+	created_at = models.DateTimeField(auto_now_add=True,null=True)
+	updated_at =  models.DateTimeField(auto_now=True)
 
 
 

@@ -31,6 +31,54 @@
         </div>
       </div> -->
 
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <form class="form-horizontal form-label-left" method="GET" novalidate>
+              <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Start Date <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="start_date" class="form-control col-md-7 col-xs-12" name="start_date"
+                     value = ""  type="date" required="required">
+                  </div>
+              </div>
+              <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">End Date <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="end_date" class="form-control col-md-7 col-xs-12" name="end_date"
+                     value = ""  type="date" required="required">
+                  </div>
+              </div>
+              <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">It's Paid <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select class="form-control col-md-7 col-xs-12" name="paid" id="paid">
+                      <option value="" >Choose here</option>
+                      
+                      <option value="">All</option>
+                      <option value="1">Paid</option>
+                      <option value="0">Unpaid</option>
+
+                    </select>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div class="col-md-6 col-md-offset-3">
+                    <button id="send" type="submit" class="btn btn-success">Search</button>
+                  </div>
+              </div>
+
+            </form>        
+
+          </div>
+        </div>
+      </div>
+
+
       <div class="clearfix"></div>
 
       <div class="row">
@@ -67,13 +115,15 @@
                     <th>S.No</th>
                     <th>ITN</th>
                     <th>Date</th>
-                    <th>Refrence</th>
+                    <th>Reference</th>
                     <th>Name</th>
                     <th>VIN</th>
                     <th>Make</th>
                     <th>Year</th>
                     <th>Created_at</th>
                     <th>Notes</th>
+                    <th>Created_at</th>
+
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -90,7 +140,12 @@
                     <td>{{shipper.year}}</td>
                     <td>{{shipper.created_at}}</td>
                     <td>{{shipper.note}}</td>
+<<<<<<< HEAD
 
+=======
+                    <td>{{shipper.created_at|date:'Y-m-d H:i'}}</td>
+                    
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
                     <td>
                       <a href="{% url 'shipper_update' shipper.id %}" class="btn text-secondary px-0">
                         <i class="fa fa-pencil" style="font-size:28px;color:green"></i>
@@ -152,5 +207,7 @@
   <script src="/static/vendors/jszip/dist/jszip.min.js"></script>
   <script src="/static/vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="/static/vendors/pdfmake/build/vfs_fonts.js"></script>
+  <!-- validator -->
+  <script src="/static/vendors/validator/validator.js"></script>
 {% endblock javascripts %}
 

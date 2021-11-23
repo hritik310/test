@@ -96,7 +96,10 @@
                   {% endif %}
                   </div>
                 </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
                 <div class="item form-group  {% if form.city.errors %} has-error  {% endif %}">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">City <span class="required">*</span>
                   </label>
@@ -111,9 +114,14 @@
                   {% endif %}
                   </div>
                 </div>
+<<<<<<< HEAD
                 
                  <div class="item form-group  {% if form.state.errors %} has-error  {% endif %}">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">State<span class="required">*</span>
+=======
+                <div class="item form-group  {% if form.state.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">State <span class="required">*</span>
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                   {{form.state}}
@@ -126,7 +134,10 @@
                   {% endif %}
                   </div>
                 </div>
+<<<<<<< HEAD
                
+=======
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
                 <div class="item form-group {% if form.country.errors %} has-error  {% endif %}">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Country<span class="required">*</span>
                   </label>
@@ -141,6 +152,7 @@
                   {% endif %}
                   </div>
                 </div>
+<<<<<<< HEAD
 
                 
                 <div class="item form-group">
@@ -160,6 +172,34 @@
                   <div class="col-md-6 col-sm-6 col-xs-12">
                   {{form.curp}}
                   
+=======
+                <div class="item form-group {% if form.rfc.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">RFC<span class="required"></span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  {{form.rfc}}
+                  {% if form.rfc.errors %}
+                  {% for error in form.rfc.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+                  </div>
+                </div>
+                <div class="item form-group {% if form.curp.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">CURP<span class="required"></span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  {{form.curp}}
+                  {% if form.curp.errors %}
+                  {% for error in form.curp.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
                   </div>
                 </div>
                 <div class="item form-group {% if form.phone.errors %} has-error  {% endif %}">

@@ -104,8 +104,8 @@ DATABASES = {
 #        'NAME': 'py_db',
 #        'HOST': 'localhost',
 #        'PORT': '3306',
-#        'USER': 'py_db',
-#        'PASSWORD': 'It6j90h#',
+#        'USER': 'root',
+#        'PASSWORD': '',
 #        'OPTIONS': {
 #             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
 #         }

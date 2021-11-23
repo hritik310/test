@@ -10,12 +10,18 @@ from app.forms.customer import *
 @login_required
 def create(request):
     if request.method == 'POST':
+<<<<<<< HEAD
         customerform = CustomerCreateForm(request.POST,request.FILES)       
 
 
     
         if customerform.is_valid():   
             if customerform.save():           
+=======
+        customerform = CustomerCreateForm(request.POST,request.FILES)
+        if customerform.is_valid():
+            if customerform.save():
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
                 messages.success(request,'Customer Added Successfully.')
                 return redirect('/customer')
                 
@@ -25,9 +31,17 @@ def create(request):
     form = CustomerCreateForm()  
     return render(request,"customer/create.html",{'form':form})
 
+
 @login_required
 def customer(request):
-    context = {'employee_list':Customer.objects.all()}
+    startDate = request.GET.get('start_date',False)
+    endDate = request.GET.get('end_date',False)
+    customer=Customer.objects.all()
+
+    if startDate and endDate:
+        customer = Customer.objects.filter(created_at__date__range=(startDate, endDate))
+        print(customer.query)
+    context = {'employee_list':customer}
     return render(request,"customer/index.html",context)
 
 
@@ -37,10 +51,17 @@ def update(request,id):
     customer = Customer.objects.get(id=id)
     print(customer)
     if request.method == 'POST':
+<<<<<<< HEAD
         if (request.FILES.get('files',None)):
             img = request.FILES['files']
             customer.upload_passport_image = img
+=======
+        if (request.FILES.get('pass_image',None)):
+            img = request.FILES['pass_image'];
+            customer.passport_upload = img
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
         customer.passport_id = request.POST.get('passport_Id')
+        customer.passport_expiry = request.POST.get('passport_expiry')
         customer.name = request.POST.get('name')
         customer.country = request.POST.get('country')
         customer.phone = request.POST.get('number')

@@ -10,7 +10,14 @@ from app.forms.provider import *
 
 @login_required
 def provider(request):
-    context = {'employee_list':User.objects.all()}
+    startDate = request.GET.get('start_date',False)
+    endDate = request.GET.get('end_date',False)
+    user=User.objects.all()
+
+    if startDate and endDate:
+        user = User.objects.filter(created_at__date__range=(startDate, endDate))
+        print(user.query)
+    context = {'employee_list':user}
     return render(request,"provider/index.html",context)
 
 
