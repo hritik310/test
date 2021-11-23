@@ -32,6 +32,7 @@ def create(request):
         print(request.POST)
         #jfgjffjgfhh
         insurance.Type = request.POST.get('type')
+        insurance.insurer=request.POST.get('insurer')
         insurance.policy_number = request.POST.get('policy_number')
         insurance.date = request.POST.get('ins_date')
         insurance.ins_name = request.POST.get('ins_name')
@@ -43,6 +44,7 @@ def create(request):
         insurance.save()
         messages.success(request,'Insurance Added Successfully.')
         return redirect('/insurance')
+        
     return render(request,"insurance/create.html")
 
 
@@ -51,6 +53,7 @@ def update(request, id):
     insurance = Insurance.objects.get(id=id)
     if request.method == 'POST':
         insurance.Type = request.POST.get('type')
+        insurance.insurer=request.POST.get('insurer')
         insurance.policy_number = request.POST.get('policy_number')
         insurance.date = request.POST.get('ins_date')
         insurance.ins_name = request.POST.get('ins_name')
@@ -59,6 +62,7 @@ def update(request, id):
         insurance.make = request.POST.get('ins_make')
         insurance.year = request.POST.get('ins_year')
         insurance.note = request.POST.get('ins_notes')
+
         insurance.save()
         messages.success(request,'Insurance details updated Successfully.')
         return redirect('/insurance')

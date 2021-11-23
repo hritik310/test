@@ -10,10 +10,6 @@ from .manager import CustomUserManager
 from django_countries.fields import CountryField
 from phone_field import PhoneField
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
 # from multiselectfield import MultiSelectField
 # Create your models here.
 class User(AbstractBaseUser,PermissionsMixin):
@@ -60,16 +56,10 @@ class Customer(models.Model):
 	curp        = models.CharField(max_length=255,default="")
 	city        = models.CharField(max_length=255,default="")
 	state       = models.CharField(max_length=255,default="")
-<<<<<<< HEAD
-	passport_expiry	 =models.DateField(null=True)	
-	upload_passport_image=models.ImageField(upload_to='profilepic/')
-
-=======
 	created_at = models.DateTimeField(auto_now_add=True,null=True)
 	updated_at =  models.DateTimeField(auto_now=True)
 
 	
->>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
 	
 
 class Agencies(models.Model):
@@ -141,18 +131,9 @@ class Shipper_Exports(models.Model):
 	make 		= models.CharField(max_length=255,default="")
 	year 		= models.IntegerField(max_length=255,default="")
 	note	 	= models.CharField(max_length=255,default="")
-<<<<<<< HEAD
-	paid        = models.IntegerField(blank=True,null=True)
-	created_at=models.DateTimeField(auto_now_add=True)
-	updated_at=models.DateTimeField(auto_now=True)
-	
-	
-
-=======
 	paid        = models.IntegerField(default=0)
 	created_at = models.DateTimeField(auto_now_add=True,null=True)
 	updated_at =  models.DateTimeField(auto_now=True)
->>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
 
 class Insurance(models.Model):
 		INACTIVE = 0
@@ -162,27 +143,23 @@ class Insurance(models.Model):
 		    (ACTIVE, _('Active')),
 		)
 		Type =    models.CharField(max_length=255,default="")
-		policy_number = models.IntegerField(blank=True, null=True)
+		policy_number = models.CharField(max_length=255,default="")
 		date  	= models.DateField()
 		ins_name 	= models.CharField(max_length=255,default="")
 		days 	= models.IntegerField(max_length=255,default="")
 		vin 	= models.CharField(max_length=255,default="")
 		make 	= models.CharField(max_length=255,default="")
-<<<<<<< HEAD
-		paid =   models.IntegerField(blank=True, null=True)
-=======
 		paid = models.IntegerField(default=0)
->>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
 		year 	= models.IntegerField(max_length=255,default="")
 		created_at = models.DateTimeField(auto_now_add=True,null=True)
 		updated_at =  models.DateTimeField(auto_now=True)
 		note	= models.CharField(max_length=255,default="")
 		created_at = models.DateTimeField(auto_now_add=True)
 		updated_at =  models.DateTimeField(auto_now=True)
-		
+		insurer    = models.CharField(max_length=255,default="")
 
 class Temporary_Permits(models.Model):
-		INACTIVE = 0
+		INACTIVE = 0	
 		ACTIVE = 1
 		STATUS = (
 		    (INACTIVE, _('Inactive')),

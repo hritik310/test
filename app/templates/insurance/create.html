@@ -18,7 +18,7 @@
 
                 <!--p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
                 </p-->
-                <span class="section">Create Insurance </span>
+                <span class="section">Create Insurance </span>      
                 <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Type <span class="required">*</span>
                   </label>
@@ -28,11 +28,19 @@
                   </div>
                 </div>
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Policy Number <span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Insurer<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="insurer" class="form-control col-md-7 col-xs-12" name="insurer"
+                     value = ""   required="required" type="text">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Policy<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input id="policy_number" class="form-control col-md-7 col-xs-12" name="policy_number"
-                     value = ""   required="required" type="number">
+                     value = ""   required="required" type="text">
                   </div>
                 </div>
 
@@ -65,7 +73,10 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">VIN<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="ins_vin" name="ins_vin" value = ""required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="ins_vin" name="ins_vin" value = ""required="required" class="form-control col-md-7 col-xs-12" class="alert alert-warning" role="alert"  >
+                     <div class="invalid-tooltip">
+                       Please enter vin of !7 character
+                     </div>
                   </div>
                 </div>
                 <div class="item form-group">
