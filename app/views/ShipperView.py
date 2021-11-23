@@ -7,8 +7,22 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def shipper(request):
-    context = {'shipper_list':Shipper_Exports.objects.all()}
-    return render(request,"shipper/index.html", context)
+    
+    if request.method=="POST":
+        start = request.POST.get('start')
+        end = request.POST.get('end')
+        its_paid=request.POST.get('paid')
+    
+        result=Shipper_Exports.objects.filter(created_at__date__range=(start,end)) 
+        if its_paid:
+            result=Shipper_Exports.objects.filter(paid=its_paid)
+        
+        return render(request,"shipper/index.html",{"shipper_list":result})
+        
+            
+    else:
+        context =Shipper_Exports.objects.all()
+        return render(request,"shipper/index.html",{"shipper_list" :context})
 
 
 @login_required
@@ -16,6 +30,7 @@ def create(request):
     if request.method == 'POST':
         shipper=Shipper_Exports()
         print(request.POST)
+        
         shipper.itn = request.POST.get('itn')
         shipper.date = request.POST.get('date')
         shipper.name = request.POST.get('shipper_name')
@@ -36,6 +51,7 @@ def update(request, id):
     shipper = Shipper_Exports.objects.get(id=id)
     if request.method == 'POST':
         print(request.POST)
+        
         shipper.itn = request.POST.get('itn')
         shipper.date = request.POST.get('date')
         shipper.name = request.POST.get('shipper_name')
@@ -44,6 +60,7 @@ def update(request, id):
         shipper.make = request.POST.get('make')
         shipper.year = request.POST.get('year')
         shipper.note = request.POST.get('note')
+        shipper.paid = request.POST.get('paid')
         shipper.save()
         messages.success(request,'Shipper details updated Successfully.')
         return redirect('/shipper')
@@ -63,8 +80,10 @@ def updateShipperStatus(request):
     shipper = Shipper_Exports.objects.get(id=request.GET.get('id'))
     if shipper.paid == 1:
         shipper.paid = 0
+        
     else:
         shipper.paid = 1
+        
     shipper.save()
     data = {
     "status":"OK",

@@ -61,14 +61,25 @@ class CustomerCreateForm(ModelForm):
     city= forms.CharField(required = True,widget=forms.TextInput(
         attrs={
         'class':'form-control',
-        #'placeholder':'Enter your curp'
+        'placeholder':'Enter your city'
         }
     ))
+    upload_passport_image=forms.ImageField(required=True)
 
 
+
+    passport_expiry = forms.DateField(required = True,widget=forms.DateInput(
+        attrs={
+        'class':'form-control',
+        'type': 'date',
+        'placeholder':'Enter Passport Expiry date'
+        }
+    ))
+    
+    
     class Meta:
         model = Customer
-        fields = ["passport_id","name","country","phone","address","city","state","rfc","curp"]
+        fields = ["passport_id","name","country","phone","address","city","state","rfc","curp","upload_passport_image","passport_expiry"]
 
 
     def clean(self):
@@ -84,3 +95,4 @@ class CustomerCreateForm(ModelForm):
 
 
 
+                              

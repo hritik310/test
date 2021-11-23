@@ -28,7 +28,7 @@ SECRET_KEY = '8*md2t)o**67@*yhc(d=f@j95kl(dnf^rmm4s00$-mh_vurb2b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['184.168.122.169']
+#ALLOWED_HOSTS = ['184.168.122.169']
 
 # ALLOWED_HOSTS = []
 
@@ -89,8 +89,8 @@ DATABASES = {
        'NAME': 'py_db',
        'HOST': 'localhost',
        'PORT': '3306',
-       'USER': 'py_db',
-       'PASSWORD': 'It6j90h#',
+       'USER': 'root',
+       'PASSWORD': '',
        'OPTIONS': {
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
         }

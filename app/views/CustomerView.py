@@ -1,3 +1,4 @@
+from app.helper import *
 from django.shortcuts import render,HttpResponseRedirect
 from django.shortcuts import redirect
 from django.contrib import messages
@@ -9,15 +10,19 @@ from app.forms.customer import *
 @login_required
 def create(request):
     if request.method == 'POST':
-        customerform = CustomerCreateForm(request.POST)
-        if customerform.is_valid():
-            if customerform.save():
+        customerform = CustomerCreateForm(request.POST,request.FILES)       
+
+
+    
+        if customerform.is_valid():   
+            if customerform.save():           
                 messages.success(request,'Customer Added Successfully.')
                 return redirect('/customer')
+                
         else:
             return render(request,"customer/create.html",{'form':customerform})
 
-    form = CustomerCreateForm()
+    form = CustomerCreateForm()  
     return render(request,"customer/create.html",{'form':form})
 
 @login_required
@@ -32,6 +37,9 @@ def update(request,id):
     customer = Customer.objects.get(id=id)
     print(customer)
     if request.method == 'POST':
+        if (request.FILES.get('files',None)):
+            img = request.FILES['files']
+            customer.upload_passport_image = img
         customer.passport_id = request.POST.get('passport_Id')
         customer.name = request.POST.get('name')
         customer.country = request.POST.get('country')
@@ -41,7 +49,7 @@ def update(request,id):
         customer.rfc     =request.POST.get('rfc')
         customer.state   =request.POST.get('state')
         customer.curp   =request.POST.get('curp')
-        
+        customer.passport_expiry=request.POST.get('passport_expiry')
         
         customer.save()
         messages.success(request,'Customer details updated Successfully.')

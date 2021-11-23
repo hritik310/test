@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
@@ -9,7 +8,8 @@ from django.utils import timezone
 from .manager import CustomUserManager
 from django_countries.fields import CountryField
 from phone_field import PhoneField
-from cities_light.models import City,Country
+
+
 # from multiselectfield import MultiSelectField
 # Create your models here.
 class User(AbstractBaseUser,PermissionsMixin):
@@ -47,11 +47,13 @@ class Customer(models.Model):
 	country 	= models.CharField(max_length=255,default="")
 	phone 		= PhoneField(blank=True, help_text='Contact phone number',default="")
 	address		= models.CharField(max_length=255,default="")
-	rfc         = models.IntegerField(max_length=12,default="")
+	rfc         = models.CharField(max_length=255,default="")
 	curp        = models.CharField(max_length=255,default="")
 	city        = models.CharField(max_length=255,default="")
 	state       = models.CharField(max_length=255,default="")
-	
+	passport_expiry	 =models.DateField(null=True)	
+	upload_passport_image=models.ImageField(upload_to='profilepic/')
+
 	
 
 class Agencies(models.Model):
@@ -87,7 +89,6 @@ class Pedimentos(models.Model):
 	lock7           = models.CharField(max_length=255,default="")
 	lock8           = models.CharField(max_length=255,default="")
 	supplier        = models.CharField(max_length=255,default="")
-
 	document        = models.ImageField(upload_to='profilepic/', null=True, blank=True)
 
 class Inventories(models.Model):
@@ -105,9 +106,11 @@ class Inventories(models.Model):
 class Shipper_Exports(models.Model):
 	INACTIVE = 0
 	ACTIVE = 1
+	
 	STATUS = (
         (INACTIVE, _('Inactive')),
         (ACTIVE, _('Active')),
+		
     )
 	itn 		= models.CharField(max_length=255,default="")
 	date  		= models.DateField()
@@ -117,7 +120,12 @@ class Shipper_Exports(models.Model):
 	make 		= models.CharField(max_length=255,default="")
 	year 		= models.IntegerField(max_length=255,default="")
 	note	 	= models.CharField(max_length=255,default="")
-	paid        = models.IntegerField(blank=True, null=True)
+	paid        = models.IntegerField(blank=True,null=True)
+	created_at=models.DateTimeField(auto_now_add=True)
+	updated_at=models.DateTimeField(auto_now=True)
+	
+	
+
 
 class Insurance(models.Model):
 		INACTIVE = 0
@@ -133,9 +141,12 @@ class Insurance(models.Model):
 		days 	= models.IntegerField(max_length=255,default="")
 		vin 	= models.CharField(max_length=255,default="")
 		make 	= models.CharField(max_length=255,default="")
-		paid = models.IntegerField(blank=True, null=True)
+		paid =   models.IntegerField(blank=True, null=True)
 		year 	= models.IntegerField(max_length=255,default="")
 		note	= models.CharField(max_length=255,default="")
+		created_at = models.DateTimeField(auto_now_add=True)
+		updated_at =  models.DateTimeField(auto_now=True)
+		
 
 class Temporary_Permits(models.Model):
 		INACTIVE = 0
@@ -174,7 +185,5 @@ class File(models.Model):
 	file = models.CharField(max_length=255,default="")
 	size = models.CharField(max_length=255,default="")
 	type_id = models.IntegerField(default=0)
-	created_at = models.DateTimeField(auto_now_add=True)
-	updated_at =  models.DateTimeField(auto_now=True)
 
 	
