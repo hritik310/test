@@ -80,8 +80,19 @@ class CustomerCreateForm(ModelForm):
         'placeholder':'Enter your City'
         }
     ))
+    upload_passport_image=forms.ImageField(required=True)
 
 
+
+    passport_expiry = forms.DateField(required = True,widget=forms.DateInput(
+        attrs={
+        'class':'form-control',
+        'type': 'date',
+        'placeholder':'Enter Passport Expiry date'
+        }
+    ))
+    
+    
     class Meta:
         model = Customer
         fields = ["passport_id","passport_upload","passport_expiry","name","country","phone","email","address","city","state","rfc","curp"]
@@ -100,3 +111,4 @@ class CustomerCreateForm(ModelForm):
 
 
 
+                              

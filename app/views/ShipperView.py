@@ -48,6 +48,7 @@ def update(request, id):
     shipper = Shipper_Exports.objects.get(id=id)
     if request.method == 'POST':
         print(request.POST)
+        
         shipper.itn = request.POST.get('itn')
         shipper.date = request.POST.get('date')
         shipper.name = request.POST.get('shipper_name')
@@ -56,6 +57,7 @@ def update(request, id):
         shipper.make = request.POST.get('make')
         shipper.year = request.POST.get('year')
         shipper.note = request.POST.get('note')
+        shipper.paid = request.POST.get('paid')
         shipper.save()
         messages.success(request,'Shipper details updated Successfully.')
         return redirect('/shipper')
@@ -75,8 +77,10 @@ def updateShipperStatus(request):
     shipper = Shipper_Exports.objects.get(id=request.GET.get('id'))
     if shipper.paid == 1:
         shipper.paid = 0
+        
     else:
         shipper.paid = 1
+        
     shipper.save()
     data = {
     "status":"OK",

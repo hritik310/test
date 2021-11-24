@@ -50,6 +50,22 @@
           
 
                 <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Upload Passport Image<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <img  src ="{{customer.upload_passport_image.url}}" width = "40px" height="40px"/><img/>
+                    <input type="file" id="upload_passport_image" name="files"  class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>       
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Passport Expiry<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="date" id="passport_expiry" name="passport_expiry" value = "{{customer.passport_expiry|date:'Y-m-d'}}"   class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                
+                <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
@@ -67,12 +83,19 @@
                 </div>
 
                 <div class="item form-group">
+<<<<<<< HEAD
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">City <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="city" name="city" value = "{{customer.city}}"required="required" class="form-control col-md-7 col-xs-12">
+=======
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">City <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input id="city" class="form-control col-md-7 col-xs-12" name="city"
                     value = "{{customer.city}}" 
                     required="required" type="text">
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
                   </div>
                 </div>
 
@@ -81,11 +104,16 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">State <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
+<<<<<<< HEAD
+                    <input type="text" id="state" name="state" value = "{{customer.state}}"required="required" class="form-control col-md-7 col-xs-12">
+=======
                     <input id="state" class="form-control col-md-7 col-xs-12" name="state"
                     value = "{{customer.state}}" 
                     required="required" type="text">
+>>>>>>> 6b039926085fcc963503ca6c99f541d840ec82b2
                   </div>
-                </div>
+                </div>  
+                
 
                 <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Country<span class="required">*</span>
@@ -99,7 +127,8 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">RFC
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="rfc" name="rfc" value = "{{customer.rfc}}" class="form-control col-md-7 col-xs-12">
+                
+                    <input type="text" id="rfc" name="rfc" value="{{ customer.rfc }}"  class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
 
@@ -107,7 +136,7 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Curp
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="curp" id="rfc" name="curp" value = "{{customer.curp}}"  class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="curp" name="curp" value = "{{customer.curp}}"  class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
 
