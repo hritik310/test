@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+
 from django.db import models
 import datetime
 from django.contrib.auth.models import AbstractBaseUser
@@ -99,6 +100,7 @@ class Pedimentos(models.Model):
 	lock7           = models.CharField(max_length=255,default="")
 	lock8           = models.CharField(max_length=255,default="")
 	supplier        = models.CharField(max_length=255,default="")
+
 	document        = models.ImageField(upload_to='profilepic/', null=True, blank=True)
 	created_at = models.DateTimeField(auto_now_add=True,null=True)
 	updated_at =  models.DateTimeField(auto_now=True)
@@ -118,11 +120,9 @@ class Inventories(models.Model):
 class Shipper_Exports(models.Model):
 	INACTIVE = 0
 	ACTIVE = 1
-	
 	STATUS = (
         (INACTIVE, _('Inactive')),
         (ACTIVE, _('Active')),
-		
     )
 	itn 		= models.CharField(max_length=255,default="")
 	date  		= models.DateField()
@@ -156,12 +156,9 @@ class Insurance(models.Model):
 		created_at = models.DateTimeField(auto_now_add=True,null=True)
 		updated_at =  models.DateTimeField(auto_now=True)
 		note	= models.CharField(max_length=255,default="")
-		created_at = models.DateTimeField(auto_now_add=True)
-		updated_at =  models.DateTimeField(auto_now=True)
-		insurer    = models.CharField(max_length=255,default="")
 
 class Temporary_Permits(models.Model):
-		INACTIVE = 0	
+		INACTIVE = 0
 		ACTIVE = 1
 		STATUS = (
 		    (INACTIVE, _('Inactive')),
@@ -202,5 +199,7 @@ class File(models.Model):
 	file = models.CharField(max_length=255,default="")
 	size = models.CharField(max_length=255,default="")
 	type_id = models.IntegerField(default=0)
+	created_at = models.DateTimeField(auto_now_add=True)
+	updated_at =  models.DateTimeField(auto_now=True)
 
 	

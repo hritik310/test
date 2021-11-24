@@ -50,7 +50,7 @@ def create(request):
         files = request.FILES.getlist('file',False)
         if files:
             saveMultipleFiles(files,pedi)
-    
+
 
         # for f in pedi.document:
         #     Pedimentos(document=f).save()

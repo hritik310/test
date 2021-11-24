@@ -44,7 +44,6 @@ def create(request):
         insurance.save()
         messages.success(request,'Insurance Added Successfully.')
         return redirect('/insurance')
-        
     return render(request,"insurance/create.html")
 
 
@@ -62,7 +61,6 @@ def update(request, id):
         insurance.make = request.POST.get('ins_make')
         insurance.year = request.POST.get('ins_year')
         insurance.note = request.POST.get('ins_notes')
-
         insurance.save()
         messages.success(request,'Insurance details updated Successfully.')
         return redirect('/insurance')
