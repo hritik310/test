@@ -31,10 +31,11 @@ def create(request):
         relea.date = request.POST.get('date')
         relea.file = request.POST.get('file')
         relea.name = request.POST.get('name')
-        relea.refrence = request.POST.get('refrence')
+        relea.itn = request.POST.get('refrence')
         relea.vin = request.POST.get('vin')
         relea.make = request.POST.get('make')
         relea.year = request.POST.get('year')
+        relea.scan = request.FILES.get('scan')
         relea.note = request.POST.get('note')
         relea.save()
         messages.success(request,'Released Created Successfully.')
@@ -54,10 +55,13 @@ def delete(request,id):
 def update(request,id):
     relea = Released.objects.get(pk=id)
     if request.method =='POST':
+        if (request.FILES.get('scan',None)):
+            img = request.FILES['scan'];
+            relea.scan = img
         relea.date = request.POST.get('date')
         relea.file = request.POST.get('file')
         relea.name = request.POST.get('name')
-        relea.refrence = request.POST.get('refrence')
+        relea.itn = request.POST.get('refrence')
         relea.vin = request.POST.get('vin')
         relea.make = request.POST.get('make')
         relea.year = request.POST.get('year')
@@ -68,6 +72,13 @@ def update(request,id):
     
 
     return render(request,"released/update.html",{'released':relea})
+
+
+
+@login_required
+def view(request,id):
+    released = Released.objects.get(id=id)
+    return render(request,"released/view.html",{'release':released})
 
 
 

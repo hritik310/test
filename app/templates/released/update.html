@@ -47,10 +47,10 @@
                   </div>
                 </div>
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Reference <span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">ITN <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="refrence" name="refrence" value = "{{released.refrence}}"required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="refrence" name="refrence" value = "{{released.itn}}"required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
                 <div class="item form-group">
@@ -58,6 +58,7 @@
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" id="vin" name="vin" value = "{{released.vin}}"required="required"class="form-control col-md-7 col-xs-12">
+                    <span class="error text-danger" id="vin_custom_error"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -65,6 +66,17 @@
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" id="make" name="make" value = "{{released.make}}"required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Scan <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    {% if released.scan %}
+                    <img  src ="{{ released.scan.url}}" width = "40px" height="40px"/><br/>
+                    {% endif %}
+                    <input id="scan" class="form-control col-md-7 col-xs-12" name="scan"
+                      type="file">
                   </div>
                 </div>
                 <div class="item form-group">
@@ -98,6 +110,28 @@
 {% endblock content %}
 {% block javascripts %}
   {{ block.super }}
+  <script>
+    $(document).ready(function () {
+      $("#vin").keyup(function(){
+        var vin = $(this).val()
+        
+        if (vin.length < 17){
+          $("#vin_custom_error").text("VIN is not 17 digit. ")
+
+          
+
+        }else if (vin.length == 17){
+            $("#vin_custom_error").text("Ok.")
+
+        }else{
+          $("#vin_custom_error").text("VIN is above 17 digit.")
+
+        }
+
+      });
+
+    });
+  </script>
   <!-- validator -->
   <script src="/static/vendors/validator/validator.js"></script>
 {% endblock javascripts %}

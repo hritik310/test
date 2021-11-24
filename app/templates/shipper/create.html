@@ -20,64 +20,118 @@
                 </p-->
                 <span class="section">Create Shipper Exports</span>
 
-                <div class="item form-group">
+                <div class="item form-group  {% if form.itn.errors %} has-error  {% endif %}">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">ITN <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input id="itn" class="form-control col-md-7 col-xs-12" name="itn"
-                     value = ""   required="required" type="text">
+                  {{form.itn}}
+                   {% if form.itn.errors %}
+                  {% for error in form.itn.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
                   </div>
                 </div>
 
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Date<span class="required">*</span>
+                <div class="item form-group  {% if form.date.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Date <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input id="date" class="form-control col-md-7 col-xs-12" name="date"
-                    value = "" 
-                    required="required" type="date">
+                  {{form.date}}
+                   {% if form.date.errors %}
+                  {% for error in form.date.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
                   </div>
                 </div>
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Reference <span class="required">*</span>
+               <div class="item form-group  {% if form.refrence.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Reference <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="refrence" name="refrence" value = ""required="required" class="form-control col-md-7 col-xs-12">
+                  {{form.refrence}}
+                   {% if form.refrence.errors %}
+                  {% for error in form.refrence.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
                   </div>
                 </div>
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Name<span class="required">*</span>
+                <div class="item form-group  {% if form.name.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="shipper_name" name="shipper_name" value = "" required="required" class="form-control col-md-7 col-xs-12">
+                  {{form.name}}
+                   {% if form.name.errors %}
+                  {% for error in form.name.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
                   </div>
                 </div>
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">VIN<span class="required">*</span>
+                <div class="item form-group  {% if form.vin.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">VIN <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="vin" name="vin" value = ""required="required"class="form-control col-md-7 col-xs-12">
+                  {{form.vin}}
+                  <span class="error text-danger" id="vin_custom_error"></span>
+                  {% if form.vin.errors %}
+                  {% for error in form.vin.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
                   </div>
                 </div>
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Make<span class="required">*</span>
+                <div class="item form-group  {% if form.make.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Make<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="make" name="make" value = ""required="required" class="form-control col-md-7 col-xs-12">
+                  {{form.make}}
+                   {% if form.make.errors %}
+                  {% for error in form.make.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
                   </div>
                 </div>
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Year<span class="required">*</span>
+                <div class="item form-group  {% if form.year.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Year<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="number" id="year" name="year" value = ""required="required" class="form-control col-md-7 col-xs-12">
+                  {{form.year}}
+                   {% if form.year.errors %}
+                  {% for error in form.year.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
                   </div>
                 </div>
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Notes<span class="required">*</span>
+                <div class="item form-group  {% if form.note.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Notes<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <textarea type="text" id="note" name="note" value = "" class="form-control col-md-7 col-xs-12"></textarea>
+                  {{form.note}}
+                   {% if form.note.errors %}
+                  {% for error in form.note.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
                   </div>
                 </div>
                 <div class="ln_solid"></div>
@@ -95,11 +149,36 @@
     </div>
   </div>
 {% endblock content %}
+
 {% block javascripts %}
   {{ block.super }}
-  <!-- validator -->
-  <script src="/static/vendors/validator/validator.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $("#id_vin").keyup(function(){
+        var vin = $(this).val()
+        
+        if (vin.length < 17){
+          $("#vin_custom_error").text("VIN is not 17 digit.")
+
+          
+
+        }else if (vin.length == 17){
+            $("#vin_custom_error").text("Ok.")
+        }else{
+          $("#vin_custom_error").text("VIN is above 17 digit.")
+
+        }
+
+      });
+
+    });
+  </script>
+
+
+  
 {% endblock javascripts %}
+
 
 
 

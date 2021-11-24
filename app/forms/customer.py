@@ -39,6 +39,12 @@ class CustomerCreateForm(ModelForm):
         'placeholder':'Enter your Phone Number'
         }
     ))
+    email = forms.EmailField(required = True,widget=forms.TextInput(
+        attrs={
+        'class':'form-control',
+        'placeholder':'Enter your Email'
+        }
+    ))
 
     address = forms.CharField(required = True,widget=forms.TextInput(
         attrs={
@@ -78,7 +84,7 @@ class CustomerCreateForm(ModelForm):
 
     class Meta:
         model = Customer
-        fields = ["passport_id","passport_upload","passport_expiry","name","country","phone","address","city","state","rfc","curp"]
+        fields = ["passport_id","passport_upload","passport_expiry","name","country","phone","email","address","city","state","rfc","curp"]
 
 
     def clean(self):

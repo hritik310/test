@@ -48,6 +48,7 @@ def update(request,id):
         customer.name = request.POST.get('name')
         customer.country = request.POST.get('country')
         customer.phone = request.POST.get('number')
+        customer.email = request.POST.get('email')
         customer.address = request.POST.get('address')
         customer.city    =request.POST.get('city')
         customer.rfc     =request.POST.get('rfc')
@@ -66,3 +67,8 @@ def delete(request,id):
     customer = Customer.objects.get(pk=id)
     customer.delete()
     return redirect('/customer')
+
+@login_required
+def view(request,id):
+    customer = Customer.objects.get(id=id)
+    return render(request,"customer/view.html",{'custom':customer})

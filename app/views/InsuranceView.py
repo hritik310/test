@@ -32,6 +32,7 @@ def create(request):
         print(request.POST)
         #jfgjffjgfhh
         insurance.Type = request.POST.get('type')
+        insurance.insurer = request.POST.get('insurer')
         insurance.policy_number = request.POST.get('policy_number')
         insurance.date = request.POST.get('ins_date')
         insurance.ins_name = request.POST.get('ins_name')
@@ -51,6 +52,7 @@ def update(request, id):
     insurance = Insurance.objects.get(id=id)
     if request.method == 'POST':
         insurance.Type = request.POST.get('type')
+        insurance.insurer = request.POST.get('insurer')
         insurance.policy_number = request.POST.get('policy_number')
         insurance.date = request.POST.get('ins_date')
         insurance.ins_name = request.POST.get('ins_name')

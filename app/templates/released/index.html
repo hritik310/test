@@ -4,6 +4,16 @@
 
 {% block stylesheets %}
   {{ block.super }}
+  <style>
+  td.icon {
+    display: flex;
+}
+a.btn.text-secondary.px-0 {
+    margin-right: 0px;
+    padding: 9px;
+}
+
+</style>
   <link href="/static/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
   <link href="/static/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
   <link href="/static/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
@@ -51,15 +61,15 @@
                   </div>
               </div>
               <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">It's Paid <span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">RELEASED <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control col-md-7 col-xs-12" name="paid" id="paid">
                       <option value="" >Choose here</option>
                       
                       <option value="">All</option>
-                      <option value="1">Paid</option>
-                      <option value="0">Unpaid</option>
+                      <option value="1">RELEASED</option>
+                      <option value="0">FILED</option>
 
                     </select>
                   </div>
@@ -94,16 +104,17 @@
                 <thead>
                   <tr>
                     <!-- <th>checked</th> -->
+                    <th>S.No</th>
                     <th>Released</th>
+                    <th>Created At</th>
                     <th>Date</th>
                     <th>File</th>
                     <th>Name</th>
-                    <th>Reference</th>
+                    <th>ITN</th>
                     <th>VIN</th>
                     <th>Make</th>
                     <th>Year</th>
-                    <th>Created At</th>
-
+                    <th>Scan</th>
                     <th>Notes</th>
                     <th>Action</th>
                   </tr>
@@ -113,23 +124,28 @@
                 <tbody>
                   {% for release in released_list %}         
                   <tr>
+                    <td>{{forloop.counter}}</td>
                     <td><input type="checkbox" {% if release.paid == 1 %}  checked  {% endif %} class="checkbox" data-id = {{release.id}}></td>
+                    <td>{{release.created_at|date:'Y-m-d H:i'}}</td>
                     <td>{{release.date}}</td>
                     <td>{{release.file}}</td>
                     <td>{{release.name}}</td>
-                    <td>{{release.refrence}}</td>
+                    <td>{{release.itn}}</td>
                     <td>{{release.vin}}</td>
                     <td>{{release.make}}</td>
                     <td>{{release.year}}</td>
-                    <td>{{release.created_at|date:'Y-m-d H:i'}}</td>
+                    <td>{{release.scan}}</td>
                     <td>{{release.note}}</td>
                     
-                    <td>
+                    <td class="icon">
+                      <a href="{% url 'released_view' release.id %}" class="btn text-secondary px-0" >
+                        <i class="fa fa-eye" style="font-size:15px"></i>
+                      </a>
                       <a href="{% url 'released_update' release.id %}" class="btn text-secondary px-0">
-                        <i class="fa fa-pencil" style="font-size:28px;color:green"></i>
+                        <i class="fa fa-pencil" style="font-size:15px;color:green"></i>
                       </a>
                       <a href="{% url 'released_delete' release.id %}" class="btn text-secondary px-0"  onclick="return confirm('Are you sure you want to delete this item?');">
-                        <i class="fa fa-trash-o danger " style="font-size:28px;color:red;"></i>
+                        <i class="fa fa-trash-o danger " style="font-size:15px;color:red;"></i>
                       </a>
                     </td>
 

@@ -39,12 +39,12 @@
                   </div>
                 </div>
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Hour Permit <span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Hours<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control col-md-7 col-xs-12" name="permit_hour" id="permit_hour" required="required">
                       <option value="" selected disabled hidden>Choose here</option>
-                      <option value="77">77</option>
+                      <option value="72">72</option>
                       <option value="144">144</option>
                     </select>
                   </div>
@@ -61,6 +61,7 @@
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" id="permit_vin" name="permit_vin" value = ""required="required" class="form-control col-md-7 col-xs-12">
+                    <span class="error text-danger" id="vin_custom_error"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -101,8 +102,32 @@
 {% endblock content %}
 {% block javascripts %}
   {{ block.super }}
+  <script>
+    $(document).ready(function () {
+      $("#permit_vin").keyup(function(){
+        var vin = $(this).val()
+        
+        if (vin.length < 17){
+          $("#vin_custom_error").text("VIN is not 17 digit.")
+
+          
+
+        }else if (vin.length == 17){
+            $("#vin_custom_error").text("Ok")
+        }else{
+          $("#vin_custom_error").text("VIN is above 17 digit.")
+
+        }
+
+      });
+
+    });
+  </script>
   <!-- validator -->
   <script src="/static/vendors/validator/validator.js"></script>
 {% endblock javascripts %}
+
+
+ 
 
 

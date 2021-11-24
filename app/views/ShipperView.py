@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from app.models import *
 from django.contrib.auth.decorators import login_required
+from app.forms.shipper import *
 
 
 @login_required
@@ -20,8 +21,6 @@ def shipper(request):
         shipper = shipper.filter(paid=paid)
         print(shipper.query)
 
-
-
     context = {'shipper_list':shipper}
     return render(request,"shipper/index.html",context)
 
@@ -29,21 +28,19 @@ def shipper(request):
 @login_required
 def create(request):
     if request.method == 'POST':
-        shipper=Shipper_Exports()
-        print(request.POST)
-        shipper.itn = request.POST.get('itn')
-        shipper.date = request.POST.get('date')
-        shipper.name = request.POST.get('shipper_name')
-        shipper.refrence = request.POST.get('refrence')
-        shipper.vin = request.POST.get('vin')
-        shipper.make = request.POST.get('make')
-        shipper.year = request.POST.get('year')
-        shipper.note = request.POST.get('note')
-        shipper.save()
-        messages.success(request,'Shipper_Exports Added Successfully.')
-        return redirect('/shipper')
+        shipperform = ShipperCreateForm(request.POST)
+        print(shipperform)
+        if shipperform.is_valid():
+            if shipperform.save():
+                messages.success(request,'Shipper_Exports Added Successfully.')
+                return redirect('/shipper')
+        else:
+            return render(request,"shipper/create.html",{'form':shipperform})
 
-    return render(request,"shipper/create.html")
+    form = ShipperCreateForm()
+    return render(request,"shipper/create.html",{'form':form})
+
+
 
 @login_required    
 def update(request, id):

@@ -28,11 +28,19 @@
                   </div>
                 </div>
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Policy Number <span class="required">*</span>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">INSURER <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="insurer" class="form-control col-md-7 col-xs-12" name="insurer"
+                     value = ""   required="required" type="text">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Policy<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input id="policy_number" class="form-control col-md-7 col-xs-12" name="policy_number"
-                     value = ""   required="required" type="number">
+                     value = ""   required="required" type="text">
                   </div>
                 </div>
 
@@ -66,6 +74,7 @@
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" id="ins_vin" name="ins_vin" value = ""required="required" class="form-control col-md-7 col-xs-12">
+                    <span class="error text-danger" id="vin_custom_error"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -106,8 +115,38 @@
 {% endblock content %}
 {% block javascripts %}
   {{ block.super }}
+
+  <script>
+    $(document).ready(function () {
+      $("#ins_vin").keyup(function(){
+        var vin = $(this).val()
+        
+        if (vin.length < 17){
+          $("#vin_custom_error").text("VIN is not 17 digit.")
+
+          
+
+        }else if (vin.length == 17){
+            $("#vin_custom_error").text(" Ok.")
+
+
+        }else{
+          $("#vin_custom_error").text("VIN is above 17 digit.")
+
+        }
+
+      });
+
+    });
+  </script>
+
+
+
   <!-- validator -->
   <script src="/static/vendors/validator/validator.js"></script>
 {% endblock javascripts %}
+
+  
+
 
 

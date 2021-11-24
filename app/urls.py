@@ -28,7 +28,8 @@ urlpatterns = [
     path('customer',CustomerView.customer,name='customer'),
     path('customer/create',CustomerView.create,name='customerCreate'),
     path('customer/update/<int:id>',CustomerView.update,name='customerupdate'),
-    path('customer/delete/<int:id>',CustomerView.delete, name ="customerdelete"), 
+    path('customer/delete/<int:id>',CustomerView.delete, name ="customerdelete"),
+    path('customer/view/<int:id>/',CustomerView.view,name='customer_view'), 
 
 
     # provider urls  
@@ -84,6 +85,7 @@ urlpatterns = [
     path('released/create',ReleasedView.create,name='create_released'),
     path('released/update/<int:id>',ReleasedView.update,name='released_update'),
     path('released/delete/<int:id>',ReleasedView.delete, name ="released_delete"),
+    path('released/view/<int:id>/',ReleasedView.view,name='released_view'),
     path('released/update-released-status/',ReleasedView.updateReleasedStatus, name ="update-released-status"),
 
 
