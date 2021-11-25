@@ -38,7 +38,21 @@ def create(request):
         permits.save()
         messages.success(request,'Temporary_permits Added Successfully.')
         return redirect('/temp_permits')
-    return render(request,"temp_permits/create.html")  
+    return render(request,"temp_permits/create.html")
+
+# def create(request):
+#     if request.method == 'POST':
+#         temp_permits = Temp_PermitCreateForm(request.POST)
+#         if temp_permits.is_valid():
+#             if temp_permits.save():
+#                 messages.success(request,'Temporary_permits Added Successfully.')
+#                 return redirect('/temp_permits')
+
+#         else:
+#             return render(request,"temp_permits/create.html",{'form':temp_permits})
+
+#     form = Temp_PermitCreateForm()
+#     return render(request,"temp_permits/create.html",{'form':form})  
 
 def update(request,id):
 

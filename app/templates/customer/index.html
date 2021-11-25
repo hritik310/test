@@ -46,27 +46,30 @@ a.btn.text-secondary.px-0 {
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <form class="form-horizontal form-label-left" method="GET" novalidate>
-              <div class="item form-group">
+            <div class="row">
+              <div class="col-md-4 item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Start Date <span class="required">*</span>
                   </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="col-md-9 col-sm-6 col-xs-12">
                     <input id="start_date" class="form-control col-md-7 col-xs-12" name="start_date"
                      value = "" required="required"  type="date">
                   </div>
               </div>
-              <div class="item form-group">
+              <div class="col-md-4 item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">End Date <span class="required">*</span>
                   </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="col-md-9 col-sm-6 col-xs-12">
                     <input id="end_date" class="form-control col-md-7 col-xs-12" name="end_date"
                      value = "" required="required" type="date">
                   </div>
               </div>
-              <div class="form-group">
-                  <div class="col-md-6 col-md-offset-3">
+              <div class="col-md-4 form-group">
+                  <div class="col-md-6 ">
                     <button id="send" type="submit" class="btn btn-success">Search</button>
                   </div>
               </div>
+
+            </div>
 
             </form>        
 
@@ -94,7 +97,6 @@ a.btn.text-secondary.px-0 {
                     <th>S.No</th>
                     <th>Passport Id</th>
                     <th>Passport Expiry</th>
-                    <th>Passport Image</th>
                     <th>Name</th>
                     <th>Address</th>
                     <th>City</th>
@@ -115,7 +117,6 @@ a.btn.text-secondary.px-0 {
                     <td>{{forloop.counter}}</td>
                     <td>{{employee.passport_id}}</td>
                     <td>{{employee.passport_expiry}}</td>
-                    <td>{{employee.passport_upload}}</td>
                     <td>{{employee.name}}</td>
                     <td>{{employee.address}}</td>
                     <td>{{employee.city}}</td>
@@ -124,6 +125,9 @@ a.btn.text-secondary.px-0 {
                     <td>{{employee.phone}}</td>
                     <td>{{employee.email}}</td>
                     <td class="icon">
+                      <a href="{{employee.passport_upload.url}}" target="_blank" class="btn text-secondary px-0" >
+                        <i class="fa fa-file" style="font-size:15px"></i>
+                      </a>
                       <a href="{% url 'customer_view' employee.id %}" class="btn text-secondary px-0" >
                         <i class="fa fa-eye" style="font-size:15px"></i>
                       </a>

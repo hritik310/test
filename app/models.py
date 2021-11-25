@@ -170,7 +170,7 @@ class Temporary_Permits(models.Model):
 		permit_number 	= models.CharField(max_length=255,default="")
 		permit_vin 		= models.CharField(max_length=255,default="")
 		permit_make 	= models.CharField(max_length=255,default="")
-		permit_year 	= models.IntegerField(max_length=255,default="")
+		permit_year 	= models.IntegerField(max_length=4,default="")
 		permit_note		= models.CharField(max_length=255,default="")
 		paid            = models.IntegerField(default=0)
 		created_at = models.DateTimeField(auto_now_add=True,null=True)
