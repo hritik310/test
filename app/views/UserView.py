@@ -43,6 +43,7 @@ def userLogout(request):
 
 @login_required
 def home(request):
+    searchdata = request.GET.get('data',False)
     dateRange = request.GET.get('date',False)
     print(dateRange)
     count= Released.objects.all().count()
@@ -65,8 +66,6 @@ def home(request):
         custom= Customer.objects.filter(created_at__date__range=(startDate, endDate)).count()
         shipp= Shipper_Exports.objects.filter(created_at__date__range=(startDate, endDate)).count()
 
-    searchdata = request.GET.get('data',False)
-    print(searchdata)
     if not searchdata:
         searchdata=""
     shipper,temp_permit,released,insurance=([] for i in range(4))
