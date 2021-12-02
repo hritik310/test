@@ -9,6 +9,7 @@ from app.forms.shipper import *
 @login_required
 def shipper(request):
     startDate = request.GET.get('start_date',False)
+    print(startDate)
     endDate = request.GET.get('end_date',False)
     paid = request.GET.get('paid',False)
     shipper=Shipper_Exports.objects.all()

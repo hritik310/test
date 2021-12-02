@@ -3,21 +3,22 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from app.models import *
 from django.contrib.auth.decorators import login_required
+from app.forms.agency import *
 
 @login_required
 def create(request):
     if request.method == 'POST':
-        m = Agencies()
-        print(request.POST)
-        m.name = request.POST.get('name')
-        m.domain = request.POST.get('domain')
-        m.active = request.POST.get('active')
-        m.patente = request.POST.get('patente')
+        agencyForm = AgencyCreateForm(request.POST)
+        if agencyForm.is_valid():
+            if agencyForm.save():
+                messages.success(request,'Agencies Added Successfully.')
+                return redirect('/agencies')
+        else:
+            print(agencyForm)
+            return render(request,"agency/create.html",{'form':agencyForm})
         
-        m.save()
-        messages.success(request,'Agencies Added Successfully.')
-        return redirect('/agencies')
-    return render(request,"agency/create.html")
+    form = AgencyCreateForm(None)  
+    return render(request,"agency/create.html",{'form':form})
     
 @login_required
 def agencies(request):

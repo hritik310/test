@@ -19,33 +19,68 @@
                 </p-->
                 <span class="section">Agencies Add</span>
 
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
+                <div class="item form-group {% if form.name.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required text-danger">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input id="name" class="form-control col-md-7 col-xs-12"name="name"     
-                    value = "{{agencies.name}}" required="required" type="text">
+                  {{form.name}}
+                  {% if form.name.errors %}
+                  {% for error in form.name.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+
+
                   </div>
                 </div>
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email"> Domain <span class="required">*</span>
+                <div class="item form-group {% if form.domain.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email"> Domain <span class="required text-danger">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="url" id="domain" name="domain" value = "{{agencies.domain}}"  required="required" class="form-control col-md-7 col-xs-12">
+                    {{form.domain}}
+                    {% if form.domain.errors %}
+                    {% for error in form.domain.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                    {% endfor %}
+                    {% endif %}
+                   
+                    
                   </div>
                 </div>
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Active<span class="required">*</span>
+                <div class="item form-group {% if form.state_id.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Active<span class="required  text-danger">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="number" id="active" name="active" value = "{{agencies.active}}" required="required" class="form-control col-md-7 col-xs-12">
+                    {{form.state_id}}
+                    {% if form.state_id.errors %}
+                    {% for error in form.state_id.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                      </span>
+                    {% endfor %}
+                    {% endif %}
+                  
+
+                    
                   </div>
                 </div>
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Patente<span class="required">*</span>
+                <div class="item form-group {% if form.patente.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Patente<span class="required text-danger"> *</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="patente" name="patente" value = "{{agencies.patente}}"  required="required" class="form-control col-md-7 col-xs-12">
+                  {{form.patente}}
+                  {% if form.patente.errors %}
+                  {% for error in form.patente.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+
                   </div>
                 </div>
                 <div class="ln_solid"></div>
@@ -63,9 +98,3 @@
     </div>
   </div>
 {% endblock content %}
-{% block javascripts %}
-  {{ block.super }}
-  <!-- validator -->
-  <script src="/static/vendors/validator/validator.js"></script>
-{% endblock javascripts %}
-

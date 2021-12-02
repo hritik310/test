@@ -1,6 +1,9 @@
 from django.forms import ModelForm
 from django import forms
 from app.models import *
+# from phonenumber_field.formfields import PhoneNumberField
+# from phonenumber_field.widgets import PhoneNumberPrefixWidget
+
 
 
 class CustomerCreateForm(ModelForm):
@@ -32,13 +35,14 @@ class CustomerCreateForm(ModelForm):
         'placeholder':'Enter your country'
         }
     ))
-    
     phone = forms.CharField(required = True,widget=forms.TextInput(
         attrs={
         'class':'form-control',
         'placeholder':'Enter your Phone Number'
         }
     ))
+    # phone = PhoneNumberField(required = True,widget=PhoneNumberPrefixWidget(initial='IN')
+    # )
     email = forms.EmailField(required = True,widget=forms.TextInput(
         attrs={
         'class':'form-control',
