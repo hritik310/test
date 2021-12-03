@@ -51,7 +51,10 @@ def home(request):
     insura= Insurance.objects.all().count()
     temp= Temporary_Permits.objects.all().count()
     custom= Customer.objects.all().count()
-    shipp= Shipper_Exports.objects.all().count() 
+    shipp= Shipper_Exports.objects.all().count()
+    show =Shipper_Exports.objects.all().order_by('-id')[:20]
+    shows=Insurance.objects.all().order_by('-id')[:20]  
+    display=Temporary_Permits.objects.all().order_by('-id')[:20]   
     if dateRange:
         splitRange = dateRange.split(" - ")
         print(splitRange)
@@ -70,6 +73,7 @@ def home(request):
         searchdata=""
     shipper,temp_permit,released,insurance=([] for i in range(4))
 
+
     if searchdata:
         shipper = Shipper_Exports.objects.filter(Q(name__icontains=searchdata)|Q(vin__icontains=searchdata)|Q(make__icontains=searchdata))
         print(shipper.query)
@@ -82,7 +86,7 @@ def home(request):
     if searchdata:
         insurance = Insurance.objects.filter(Q(ins_name__icontains=searchdata)|Q(vin__icontains=searchdata)|Q(make__icontains=searchdata))
         print(insurance.query)
-    context= {'count': count,'pedi':pedi,'custom':custom,'shipp':shipp,'temp':temp,'insurance':insura,'shipper':shipper,'temp_permit':temp_permit,'released':released,'insuran':insurance,'search':searchdata}
+    context= {'count': count,'pedi':pedi,'custom':custom,'shipp':shipp,'temp':temp,'insurance':insura,'shipper':shipper,'temp_permit':temp_permit,'released':released,'insuran':insurance,'search':searchdata,'show':show,'shows':shows,'display':display}
     return render(request,"home.html",context)
 
     # count= Released.objects.all().count()
