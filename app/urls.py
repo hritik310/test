@@ -87,7 +87,8 @@ urlpatterns = [
     path('released/delete/<int:id>',ReleasedView.delete, name ="released_delete"),
     path('released/view/<int:id>/',ReleasedView.view,name='released_view'),
     path('released/update-released-status/',ReleasedView.updateReleasedStatus, name ="update-released-status"),
-    # path("released/<int:id>",ReleasedView.imagedelete, name ="released_img"),
+    path("remove/<int:id>",ReleasedView.remove, name ="remove_img"),
+
 
 
 

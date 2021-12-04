@@ -57,6 +57,7 @@ def update(request,id):
     if request.method =='POST':
         if (request.FILES.get('scan',None)):
             img = request.FILES['scan'];
+            print(img)
             relea.scan = img
         relea.date = request.POST.get('date')
         relea.file = request.POST.get('file')
@@ -100,29 +101,13 @@ def updateReleasedStatus(request):
     return JsonResponse(data)
 
 
-# @login_required   
-# def imagedelete(request,id):
-#     released=Released.objects.get(id=id)
-#     if released.scan:
-#         released.scan.delete()
-#         released.save()
-#         return render(request,"released/update.html",{'released':released})
-#     else:
-#         relea = Released.objects.get(pk=id)
-#     if request.method =='POST':
-#         if (request.FILES.get('scan',None)):
-#             img = request.FILES['scan'];
-#             relea.scan = img
-        
-#         relea.date = request.POST.get('date')
-#         relea.file = request.POST.get('file')
-#         relea.name = request.POST.get('name')
-#         relea.refrence = request.POST.get('refrence')
-#         relea.vin = request.POST.get('vin')
-#         relea.make = request.POST.get('make')
-#         relea.year = request.POST.get('year')
-#         relea.note = request.POST.get('note')
-#         relea.save()
-#         messages.success(request,'Released details updated Successfully.')
-#         return redirect('/released') 
+@login_required   
+def remove(request,id):
+    released=Released.objects.get(id=id)
+    print(released)
+    released.scan=""
+    released.save()
+
+    return render(request,"released/update.html",{'released':released})
+
 
