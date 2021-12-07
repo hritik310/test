@@ -123,6 +123,7 @@
               <table id="datatable" class="table table-striped table-bordered">
                 <thead>
                   <tr>
+                    <th>table</th>
                     <th>Name</th>
                     <th>Vin</th>
                     <th>Make</th>
@@ -132,6 +133,7 @@
                 <tbody>
                   {% for a in shipper %}
                   <tr>
+                    <td><a href="shipper">Shipper</a></td>
                     <td><a href="shipper">{{a.name}}</a></td>
                     <td><a href="shipper">{{a.vin}}</a></td>
                     <td><a href="shipper">{{a.make}}</a></td>
@@ -139,6 +141,7 @@
                   {% endfor %}
                   {% for b in temp_permit %}
                   <tr>
+                    <td><a href="temp_permits">Temporary_permit</a></td>
                     <td><a href="temp_permits">{{b.permit_name}}</a></td>
                     <td><a href="temp_permits">{{b.permit_vin}}</a></td>
                     <td><a href="temp_permits">{{b.permit_make}}</a></td>
@@ -146,6 +149,7 @@
                   {% endfor %}
                   {% for c in released %}
                   <tr>
+                    <td><a href="released">Released</a></td>
                     <td><a href="released">{{c.name}}</a></td>
                     <td><a href="released">{{c.vin}}</a></td>
                     <td><a href="released">{{c.make}}</a></td>
@@ -153,6 +157,7 @@
                   {% endfor %}
                   {% for d in insuran %}
                   <tr>
+                    <td><a href="insurance">Insurance</a></td>
                     <td><a href="insurance">{{d.ins_name}}</a></td>
                     <td><a href="insurance">{{d.vin}}</a></td>
                     <td><a href="insurance">{{d.make}}</a></td>
@@ -260,7 +265,9 @@
             <tr>
               <th>S.NO</th>
               <th>Name</th>
-              <th>Vin</th>           
+              <th>Vin</th>
+              <th>Referece</th>
+
             </tr>
           </thead>
           <tbody>
@@ -268,7 +275,8 @@
             <tr>
               <td>{{forloop.counter}}</td>
               <td>{{shipper.name}}</td>
-              <td>{{shipper.vin}}</td>       
+              <td>{{shipper.vin}}</td>
+              <td>{{shipper.refrence}}</td>       
             </tr>
             {%endfor%}
           </tbody>                 
@@ -286,14 +294,18 @@
                   <th>S.No</th>
                   <th>Name</th>
                   <th>VIN</th>
+                  <th>Type</th>
+                  <th>Days</th>
                 </tr>
               </thead>
               <tbody>            
-                {%for insurance in shows%}                           
+                {% for insurance in shows %}                           
                 <tr>
                   <td>{{forloop.counter}}</td>    
                   <td>{{insurance.ins_name}}</td>
                   <td>{{insurance.vin}}</td>
+                  <td>{{insurance.Type}}</td>
+                  <td>{{insurance.days}}</td>
                 </tr>
                 {% endfor %}
               </tbody>
@@ -313,6 +325,9 @@
                   <th>S.No</th>
                   <th>Name</th>
                   <th>VIN</th>
+                  <th>Make</th>
+                  <th>Hours</th>
+
                 </tr>
               </thead>
               <tbody>
@@ -320,7 +335,10 @@
                 <tr>
                   <td>{{forloop.counter}}</td>
                   <td>{{permits.permit_name}}</td>
-                  <td>{{permits.permit_vin}}</td> 
+                  <td>{{permits.permit_vin}}</td>
+                  <td>{{permits.permit_make}}</td>
+                  <td>{{permits.permit_hour}}</td>
+
                 </tr>
                 {%endfor%}
               </tbody>
@@ -339,31 +357,45 @@
     $(document).ready(function() {
     $("#b-navbar-fg").hide();
 });
-$(function() {
+</script>
 
-    var start = moment().subtract(29, 'days');
-    var end = moment();
 
-    function cb(start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    }
-
-    $('#reportrange').daterangepicker({
-        startDate: start,
-        endDate: end,
-        ranges: {
-           'Today': [moment(), moment()],
-           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-           'This Month': [moment().startOf('month'), moment().endOf('month')],
-           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+    <script type="text/javascript">
+    $(function() {
+    
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+    
+        function cb(start, end) {
+            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
         }
-    }, cb);
+    
+        $('#reportrange').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+               'All': [moment().subtract( 'years').startOf('years'), moment().subtract( 'yearRange').endOf('yearRange')],
 
-    cb(start, end);
 
-});
+
+
+            }
+        }, cb);
+    
+        cb(start, end);
+    
+    });
+
+    
+
+
+
  $(document).ready(function() {
     $('#daterange').DataTable({"searching": false,"lengthChange": false});
     $('#daterange1').DataTable({"searching": false,"lengthChange": false});
