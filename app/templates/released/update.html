@@ -80,8 +80,10 @@
                 
                     </a> 
                     {% endif %}
+                    {% if released.scan == '' %}
                     <input id="scan" class="form-control col-md-7 col-xs-12" name="scan"
                       type="file" required="required">
+                    {% endif %}
                   </div>
                 </div>
                 <div class="item form-group">

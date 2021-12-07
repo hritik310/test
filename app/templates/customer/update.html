@@ -13,7 +13,7 @@
           <div class="x_panel">
             <div class="x_content">
 
-              <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data" novalidate>
+              <form class="form-horizontal form-label-left" action="{% url 'customerupdate' customer.id %}" method="POST" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
 
                 <!--p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
@@ -33,10 +33,15 @@
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     {% if customer.passport_upload %}
-                    <img  src ="{{ customer.passport_upload.url}}" width = "40px" height="40px"/><br/>
+                    <img  src ="{{ customer.passport_upload.url}}" width = "40px" height="40px"/>
+                    <a href="{% url 'image' customer.id %}"class="glyphicon glyphicon-remove">
+                
+                    </a>
                     {% endif %}
+                    {% if customer.passport_upload == '' %}
                     <input id="pass_image" class="form-control col-md-7 col-xs-12" name="pass_image"
-                      type="file">
+                      type="file" required="required">
+                    {% endif %}
                   </div>
                 </div>
                 <div class="item form-group">

@@ -72,3 +72,13 @@ def delete(request,id):
 def view(request,id):
     customer = Customer.objects.get(id=id)
     return render(request,"customer/view.html",{'custom':customer})
+
+
+@login_required   
+def imagedelete(request,id):
+    cust=Customer.objects.get(id=id)
+    print(cust)
+    cust.passport_upload=""
+    cust.save()
+
+    return render(request,"customer/update.html",{'customer':cust})

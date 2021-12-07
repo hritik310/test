@@ -29,7 +29,8 @@ urlpatterns = [
     path('customer/create',CustomerView.create,name='customerCreate'),
     path('customer/update/<int:id>',CustomerView.update,name='customerupdate'),
     path('customer/delete/<int:id>',CustomerView.delete, name ="customerdelete"),
-    path('customer/view/<int:id>/',CustomerView.view,name='customer_view'), 
+    path('customer/view/<int:id>/',CustomerView.view,name='customer_view'),
+    path("image/<int:id>",CustomerView.imagedelete, name ="image"), 
 
 
     # provider urls  
