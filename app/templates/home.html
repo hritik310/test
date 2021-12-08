@@ -15,22 +15,39 @@
 
 .col-md-6.col-sm-6.col-xs-12.left-side {
     position: relative;
-    right: 40px;
+    right: 30px;
 }
+
+
 .col-md-2.form-group.left {
     position: relative;
-    right: 155px;
+    right: 135px;
 }
+/*.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0px;
+    text-align: left;
+}*/
 .col-md-6.col-sm-6.col-xs-12.left-input {
     position: relative;
-    right: 87px;
+    right: 40px;
 }
+
 
 .col-md-2.form-group.left-search {
     position: relative;
-    right: 250px;
+    right: 307px;
+}
+.col-md-6.col-sm-6.col-xs-12.left-input {
+    width: 158px;
+    position: relative;
+    right: 70px;
 }
 
+.row {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
    </style>
 {% endblock stylesheets %}
 
@@ -258,7 +275,7 @@
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="x_panel tile ">
           <div class="x_title">
-            <h2>Shipper</h2>
+            <h2>Shipper Exports</h2>
             <table id="daterange" class="table table-striped table-bordered">
               <thead>
                 <tr>
@@ -319,7 +336,7 @@
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="x_panel tile">
           <div class="x_title">
-            <h2>Temporary Permit</h2>  
+            <h2>Temporary Permits</h2>  
           <table id="daterange2" class="table table-striped table-bordered">
                 <thead>
                 <tr>
@@ -397,11 +414,10 @@
 
 
 
-//  $(document).ready(function() {
-//     $('#daterange').DataTable({"searching": false,"lengthChange": false});
-//     $('#daterange1').DataTable({"searching": false,"lengthChange": false});
-//     $('#daterange2').DataTable({"searching": false,"lengthChange": false});
-// });
+ $(document).ready(function() {
+    $('#daterange').DataTable({"searching": false,"lengthChange": false});
+    $('#daterange2').DataTable({"searching": false,"lengthChange": false});
+});
 </script>
   <!-- Chart.js -->
   <script src="/static/vendors/Chart.js/dist/Chart.min.js"></script>
@@ -426,4 +442,17 @@
   <script src="/static/vendors/jqvmap/dist/jquery.vmap.js"></script>
   <script src="/static/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
   <script src="/static/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+  <script src="/static/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="/static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+  <script src="/static/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <script src="/static/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="/static/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <script src="/static/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+ 
 {% endblock javascripts %}
