@@ -255,37 +255,37 @@
 
     <div class="row">
 
-      <div class="col-md-4 col-sm-4 col-xs-12">
-        <div class="x_panel tile fixed_height_320">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel tile ">
           <div class="x_title">
-            <h2>Shipper</h2>  
-        <table id="daterange" class="table table-striped table-bordered" style="width:100%">
-          <thead>
-            <tr>
-              <th>S.NO</th>
-              <th>Name</th>
-              <th>Vin</th>
-              <th>Referece</th>
+            <h2>Shipper</h2>
+            <table id="daterange" class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>S.NO</th>
+                  <th>Name</th>
+                  <th>Vin</th>
+                  <th>Referece</th>
 
-            </tr>
-          </thead>
-          <tbody>
-          {% for shipper in show %}         
-            <tr>
-              <td>{{forloop.counter}}</td>
-              <td>{{shipper.name}}</td>
-              <td>{{shipper.vin}}</td>
-              <td>{{shipper.refrence}}</td>       
-            </tr>
-            {%endfor%}
-          </tbody>                 
-        </table>      
+                </tr>
+              </thead>
+              <tbody>
+              {% for shipper in show %}
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{shipper.name}}</td>
+                <td>{{shipper.vin}}</td>
+                <td>{{shipper.refrence}}</td>       
+              </tr>
+              {%endfor%}
+              </tbody>                 
+            </table>      
 
           </div>
         </div>
       </div>
 
-      <div class="col-md-4 col-sm-4 col-xs-12">
+      <!-- <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="x_panel tile fixed_height_320 overflow_hidden">
           <div class="x_title">
             <h2>Insurance</h2>
@@ -314,13 +314,13 @@
           </div>
         </div>
       </div>
+ -->
 
-
-      <div class="col-md-4 col-sm-4 col-xs-12">
-        <div class="x_panel tile fixed_height_320">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel tile">
           <div class="x_title">
             <h2>Temporary Permit</h2>  
-          <table id="daterange2" class="table table-striped table-bordered" style="width:100%">
+          <table id="daterange2" class="table table-striped table-bordered">
                 <thead>
                 <tr>
                   <th>S.No</th>
@@ -343,11 +343,12 @@
                 </tr>
                 {%endfor%}
               </tbody>
-            </table>         
+            </table> 
           </div>
         </div>
       </div>
     </div>
+
 
 {% endblock content %}
 
