@@ -5,10 +5,19 @@
 {% block stylesheets %}
   {{ block.super }}
     <style>
+
 button#send {
     width: 98px;
-    margin-left: 84px;
     font-size: 18px;
+    float: right;
+    position: relative;
+    left: 266px;
+}
+.control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+    font-size: 12px;
 }
 
 </style>
@@ -75,7 +84,7 @@ button#send {
               </div>
             </div>
               <div class="form-group">
-                  <div class="col-md-9 col-md-offset-10">
+                  <div class="col-md-9">
                     <button id="send" type="submit" class="btn btn-success">Search</button>
                   </div>
               </div>

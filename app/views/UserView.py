@@ -11,6 +11,7 @@ from django.shortcuts import redirect
 from django.db.models import Q
 
 
+
 def index(request):
     context = {}
     template = loader.get_template('app/index.html')
