@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from app.models import *
 from django.contrib.auth.decorators import login_required
+from app.helper import *
 
 
 
@@ -11,9 +12,11 @@ def index(request):
     endDate = request.GET.get('end_date',False)
     paid = request.GET.get('paid',False)
     temp_permits=Temporary_Permits.objects.all()
+    if isProvider(request):
+        temp_permits = temp_permits.filter(created_by=request.user)
 
     if startDate and endDate:
-        temp_permits = Temporary_Permits.objects.filter(created_at__date__range=(startDate, endDate))
+        temp_permits = temp_permits.filter(created_at__date__range=(startDate, endDate))
         print(temp_permits.query)
 
     if paid:
@@ -35,6 +38,7 @@ def create(request):
         permits.permit_make = request.POST.get('permit_make')
         permits.permit_year = request.POST.get('permit_year')
         permits.permit_note = request.POST.get('permit_note')
+        permits.created_by = request.user
         permits.save()
         messages.success(request,'Temporary_permits Added Successfully.')
         return redirect('/temp_permits')

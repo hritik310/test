@@ -4,6 +4,7 @@ from django.contrib import messages
 from app.models import *
 from django.contrib.auth.decorators import login_required
 from app.forms.shipper import *
+from app.helper import *
 
 
 @login_required
@@ -13,9 +14,11 @@ def shipper(request):
     endDate = request.GET.get('end_date',False)
     paid = request.GET.get('paid',False)
     shipper=Shipper_Exports.objects.all()
+    if isProvider(request):
+        shipper = shipper.filter(created_by = request.user) 
 
     if startDate and endDate:
-        shipper = Shipper_Exports.objects.filter(created_at__date__range=(startDate, endDate))
+        shipper = shipper.filter(created_at__date__range=(startDate, endDate))
         print(shipper.query)
 
     if paid:
@@ -32,6 +35,7 @@ def create(request):
         shipperform = ShipperCreateForm(request.POST)
         print(shipperform)
         if shipperform.is_valid():
+            shipperform.instance.created_by = request.user
             if shipperform.save():
                 messages.success(request,'Shipper_Exports Added Successfully.')
                 return redirect('/shipper')

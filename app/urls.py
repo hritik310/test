@@ -9,6 +9,7 @@ from app.views import TemporaryPermitView
 from app.views import ReleasedView
 from app.views import PedimentorView
 from app.views import InventoryView
+from app.views import AccountView
 
 urlpatterns = [
     # Matches any html file - to be used for gentella
@@ -23,6 +24,13 @@ urlpatterns = [
     path('login',UserView.userLogin,name='login'),
     path('logout',UserView.userLogout,name='logout'),
 
+    path('account',AccountView.account,name='account'),
+    path('account/create',AccountView.create,name='accountcreate'),
+    path('account/update/<int:id>',AccountView.update,name='accountupdate'),
+    path('account/delete/<int:id>',AccountView.delete, name ="accountdelete"),
+    path('account/permission/<int:id>',AccountView.permission, name ="permission"),
+
+
 
     # # customer urls
     path('customer',CustomerView.customer,name='customer'),
@@ -35,7 +43,7 @@ urlpatterns = [
 
     # provider urls  
     path('provider',ProviderView.provider,name='provider'),
-    path('provider/index',ProviderView.create,name='providerIndex'),
+    path('provider/create',ProviderView.create,name='providercreate'),
     path('provider/update/<int:id>',ProviderView.update,name='providerupdate'),
     path('provider/delete/<int:id>',ProviderView.delete, name ="providerdelete"),
 

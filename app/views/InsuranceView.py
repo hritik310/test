@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from app.models import *
 from django.contrib.auth.decorators import login_required
+from app.helper import *
 
 @login_required
 def insurance(request):
@@ -11,9 +12,11 @@ def insurance(request):
     endDate=request.GET.get('end_date',False)
     paid = request.GET.get('paid',False)
     insurance=Insurance.objects.all()
+    if isProvider(request):
+        insurance=insurance.filter(created_by=request.user)
 
     if startDate and endDate:
-        insurance = Insurance.objects.filter(created_at__date__range=(startDate, endDate))
+        insurance = insurance.filter(created_at__date__range=(startDate, endDate))
 
     if paid:
         insurance = insurance.filter(paid=paid)
@@ -27,6 +30,7 @@ def insurance(request):
 
 @login_required
 def create(request):
+    # user=User.objects.get(id=id)
     if request.method == 'POST':
         insurance=Insurance()
         print(request.POST)
@@ -41,6 +45,8 @@ def create(request):
         insurance.make = request.POST.get('ins_make')
         insurance.year = request.POST.get('ins_year')
         insurance.note = request.POST.get('ins_notes')
+        insurance.created_by=request.user
+        # insurance.user_id_id = user
         insurance.save()
         messages.success(request,'Insurance Added Successfully.')
         return redirect('/insurance')

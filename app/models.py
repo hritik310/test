@@ -17,15 +17,13 @@ class User(AbstractBaseUser,PermissionsMixin):
 	id = models.AutoField(primary_key=True)
 	USER_TYPE_CHOICES = (
         ("superadmin", 0),
-        ("admin", 1), 
+        ("provider", 1), 
         ("user", 2), 
     )
 	user_type 	= models.IntegerField(choices = USER_TYPE_CHOICES,default="2")
 	username 	= models.CharField(_('username'),max_length=255,default="")
-	name 		= models.CharField(_('name'),max_length=255,default="")
-	owner		= models.CharField(_('owner'),max_length=255,default="")
-	tax_id		= models.IntegerField(null=True)
 	email 		= models.EmailField(_('email'),unique=True)
+	phone 		= PhoneField(blank=True, help_text='Contact phone number',default="")
 	is_staff 	= models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.')
 	is_active 	= models.BooleanField(default=True,
 		help_text='Designates whether this user should be treated as active.\
@@ -60,6 +58,7 @@ class Customer(models.Model):
 	state       = models.CharField(max_length=255,default="")
 	created_at = models.DateTimeField(auto_now_add=True,null=True)
 	updated_at =  models.DateTimeField(auto_now=True)
+	created_by = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
 	
 	
@@ -77,9 +76,11 @@ class Agencies(models.Model):
 	patente = models.CharField(max_length=255,default="")
 	created_at = models.DateTimeField(auto_now_add=True,null=True)
 	updated_at =  models.DateTimeField(auto_now=True)
+	created_by = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
 
 class Pedimentos(models.Model):
+	created_by = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 	refrence_id 	= models.IntegerField(max_length=11,default="")
 	pedimento_no 	= models.IntegerField()
 	date  			= models.DateField()
@@ -135,6 +136,7 @@ class Shipper_Exports(models.Model):
 	paid        = models.IntegerField(default=0)
 	created_at = models.DateTimeField(auto_now_add=True,null=True)
 	updated_at =  models.DateTimeField(auto_now=True)
+	created_by = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
 class Insurance(models.Model):
 		INACTIVE = 0
@@ -143,6 +145,7 @@ class Insurance(models.Model):
 		    (INACTIVE, _('Inactive')),
 		    (ACTIVE, _('Active')),
 		)
+		created_by = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 		Type =    models.CharField(max_length=255,default="")
 		insurer = models.CharField(max_length=255,default="")
 		policy_number = models.CharField(max_length=255,default="")
@@ -164,6 +167,7 @@ class Temporary_Permits(models.Model):
 		    (INACTIVE, _('Inactive')),
 		    (ACTIVE, _('Active')),
 		)
+		created_by = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 		permit_date  	= models.DateField()
 		permit_name 	= models.CharField(max_length=255,default="")
 		permit_hour 	= models.IntegerField(max_length=255,default="")
@@ -178,6 +182,7 @@ class Temporary_Permits(models.Model):
 
 
 class Released(models.Model):
+	created_by = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 	date  =  models.DateField()
 	file  =  models.CharField(max_length=255,default="")
 	name = models.CharField(max_length=255,default="")
@@ -190,6 +195,18 @@ class Released(models.Model):
 	paid  = models.IntegerField(default=0)
 	created_at = models.DateTimeField(auto_now_add=True,null=True)
 	updated_at =  models.DateTimeField(auto_now=True)
+
+class Provider(models.Model):
+	created_by = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+	name = models.CharField(max_length=255,default="")
+	owner = models.CharField(max_length=255,default="")
+	email = models.EmailField(unique=True)
+	tax_id = models.IntegerField()
+
+class Permissions(models.Model):
+	permission =models.CharField(max_length=100,default="")
+	user = models.ForeignKey(User,on_delete=models.CASCADE) 
+
 
 
 

@@ -1,0 +1,35 @@
+{% extends "layouts/admin.html" %}
+
+{% block title %} Permission {% endblock title %}
+
+{% block stylesheets %}
+
+  {{ block.super }}
+{% endblock stylesheets %}
+
+
+{% block content %}
+<div class="right_col" role="main">
+	<div class="">
+		<form action="" method="POST" novalidate>
+			{% csrf_token %}
+			<input type="checkbox" id="vehicle1" name="permission" value="1">
+            <label for="vehicle1"> Pedimentos </label><br>
+			<input type="checkbox" id="vehicle2" name="permission" value="2">
+			<label for="vehicle2"> Customer </label><br>
+			<input type="checkbox" id="vehicle3" name="permission" value="3">
+			<label for="vehicle3"> Insurance</label><br>
+
+			<button type="submit">Save</button>
+		</form>
+    </div>
+</div>
+  
+
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+
+{% endblock javascripts %}
+

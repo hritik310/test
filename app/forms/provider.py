@@ -22,6 +22,11 @@ class ProviderCreateForm(ModelForm):
         'placeholder':'Enter your address'
         }
     ))
+    # password = forms.CharField(required = True,widget=forms.PasswordInput(
+    #     attrs={
+    #     'class':'form-control'
+    #     }
+    # ))
 
     tax_id = forms.CharField(required = True,widget=forms.TextInput(
         attrs={
@@ -31,6 +36,6 @@ class ProviderCreateForm(ModelForm):
     ))
 
     class Meta:
-        model = User
+        model = Provider
         fields = ["name","owner","tax_id","email"]
 

@@ -4,12 +4,14 @@ from django.contrib import messages
 from app.models import *
 from django.contrib.auth.decorators import login_required
 from app.forms.agency import *
+from app.helper import *
 
 @login_required
 def create(request):
     if request.method == 'POST':
         agencyForm = AgencyCreateForm(request.POST)
         if agencyForm.is_valid():
+            agencyForm.instance.created_by = request.user
             if agencyForm.save():
                 messages.success(request,'Agencies Added Successfully.')
                 return redirect('/agencies')
@@ -25,9 +27,12 @@ def agencies(request):
     startDate = request.GET.get('start_date',False)
     endDate = request.GET.get('end_date',False)
     agency=Agencies.objects.all()
+    if isProvider(request):
+        agency=agency.filter(created_by=request.user)
+
 
     if startDate and endDate:
-        agency = Agencies.objects.filter(created_at__date__range=(startDate, endDate))
+        agency = agency.filter(created_at__date__range=(startDate, endDate))
         print(agency.query)
     context = {'employee_list':agency}
     return render(request,"agency/index.html",context)

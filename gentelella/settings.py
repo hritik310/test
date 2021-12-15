@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_countries',
     'phone_field',
     'app'
+    # 'multiselectfield',
 ]
 AUTH_USER_MODEL = 'app.User'
 
