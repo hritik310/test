@@ -4,6 +4,8 @@ from django.contrib import messages
 from app.models import *
 from django.contrib.auth.decorators import login_required
 from app.forms.provider import *
+from app.helper import *
+
 
 
 
@@ -12,12 +14,15 @@ from app.forms.provider import *
 def provider(request):
     startDate = request.GET.get('start_date',False)
     endDate = request.GET.get('end_date',False)
-    user=User.objects.all()
+    provider = Provider.objects.all()
+    if isProvider(request):
+        provider = provider.filter(created_by = request.user)
+
 
     if startDate and endDate:
-        user = User.objects.filter(created_at__date__range=(startDate, endDate))
+        provider = provider.filter(created_at__date__range=(startDate, endDate))
         print(user.query)
-    context = {'employee_list':user}
+    context = {'employee_list':provider}
     return render(request,"provider/index.html",context)
 
 
@@ -27,6 +32,7 @@ def create(request):
     if request.method == 'POST':
         providerform = ProviderCreateForm(request.POST)
         if providerform.is_valid():
+            providerform.instance.created_by = request.user
             if providerform.save():
                 messages.success(request,'Provider Added Successfully.')
                 return redirect('/provider')
@@ -39,7 +45,7 @@ def create(request):
 
 @login_required
 def update(request,id):
-    employee = User.objects.get(pk=id)
+    employee = Provider.objects.get(pk=id)
     print(employee)
     if request.method == 'POST':
         employee.name = request.POST.get('name')
@@ -56,6 +62,6 @@ def update(request,id):
 
 @login_required
 def delete(request,id):
-    employee = User.objects.get(pk=id)
+    employee = Provider.objects.get(pk=id)
     employee.delete()
     return redirect('/provider')

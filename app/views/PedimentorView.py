@@ -13,9 +13,11 @@ def index(request):
     startDate = request.GET.get('start_date',False)
     endDate = request.GET.get('end_date',False)
     pedimentor=Pedimentos.objects.all()
+    if isProvider(request):
+        pedimentor = pedimentor.filter(created_by = request.user)
 
     if startDate and endDate:
-        pedimentor = Pedimentos.objects.filter(created_at__date__range=(startDate, endDate))
+        pedimentor = pedimentor.filter(created_at__date__range=(startDate, endDate))
         print(pedimentor.query)
     context = {'pedimentos_list':pedimentor}
     return render(request,"pedimentos/index.html",context )
@@ -46,6 +48,7 @@ def create(request):
         pedi.lock7 = request.POST.get('lock7')
         pedi.lock8 = request.POST.get('lock8')
         pedi.supplier = request.POST.get('supplier')
+        pedi.created_by = request.user
         pedi.save()
         files = request.FILES.getlist('file',False)
         if files:

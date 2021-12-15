@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from app.models import *
 from django.contrib.auth.decorators import login_required
+from app.helper import *
 
 
 @login_required
@@ -11,9 +12,11 @@ def released(request):
     endDate = request.GET.get('end_date',False)
     paid = request.GET.get('paid',False)
     released=Released.objects.all()
+    if isProvider(request):
+        released = released.filter(created_by=request.user)
 
     if startDate and endDate:
-        released = Released.objects.filter(created_at__date__range=(startDate, endDate))
+        released = released.filter(created_at__date__range=(startDate, endDate))
         print(released.query)
 
     if paid:
@@ -37,6 +40,7 @@ def create(request):
         relea.year = request.POST.get('year')
         relea.scan = request.FILES.get('scan')
         relea.note = request.POST.get('note')
+        relea.created_by = request.user
         relea.save()
         messages.success(request,'Released Created Successfully.')
         return redirect('/released') 

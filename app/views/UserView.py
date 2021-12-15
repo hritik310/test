@@ -25,6 +25,7 @@ def userLogin(request):
         upass= request.POST.get('password')
         print(upass)
         user = authenticate(username=uname,password=upass)
+        print(user)
         if user is not None:
             login(request,user)
             return redirect('/home')

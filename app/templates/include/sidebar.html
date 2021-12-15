@@ -1,4 +1,4 @@
-
+{% load post_tags %}
 <div class="left_col scroll-view">
   <div class="navbar nav_title" style="border: 0;">
     <a href="{% url 'home' %}" class="site_title"><i class="fa fa-spinner"></i> <span>Transmission</span></a>
@@ -27,6 +27,14 @@
        <!--  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
            
         </li> -->
+        <li><a href="{% url 'account' %}"><i class="fa fa-user"></i> Accounts</a>
+          <ul class="nav child_menu">
+            <!-- <li><a href="">Views</a></li> -->
+            <!--li><a href="form_wizards.html">Form Wizard</a></li-->
+            <!--li><a href="form_upload.html">Form Upload</a></li-->
+            <!--li><a href="form_buttons.html">Form Buttons</a></li-->
+          </ul>
+        </li>
         <li><a href="{% url 'pedimentos' %}"><i class="fa fa-table"></i> Pedimentos</a>
           <ul class="nav child_menu">
             <!-- <li><a href="{% url 'pedimentos' %}">Pedimentos</a></li> -->
@@ -59,6 +67,7 @@
             <!--li><a href="form_buttons.html">Form Buttons</a></li-->
           </ul>
         </li>
+     
         <li><a href="{% url 'released' %}"><i class="fa fa-edit"></i>Title</a>
           <ul class="nav child_menu">
           </ul>
@@ -80,7 +89,6 @@
             <li><a href="calendar.html">Calendar</a></li-->
           </ul>
         </li>
-
         <li><a><i class="fa fa-edit"></i> Catalogs <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="{% url 'agencies'%}">Agencies</a></li>

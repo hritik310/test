@@ -1,0 +1,96 @@
+
+{% extends "layouts/admin.html" %}
+
+{% block title %} Create Provider {% endblock title %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+
+              <form class="form-horizontal form-label-left" method="POST" novalidate>
+                {% csrf_token %}
+
+                <!--p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
+                </p-->
+                <span class="section"> Add Account</span>
+
+                <div class="item form-group {% if form.username.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Username <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                   {{form.username}}
+                   {% if form.username.errors %}
+                  {% for error in form.username.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+                  </div>
+                </div>
+
+                <div class="item form-group {% if form.email.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  {{form.email}}
+                  {% if form.email.errors %}
+                  {% for error in form.email.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+                  </div>
+                </div>
+                <div class="item form-group {% if form.password.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email"> Password <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{form.password}}
+                   {% if form.password.errors %}
+                  {% for error in form.password.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+                  </div>
+                </div>
+                <div class="item form-group {% if form.phone.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Phone<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  {{form.phone}}
+                  {% if form.phone.errors %}
+                  {% for error in form.phone.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+                  </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-6 col-md-offset-3">
+                    <button type="submit" class="btn btn-primary"><a href="{% url 'account'%}"style="color:white">Cancel</a></button>
+                    <button id="send" type="submit" class="btn btn-success">Add</a></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+

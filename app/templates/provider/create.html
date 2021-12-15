@@ -63,6 +63,20 @@
                   {% endif %}
                   </div>
                 </div>
+                <!-- <div class="item form-group {% if form.password.errors %} has-error  {% endif %}">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email"> Password <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{form.password}}
+                   {% if form.password.errors %}
+                  {% for error in form.password.errors %}
+                    <span class="error text-danger">
+                      <strong>{{ error|escape }}</strong>
+                    </span>
+                  {% endfor %}
+                  {% endif %}
+                  </div>
+                </div> -->
                 <div class="item form-group {% if form.tax_id.errors %} has-error  {% endif %}">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Tax ID<span class="required">*</span>
                   </label>

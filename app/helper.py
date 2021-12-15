@@ -26,5 +26,20 @@ def saveMultipleFiles(files,model):
         fileModel.model_type = model.__class__.__name__
         fileModel.save()
 
+def isProvider(request):
+    current_user = request.user
+    if current_user.user_type==3:
+        return True
+    return False
+
+# public static function isGroupUser()
+#     {
+#         $user = auth()->user();
+#         if ($user == null)
+#             return false;
+
+#         return ($user->role == User::GROUP_USER_ROLE);
+#     }
+
 
 
