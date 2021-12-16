@@ -3,7 +3,7 @@ from django import forms
 from app.models import *
 
 
-class AccountCreateForm(ModelForm):
+class AddCreateForm(ModelForm):
     username = forms.CharField(required = True,widget=forms.TextInput(
         attrs={
         'class':'form-control',

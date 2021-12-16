@@ -45,6 +45,15 @@ def userLogout(request):
 
 @login_required
 def home(request):
+    # per = Permissions.objects.filter(user_id = request.user.id)
+    # print(per.query)
+    permissions = userPermission.objects.filter(user_id=request.user.id)
+    print(permissions.query)
+    userPermissions = permissions
+    print(userPermissions)
+    # if userPermissions:
+    #     if permissionGiven in userPermissions:
+    #         return True
     searchdata = request.GET.get('data',False)
     dateRange = request.GET.get('date',False)
     print(dateRange)

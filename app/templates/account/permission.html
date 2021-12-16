@@ -1,35 +1,75 @@
 {% extends "layouts/admin.html" %}
 
-{% block title %} Permission {% endblock title %}
+
+{% block title %} Add Account {% endblock title %}
 
 {% block stylesheets %}
-
-  {{ block.super }}
+ {{ block.super }}
+ <link href="/static/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+ <link href="/static/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+ <link href="/static/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+ <link href="/static/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+ <link href="/static/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 {% endblock stylesheets %}
 
-
 {% block content %}
-<div class="right_col" role="main">
-	<div class="">
-		<form action="" method="POST" novalidate>
-			{% csrf_token %}
-			<input type="checkbox" id="vehicle1" name="permission" value="1">
-            <label for="vehicle1"> Pedimentos </label><br>
-			<input type="checkbox" id="vehicle2" name="permission" value="2">
-			<label for="vehicle2"> Customer </label><br>
-			<input type="checkbox" id="vehicle3" name="permission" value="3">
-			<label for="vehicle3"> Insurance</label><br>
+ <div class="right_col" role="main">
+ <div class="">
+ <div class="clearfix"></div>
 
-			<button type="submit">Save</button>
-		</form>
-    </div>
-</div>
-  
+
+<h1>Permission</h1>
+
+<form method="POST">
+ {% csrf_token %}
+
+ <input type="checkbox" name="shipper_Exports" value="1" {%if save.shipper_Exports == 1 %} checked {%endif%} >
+ <label for="shipper_Exports">Shipper</label><br>
+
+ <input type="checkbox" name="pedimentos" value="1" {%if save.pedimentos == 1 %} checked {%endif%}>
+ <label>Pedimentos</label><br>
+
+ <input type="checkbox" name="customer" value="1" {%if save.customer == 1 %} checked {%endif%}>
+ <label for="customer">Customer</label><br>
+
+ <input type="checkbox" name="insurance" value="1" {%if save.insurance == 1 %} checked {%endif%}>
+ <label for="insurance">Insurance</label><br>
+ 
+ <input type="checkbox" name="temporary_Permits" value="1" {%if save.temporary_Permits == 1 %} checked {%endif%}>
+ <label for="temporary_Permits">Temporary Permits</label><br>
+
+ <input type="checkbox" name="released" value="1" {%if save.released == 1 %} checked {%endif%}>
+ <label for="title">Released</label><br> 
+
+
+ <input type="checkbox" name="agencies" value="1" {%if save.agencies == 1 %} checked {%endif%}>
+ <label for="title">Agencies</label><br>
+
+
+ <input type="checkbox" name="providers" value="1" {%if save.providers == 1 %} checked {%endif%}>
+ <label for="title">providers</label><br>
+ <button id="send" type="submit" class="btn btn-success">update</button>
+ <button id="send" type="submit" class="btn btn-primary"><a href="{% url 'account' %}" style="color:white"> Cancel</a></button>
+</form> 
+
+
 
 {% endblock content %}
 
-{% block javascripts %}
-  {{ block.super }}
+<!--  {% block javascripts %}
+ {{ block.super }}
+ <script>
 
-{% endblock javascripts %}
 
+
+ $('#checkbox').attr('checked', true);
+ $('#checkbox1').attr('checked', true);
+ $('#checkbox2').attr('checked', true);
+ $('#checkbox3').attr('checked', true);
+ $('#checkbox4').attr('checked', true);
+ $('#checkbox5').attr('checked', true);
+ $('#checkbox6').attr('checked', true);
+ $('#checkbox7').attr('checked', true);
+ $('#checkbox8').attr('checked', true);
+</script>
+{%endblock javascripts%} -->

@@ -28,7 +28,8 @@ urlpatterns = [
     path('account/create',AccountView.create,name='accountcreate'),
     path('account/update/<int:id>',AccountView.update,name='accountupdate'),
     path('account/delete/<int:id>',AccountView.delete, name ="accountdelete"),
-    path('account/permission/<int:id>',AccountView.permission, name ="permission"),
+    path('account/updateaccount/<int:id>',AccountView.updateaccount,name='permission_account'),
+    # path('account/permission/<int:id>',AccountView.permission, name ="permission"),
 
 
 

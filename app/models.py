@@ -208,6 +208,18 @@ class Permissions(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE) 
 
 
+class userPermission(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    shipper_Exports=models.IntegerField(default=1)
+    pedimentos=models.IntegerField(default=1)
+    temporary_Permits= models.IntegerField(default=1)
+    customer=models.IntegerField(default=1)
+    insurance=models.IntegerField(default=1)
+    released=models.IntegerField(default=1)
+    agencies=models.IntegerField(default=1)
+    providers=models.IntegerField(default=1)
+
+
 
 
 class File(models.Model):

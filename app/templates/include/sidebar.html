@@ -1,4 +1,5 @@
 {% load post_tags %}
+{% csrf_token %}
 <div class="left_col scroll-view">
   <div class="navbar nav_title" style="border: 0;">
     <a href="{% url 'home' %}" class="site_title"><i class="fa fa-spinner"></i> <span>Transmission</span></a>
@@ -27,6 +28,7 @@
        <!--  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
            
         </li> -->
+        {% if request.user.user_type == 2 %}
         <li><a href="{% url 'account' %}"><i class="fa fa-user"></i> Accounts</a>
           <ul class="nav child_menu">
             <!-- <li><a href="">Views</a></li> -->
@@ -35,6 +37,9 @@
             <!--li><a href="form_buttons.html">Form Buttons</a></li-->
           </ul>
         </li>
+        {% endif %}
+        {% hasPermission user as userPermission %}
+        {% if user.is_superuser or userPermission and userPermission.pedimentos == 1 %}
         <li><a href="{% url 'pedimentos' %}"><i class="fa fa-table"></i> Pedimentos</a>
           <ul class="nav child_menu">
             <!-- <li><a href="{% url 'pedimentos' %}">Pedimentos</a></li> -->
@@ -43,6 +48,8 @@
               <li><a href="tables_dynamic.html">Table Dynamic</a></li-->
           </ul>
         </li>
+        {% endif %}
+        {% if user.is_superuser or userPermission and userPermission.shipper_Exports == 1 %}
         <li><a href="{% url 'shipper'%}"><i class="fa fa-ship"></i> Shipper Exports</a>
           <ul class="nav child_menu">
             <!-- <li><a href="">Views</a></li> -->
@@ -51,6 +58,10 @@
             <!--li><a href="form_buttons.html">Form Buttons</a></li-->
           </ul>
         </li>
+        {% endif %}
+
+        {% if user.is_superuser or userPermission and userPermission.insurance == 1 %}
+
         <li><a href="{% url 'insurance'%}"><i class="fa fa-medkit"></i> Insurance</a>
           <ul class="nav child_menu">
             <!-- <li><a href="">Views</a></li> -->
@@ -59,6 +70,13 @@
             <!--li><a href="form_buttons.html">Form Buttons</a></li-->
           </ul>
         </li>
+
+        {% endif %}
+
+
+   
+    
+      {% if user.is_superuser or userPermission and userPermission.temporary_Permits == 1 %}
         <li><a href="{% url 'temp_permits'%}"><i class="fa fa-edit"></i> Temporary Permits</a>
           <ul class="nav child_menu">
             <!-- <li><a href="">Views</a></li> -->
@@ -67,15 +85,26 @@
             <!--li><a href="form_buttons.html">Form Buttons</a></li-->
           </ul>
         </li>
-     
+
+      {% endif %}
+
+
+      {% if user.is_superuser or userPermission and userPermission.released == 1 %}
         <li><a href="{% url 'released' %}"><i class="fa fa-edit"></i>Title</a>
           <ul class="nav child_menu">
           </ul>
         </li>
+
+      {% endif %}
+       
+      {% if user.is_superuser or userPermission and userPermission.customer == 1 %}
         <li><a href="{% url 'customer'%}"><i class="fa fa-user"></i> Customers</a>
           <ul class="nav child_menu">
           </ul>
         </li>
+
+      {% endif %}
+
         <li><a><i class="fa fa-desktop"></i> Reports <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="#">Projects</a></li>
@@ -91,8 +120,13 @@
         </li>
         <li><a><i class="fa fa-edit"></i> Catalogs <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="{% url 'agencies'%}">Agencies</a></li>
+          {% if user.is_superuser or userPermission and userPermission.providers == 1 %} 
             <li><a href="{% url 'provider'%}">Providers</a></li>
+          {% endif %}
+          {% if user.is_superuser or userPermission and userPermission.agencies == 1 %}  
+            <li><a href="{% url 'agencies'%}">Agencies</a></li>
+      
+          {% endif %}
             <!--li><a href="form_wizards.html">Form Wizard</a></li-->
             <!--li><a href="form_upload.html">Form Upload</a></li-->
             <!--li><a href="form_buttons.html">Form Buttons</a></li-->
