@@ -34,7 +34,7 @@
 
  <input type="checkbox" name="insurance" value="1" {%if save.insurance == 1 %} checked {%endif%}>
  <label for="insurance">Insurance</label><br>
- 
+
  <input type="checkbox" name="temporary_Permits" value="1" {%if save.temporary_Permits == 1 %} checked {%endif%}>
  <label for="temporary_Permits">Temporary Permits</label><br>
 
@@ -42,12 +42,16 @@
  <label for="title">Released</label><br> 
 
 
- <input type="checkbox" name="agencies" value="1" {%if save.agencies == 1 %} checked {%endif%}>
- <label for="title">Agencies</label><br>
+ <input type="checkbox" name="catalogs" value="1" {%if save.catalogs == 1 %} checked {%endif%}>
+ <label for="title">Catalogs</label><br>
 
 
- <input type="checkbox" name="providers" value="1" {%if save.providers == 1 %} checked {%endif%}>
- <label for="title">providers</label><br>
+ <input type="checkbox" name="reports" value="1" {%if save.reports == 1 %} checked {%endif%}>
+ <label for="title">Reports</label><br>
+
+ <input type="checkbox" name="validate" value="1" {%if save.validate == 1 %} checked {%endif%}>
+ <label for="title">Validate</label><br>
+
  <button id="send" type="submit" class="btn btn-success">update</button>
  <button id="send" type="submit" class="btn btn-primary"><a href="{% url 'account' %}" style="color:white"> Cancel</a></button>
 </form> 

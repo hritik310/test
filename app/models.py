@@ -216,8 +216,9 @@ class userPermission(models.Model):
     customer=models.IntegerField(default=1)
     insurance=models.IntegerField(default=1)
     released=models.IntegerField(default=1)
-    agencies=models.IntegerField(default=1)
-    providers=models.IntegerField(default=1)
+    catalogs=models.IntegerField(default=1)
+    reports=models.IntegerField(default=1)
+    validate=models.IntegerField(default=1)
 
 
 

@@ -5,7 +5,7 @@ from app.models import *
 from django.contrib.auth.decorators import login_required
 from app.forms.account import *
 from app.helper import *
-
+from django.contrib.auth.hashers import make_password
 
 
 @login_required
@@ -53,7 +53,7 @@ def create(request):
 
 @login_required
 def account(request):
-    context = {'employee_list':User.objects.all()}
+    context = {'employee_list':User.objects.filter(user_type=3)}
     return render(request,"account/index.html",context)
 
 
@@ -70,8 +70,9 @@ def updateaccount(request,id):
         a.customer = request.POST.get('customer',False)
         a.insurance = request.POST.get('insurance',False)
         a.released = request.POST.get('released',False)
-        a.agencies = request.POST.get('agencies',False)
-        a.providers = request.POST.get('providers',False)
+        a.catalogs = request.POST.get('catalogs',False)
+        a.reports = request.POST.get('reports',False)
+        a.validate = request.POST.get('validate',False)
    
         a.save()
         messages.success(request,'Account Added Successfully.')
@@ -89,6 +90,8 @@ def update(request,id):
         employee.username = request.POST.get('username')
         employee.email = request.POST.get('email')
         employee.password = request.POST.get('password')
+        obj=User.objects.filter(id=id).update(password=employee.password)
+        employee.password=make_password(employee.password) 
         employee.phone = request.POST.get('phone')
         employee.save()
         messages.success(request,'Accounts details updated Successfully.')
