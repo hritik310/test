@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from app.models import *
 from django.contrib.auth.decorators import login_required
 from app.helper import *
+from vininfo import Vin
 
 @login_required
 def insurance(request):
@@ -46,7 +47,6 @@ def create(request):
         insurance.year = request.POST.get('ins_year')
         insurance.note = request.POST.get('ins_notes')
         insurance.created_by=request.user
-        # insurance.user_id_id = user
         insurance.save()
         messages.success(request,'Insurance Added Successfully.')
         return redirect('/insurance')
@@ -85,6 +85,7 @@ def delete(request, id):
 def updateInsuranceStatus(request):
   
     insurance = Insurance.objects.get(id=request.GET.get('id'))
+    print(insurance)
     if insurance.paid == 1:
         insurance.paid = 0
     else:
@@ -97,3 +98,24 @@ def updateInsuranceStatus(request):
     }
 
     return JsonResponse(data)
+
+
+@login_required
+def InsuranceVin(request):
+
+    insurance = Vin(request.GET.get('id'))
+    print("insurance")
+    print(insurance)
+    print(insurance.manufacturer)
+    print(insurance.years)
+
+
+    data = {
+    "status":"OK",
+    "make":insurance.manufacturer,
+    "year":insurance.years
+ 
+    }
+    return JsonResponse(data)
+
+

@@ -72,8 +72,9 @@ urlpatterns = [
     path('shipper',ShipperView.shipper, name='shipper'),
     path('shipper/create',ShipperView.create,name='shipper_create'),
     path('shipper/update/<int:id>',ShipperView.update,name='shipper_update'),
-    path('shipper/delete/<int:id>',ShipperView.delete, name ="shipper_delete"),
+    path('shipper/delete/<int:id>',ShipperView.delete, name ="shipper_delete"), 
     path('shipper/update-shipper-status/',ShipperView.updateShipperStatus, name ="update-shipper-status"),
+    path('shipper/shipper-vin/',ShipperView.shipperVin, name ="shipper-vin"),
 
     # # insurance urls
      path('insurance',InsuranceView.insurance,name='insurance'),
@@ -81,6 +82,7 @@ urlpatterns = [
      path('insurance/update/<int:id>',InsuranceView.update,name='insurance_update'),
      path('insurance/delete/<int:id>',InsuranceView.delete, name ="insurance_delete"),
      path('insurance/update-insurance-status/',InsuranceView.updateInsuranceStatus, name ="update-insurance-status"),
+     path('insurance/insurance-vin/',InsuranceView.InsuranceVin, name ="insurance-vin"),
 
     # #temporary permits urls
     path('temp_permits',TemporaryPermitView.index,name='temp_permits'),
@@ -88,6 +90,7 @@ urlpatterns = [
     path('temp_permits/update/<int:id>',TemporaryPermitView.update,name='temp_permits_update'),
     path('temp_permits/delete/<int:id>',TemporaryPermitView.delete, name ="temp_permits_delete"),
     path('temp_permits/update-temporary-status/',TemporaryPermitView.updateTemporaryStatus, name ="update-temporary-status"),
+    path('temp_permits/temp_permits-vin/',TemporaryPermitView.permitVin, name ="temp_permits-vin"),
 
 
     # # Released urls
@@ -98,6 +101,7 @@ urlpatterns = [
     path('released/view/<int:id>/',ReleasedView.view,name='released_view'),
     path('released/update-released-status/',ReleasedView.updateReleasedStatus, name ="update-released-status"),
     path("remove/<int:id>",ReleasedView.remove, name ="remove_img"),
+    path('released/released-vin/',ReleasedView.releasedVin, name ="released-vin"),
 
 
 

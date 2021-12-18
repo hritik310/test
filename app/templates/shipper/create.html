@@ -154,6 +154,27 @@
   {{ block.super }}
 
   <script>
+    $("#id_vin").change(function () {
+      var vin = $(this).val()
+      console.log(vin);
+      $.ajax({
+        type:"GET",
+        url: '/shipper/shipper-vin/',
+        data: {
+          'id': vin
+        },
+        dataType: 'json',
+        success: function (data) {
+          console.log(data.make);
+          console.log(data.year);
+          $("#id_make").val(data.make);
+          $("#id_year").val(data.year);
+
+         
+        }
+      });
+
+    });
     $(document).ready(function () {
       $("#id_vin").keyup(function(){
         var vin = $(this).val()

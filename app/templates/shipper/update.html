@@ -99,6 +99,27 @@
 {% block javascripts %}
   {{ block.super }}
    <script>
+    $("#vin").change(function () {
+      var vin = $(this).val()
+      console.log(vin);
+      $.ajax({
+        type:"GET",
+        url: '/shipper/shipper-vin/',
+        data: {
+          'id': vin
+        },
+        dataType: 'json',
+        success: function (data) {
+          console.log(data.make);
+          console.log(data.year);
+          $("#make").val(data.make);
+          $("#year").val(data.year);
+
+         
+        }
+      });
+
+    });
     $(document).ready(function () {
       $("#vin").keyup(function(){
         var vin = $(this).val()

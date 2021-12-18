@@ -117,6 +117,27 @@
   {{ block.super }}
 
   <script>
+    $("#ins_vin").change(function () {
+      var vin = $(this).val()
+      console.log(vin);
+      $.ajax({
+        type:"GET",
+        url: '/insurance/insurance-vin/',
+        data: {
+          'id': vin
+        },
+        dataType: 'json',
+        success: function (data) {
+          console.log(data.make);
+          console.log(data.year);
+          $("#ins_make").val(data.make);
+          $("#ins_year").val(data.year);
+
+         
+        }
+      });
+
+    });
     $(document).ready(function () {
       $("#ins_vin").keyup(function(){
         var vin = $(this).val()
@@ -139,6 +160,7 @@
 
     });
   </script>
+
 
 
 

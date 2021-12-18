@@ -5,6 +5,8 @@ from app.models import *
 from django.contrib.auth.decorators import login_required
 from app.forms.shipper import *
 from app.helper import *
+from vininfo import Vin
+from django.http import JsonResponse
 
 
 @login_required
@@ -90,3 +92,23 @@ def updateShipperStatus(request):
     }
 
     return JsonResponse(data)
+
+
+
+@login_required
+def shipperVin(request):
+
+    shipper = Vin(request.GET.get('id'))
+    print(shipper)
+    print(shipper.manufacturer)
+    print(shipper.years)
+
+
+    data = {
+    "status":"OK",
+    "make":shipper.manufacturer,
+    "year":shipper.years
+ 
+    }
+    return JsonResponse(data)
+

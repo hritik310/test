@@ -4,6 +4,8 @@ from django.contrib import messages
 from app.models import *
 from django.contrib.auth.decorators import login_required
 from app.helper import *
+from django.http import JsonResponse
+from vininfo import Vin
 
 
 @login_required
@@ -113,5 +115,25 @@ def remove(request,id):
     released.save()
 
     return render(request,"released/update.html",{'released':released})
+
+
+@login_required
+def releasedVin(request):
+
+    released = Vin(request.GET.get('id'))
+    print(released)
+    print(released.manufacturer)
+    print(released.years)
+
+
+    data = {
+    "status":"OK",
+    "make":released.manufacturer,
+    "year":released.years
+ 
+    }
+    return JsonResponse(data)
+
+
 
 

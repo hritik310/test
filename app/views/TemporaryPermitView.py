@@ -4,6 +4,8 @@ from django.contrib import messages
 from app.models import *
 from django.contrib.auth.decorators import login_required
 from app.helper import *
+from django.http import JsonResponse
+from vininfo import Vin
 
 
 
@@ -95,3 +97,22 @@ def updateTemporaryStatus(request):
     }
 
     return JsonResponse(data)
+
+
+@login_required
+def permitVin(request):
+
+    temp_permits = Vin(request.GET.get('id'))
+    print(temp_permits)
+    print(temp_permits.manufacturer)
+    print(temp_permits.years)
+
+
+    data = {
+    "status":"OK",
+    "make":temp_permits.manufacturer,
+    "year":temp_permits.years
+ 
+    }
+    return JsonResponse(data)
+
