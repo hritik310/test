@@ -8,7 +8,7 @@ register = template.Library()
 def hasPermission(user):
 	# if user.is_superuser:
 	# 	return True
-	permissions = userPermission.objects.filter(company_id=user.id).first()
+	permissions = userPermission.objects.filter(company_id=user.company_id).first()
 	return permissions;
 	# if permissions:
 	# 	userPermissions = permissions

@@ -28,17 +28,9 @@
        <!--  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
            
         </li> -->
+        {% if user.user_type == 2 %}
         <li><a href="{% url 'company' %}"><i class="fa fa-edit"></i>Company</a>
           <ul class="nav child_menu">
-          </ul>
-        </li>
-        {% if request.user.user_type == 2 %}
-        <li><a href="{% url 'account' %}"><i class="fa fa-user"></i> Accounts</a>
-          <ul class="nav child_menu">
-            <!-- <li><a href="">Views</a></li> -->
-            <!--li><a href="form_wizards.html">Form Wizard</a></li-->
-            <!--li><a href="form_upload.html">Form Upload</a></li-->
-            <!--li><a href="form_buttons.html">Form Buttons</a></li-->
           </ul>
         </li>
         {% endif %}
