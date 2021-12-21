@@ -154,7 +154,24 @@
   {{ block.super }}
 
   <script>
-    $("#id_vin").change(function () {
+    $(document).ready(function () {
+      $("#id_vin").keyup(function(){
+        var vin = $(this).val()
+        
+        if (vin.length < 17){
+          $("#vin_custom_error").text("VIN is not 17 digit.")
+
+          
+
+        }else if (vin.length == 17){
+            $("#vin_custom_error").text("Ok.")
+        }else{
+          $("#vin_custom_error").text("VIN is above 17 digit.")
+
+        }
+
+      });
+      $("#id_vin").on('input',function () {
       var vin = $(this).val()
       console.log(vin);
       $.ajax({
@@ -175,23 +192,6 @@
       });
 
     });
-    $(document).ready(function () {
-      $("#id_vin").keyup(function(){
-        var vin = $(this).val()
-        
-        if (vin.length < 17){
-          $("#vin_custom_error").text("VIN is not 17 digit.")
-
-          
-
-        }else if (vin.length == 17){
-            $("#vin_custom_error").text("Ok.")
-        }else{
-          $("#vin_custom_error").text("VIN is above 17 digit.")
-
-        }
-
-      });
 
     });
   </script>

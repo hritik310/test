@@ -125,7 +125,7 @@ hr.border {
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Importer<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select class="form-control col-md-7 col-xs-12" name="country" id="country" required="required">
+                    <select class="form-control col-md-7 col-xs-12" name="country" id="country">
                       <option value="" >Choose Customer</option>
                       {% for a in custom %}
                       <option value="{{a.name}}">{{a.name}}</option>
@@ -201,7 +201,7 @@ hr.border {
                   <label class="control-label col-md-1 col-sm-3 col-xs-12" for="number">Supplier<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select class="form-control col-md-7 col-xs-12" name="supplier" id="supplier" required="required">
+                    <select class="form-control col-md-7 col-xs-12" name="supplier" id="supplier">
                       <option value="" >Choose Supplier</option>
                       {% for provider in provide %}
                       <option value="{{provider.name}}">{{provider.name}}</option>

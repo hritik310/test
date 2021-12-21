@@ -1,0 +1,79 @@
+{% extends "layouts/admin.html" %}
+
+{% block title %} Create Inventory {% endblock title %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+
+              <form action="" class="form-horizontal form-label-left" method="POST" novalidate>
+                {% csrf_token %}
+
+                <!--p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
+                </p-->
+                <span class="section">Create Account</span>
+
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Username <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="username" class="form-control col-md-7 col-xs-12" name="username"
+                     value = ""   required="required" type="text">
+                  </div>
+                </div>
+
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Email <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="email" class="form-control col-md-7 col-xs-12" name="email"
+                    value = "" 
+                    required="required" type="text">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Password <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" id="unit_type" name="password" value = ""required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Phone<span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="number" id="vechicle" name="phone" required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-6 col-md-offset-3">
+                    <button type="submit" class="btn btn-primary"><a href=""style="color:white">Cancel</a></button>
+                    <button id="send" type="submit" class="btn btn-success">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block javascripts %}
+  {{ block.super }}
+  <!-- validator -->
+  <script src="/static/vendors/validator/validator.js"></script>
+{% endblock javascripts %}
+
+
+
+

@@ -12,19 +12,13 @@ from django.contrib.auth.hashers import make_password
 @login_required
 def create(request):
     if request.method == 'POST':
-        permission=userPermission()
         accountform = AddCreateForm(request.POST)
         if accountform.is_valid():
-            accountform.instance.user_type=3
             new_user = accountform.save()
             new_user.set_password(
                 accountform.cleaned_data.get('password')
             )
-            if request.user.is_authenticated:
-                permission.user_id=new_user.id
-            print(permission.user_id)
             if accountform.save():
-                permission.save()
                 messages.success(request,'Account Added Successfully.')
                 return redirect('/account')
         else:
@@ -57,28 +51,28 @@ def account(request):
     return render(request,"account/index.html",context)
 
 
-@login_required
-def updateaccount(request,id):
-    a=userPermission.objects.get(user=id)
-    print(a.id)
+# @login_required
+# def updateaccount(request,id):
+#     a=userPermission.objects.get(user=id)
+#     print(a.id)
 
-    if request.method == 'POST':
-        a.shipper_Exports = request.POST.get('shipper_Exports',False)
-        a.pedimentos = request.POST.get('pedimentos',False)
-        a.temporary_Permits = request.POST.get('temporary_Permits',False)
+#     if request.method == 'POST':
+#         a.shipper_Exports = request.POST.get('shipper_Exports',False)
+#         a.pedimentos = request.POST.get('pedimentos',False)
+#         a.temporary_Permits = request.POST.get('temporary_Permits',False)
 
-        a.customer = request.POST.get('customer',False)
-        a.insurance = request.POST.get('insurance',False)
-        a.released = request.POST.get('released',False)
-        a.catalogs = request.POST.get('catalogs',False)
-        a.reports = request.POST.get('reports',False)
-        a.validate = request.POST.get('validate',False)
+#         a.customer = request.POST.get('customer',False)
+#         a.insurance = request.POST.get('insurance',False)
+#         a.released = request.POST.get('released',False)
+#         a.catalogs = request.POST.get('catalogs',False)
+#         a.reports = request.POST.get('reports',False)
+#         a.validate = request.POST.get('validate',False)
    
-        a.save()
-        messages.success(request,'Account Added Successfully.')
-        return redirect('/account')
+#         a.save()
+#         messages.success(request,'Account Added Successfully.')
+#         return redirect('/account')
        
-    return render(request,"account/permission.html",{"save":a})
+#     return render(request,"account/permission.html",{"save":a})
 
 
 @login_required
@@ -90,7 +84,7 @@ def update(request,id):
         employee.username = request.POST.get('username')
         employee.email = request.POST.get('email')
         employee.password = request.POST.get('password')
-        obj=User.objects.filter(id=id).update(password=employee.password)
+        # obj=User.objects.filter(id=id).update(password=employee.password)
         employee.password=make_password(employee.password) 
         employee.phone = request.POST.get('phone')
         employee.save()

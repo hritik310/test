@@ -28,6 +28,10 @@
        <!--  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
            
         </li> -->
+        <li><a href="{% url 'company' %}"><i class="fa fa-edit"></i>Company</a>
+          <ul class="nav child_menu">
+          </ul>
+        </li>
         {% if request.user.user_type == 2 %}
         <li><a href="{% url 'account' %}"><i class="fa fa-user"></i> Accounts</a>
           <ul class="nav child_menu">

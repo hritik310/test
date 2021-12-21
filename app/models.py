@@ -13,6 +13,13 @@ from phone_field import PhoneField
 
 # from multiselectfield import MultiSelectField
 # Create your models here.
+
+
+class Company(models.Model):
+	company_name=models.CharField(max_length=255,default="")
+	company_description=models.CharField(max_length=255,default="")
+
+
 class User(AbstractBaseUser,PermissionsMixin):
 	id = models.AutoField(primary_key=True)
 	USER_TYPE_CHOICES = (
@@ -20,6 +27,7 @@ class User(AbstractBaseUser,PermissionsMixin):
         ("provider", 1), 
         ("user", 2), 
     )
+	company = models.ForeignKey(Company, on_delete=models.CASCADE,null=True)
 	user_type 	= models.IntegerField(choices = USER_TYPE_CHOICES,default="2")
 	username 	= models.CharField(_('username'),max_length=255,default="")
 	email 		= models.EmailField(_('email'),unique=True)
@@ -203,22 +211,24 @@ class Provider(models.Model):
 	email = models.EmailField(unique=True)
 	tax_id = models.IntegerField()
 
-class Permissions(models.Model):
-	permission =models.CharField(max_length=100,default="")
-	user = models.ForeignKey(User,on_delete=models.CASCADE) 
+
+
+
 
 
 class userPermission(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    shipper_Exports=models.IntegerField(default=1)
-    pedimentos=models.IntegerField(default=1)
-    temporary_Permits= models.IntegerField(default=1)
-    customer=models.IntegerField(default=1)
-    insurance=models.IntegerField(default=1)
-    released=models.IntegerField(default=1)
-    catalogs=models.IntegerField(default=1)
-    reports=models.IntegerField(default=1)
-    validate=models.IntegerField(default=1)
+	user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+	company = models.ForeignKey(Company, on_delete=models.CASCADE,null=True)
+
+	shipper_Exports=models.IntegerField(default=1)
+	pedimentos=models.IntegerField(default=1)
+	temporary_Permits= models.IntegerField(default=1)
+	customer=models.IntegerField(default=1)
+	insurance=models.IntegerField(default=1)
+	released=models.IntegerField(default=1)
+	catalogs=models.IntegerField(default=1)
+	reports=models.IntegerField(default=1)
+	validate=models.IntegerField(default=1)
 
 
 

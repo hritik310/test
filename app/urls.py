@@ -10,6 +10,7 @@ from app.views import ReleasedView
 from app.views import PedimentorView
 from app.views import InventoryView
 from app.views import AccountView
+from app.views import CompanyView
 
 urlpatterns = [
     # Matches any html file - to be used for gentella
@@ -28,7 +29,7 @@ urlpatterns = [
     path('account/create',AccountView.create,name='accountcreate'),
     path('account/update/<int:id>',AccountView.update,name='accountupdate'),
     path('account/delete/<int:id>',AccountView.delete, name ="accountdelete"),
-    path('account/updateaccount/<int:id>',AccountView.updateaccount,name='permission_account'),
+    # path('account/updateaccount/<int:id>',AccountView.updateaccount,name='permission_account'),
     # path('account/permission/<int:id>',AccountView.permission, name ="permission"),
 
 
@@ -104,9 +105,18 @@ urlpatterns = [
     path('released/released-vin/',ReleasedView.releasedVin, name ="released-vin"),
 
 
+     # Company urls
+    path('company',CompanyView.index,name='company'),
+    path('company/create',CompanyView.create,name='add_company'),
+    path('company/update/<int:id>',CompanyView.update,name='company_update'),
+    path('company/delete/<int:id>',CompanyView.delete, name ="company_delete"), 
+    path('company/updateperm/<int:id>',CompanyView.updatecheck,name='company_check'),
+    path('company/view/<int:id>/',CompanyView.view,name='company_view'),
+    path('company/<int:id>/',CompanyView.account,name='account_company'),
 
 
-    
+
+
 
    
 ]

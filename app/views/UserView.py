@@ -45,12 +45,15 @@ def userLogout(request):
 
 @login_required
 def home(request):
+    permissions = User.objects.filter(company_id=request.user.id)
+    print(permissions.query)
+
     # per = Permissions.objects.filter(user_id = request.user.id)
     # print(per.query)
-    permissions = userPermission.objects.filter(user_id=request.user.id)
-    print(permissions.query)
-    userPermissions = permissions
-    print(userPermissions)
+    # permissions = userPermission.objects.filter(user_id=request.user.id)
+    # print(permissions.query)
+    # userPermissions = permissions
+    # print(userPermissions)
     # if userPermissions:
     #     if permissionGiven in userPermissions:
     #         return True
