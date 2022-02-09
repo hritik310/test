@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 from pathlib import Path
 import pymysql
+pymysql.version_info = (1, 4, 13, "final", 0)
 
 pymysql.install_as_MySQLdb()
 
