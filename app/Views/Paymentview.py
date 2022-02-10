@@ -17,6 +17,7 @@ class HomePageView(TemplateView):
 
 def charge(request): # new
     if request.method == 'POST':
+        print("hello")
         charge = stripe.Charge.create(
             amount=500,
             currency='usd',
