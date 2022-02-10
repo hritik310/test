@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+.container.outer_background {
+    background-image: linear-gradient(to right, #01bde1 , #fd27f9);
+}
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button.btn.btn-primary.Sign_Up {
+    width: 200px;
+    border-radius: 20px;
+    border: 2px solid #ffffff;
+    background-image: linear-gradient(to right, #01bde1 , #fd27f9);
+}
+span.psw {
+  float: right;
+}
+
+.form_background {
+    background: #ffffff;
+    width: 40%;
+    margin: 0 auto;
+	padding: 30px;
+}
+
+ @media screen and (max-width: 767px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .form_background {
+    background: #ffffff;
+    width: 100%;
+    margin: 0 auto;
+    padding: 30px;
+}
+}
+
+i.user_lock_icon {
+    margin-right: 20px;
+    font-size: 30px;
+}
+</style>
+</head>
+<body>
+
+
+
+<div class="container outer_background my-5 py-5"> 
+
+<div class="form_background my-5 py-5">
+  <form method="POST">
+      {%csrf_token%}
+	<h2 class="text-center mb-3">Login</h2>
+	<div class="form-group">
+      <label for="uname"><i class="fa fa-user user_lock_icon" aria-hidden="true"></i><b>Useremail</b></label>
+      <input type="text" placeholder="Enter Useremail" name="email" required>
+	</div>
+	<div class="form-group">
+      <label for="psw"><i class="fa fa-lock user_lock_icon" aria-hidden="true"></i><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required>
+     </div>
+	 <div class="form-group form-check">
+		<label class="form-check-label">
+			<input class="form-check-input" type="checkbox" name="remember">Remember me
+		</label>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-right">
+		  <span class="psw mb-4">Forgot <a href="#">password?</a></span>
+		</div>
+		<div class="col-md-12 text-center">
+            <input type="submit" name="commit" value="login" class="btn-xl btn-primary btn-wrap-text" data-disable-with="login" />   
+        </div>
+	</div>
+
+  </form>
+</div>
+</div>
+
+</body>
+</html>

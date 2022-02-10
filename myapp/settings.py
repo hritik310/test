@@ -29,9 +29,10 @@ SECRET_KEY = 'django-insecure-@l_4z$myv1l378++o3p*zdv#(d#i=pl6wo1m6$u$=4$vxoa^l3
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+   
+
 
 ALLOWED_HOSTS = ['3.92.217.18']
-
 # ALLOWED_HOSTS = []
 
 # Application definition
@@ -102,9 +103,14 @@ DATABASES = {
     }
 }
 
+
+
+
+
+
 # DATABASES = {
 #     'default': {
-#        'ENGINE': 'django.db.backends.mysql', 
+#        'ENGINE': 'django.db.backends.mysql',   
 #        'NAME': 'myapp',
 #        'HOST': 'localhost',
 #        'PORT': '3306',
@@ -153,6 +159,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STRIPE_PUBLISHABLE_KEY="pk_test_51KRAVuSAx8Z22VypAjVaLYRlBICJiZXfBjQIAQRuZ264VoiG4pE8P4qjSVvAIQ1I52Wlh3ZLaZzKL2Z17ZPnHMKb00hjxpUo5M"
+STRIPE_SECRET_KEY="sk_test_51KRAVuSAx8Z22VypxLp1N9Y1zJAfWclo7M0RuGsU0aIW5M6W4FF7MtXelcUisjXIVF1E7GQObFiCD3lvMYGK7n2D00eudT2Hql"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
