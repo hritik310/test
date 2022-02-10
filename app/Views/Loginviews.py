@@ -35,13 +35,13 @@ def user_login(request):
         print(user) 
         if user is not None:
           login(request,user)
-          return redirect('/show')
+          return redirect('/home')
 
         else:
           messages.error(request,"Invalid Credential")
           return redirect('/login')
               
-    return render(request,"login.html")
+    return render(request,"login/login.html")
 
 # def userLogout(request):
 #   auth.logout(request)

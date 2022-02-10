@@ -8,10 +8,14 @@ from django.core.validators import validate_comma_separated_integer_list
 
 # Create your models here.
 class user(AbstractBaseUser,PermissionsMixin):
-    name=models.CharField(max_length=200,null=True)
+    username=models.CharField(max_length=200,null=True,unique=True)
     email=models.EmailField(_('email'),unique=True)
     password=models.CharField(max_length=220)
-    address=models.CharField(max_length=100,null=True)
+    first_name=models.CharField(max_length=200,null=True)
+    last_name=models.CharField(max_length=200,null=True)
+    date_of_birth=models.DateField(null=True)
+    phone_number=models.IntegerField(null=True,default=0)
+    #address=models.CharField(max_length=100,null=True)
     is_staff 	= models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.')
     is_active 	= models.BooleanField(default=True,
 		help_text='Designates whether this user should be treated as active.\
