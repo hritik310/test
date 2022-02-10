@@ -28,6 +28,9 @@ SECRET_KEY = 'django-insecure-@l_4z$myv1l378++o3p*zdv#(d#i=pl6wo1m6$u$=4$vxoa^l3
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+   
+# ALLOWED_HOSTS = ['184.168.122.169']
+
 
 ALLOWED_HOSTS = []
 
@@ -76,6 +79,24 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
+# DATABASES = {
+#     'default': {
+#        'ENGINE': 'django.db.backends.mysql', 
+#        'NAME': 'voting_portal',
+#        'HOST': 'localhost',
+#        'PORT': '3306',
+#        'USER': 'voting',
+#        'PASSWORD': 'l3w@61kV',
+#        'OPTIONS': {
+#             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
+                     
+#         }
+#     }
+# }
+
+
+
 
 DATABASES = {
     'default': {
