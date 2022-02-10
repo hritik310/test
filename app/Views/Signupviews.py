@@ -44,10 +44,10 @@ def create(request):
     return render(request,"signup/index.html",{'form':form})
 
 # def make(request,id):
-#     user = AddCreateForm.objects.get(id=id)
+#     users = user.objects.get(id=id)
 #     strip_customer = stripe.Customer.create(
-#         description= user.name,
-#         email=user.email
+#         description= users.name,
+#         email=users.email
 #     )
 #     print("see",strip_customer.description)
 #     print("email",strip_customer.email)

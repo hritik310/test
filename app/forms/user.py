@@ -1,6 +1,6 @@
 from django.forms import IntegerField, ModelForm
 from django import forms
-
+from datetime import datetime
 from app.models import *
 
 class AddCreateForm(ModelForm):
@@ -54,3 +54,23 @@ class AddCreateForm(ModelForm):
     class Meta:
         model = user
         fields = ["first_name","last_name","email","username","password","phone_number","date_of_birth"]
+
+    #     def clean_date_(self):
+    #         dob = self.cleaned_data['date_of_birth']
+    #         age = (datetime.now() - dob).days/365
+    #         if age < 18:
+    #             raise forms.ValidationError('Must be at least 18 years old to register')
+    #         return dob
+
+    # def clean(self):
+ 
+    #     super(AddCreateForm,self).clean()
+
+
+    #     date_of_birth = self.cleaned_data.get('date_of_birth') 
+       
+    #     age = (datetime.now() - date_of_birth).days/365
+
+    #     if age < 18:
+    #         raise forms.ValidationError('Must be at least 18 years old to register')
+    #     return date_of_birth
