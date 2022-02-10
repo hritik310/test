@@ -30,9 +30,9 @@ SECRET_KEY = 'django-insecure-@l_4z$myv1l378++o3p*zdv#(d#i=pl6wo1m6$u$=4$vxoa^l3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.92.217.18']
+# ALLOWED_HOSTS = ['3.92.217.18']
 
-# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -87,36 +87,36 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-       'ENGINE': 'django.db.backends.mysql', 
-       'NAME': 'datasport',
-       'HOST': 'database1.cbwnrv3otwrb.us-east-1.rds.amazonaws.com',
-       'PORT': '3306',
-       'USER': 'admin',
-       'PASSWORD': 'admin12345',
-       'OPTIONS': {
-            'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
-                     
-        }
-    }
-}
-
 # DATABASES = {
 #     'default': {
 #        'ENGINE': 'django.db.backends.mysql', 
-#        'NAME': 'myapp',
-#        'HOST': 'localhost',
+#        'NAME': 'datasport',
+#        'HOST': 'database1.cbwnrv3otwrb.us-east-1.rds.amazonaws.com',
 #        'PORT': '3306',
-#        'USER': 'root',
-#        'PASSWORD': '',
+#        'USER': 'admin',
+#        'PASSWORD': 'admin12345',
 #        'OPTIONS': {
 #             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
-            
-             
+                     
 #         }
 #     }
 # }
+
+DATABASES = {
+    'default': {
+       'ENGINE': 'django.db.backends.mysql', 
+       'NAME': 'myapp',
+       'HOST': 'localhost',
+       'PORT': '3306',
+       'USER': 'root',
+       'PASSWORD': '',
+       'OPTIONS': {
+            'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
+            
+             
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
