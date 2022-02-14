@@ -51,3 +51,53 @@ def create(request):
 #     )
 #     print("see",strip_customer.description)
 #     print("email",strip_customer.email)
+
+
+
+
+
+
+
+# Create the PaymentIntent
+        # intent = stripe.PaymentIntent.create(
+        # payment_method = "pm_card_visa",
+        # amount = 1099,
+        # currency = 'usd',
+        # confirmation_method = 'manual',
+        # confirm = True,
+        # )
+        # print("secret",intent.client_secret)
+            # intent = stripe.PaymentIntent.confirm([intent.id])
+        # except stripe.error.CardError as e:
+        #     # Display error on client
+        #     return json.dumps({'error': e.user_message}), 200
+
+        # return generate_response(intent)
+    return render(request, 'payment/charge.html')
+
+        # )
+    #     return render(request, 'payment/charge.html')
+    # return render(request, 'payment/charge.html')
+
+
+
+    #To create a PaymentIntent for confirmation, see our guide at: https://stripe.com/docs/payments/payment-intents/creating-payment-intents#creating-for-automatic
+        # stripe.PaymentIntent.confirm(
+        # format,
+        # payment_method="pm_card_visa",
+        # )
+        
+        # stripe.PaymentMethod.create(
+        # type="card",
+        # card={
+        #     "number": "4242424242424242",
+        #     "exp_month": 2,
+        #     "exp_year": 2023,
+        #     "cvc": "314",
+        #     },
+        # )
+        # charge = stripe.Charge.create(
+        #     amount=500,
+        #     currency='inr',
+        #     description='charge',
+        #     source=request.POST['stripeToken']

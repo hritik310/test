@@ -2,6 +2,8 @@ import stripe
 from django.conf import settings
 from django.views.generic.base import TemplateView
 from django.shortcuts import render # new
+import json
+
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # new
 
@@ -17,11 +19,14 @@ class HomePageView(TemplateView):
 
 def charge(request): # new
     if request.method == 'POST':
-        print("hello")
-        charge = stripe.Charge.create(
+       
+        intent = None
+        charge = stripe.PaymentIntent.create(
             amount=500,
             currency='inr',
-            description='A Django charge',
-            source=request.POST['stripeToken']
+            description='charge',
+            #source=request.POST['stripeToken']
         )
         return render(request, 'payment/charge.html')
+
+      

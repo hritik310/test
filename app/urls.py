@@ -10,7 +10,7 @@ from . import views
 urlpatterns = [
     path('', Signupviews.create, name='index'),
     path('login', Loginviews.user_login, name='login'),
-      path('charge', Paymentview.charge, name='charge'), # new
+    path('charge', Paymentview.charge, name='charge'), # new
     path('home', Paymentview.HomePageView.as_view(), name='home'),
 ]
 
