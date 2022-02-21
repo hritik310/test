@@ -10,14 +10,14 @@ from django.contrib import auth
 
 
 
-def index(request):
-    context = {}
-    template = loader.get_template('app/index.html')
-    return HttpResponse(template.render(context, request))
+# def index(request):
+#     context = {}
+#     template = loader.get_template('app/index.html')
+#     return HttpResponse(template.render(context, request))
 
 def user_login(request):
     if request.method == "POST":
-        uname= request.POST.get('email')
+        uname= request.POST.get('username')
         print(uname)
         upass= request.POST.get('password')
         print(upass)
@@ -26,16 +26,12 @@ def user_login(request):
         #   b=i.id
         if request.method == "POST":
           current_user = request.user.id
-
-        
-        #i  f pod_member.objects.filter(member_id_id=current_user).exists():
-            #request.session['pod_id']=b
     
         user = authenticate(username=uname,password=upass)
         print(user) 
         if user is not None:
           login(request,user)
-          return redirect('/home')
+          return redirect('stripe_checkout')
 
         else:
           messages.error(request,"Invalid Credential")
@@ -43,12 +39,8 @@ def user_login(request):
               
     return render(request,"login/login.html")
 
-# def userLogout(request):
-#   auth.logout(request)
-#   return redirect('/login')
 
 
-# def help(request):
-#     context = {}
-#     template = loader.get_template('help.html')
-#     return HttpResponse(template.render(context, request))    
+def userLogout(request):
+  auth.logout(request)
+  return redirect('/login')

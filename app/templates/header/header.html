@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+  img {
+    width: 100%;
+    height: 100%;
+}
+  a.navbar-brand.logo_name {
+    width: 10%;
+}
+.collapse.navbar-collapse.navigtion{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: end !important;
+}
+ul.navbar-nav a.home_list {
+    color: #000000 !important;
+    font-size: 16px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md bg-light navbar-light">
+  <a class="navbar-brand logo_name" href="#"><img src="/static/image/logo-abaxx.png"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse navigtion" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link home_list" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link home_list" href="/signup">Sign up </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link home_list" href="/stripe-checkout/">Buy Subscription</a>
+      </li>
+      {%else%}
+      <li class="nav-item">
+        <a class="nav-link home_list" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link home_list" href="/login">Login</a>
+      </li>  
+      {%endif%}  
+    </ul>
+  </div>  
+</nav>
+
+</body>
+</html>
+
+

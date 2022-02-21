@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
@@ -11,12 +12,16 @@ from phone_field import PhoneField
 class user(AbstractBaseUser,PermissionsMixin):
     username=models.CharField(max_length=200,null=True,unique=True)
     email=models.EmailField(_('email'),unique=True)
+    title=models.CharField(max_length=200,null=True)
     password=models.CharField(max_length=220)
     first_name=models.CharField(max_length=200,null=True)
     last_name=models.CharField(max_length=200,null=True)
     date_of_birth=models.DateField(null=True)
+    zip=models.IntegerField(max_length=6,null=True)
+    address=models.CharField(max_length=200,null=True)
     phone_number=PhoneField(null=True,default=0)
     #address=models.CharField(max_length=100,null=True)
+    entry_code=models.CharField(max_length=200,null=True)
     is_staff 	= models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.')
     is_active 	= models.BooleanField(default=True,
 		help_text='Designates whether this user should be treated as active.\
@@ -25,11 +30,23 @@ class user(AbstractBaseUser,PermissionsMixin):
     updated_at =  models.DateTimeField(auto_now=True)
 
 
+# class store(model.Model):
+    
 
-    USERNAME_FIELD 	='email'
+
+
+    USERNAME_FIELD 	='username'
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        return self.username
 
 
+class StripeCustomer(models.Model):
+    #users = models.OneToOneField(to=user, on_delete=models.CASCADE)
+    stripeCustomerId = models.CharField(max_length=300,null=True)
+    stripeSubscriptionId = models.CharField(max_length=255,null=True)
+    
+
+    def __str__(self):
+        return self.user.username

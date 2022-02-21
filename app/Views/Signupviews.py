@@ -2,6 +2,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
+from django.contrib.sites.shortcuts import get_current_site
 from app.models import *
 from django.contrib import messages
 from django.urls import reverse
@@ -10,94 +11,97 @@ from app.forms.user import *
 from django.db.models import F
 import stripe
 from django.conf import settings
+from django.views.generic.base import TemplateView
+from django.utils.crypto import get_random_string
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes,force_str
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from .token import account_activation_token
+from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
+from django.contrib.auth import get_user_model
 
-
-stripe.api_key = settings.STRIPE_SECRET_KEY # new
+stripe.api_key = settings.SECTRET_KEY # new
+print(stripe.api_key)
 
 
 def index(request):   
     context = {'user_list':user.objects.all()}
-    return render(request,"index.html",context) 
+    return render(request,"signup/home.html",context) 
 
 
 def create(request):
+    context=user.objects.all()
     if request.method == 'POST':
         accountform = AddCreateForm(request.POST)
-        if accountform.is_valid():
-            new_user = accountform.save()
-            users = user.objects.get(id=new_user.id)
-            strip_customer = stripe.Customer.create(
-                description= users.username,
-                email=users.email
-            )
+        if accountform.is_valid():    
+            name=request.POST.get("username")
+            print("a",name)
+            unique_id = get_random_string(length=5)
+            uniqueName=name + unique_id
+            accountform.username=uniqueName    
+            accountform.username="hritik"+accountform.username 
+            new_user = accountform.save(commit=False)
+            new_user.is_active = False
+            new_user.save()
+           
+
+
+            new_user.entry_code= uniqueName
+                
+            
             new_user.set_password(
                 accountform.cleaned_data.get('password')         
             )
+            current_site = get_current_site(request)
+            mail_subject = 'Activate your account.'
+            message = render_to_string('header/acc_active_email.html', {
+                'user': new_user,
+                'domain': current_site.domain,
+                'uid':urlsafe_base64_encode(force_bytes(new_user.pk)),
+                'token':account_activation_token.make_token(new_user),
+            })
+            to_email = accountform.cleaned_data.get('email')
+            email = EmailMessage(
+                        mail_subject, 
+                        message, 
+                        to=[to_email]
+            )
+           
 
-            if accountform.save():
-                messages.success(request,'Account Added Successfully.')
-                return redirect('login')
+            a=accountform.save()
+            print(a.id)
+            email.send()
+            return HttpResponse('Please confirm your email address to complete the registration')
+
         else:
-            return render(request,"signup/index.html",{'form':accountform})
+            return render(request,"signup/index.html",{'form':accountform,"context":context})
 
     form = AddCreateForm()
-    return render(request,"signup/index.html",{'form':form})
-
-# def make(request,id):
-#     users = user.objects.get(id=id)
-#     strip_customer = stripe.Customer.create(
-#         description= users.name,
-#         email=users.email
-#     )
-#     print("see",strip_customer.description)
-#     print("email",strip_customer.email)
+    return render(request,"signup/signup.html",{'form':form,"context":context})
 
 
-
-
-
-
-
-# Create the PaymentIntent
-        # intent = stripe.PaymentIntent.create(
-        # payment_method = "pm_card_visa",
-        # amount = 1099,
-        # currency = 'usd',
-        # confirmation_method = 'manual',
-        # confirm = True,
-        # )
-        # print("secret",intent.client_secret)
-            # intent = stripe.PaymentIntent.confirm([intent.id])
-        # except stripe.error.CardError as e:
-        #     # Display error on client
-        #     return json.dumps({'error': e.user_message}), 200
-
-        # return generate_response(intent)
-    return render(request, 'payment/charge.html')
-
-        # )
-    #     return render(request, 'payment/charge.html')
-    # return render(request, 'payment/charge.html')
-
-
-
-    #To create a PaymentIntent for confirmation, see our guide at: https://stripe.com/docs/payments/payment-intents/creating-payment-intents#creating-for-automatic
-        # stripe.PaymentIntent.confirm(
-        # format,
-        # payment_method="pm_card_visa",
-        # )
-        
-        # stripe.PaymentMethod.create(
-        # type="card",
-        # card={
-        #     "number": "4242424242424242",
-        #     "exp_month": 2,
-        #     "exp_year": 2023,
-        #     "cvc": "314",
-        #     },
-        # )
-        # charge = stripe.Charge.create(
-        #     amount=500,
-        #     currency='inr',
-        #     description='charge',
-        #     source=request.POST['stripeToken']
+def activate(request, uidb64, token):
+    User=get_user_model()
+    
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        users = User.objects.get(id=uid)
+        print("hritik")
+        print("user",users)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        users = None
+        print("hritik")
+        print("user",users)
+    if users is not None and account_activation_token.check_token(users, token):
+        users.is_active = user.objects.filter(id=uid).update(is_active=True)
+        login(request, users)
+        messages.success(request,"Successfully Registered")
+        return redirect('/login')
+        # return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+    else:
+        return HttpResponse('Activation link is invalid!')

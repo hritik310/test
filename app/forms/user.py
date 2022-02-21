@@ -2,6 +2,8 @@ from django.forms import IntegerField, ModelForm
 from django import forms
 from datetime import datetime
 from app.models import *
+from django.contrib.auth.password_validation import validate_password
+from django.core import validators
 
 class AddCreateForm(ModelForm):
     email = forms.CharField(required = True,widget=forms.TextInput(
@@ -16,14 +18,18 @@ class AddCreateForm(ModelForm):
         'placeholder':'Enter your name',
         
         }
+
     ))
- 
-    password = forms.CharField(required = True,widget=forms.PasswordInput(
-        attrs={
-        'class':'form-control',
-        'placeholder':'Enter your Password',
-        }
-    ))
+    password=forms.CharField(widget=forms.PasswordInput( attrs={
+         'class':'form-control',
+         'placeholder':'Enter your Password',
+        }),validators=[validate_password])
+    # password = forms.CharField(required = True,widget=forms.PasswordInput(
+    #     attrs={
+    #     'class':'form-control',
+    #     'placeholder':'Enter your Password',
+    #     }
+    # ))
 
     first_name= forms.CharField(label="Firstname",required = True,widget=forms.TextInput(
         attrs={
@@ -41,7 +47,14 @@ class AddCreateForm(ModelForm):
         }
     ))
   
-    phone_number=forms.IntegerField(label="Phone number")
+    phone_number=forms.IntegerField(label="Phone Number",required = True,widget=forms.TextInput(
+        attrs={
+        'class':'form-control',
+        'placeholder':'Enter Phone number',
+        'type':'number'
+        }
+
+    ))
 
     date_of_birth=forms.DateField(label="Date of Birth",required = True,widget=forms.DateInput(
         attrs={
@@ -51,9 +64,34 @@ class AddCreateForm(ModelForm):
         }
     ))
 
+    address=forms.CharField(label="Address",required = True,widget=forms.TextInput(
+        attrs={
+        'class':'form-control',
+        'placeholder':'Enter your address',
+        
+        }
+    ))
+
+    zip=forms.IntegerField(label="Zip",required = True,widget=forms.TextInput(
+        attrs={
+        'class':'form-control',
+        'placeholder':'Enter Zip',
+        'type':'number'
+        }
+    ))
+    title=forms.CharField(label="Title",required = True,widget=forms.TextInput(
+        attrs={
+        'class':'form-control',
+        'placeholder':'Enter your title',
+        
+        
+        }
+    ))
+
+
     class Meta:
         model = user
-        fields = ["first_name","last_name","email","username","password","phone_number","date_of_birth"]
+        fields = ["first_name","last_name","address","zip","title","email","username","password","phone_number","date_of_birth"]
 
     #     def clean_date_(self):
     #         dob = self.cleaned_data['date_of_birth']
@@ -67,10 +105,8 @@ class AddCreateForm(ModelForm):
     #     super(AddCreateForm,self).clean()
 
 
-    #     date_of_birth = self.cleaned_data.get('date_of_birth') 
-       
-    #     age = (datetime.now() - date_of_birth).days/365
+    #     password = self.cleaned_data.get('password') 
 
-    #     if age < 18:
-    #         raise forms.ValidationError('Must be at least 18 years old to register')
-    #     return date_of_birth
+    #     if len(password) < 8:
+    #         raise forms.ValidationError('length of password must be  atleast 9 ')
+    #     return password

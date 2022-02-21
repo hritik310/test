@@ -1,0 +1,33 @@
+{%include "header/header.html"%}
+{%block start%}
+
+
+
+<div class="container">
+<div class="row">
+<div class="col-lg-6">
+<h3>Buy a membership</h3>
+{% comment %} <p>You can Buy 3 type of subscription</p> {% endcomment %}
+
+<form action="/stripe-checkout/" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<div class="from-group">
+<label>Membership type</label>
+<select class="from-control" name="plan">
+<Option>Choose</Option>
+<Option value="daily">Monthly membership</options>
+{% comment %} <Option value="Enterprise">Enterprise</options>
+<Option value="daily">Daily</options>   {% endcomment %}
+</select>
+</div>
+
+    {% comment %} <form action="/stripe-checkout/" method="POST" enctype="multipart/form-data"> {% endcomment %}
+        {% csrf_token %}
+      <button class="btn btn-success btn-lg">Checkout</button>
+    </form>
+    </div>
+
+
+</form>
+{%endblock%}
