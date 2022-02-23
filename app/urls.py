@@ -15,7 +15,7 @@ urlpatterns = [
     path('updateprofile/<int:id>',Signupviews.updateprofile, name ='updateprofile'),
     path('login', Loginviews.user_login, name='login'),
     path('logout',Loginviews.userLogout,name='logout'),
-    path('setting',Loginviews.setting,name = 'setting'),
+    path('sport',Loginviews.setting,name = 'sport'),
     path('update',Loginviews.update, name ='update'),
 
 

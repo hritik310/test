@@ -31,7 +31,7 @@ def user_login(request):
         print(user) 
         if user is not None:
           login(request,user)
-          return redirect('setting')
+          return redirect('sport')
 
         else:
           messages.error(request,"Invalid Credential")

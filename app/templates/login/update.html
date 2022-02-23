@@ -1,7 +1,8 @@
+
+{%include "header/header.html"%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -10,146 +11,79 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
   <style>
   
- /* body{
-	line-height:0;
-  }*/
-  img {
-    width: 100%;
-    height: 100%;
-}
- a.navbar-brand.logo_name {
-    width: 13%;
-    height: 70px;
-    padding: 0px !important;
-}
-ul.navbar-nav.navigation_navbar li {
-    margin-right: 20px;
-}
-.collapse.navbar-collapse.navigtion{
-    display: flex !important;
-    align-items: center !important;
-    justify-content: end !important;
-}
-ul.navbar-nav a.home_list {
-    color: #000000 !important;
-    font-size: 16px;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-}
-
-
-
-/* Using the border-radius property 
-	   to draw the semi-circle*/
-	div.moon_box {
-		height: 175px;
-		width: 345px;
-		border-radius: 200px 200px 0 0;
-		background-color: #ffffff;
-		margin: 0 auto;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	.row.half-Semi-Circle {
-		background: #f0f0ee;
-		padding: 40px 10px;
-	}
-	button.btn.btn-primary.center_btn {
-    color: #000000;
-    background-color: #69ace0;
-	background-color: unset;
-    border-color: #5fa1d4;
-	width: 180px;
-    font-size: 18px;
-	border: 2px solid #69ace0;
-}
-
-		button.btn.btn-primary.center_btn:hover {
-		color: #ffffff;
-		background-color: #61a2d4;
-		border-color: #61a2d4;
-	}
-	.container-fluid.background_image {
-    /* background-image: url(image/grass_ground.jpg); */
-    padding: 0px !important;
-    background-size: cover;
-    background-repeat: no-repeat;
-    /* height: 300px; */
-}
-	#istockphotoVideo {
-    width: 100%;
-    height: 360px;
-    object-fit: initial;
-}
-
-.container.text_box {
-    position: absolute;
-    top: 20%;
-    left: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.this_example {
-    height: 250px;
-    width: 60%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}	
-	h3.Data_sports {
-    font-size: 36px;
-    font-weight: 900;
-    line-height: 1.2;
-    letter-spacing: 1px;
-}
 .cancelsubscription {
     margin-top: 2rem;
 }	
+
+
+
+button.btn.btn-primary.cancel_subscription {
+    background: #6aaddf;
+    border: #6baedc;
+    border-radius: 30px;
+    width: 200px;
+    /* background-image: linear-gradient(#0a568d, #959599); */
+}
+
+button.btn.btn-success.update_profile {
+    border-radius: 30px;
+    /* margin-top: 20px; */
+    width: 200px;
+}
+
+
   </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md py-0">
+<!-- <nav class="navbar navbar-expand-md py-0">
   <a class="navbar-brand logo_name" href="#"><img src="static/image/datasport-logo.jpg"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse navigtion" id="collapsibleNavbar">
     <ul class="navbar-nav navigation_navbar">
-    <!--   <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link home_list" href="#">Build Model</a>
       </li>
       <li class="nav-item">
         <a class="nav-link home_list" href="#">My Models</a>
-      </li> -->
+      </li>
 	  <li class="nav-item">
         <a class="nav-link home_list" href="{% url 'update' %}">Settings</a>
       </li>
-  <!--     <li class="nav-item">
+     <li class="nav-item">
         <a class="nav-link home_list" href="#">Logout</a>
       </li> -->    
-    </ul>
+<!--     </ul>
   </div>  
-</nav>
+</nav> --> 
 
 
 <div class="container-fluid">
 	<div class="cancelsubscription">
-		<ul>
+		
+            <div>
+                <ul>
 			<li>
-				<a href="/stripe-checkout/cancel">Cancel Subscription</a>
+				<a href="/stripe-checkout/cancel">
+                    <button type="button" class="btn btn-primary cancel_subscription">Cancel Subscription</button>
+                </a>
 			</li>
-
+            </ul>
+        </div>
+        <div class="btn_sec">
+            <ul>
 			<li>
 				{% if user.is_authenticated %}
-				<a href="{% url 'updateprofile' user.id %}">Update profile</a>
+				<a href="{% url 'updateprofile' user.id %}">
+                <button type="button" class="btn btn-success update_profile">Update profile</button></a>
                 {% endif %}
 
 			</li>
-		</ul>
+            </ul>
+        </div>
+		
 	</div>	
 </div>	
 
@@ -161,6 +95,7 @@ ul.navbar-nav a.home_list {
 
 
 </body>
+
 </html>
 
 
