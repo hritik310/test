@@ -1,0 +1,18 @@
+Watching for file changes with StatReloader
+Performing system checks...
+
+sk_test_51KR8onSF4o4pBHwpEbvzOhoSepVcczo3y7voulkh2OQwzt2PovTdTFAPKga4XKJjCrpn2JEB1sYRaWu5a9courlW00O0nRY5IT
+System check identified some issues:
+
+WARNINGS:
+app.user.zip: (fields.W122) 'max_length' is ignored when used with IntegerField.
+	HINT: Remove 'max_length' from field
+
+System check identified 1 issue (0 silenced).
+/usr/lib/python3/dist-packages/pymysql/cursors.py:170: Warning: (3135, "'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.")
+  result = self._query(query)
+February 21, 2022 - 11:19:05
+Django version 4.0.2, using settings 'myapp.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Error: That port is already in use.
