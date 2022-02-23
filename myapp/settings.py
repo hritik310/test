@@ -108,7 +108,7 @@ DATABASES = {
        'NAME': 'datasport',
        'HOST': 'localhost',
        'PORT': '3306',
-       'USER': 'admin',
+       'USER': 'root',
        'PASSWORD': 'AdMiN@12345',
        'OPTIONS': {
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
