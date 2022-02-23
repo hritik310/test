@@ -106,10 +106,10 @@ DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.mysql', 
        'NAME': 'datasport',
-       'HOST': 'database1.cbwnrv3otwrb.us-east-1.rds.amazonaws.com',
+       'HOST': 'localhost',
        'PORT': '3306',
        'USER': 'admin',
-       'PASSWORD': 'admin12345',
+       'PASSWORD': 'AdMiN@12345',
        'OPTIONS': {
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
                      
