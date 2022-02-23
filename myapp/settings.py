@@ -105,7 +105,7 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.mysql', 
-       'NAME': 'datasport',
+       'NAME': 'myapp',
        'HOST': 'localhost',
        'PORT': '3306',
        'USER': 'root',
