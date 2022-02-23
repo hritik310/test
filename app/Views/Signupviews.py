@@ -2,7 +2,6 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
-from django.contrib.sites.shortcuts import get_current_site
 from app.models import *
 from django.contrib import messages
 from django.urls import reverse
@@ -38,13 +37,15 @@ def create(request):
     context=user.objects.all()
     if request.method == 'POST':
         accountform = AddCreateForm(request.POST)
-        if accountform.is_valid():    
+        print(accountform)
+        if accountform.is_valid():
+            print("True")
+
             name=request.POST.get("username")
-            print("a",name)
+            print(name)
             unique_id = get_random_string(length=5)
             uniqueName=name + unique_id
             accountform.username=uniqueName    
-            accountform.username="hritik"+accountform.username 
             new_user = accountform.save(commit=False)
             new_user.is_active = False
             new_user.save()
@@ -79,7 +80,9 @@ def create(request):
             return HttpResponse('Please confirm your email address to complete the registration')
 
         else:
-            return render(request,"signup/index.html",{'form':accountform,"context":context})
+            print("False")
+
+            return render(request,"signup/signup.html",{'form':accountform,"context":context})
 
     form = AddCreateForm()
     return render(request,"signup/signup.html",{'form':form,"context":context})
@@ -101,7 +104,21 @@ def activate(request, uidb64, token):
         users.is_active = user.objects.filter(id=uid).update(is_active=True)
         login(request, users)
         messages.success(request,"Successfully Registered")
-        return redirect('/login')
+        return redirect('/signup')
         # return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+
+def updateprofile(request,id):
+    custom  = user.objects.get(id=id)
+    if request.method == "POST":
+
+        custom.username = request.POST.get('username')
+        custom.email = request.POST.get('email')
+        custom.phone_number= request.POST.get('phone_number')
+        custom.save()
+        return redirect('update')
+
+
+    return render(request,"signup/update.html",{'customer':custom})

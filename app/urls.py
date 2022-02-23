@@ -12,8 +12,12 @@ from . import views
 urlpatterns = [
     path('', Signupviews.index, name='index'),
     path('signup', Signupviews.create, name='signup'),
+    path('updateprofile/<int:id>',Signupviews.updateprofile, name ='updateprofile'),
     path('login', Loginviews.user_login, name='login'),
     path('logout',Loginviews.userLogout,name='logout'),
+    path('setting',Loginviews.setting,name = 'setting'),
+    path('update',Loginviews.update, name ='update'),
+
 
     
 #payment urls

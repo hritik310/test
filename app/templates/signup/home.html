@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,21 +12,26 @@
   <style>
   
 div#myNavbar {
-	float: right;
-	}
+    float: right;
+    }
 nav.navbar.navigation {
     border-radius: unset; 
-	margin-bottom: 0px !important;
+    margin-bottom: 0px !important;
 
 }
 
-  a.navbar-brand.logo_name {
-    padding: 15px 15px 0 !important;
-    width: 100%;
+ /* a.navbar-brand.logo_name {
+    padding: 5px 15px 0 25px !important;
+    width: 90%;
+}*/
+a.navbar-brand.logo_name {
+    padding: 0px 15px 0 25px !important;
+    width: 200px;
+    height: 65px;
 }
 img{
-	width:100%;
-	height:100%
+    width:100%;
+    height:100%
 }
 a.home_list {
     padding-top: 20px !important;
@@ -37,18 +41,23 @@ ul.nav.navbar-nav a.home_list {
     color: black;
     font-size: 16px;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+     padding: 10px !important;
+}
+
+ul.nav.navbar-nav.navul_sec {
+    padding-top: 13px;
 }
 .container-fluid.background_image {
    /*background-image: url(image/grass_ground.jpg);*/
     padding: 0px !important;
     background-size: cover;
     background-repeat: no-repeat;
-	   /* height: 300px;*/
-	}
+       /* height: 300px;*/
+    }
 
 
 .source_video_back{
-	background-image: url(image/image_demo.jpg);
+    background-image: url(image/image_demo.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0px 25px;
@@ -72,13 +81,13 @@ source {
     object-fit: initial;
 }
 .source_video {
-    width: 70%;
+   width: 85%;
     height: 400px;
     margin: 0 auto;
-	padding-bottom: 40px;
+    padding-bottom: 40px;
 }
 #istockphotoVideo{
-	width: 100%;
+    width: 100%;
     height: 360px;
     object-fit: initial;
 }
@@ -114,17 +123,18 @@ button#myBtn {
     background: black;
     border: none;
     color: white;
+    border-radius: 5px;
 }
 .container.bg-light {
     /*background: #f0f0ee;*/
     position: relative;
     top: -5px;
-	/*padding: 50px 0; */
+    /*padding: 50px 0; */
 }
 
 .this_contant.text-center {
    padding: 30px;
-	font-size: 18px;
+    font-size: 18px;
 }
 
 .Form_section {
@@ -150,34 +160,89 @@ p.Per_month strong {
 
 h3.Membership {
     font-weight: 700;
-	font-size: 26px;
-	background: #2c8dbd;
-	padding: 15px;
+    font-size: 26px;
+    background: #418ec5;
+    padding: 15px;
     color: white;
     border-radius: 10px 10px 0px 0px;
 }
 .row.form_back{
-background-image: url(static/image/photo-form.jpg);
+/*background-image: url(/static/image/coding-img.jpg);*/
     padding: 0px !important;
     background-size: cover;
     background-repeat: no-repeat;
-	height: 100%;
+    height: 100%;
     margin: 25px;
-	border-radius: 5px;
+    border-radius: 5px;
 }
 .col-md-6.pad_right {
-    padding-right: 0 !important;s
+    padding: 0 !important;
 }
 h3.Membership a {
     color: white;
 }
 h3.Membership:hover {
-	background: #207199;
-	}
+    background: #207199;
+    }
 h3.Membership a:hover {
     color: white;
-	text-decoration:none;
+    text-decoration:none;
 }
+
+
+/*evening*/
+
+h3.Membership:hover {
+    background: #1c70ad;
+}
+
+h3.Membership {
+    font-weight: 700;
+    font-size: 26px;
+    background:#418ec5;
+    padding: 15px;
+    color: white;
+    border-radius: 10px 10px 0px 0px;
+}
+.container-fluid.top_menu {
+    padding: 7px;
+}
+.nav>li>a.home_list.active {
+    text-decoration: none;
+    background-color:#418ec5;
+    border-radius: 8px;
+    color: white !important;
+}
+.nav>li>a.home_list:hover {
+    text-decoration: none;
+    background-color: #418ec5;
+    border-radius: 8px;
+    color: white !important;
+}
+
+ul.nav.navbar-nav li.navbar_list {
+    margin: 0px 10px;
+}
+
+.btn-primary.btn_submit {
+    color: #fff;
+    background-color: #418ec5;
+    border-color:#418ec5;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+.btn-primary.btn_submit:hover {
+    color: #fff;
+    background-color: #1c70ad;
+    border-color: #1c70ad;
+}
+
+/*evening*/
+
+
+
+
 
 
 
@@ -272,7 +337,27 @@ h3.Membership a:hover {
   margin-bottom:0;
 }
 
+
+
+
+
+
+
+
+.col-md-6.pad_left {
+    padding: 0px !important;
+}
+.sidebar_img {
+    height: 473px;
+    box-shadow: 0px 0px 14px 0px #a7a7a7;
+    border-radius: 5px;
+}
+.sidebar_img img {
+    border-radius: 5px 0 0 5px;
+}
+
 https://epicbootstrap.com/snippets/footer-dark
+
 
 
 
@@ -281,105 +366,107 @@ https://epicbootstrap.com/snippets/footer-dark
   </style>
 </head>
 <body>
-	<div class="">
-		<nav class="navbar navigation">
-		  <div class="container-fluid">
-			<div class="navbar-header">
-			  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>                        
-			  </button>
-			  <a class="navbar-brand logo_name" href="#"><img src="/static/image/logo-abaxx.png"></a>
-			</div>
-			<div class="collapse navbar-collapse" id="myNavbar">
-			  <ul class="nav navbar-nav">
-				<li class=""><a class="home_list" href="#">Home</a></li>
-				<li><a href="/signup" class="home_list">Sign Up</a></li>
-				<li><a href="/login" class="home_list">Login</a></li>
-			  </ul>
-			</div>
-		  </div>
-		</nav>
-		<div class="container-fluid background_image">
-			<div class="istockphoto_video">
-				<video autoplay muted loop id="istockphotoVideo">
-				  <source src="/static/image/istockphoto_video.mp4" type="video/mp4">
-				</video>
-			</div>
-			<div class="container text_box">
-				<div class="this_example" >
-				  <h3 class="Data_sports">Data sports Lab is a Machine learning platform to allow usese to make your own sports predkation in minutes.</h3> 
-				</div>
-			</div>				
-		</div>
-		
-		<div class="container bg-light">
-			<div class="source_video_back">
-				<div class="source_video">
-					<video autoplay muted loop id="myVideo">
-					  <source src="/static/image/mov_bbb.mp4" type="video/mp4">
-					  Your browser does not support HTML5 video.
-					</video>
-					<button id="myBtn" onclick="myFunction()">Pause</button>
-				</div>
-			</div>
-			<div class="this_contant text-center" >
-			<div class="row">
-				<div class="col-md-4">
-					<div class="text_box_contant">	
-					  <h3 class="Membership"><a href="/stripe-checkout/">Monthly Membership</a></h3>			  
-					  <p class="Per_month"><strong>$25</strong> Per month</p>
-					</div>	
-				</div>	
-				<div class="col-md-4">	
-					<div class="text_box_contant">				
-					  <h3 class="Membership"><a href="#">What's included?</a></h3>  
-					  <p class="">Build Your own machine learning models in seconds</p>
-					</div>
-				</div>
-				<div class="col-md-4">	
-					<div class="text_box_contant">	
-					  <h3 class="Membership"><a href="#">NFL, NBA AND MLB</a></h3> 
-					  <p class="">More sports coming soon </p>
-					</div>				  
-				</div>
-			</div>
-			</div>
-			<div class="row form_back">
-			<div class="col-md-6">
-			
-			</div>
-			<div class="col-md-6 pad_right">				
-			<div class="Form_section">
-			
-			<form method = "POST">
-			<div class="form-group">
-			  <label for="usr">Name:</label>
-			  <input type="text" class="form-control" id="usr">
-			</div>
-				<div class="form-group">
-				  <label for="email">Email:</label>
-				  <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-				</div>
-				<div class="form-group">
-				  <label for="pwd">Password:</label>
-				  <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
-				</div>
-			 
-				<div class="form-group">
-				  <label for="comment">Comment:</label>
-				  <textarea class="form-control" rows="5" id="comment"></textarea>
-				</div>
-				
-				<button type="submit"  href="#"class="btn btn-primary" >Submit</button>
-			  </form>
-			</div>
-		</div>
-		</div>
-		</div>
-		
-		<div class="footer-dark">
+    <div class="">
+        <nav class="navbar navigation">
+          <div class="container-fluid top_menu">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+              </button>
+              <a class="navbar-brand logo_name" href="#"><img src="/static/image/datasport-logo.jpg"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav navul_sec">
+                <li class="navbar_list"><a class="home_list active" href="">Home</a></li>
+                <li class="navbar_list"><a href="signup" class="home_list">Sign Up</a></li>
+                <li class="navbar_list"><a href="signup" class="home_list">Login</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div class="container-fluid background_image">
+            <div class="istockphoto_video">
+                <video autoplay muted loop id="istockphotoVideo">
+                  <source src="/static/image/istockphoto_video.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="container text_box">
+                <div class="this_example" >
+                  <h3 class="Data_sports">Data sports Lab is a Machine learning platform to allow usese to make your own sports predkation in minutes.</h3> 
+                </div>
+            </div>              
+        </div>
+        
+        <div class="container bg-light">
+            <div class="source_video_back">
+                <div class="source_video">
+                    <video autoplay muted loop id="myVideo">
+                      <source src="/static/image/mov_bbb.mp4" type="video/mp4">
+                      Your browser does not support HTML5 video.
+                    </video>
+                    <button id="myBtn" onclick="myFunction()">Pause</button>
+                </div>
+            </div>
+            <div class="this_contant text-center" >
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="text_box_contant">  
+                      <h3 class="Membership"><a href="#">Monthly Membership</a></h3>              
+                      <p class="Per_month"><strong>$25</strong> Per month</p>
+                    </div>  
+                </div>  
+                <div class="col-md-4">  
+                    <div class="text_box_contant">              
+                      <h3 class="Membership"><a href="#">What's included?</a></h3>  
+                      <p class="">Build Your own machine learning models in seconds</p>
+                    </div>
+                </div>
+                <div class="col-md-4">  
+                    <div class="text_box_contant">  
+                      <h3 class="Membership"><a href="#">NFL, NBA AND MLB</a></h3> 
+                      <p class="">More sports coming soon </p>
+                    </div>                
+                </div>
+            </div>
+            </div>
+            <div class="row form_back">
+            <div class="col-md-6 pad_left">
+            <div class="sidebar_img">
+                <img src="/static/image/coding-img.jpg"></a>
+            </div>
+            </div>
+            <div class="col-md-6 pad_right">                
+            <div class="Form_section">
+            
+            <form action="/action_page.php">
+            <div class="form-group">
+              <label for="usr">Name</label>
+              <input type="text" class="form-control" id="usr">
+            </div>
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                </div>
+                <div class="form-group">
+                  <label for="pwd">Password:</label>
+                  <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+                </div>
+             
+                <div class="form-group">
+                  <label for="comment">Comment:</label>
+                  <textarea class="form-control" rows="5" id="comment"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn_submit">Submit</button>
+              </form>
+            </div>
+        </div>
+        </div>
+        </div>
+        
+        <div class="footer-dark">
         <footer>
             <div class="container">
                 <div class="row">
@@ -409,7 +496,7 @@ https://epicbootstrap.com/snippets/footer-dark
             </div>
         </footer>
     </div>
-		
+        
 <script>
 
 var video = document.getElementById("myVideo");
@@ -427,4 +514,6 @@ function myFunction() {
 </script>
 
 </body>
+
+
 </html>

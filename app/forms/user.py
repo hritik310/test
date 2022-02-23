@@ -31,13 +31,13 @@ class AddCreateForm(ModelForm):
     #     }
     # ))
 
-    first_name= forms.CharField(label="Firstname",required = True,widget=forms.TextInput(
-        attrs={
-        'class':'form-control',
-        'placeholder':'Enter your Firstname',
+    # first_name= forms.CharField(label="Firstname",required = True,widget=forms.TextInput(
+    #     attrs={
+    #     'class':'form-control',
+    #     'placeholder':'Enter your Firstname',
         
-        }
-    ))
+    #     }
+    # ))
 
     last_name = forms.CharField(label="Lastname",required = True,widget=forms.TextInput(
         attrs={
@@ -91,7 +91,7 @@ class AddCreateForm(ModelForm):
 
     class Meta:
         model = user
-        fields = ["first_name","last_name","address","zip","title","email","username","password","phone_number","date_of_birth"]
+        fields = ["username","last_name","address","zip","title","email","password","phone_number","date_of_birth"]
 
     #     def clean_date_(self):
     #         dob = self.cleaned_data['date_of_birth']

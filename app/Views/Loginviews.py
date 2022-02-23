@@ -17,9 +17,9 @@ from django.contrib import auth
 
 def user_login(request):
     if request.method == "POST":
-        uname= request.POST.get('username')
+        uname= request.POST.get('uname')
         print(uname)
-        upass= request.POST.get('password')
+        upass= request.POST.get('psw')
         print(upass)
         # a=pod_groups.objects.all()
         # for i in a: 
@@ -31,16 +31,28 @@ def user_login(request):
         print(user) 
         if user is not None:
           login(request,user)
-          return redirect('stripe_checkout')
+          return redirect('setting')
 
         else:
           messages.error(request,"Invalid Credential")
           return redirect('/login')
               
-    return render(request,"login/login.html")
+    return render(request,"signup/signup.html")
 
 
 
 def userLogout(request):
   auth.logout(request)
   return redirect('/login')
+
+
+def setting(request):
+  return render(request,"login/setting.html")
+
+def update(request):
+  return render (request,"login/update.html")
+
+
+
+
+
