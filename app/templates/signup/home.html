@@ -194,7 +194,7 @@ button#myBtn {
 }
 
 .this_contant.text-center {
-   padding: 30px;
+   padding: 30px 0;
     font-size: 18px;
 }
 
@@ -417,6 +417,55 @@ ul.nav.navbar-nav li.navbar_list {
     border-radius: 5px 0 0 5px;
 }
 
+
+/*member section css start*/
+.background-banner {
+    /* background-image: url(image/membership-banner.png); */
+    padding: 0px !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 40px !important;
+    margin: 0px 25px;
+    border-radius: 5px;
+    /*height: 380px;*/
+    background: #69ace0;
+    background-image: linear-gradient(to right, #70b2df , #0069b0);
+}
+.background-banner h3 {
+        font-size: 28px;
+}
+.container.member_section {
+    background: #ffffff;
+    width: 50%;
+    text-align:center;
+    padding: 20px 0px;
+}
+
+span.pries {
+    font-size: 30px;
+}
+.container.member_section p {
+    color: #000000 !important;
+    font-size: 16px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    padding: 5px;
+}
+
+
+.btn-primary.Sign_member {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    padding: 12px;
+    width: 100px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/*member section css end*/
+
+
+
 https://epicbootstrap.com/snippets/footer-dark
 
 
@@ -499,7 +548,34 @@ https://epicbootstrap.com/snippets/footer-dark
                 </div>
             </div>
             <div class="this_contant text-center" >
-            <div class="row">
+                <div class="container-gluid">
+ 
+  
+                  <div class="background-banner ">
+
+                    <div class="container member_section">
+                     <h3>Members Area</h3>
+                     <p class=""><span class="pries"><strong>$20.00</strong></span><br><span><strong>EVERY MONTH</strong></span></p>
+                     <p class="Membership_monthly"><span>Membership $25 per month</span></p>
+                     
+                      <p class="Membership_monthly">
+                      includes<br>
+                      Access to text as many models as you want<br>
+                      Save ten models per week<br>
+                      Ability to sell picks to other members<br>
+                      Access to the leaderboard
+                      </p>
+                      <div>
+                            <a href="{% url 'stripe_checkout' %}">
+                            <button type="button" class="btn btn-primary Sign_member">Sign Up</button></a>
+                      </div>
+                     
+                     </div>
+                  </div>
+                </div>
+
+
+          <!--   <div class="row">
                 <div class="col-md-4">
                     <div class="text_box_contant">  
                       <h3 class="Membership"><a href="#">Monthly Membership</a></h3>              
@@ -518,7 +594,7 @@ https://epicbootstrap.com/snippets/footer-dark
                       <p class="">More sports coming soon </p>
                     </div>                
                 </div>
-            </div>
+            </div> -->
             </div>
             <div class="row form_back">
             <div class="col-md-6 pad_left">

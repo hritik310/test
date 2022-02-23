@@ -122,3 +122,8 @@ def updateprofile(request,id):
 
 
     return render(request,"signup/update.html",{'customer':custom})
+
+
+
+def buildmodel(request):
+    return render(request,"signup/buildmodel.html")

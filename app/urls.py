@@ -17,6 +17,7 @@ urlpatterns = [
     path('logout',Loginviews.userLogout,name='logout'),
     path('sport',Loginviews.setting,name = 'sport'),
     path('update',Loginviews.update, name ='update'),
+    path('buildmodel', Signupviews.buildmodel, name ='buildmodel'),
 
 
     
