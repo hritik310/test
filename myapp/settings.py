@@ -109,7 +109,7 @@ DATABASES = {
        'HOST': 'database1.cbwnrv3otwrb.us-east-1.rds.amazonaws.com',
        'PORT': '3306',
        'USER': 'admin',
-       'PASSWORD': 'AdMiN@12345',
+       'PASSWORD': 'admin12345',
        'OPTIONS': {
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
                      
