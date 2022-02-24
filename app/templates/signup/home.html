@@ -192,7 +192,7 @@ span.pries {
 <nav class="navbar navbar-expand-md p-0">
 <div class="container">
  <div class="logo_section">
-		 <a class="navbar-brand logo_name" href=""><img src="/static/image/datasport-logo.jpg"></a>
+		 <a class="navbar-brand logo_name" href="{% url 'index' %}"><img src="/static/image/datasport-logo.jpg"></a>
 	  </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -200,20 +200,23 @@ span.pries {
   <div class="collapse navbar-collapse navigation_menu" id="collapsibleNavbar">
     <ul class="navbar-nav navbar-menu">
       <li class="nav-item">
-        <a class="nav-link home_list active" href={% url 'index' %}>Home</a>
+        <a class="nav-link home_list active" href="{% url 'index' %}">Home</a>
       </li>
       
       <li class="nav-item">
-        <a class="nav-link home_list" href={% url 'buildmodel' %}>Build Model</a>
+        <a class="nav-link home_list" href="{% url 'buildmodel' %}">Build Model</a>
       </li> 
       <li class="nav-item">
         <a class="nav-link home_list" href="#">My Models</a>
       </li> 
       <li class="nav-item">
-        <a class="nav-link home_list" href={%url 'update' %}>Settings</a>
+        <a class="nav-link home_list" href="{%url 'update' %}">Settings</a>
       </li> 
       <li class="nav-item">
-        <a class="nav-link home_list" href={% url 'logout'%}>Logout</a>
+        <a class="nav-link home_list" href="{%url 'sport' %}">Get Started</a>
+      </li> 
+      <li class="nav-item">
+        <a class="nav-link home_list" href="{% url 'logout'%}">Logout</a>
       </li>  
     </ul>
   </div>  
@@ -225,7 +228,7 @@ span.pries {
 <nav class="navbar navbar-expand-md p-0">
   <div class="container">
    <div class="logo_section">
-       <a class="navbar-brand logo_name" href={% url 'index'%}><img src="/static/image/datasport-logo.jpg"></a>
+       <a class="navbar-brand logo_name" href="{% url 'index'%}"><img src="/static/image/datasport-logo.jpg"></a>
       </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -233,10 +236,10 @@ span.pries {
     <div class="collapse navbar-collapse navigation_menu" id="collapsibleNavbar">
       <ul class="navbar-nav navbar-menu">
         <li class="nav-item">
-          <a class="nav-link home_list active" href={% url 'index'%}>Home</a>
+          <a class="nav-link home_list active" href="{% url 'index'%}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link home_list" href={% url 'signup'%}>Signup/Login</a>
+          <a class="nav-link home_list" href="{% url 'signup'%}">Signup/Login</a>
         </li>  
        
     
@@ -255,7 +258,7 @@ span.pries {
 	<div id="tsparticles">
 		<div class="container text_box">
 			<div class="this_example" >
-			  <h3 class="Data_sports">Data sports Lab is a Machine learning platform to allow usese to make your own sports predkation in minutes.</h3> 
+			  <h3 class="Data_sports">Data sports Lab is a Machine learning platform to allow uses to make your own sports predication in minutes.</h3> 
 			</div>
 		</div>
 	</div>
@@ -296,7 +299,7 @@ span.pries {
 	  </p>
 	  <div>
 			<a href="{% url 'stripe_checkout' %}">
-        <button type="button" class="btn btn-primary Sign_member">Sign Up</button></a>
+        <button type="button" class="btn btn-primary Sign_member">Buy now</button></a>
   </div>
 	  </div>
 	 
