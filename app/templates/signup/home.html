@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Data-sport</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -192,7 +192,7 @@ span.pries {
 <nav class="navbar navbar-expand-md p-0">
 <div class="container">
  <div class="logo_section">
-		 <a class="navbar-brand logo_name" href=""><img src="/static/image/datasport-logo.jpg"></a>
+		 <a class="navbar-brand logo_name" href="{% url 'index' %}"><img src="/static/image/datasport-logo.jpg"></a>
 	  </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -200,20 +200,20 @@ span.pries {
   <div class="collapse navbar-collapse navigation_menu" id="collapsibleNavbar">
     <ul class="navbar-nav navbar-menu">
       <li class="nav-item">
-        <a class="nav-link home_list active" href={% url 'index' %}>Home</a>
+        <a class="nav-link home_list active" href="{% url 'index' %}">Home</a>
       </li>
       
       <li class="nav-item">
-        <a class="nav-link home_list" href={% url 'buildmodel' %}>Build Model</a>
+        <a class="nav-link home_list" href="{% url 'buildmodel' %}">Build Model</a>
       </li> 
       <li class="nav-item">
         <a class="nav-link home_list" href="#">My Models</a>
       </li> 
       <li class="nav-item">
-        <a class="nav-link home_list" href={%url 'update' %}>Settings</a>
+        <a class="nav-link home_list" href="{%url 'update' %}">Settings</a>
       </li> 
       <li class="nav-item">
-        <a class="nav-link home_list" href={% url 'logout'%}>Logout</a>
+        <a class="nav-link home_list" href="{% url 'logout'%}">Logout</a>
       </li>  
     </ul>
   </div>  
@@ -225,7 +225,7 @@ span.pries {
 <nav class="navbar navbar-expand-md p-0">
   <div class="container">
    <div class="logo_section">
-       <a class="navbar-brand logo_name" href={% url 'index'%}><img src="/static/image/datasport-logo.jpg"></a>
+       <a class="navbar-brand logo_name" href="{% url 'index'%}"><img src="/static/image/datasport-logo.jpg"></a>
       </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -233,10 +233,10 @@ span.pries {
     <div class="collapse navbar-collapse navigation_menu" id="collapsibleNavbar">
       <ul class="navbar-nav navbar-menu">
         <li class="nav-item">
-          <a class="nav-link home_list active" href={% url 'index'%}>Home</a>
+          <a class="nav-link home_list active" href="{% url 'index'%}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link home_list" href={% url 'signup'%}>Signup/Login</a>
+          <a class="nav-link home_list" href="{% url 'signup'%}">Signup/Login</a>
         </li>  
        
     
