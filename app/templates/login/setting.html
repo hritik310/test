@@ -1,4 +1,6 @@
+{% include "header/header.html"%}
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <title>Data-sports</title>
@@ -9,13 +11,25 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  
+  
+  
+  
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  
+  
   <style>
   
   body{
   line-height:0;
   /*background: #ebeded;*/
   }
-  
+{% comment %}   
  nav.navbar.navbar-inverse.background {
     background-color: #fff;
     border-color: #ffffff;
@@ -62,7 +76,7 @@ a.nav-link.home_list.active:hover {
     margin-left: 10px;
     background: #69ace0;
     border-radius: 30px;
-}
+} {% endcomment %}
 
 
 
@@ -180,7 +194,7 @@ h3.Data_sports {
 <body>
 
 
-<nav class="navbar navbar-inverse background">
+{% comment %} <nav class="navbar navbar-inverse background">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -209,7 +223,7 @@ h3.Data_sports {
       </ul>
     </div>
   </div>
-</nav>
+</nav> {% endcomment %}
 
 <div class="container-fluid background_image">
   <div class="istockphoto_video">
@@ -245,6 +259,7 @@ h3.Data_sports {
 </div>
 
 </body>
+{% include "header/footer.html"%}
 </html>
 
 

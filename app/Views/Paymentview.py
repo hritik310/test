@@ -89,11 +89,14 @@ import json
 @csrf_exempt
 def cancel_subscription(request):
   c= StripeCustomer.objects.values('stripeSubscriptionId')
+  print(c)
   a= stripe.Subscription.list(limit=1)
+  current=request.user.id
   b= a.data[0].id
-  print(b)
+  # b= StripeCustomer.objects.filter(stripeCustomerId=current).get("stripeSubscriptionId")
+  # print(b)
   z=stripe.Subscription.delete(b)
-  return HttpResponse("You have cancelled the Subscription.",)
+  return redirect("Your subscription is cancel",)
    
 
 # @csrf_exempt

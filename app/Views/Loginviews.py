@@ -43,7 +43,7 @@ def user_login(request):
 
 def userLogout(request):
   auth.logout(request)
-  return redirect('/login')
+  return redirect('/signup')
 
 
 def setting(request):

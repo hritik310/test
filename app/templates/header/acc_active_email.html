@@ -1,4 +1,4 @@
-{%include "header/header.html"%}
+{% comment %} {%include "header/header.html"%} {% endcomment %}
 
 {% autoescape off %}
 Hi {{user.entry_code}},
@@ -7,5 +7,5 @@ Please click on the link to confirm your registration,
 http://{{ domain }}/activate/{{ uid }}/{{ token }}
 {% endautoescape %}
 
-
-{%include "header/footer.html"%}
+{% comment %} 
+{%include "header/footer.html"%} {% endcomment %}

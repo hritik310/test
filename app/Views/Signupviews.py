@@ -37,7 +37,6 @@ def create(request):
     context=user.objects.all()
     if request.method == 'POST':
         accountform = AddCreateForm(request.POST)
-        print(accountform)
         if accountform.is_valid():
             print("True")
 

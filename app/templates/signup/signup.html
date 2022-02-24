@@ -274,11 +274,11 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 	              
 	                  <div class="row">
 	                  		<div class="col-md-6">
-			                  <div class="item form-group {% if form.username.errors %} has-error  {% endif %}"> 
-			                    <label for="Name">Username</label>
-			                    {{form.username}}
-	                            {% if form.username.errors %}
-	                            {% for error in form.username.errors %}
+			                  <div class="item form-group {% if form.first_name.errors %} has-error  {% endif %}"> 
+			                    <label for="Name">Firstname</label>
+			                    {{form.first_name}}
+	                            {% if form.first_name.errors %}
+	                            {% for error in form.first_name.errors %}
 	                            <span class="error text-danger">
 	                                <strong>{{ error|escape }}</strong>
 	                            </span>
@@ -302,35 +302,65 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 			              	</div>
 			          </div>
 
-
-			          <div class="row">
-	                  		<div class="col-md-6">
-				                <div class="item form-group {% if form.email.errors %} has-error  {% endif %}"> 
-				                    <label for="email">Email</label>
-				                    {{form.email}}
-		                            {% if form.email.errors %}
-		                            {% for error in form.email.errors %}
-		                            <span class="error text-danger">
-		                                <strong>{{ error|escape }}</strong>
-		                            </span>
-			                        {% endfor %}
-			                        {% endif %}
-				                     
-				                </div>
-			             	</div>
-			                <div class="col-md-6">
-						        <div class="item form-group {% if form.password.errors %} has-error  {% endif %}"> 
-			                    <label for="pwd">Password</label>
-			                    {{form.password}}
-	                            {% if form.password.errors %}
-	                            {% for error in form.password.errors %}
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="item form-group {% if form.username.errors %} has-error  {% endif %}"> 
+			                    <label for="Name">Username</label>
+			                    {{form.username}}
+	                            {% if form.username.errors %}
+	                            {% for error in form.username.errors %}
 	                            <span class="error text-danger">
 	                                <strong>{{ error|escape }}</strong>
 	                            </span>
 		                        {% endfor %}
 		                        {% endif %}
-			               
-			               		</div>
+			                  </div>
+                       </div>
+                      <div class="col-md-6">
+                        <div class="item form-group {% if form.email.errors %} has-error  {% endif %}"> 
+                            <label for="email">Email</label>
+                            {{form.email}}
+                            {% if form.email.errors %}
+                            {% for error in form.email.errors %}
+                            <span class="error text-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </span>
+                            {% endfor %}
+                            {% endif %}
+                             
+                        </div>
+                      </div>
+                    </div>
+
+			          <div class="row">
+	                  		<div class="col-md-6">
+				                <div class="item form-group {% if form.password.errors %} has-error  {% endif %}"> 
+                                    <label for="pwd">Password</label>
+                                    {{form.password}}
+                                    {% if form.password.errors %}
+                                    {% for error in form.password.errors %}
+                                    <span class="error text-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </span>
+                                    {% endfor %}
+                                    {% endif %}
+                               
+                                </div>
+			             	</div>
+			                <div class="col-md-6">
+						        <div class="item form-group {% if form.title.errors %} has-error  {% endif %}"> 
+                                    <label for="Name">Title</label>
+                                    {{form.title}}
+                                    {% if form.title.errors %}
+                                    {% for error in form.title.errors %}
+                                    <span class="error text-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </span>
+                                    {% endfor %}
+                                    {% endif %}
+            
+                                 
+                                  </div>
 					        </div>
 			         	 </div>
 
@@ -370,7 +400,7 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 
 
 
-	                  <div class="item form-group {% if form.title.errors %} has-error  {% endif %}"> 
+	                  {% comment %} <div class="item form-group {% if form.title.errors %} has-error  {% endif %}"> 
 	                    <label for="Name">Title</label>
 	                    {{form.title}}
                         {% if form.title.errors %}
@@ -382,7 +412,7 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
                         {% endif %}
 
 	                 
-	                  </div>
+	                  </div> {% endcomment %}
 	          
 	                  <div class="item form-group {% if form.address.errors %} has-error  {% endif %}">
 	                    <label for="street">Street Address</label>

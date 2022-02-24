@@ -1,168 +1,141 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Data-sports</title>
+  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> 
-
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
- -->
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
   <style>
-  img {
-    width: 100%;
-    height: 100%;
-}
-
-nav.navbar.navbar-expand-md.background {
-    background: #ffffff;
-}
- 
-.collapse.navbar-collapse.navigtion{
-    display: flex !important;
-    align-items: center !important;
+	div.navigation_menu {
     justify-content: end !important;
 }
-ul.navbar-nav a.home_list {
-    color: #000000 !important;
-    font-size: 16px;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
+ul.navbar-nav.navbar-menu {
+  align-items: center;
+  justify-content: end;
+  float: right;
 }
 
-a.navbar-brand.logo_name {
-    width: 200px;
-    height: 75px;
-    padding: 0px 15px 0px 15px !important;
-}
-li.nav-item.active  a.nav-link.home_list{
-    text-decoration: none;
-    background-color: #418ec5;
-    border-radius: 8px;
-    color: white !important;
-}
-
-
-
-
-
-
-/*nav.navbar.navbar-inverse.background {
-    background-color: #fff;
-    border-color: #ffffff;
-    border-radius: unset;
-  margin-bottom: 0;
-}
-.navbar-inverse .navbar-nav>li{
-    margin-left: 10px;
-}
-  a.nav-link.home_list {
-      color: #000000 !important;
-    font-size: 16px;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  padding: 10px;
-}
-.navbar-inverse.background .navbar-toggle {
-    border-color: #333;
-    background: #000000;
-}
 img {
     width: 100%;
     height: 100%;
 }
-a.navbar-brand.logo_name {
-    width: 200px;
-    height: 70px;
-    padding: 0 !important;
-  margin-left: 10px !important;
+  a.navbar-brand.logo_name {
+    height: 65px;
+    width: 150px;
+    padding: 0;
 }
-  ul.nav.navbar-nav.navbar-right.nav_menu {
+
+
+ nav.navbar.navbar-inverse.background {
+    background-color: #fff;
+    border-color: #ffffff;
+    border-radius: unset;
+}
+	a.nav-link.home_list {
+      color: #8c918f !important;
+    font-size: 16px;
+	text-align: center;
+    margin-left: 10px;
+	 font-weight: 700;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    border-bottom: 2px solid white;
+    line-height: 5px;
+}
+
+ ul.nav.navbar-nav.navbar-right.nav_menu {
     padding-top: 15px;
 }
 a.nav-link.home_list.active {
     color: #69ace0 !important;
     font-weight: 700;
+	border-bottom: 2px solid #69ace0;
 }
 a.nav-link.home_list:hover {
-      color: #ffffff!important;
+      font-weight: 700;
+	  color: #69ace0 !important;
+	  border-bottom: 2px solid #69ace0;
 }
 a.nav-link.home_list.active:hover {
-    color: #ffffff !important;
+     color: #69ace0 !important;
 }
-.navbar-inverse .navbar-nav>li:hover {
-    margin-left: 10px;
-    background: #69ace0;
-    border-radius: 30px;
+
+.navbar-nav>li {
+    text-align: center;
+    margin-left: 10px;  
 }
-*/
-
-
-
-
-
-
 
 
   </style>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-md p-0 background">
-  <a class="navbar-brand logo_name" href="{% url 'index' %}"><img src="/static/image/datasport-logo.jpg"></a>
+{%if user.is_authenticated%}
+<nav class="navbar navbar-expand-md p-0">
+<div class="container">
+ <div class="logo_section">
+		 <a class="navbar-brand logo_name" href=""><img src="/static/image/datasport-logo.jpg"></a>
+	  </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse navigtion" id="collapsibleNavbar">
-    <ul class="navbar-nav p-3">
-      {% if user.is_authenticated %}
-      <li class="nav-item mr-5 active">
-        <a class="nav-link home_list" href="/">Home</a>
-      </li>
-      {%else%}
+  <div class="collapse navbar-collapse navigation_menu" id="collapsibleNavbar">
+    <ul class="navbar-nav navbar-menu">
       <li class="nav-item">
-        <a class="nav-link home_list" href="/">Home</a>
+        <a class="nav-link home_list active" href={% url 'index' %}>Home</a>
       </li>
+      
       <li class="nav-item">
-        <a class="nav-link home_list" href="/login">Login</a>
+        <a class="nav-link home_list" href={% url 'buildmodel' %}>Build Model</a>
+      </li> 
+      <li class="nav-item">
+        <a class="nav-link home_list" href="#">My Models</a>
+      </li> 
+      <li class="nav-item">
+        <a class="nav-link home_list" href={%url 'update' %}>Settings</a>
+      </li> 
+      <li class="nav-item">
+        <a class="nav-link home_list" href={% url 'logout'%}>Logout</a>
       </li>  
-      {%endif%}  
     </ul>
   </div>  
-</nav> 
-
-<!-- <nav class="navbar navbar-inverse background">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-    <div class="logo_section">
-     <a class="navbar-brand logo_name" href="{% url 'index' %}"><img src="/static/image/datasport-logo.jpg"></a>
-    </div>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right nav_menu ">
-    <li class="nav-item">
-        <a class="nav-link home_list active" href="{% url 'index' %}">Home</a>
-      </li>
-      </ul>
-    </div>
   </div>
-</nav> -->
+</nav>
+<br>
+{%else%}
 
-
-
-
+<nav class="navbar navbar-expand-md p-0">
+  <div class="container">
+   <div class="logo_section">
+       <a class="navbar-brand logo_name" href={% url 'index'%}><img src="/static/image/datasport-logo.jpg"></a>
+      </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse navigation_menu" id="collapsibleNavbar">
+      <ul class="navbar-nav navbar-menu">
+        <li class="nav-item">
+          <a class="nav-link home_list active" href={% url 'index'%}>Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link home_list" href={% url 'signup'%}>Signup/Login</a>
+        </li>  
+       
+    
+        
+      </ul>
+    </div>  
+    </div>
+  </nav>
+  <br>
+{%endif%}
+<div class="container">
+  <div id="tsparticles"></div>
+<!-- partial -->
+  <script src='https://cdn.jsdelivr.net/npm/tsparticles@1.37.4/tsparticles.min.js'></script><script  src="./script.js"></script>
+</div>
 
 </body>
 </html>
