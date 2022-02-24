@@ -37,8 +37,8 @@ class StripeCheckoutAPIView(TemplateView):
             print("plan",plan_price)
             stripe.api_key = settings.SECTRET_KEY
             checkout_session=stripe.checkout.Session.create(
-                success_url="http://3.92.217.18:8000//stripe-checkout/success/?success=true&session_id={CHECKOUT_SESSION_ID}",
-                cancel_url="http://3.92.217.18:8000//stripe-checkout/cancel/?cancel=true",
+                success_url="http://3.92.217.18:8000/stripe-checkout/success/?success=true&session_id={CHECKOUT_SESSION_ID}",
+                cancel_url="http://3.92.217.18:8000/stripe-checkout/cancel/?cancel=true",
                 payment_method_types=["card"],
                 client_reference_id = self.request.user.id,
                 #metadata = {'user_id':45, 'email':"customer@gmail.com"},
