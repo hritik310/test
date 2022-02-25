@@ -138,7 +138,7 @@ class AddCreateForm(ModelForm):
           )
     
           ph_num=str(phone_number)
-          print(ph_num)
+          print(ph_num)#dflklg
           if len(ph_num)>15 or len(ph_num)<10:
             print("dfs")
             self.add_error("phone_number", forms.ValidationError("Phone number must be of 10 digit")
