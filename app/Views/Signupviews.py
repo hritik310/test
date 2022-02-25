@@ -44,7 +44,8 @@ def create(request):
             print(name)
             unique_id = get_random_string(length=5)
             uniqueName=name + unique_id
-            accountform.username=uniqueName    
+            accountform.username=uniqueName
+            print("accountform",accountform.username)    
             new_user = accountform.save(commit=False)
             new_user.is_active = False
             new_user.save()
@@ -76,7 +77,7 @@ def create(request):
             a=accountform.save()
             print(a.id)
             email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
+            return render(request,"signup/register.html")
 
         else:
             print("False")
@@ -103,7 +104,7 @@ def activate(request, uidb64, token):
         users.is_active = user.objects.filter(id=uid).update(is_active=True)
         login(request, users)
         messages.success(request,"Successfully Registered")
-        return redirect('/signup')
+        return redirect('/home')
         # return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')

@@ -22,6 +22,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   
   
+
+
+  
   
   <style>
   
@@ -242,7 +245,9 @@ h3.Data_sports {
   <div class="row half-Semi-Circle">
     <div class="col-md-4">
       <div class="moon_box">
-      <button type="button" class="btn btn-primary center_btn">Build Model</button>
+        <a href="{% url 'buildmodel' %}">
+      <button type="button" class="btn btn-primary center_btn" >Build Model</button>
+        </a>
       </div>
     </div>
     <div class="col-md-4">
@@ -252,7 +257,9 @@ h3.Data_sports {
     </div>
     <div class="col-md-4">
       <div class="moon_box">
+        <a href="{% url 'update' %}">
       <button type="button" class="btn btn-primary center_btn">Settings</button>
+        </a>
       </div>
     </div>
   </div>

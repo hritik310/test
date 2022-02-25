@@ -151,6 +151,7 @@ span.psw {
     margin-top: 30px;
     margin-left: 2rem;
     border-radius: 5px;
+    margin-bottom: 3rem;
 }
 
  @media screen and (max-width: 767px) {
@@ -253,12 +254,21 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 				<div class="row">
 					<div class="col-md-12 text-right">
 					  <span class="psw mb-4">Forgot <a href="#">password?</a></span>
-					</div>
-					<div class="col-md-12 text-center">
+					</div> 
+                    {% if messages%}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <div class="container-fluid p-0">
+                          <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                        <center>{{ message }}</center> 
+                        {% endfor %}
+                    </ul>
+                    {% endif %} 
+                    		<div class="col-md-12 text-center">
 						<button type="submit" class="btn btn-primary Sign_Up">Login</button>
 					</div>
 				</div>
-
+               
 			  </form>
 			</div>
 		</div>
@@ -267,7 +277,7 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 	         	<div class="sign_up_form">
 
 	            <h2 class="text-center mb-3">Sign Up</h2>
-	            <form  action = "" method="POST" novalidate>
+	            <form  action = "{% url 'signup' %}" method="POST" novalidate>
 	               {% csrf_token %}
 				
 	        
@@ -348,7 +358,7 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
                                 </div>
 			             	</div>
 			                <div class="col-md-6">
-						        <div class="item form-group {% if form.title.errors %} has-error  {% endif %}"> 
+						         {% comment %}<div class="item form-group {% if form.title.errors %} has-error  {% endif %}"> 
                                     <label for="Name">Title</label>
                                     {{form.title}}
                                     {% if form.title.errors %}
@@ -360,15 +370,9 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
                                     {% endif %}
             
                                  
-                                  </div>
-					        </div>
-			         	 </div>
+                                  </div>{% endcomment %}
 
-
-
-			         	 <div class="row">
-	                  		<div class="col-md-6">
-				                <div class="item form-group {% if form.date_of_birth.errors %} has-error  {% endif %}"> 
+                                  <div class="item form-group {% if form.date_of_birth.errors %} has-error  {% endif %}"> 
 				                    <label for="pwd">Date of Birth</label>
 				                    {{form.date_of_birth}}
 		                            {% if form.date_of_birth.errors %}
@@ -379,8 +383,29 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 			                        {% endfor %}
 			                        {% endif %}
 				                </div>
+
+					        </div> 
+			         	 </div>
+
+
+
+			         	 <div class="row">
+	                  		<div class="col-md-6">
+				                <div class="item form-group {% if form.phone_number.errors %} has-error  {% endif %}"> 
+				                    <label for="pwd">Phone number</label>
+				                    {{form.phone_number}}
+		                            {% if form.phone_number.errors %}
+		                            {% for error in form.phone_number.errors %}
+		                            <span class="error text-danger">
+		                                <strong>{{ error|escape }}</strong>
+		                            </span>
+			                        {% endfor %}
+			                        {% endif %}
+
+				                     
+				                 </div>
 			             	</div>
-			                <div class="col-md-6">
+			                {% comment %} <div class="col-md-6">
 						        <div class="item form-group {% if form.phone_number.errors %} has-error  {% endif %}"> 
 				                    <label for="pwd">Phone number</label>
 				                    {{form.phone_number}}
@@ -394,11 +419,54 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 
 				                     
 				                 </div>
-					        </div>
+					        </div> {% endcomment %}
 			         	 </div>
 
+                          <div class="col-md-12 p-0">
+                              <div class="row">
+                              <div class="col-md-5">
+                                <div class="item form-group {% if form.terms_and_conditions.errors %} has-error  {% endif %}"> 
+                                    <label for="pwd">Terms and Conditions</label>
+                                </div>
+                              </div>
 
+                              <div class="col-md-6">
+                                <div class="item form-group {% if form.terms_and_conditions.errors %} has-error  {% endif %}"> 
+                                    {{form.terms_and_conditions}}
+                                    {% if form.terms_and_conditions.errors %}
+                                    {% for error in form.terms_and_conditions.errors %}
+                                    <span class="error text-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </span>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                            {% comment %} <div class="item form-group {% if form.terms_and_conditions.errors %} has-error  {% endif %}"> 
+                                <label for="pwd">Terms and Conditions</label>
+                                {{form.terms_and_conditions}}
+                                {% if form.terms_and_conditions.errors %}
+                                {% for error in form.terms_and_conditions.errors %}
+                                <span class="error text-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </span>
+                                {% endfor %}
+                                {% endif %}
 
+                                 
+                             </div> {% endcomment %}
+                        </div>
+                    
+
+                          {% comment %} <div class="col-md-6">
+                            <label for="{{ form.terms_and_conditions.id_for_label }}">terms_and_conditions</label>
+                            {{ form.terms_and_conditions }}
+                            {{ form.terms_and_conditions.errors }}
+                                 
+                             </div>
+                        </div>
+                      </div> {% endcomment %}
 
 	                  {% comment %} <div class="item form-group {% if form.title.errors %} has-error  {% endif %}"> 
 	                    <label for="Name">Title</label>
@@ -414,7 +482,7 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 	                 
 	                  </div> {% endcomment %}
 	          
-	                  <div class="item form-group {% if form.address.errors %} has-error  {% endif %}">
+	                  {% comment %} <div class="item form-group {% if form.address.errors %} has-error  {% endif %}">
 	                    <label for="street">Street Address</label>
 	                    {{form.address}}
                         {% if form.address.errors %}
@@ -426,8 +494,8 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
                         {% endif %}
 
 	                     
-	                  </div>
-	                  <div class="item form-group {% if form.zip.errors %} has-error  {% endif %}"> 
+	                  </div> {% endcomment %}
+	                  {% comment %} <div class="item form-group {% if form.zip.errors %} has-error  {% endif %}"> 
 	                    <label for="pwd">Zip</label>
 	                    {{form.zip}}
                         {% if form.zip.errors %}
@@ -438,7 +506,7 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
                         {% endfor %}
                         {% endif %}
 	                   
-	                  </div>
+	                  </div> {% endcomment %}
 	                  
 	                  <div class="row">
 	                    <div class="col-md-12 text-center">	

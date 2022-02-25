@@ -66,6 +66,148 @@ i.user_lock_icon {
     margin-right: 20px;
     font-size: 30px;
 }
+
+
+{% comment %} sign_up page {% endcomment %}
+
+
+
+.container-fluid.py-4.px-5 {
+  padding: 30px 40px;
+}
+.sign_up_form {
+  padding: 20px;
+}
+
+/*login_page*/
+
+.form_background_section {
+  background: #bdbdbd;
+}
+.container.outer_background {
+  background-image: linear-gradient(to right, #01bde1 , #fd27f9);
+}
+input[type=text], input[type=password], input[type=number], input[type=date], input[type=email]{
+  width: 100%;
+  padding: 6px 16px;
+  margin: 0px 0 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.sign_up_form .form-group label {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.form_background .form-group {
+  margin-bottom: 0px !important;
+}
+button.btn.btn-primary.Sign_Up {
+  width: 100px;
+  border-radius: 8px;
+  border: 2px solid #ffffff;
+  background-image: linear-gradient(to right, #01bde1 , #fd27f9);
+background: #e62511;
+  border: #e62511;
+  font-size: 18px;
+  padding: 10px;
+  color: #fff;
+  background-color: #418ec5;
+  border-color: #418ec5;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+button.btn.btn-primary.Sign_Up:hover {
+  color: #fff;
+  background-color: #1c70ad;
+  border-color: #1c70ad;
+}
+span.psw {
+float: right;
+}
+
+.form_background {
+  background: #ffffff;
+  width: 95%;
+  margin: 0 auto;
+  padding: 30px;
+  margin-top: 30px;
+  margin-left: 2rem;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 767px) {
+span.psw {
+   display: block;
+   float: none;
+}
+.form_background {
+  background: #ffffff;
+  width: 100%;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 5px;
+}
+}
+
+i.user_lock_icon {
+  margin-right: 20px;
+  font-size: 30px;
+}
+
+button.btn-xl.btn-primary.btn-wrap-text {
+  color: #fff;
+  background-color:#418ec5;
+  border: #1c70ad;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  width: 100px;
+}
+
+button.btn-xl.btn-primary.btn-wrap-text:hover {
+  color: #fff;
+  background-color:#1c70ad;
+  border: #1c70ad;
+}
+.container-fluid.background_section {
+  background:#eae9ea;
+}
+.form_background_section {
+  background: #bdbdbd;
+  background-image: linear-gradient(to bottom right, #a7d0ed, #418ec5);
+  border-radius: 10px;
+}
+.sign_up_form .form-group {
+  margin: 0px !important;
+}
+.sign_up_form {
+  padding: 20px;
+  border: 2px solid white;
+  margin: 30px 35px 30px 0px;
+  background: white;
+  /* opacity: 0.80; */
+  border-radius: 5px;
+}
+.form_background_section_image {
+  width: 25%;
+  margin: 0 auto;
+  /* background: white; */
+/*  padding-top: 30px;*/
+}
+
+.form_background .form-group label {
+  font-weight: 600;
+}
+
+{% comment %} sign_up page end {% endcomment %}
+
+
+
+
 </style>
 </head>
 <body>
@@ -107,14 +249,14 @@ i.user_lock_icon {
             <input type="submit" name="commit" value="login" class="btn-xl btn-primary btn-wrap-text" data-disable-with="login" />   
         </div>
 	</div>
-  {% comment %} {%if messages == error%}
+  {%if messages == error%}
   {% for i in messages%}
       <div class="alert alert-error">
         <a class="close" href="#" data-dismiss="alert"></a>
         {{message}}
       </div>
       {% endfor %} {% endif %}
-      <div>  {% endcomment %}
+      <div>
 
   </form>
 </div>

@@ -35,7 +35,7 @@ def user_login(request):
 
         else:
           messages.error(request,"Invalid Credential")
-          return redirect('/login')
+          return redirect('/signup')
               
     return render(request,"signup/signup.html")
 

@@ -75,6 +75,7 @@ a.nav-link.home_list.active:hover {
 
 .container-fluid.canvas_section {
     padding: 0 !important;
+    height: 288px  !important;
 }
 
 
@@ -102,11 +103,10 @@ h3.Data_sports {
 
 
 .container-fluid.video_sec {
-    position: relative;
-    top: 18rem;
+   
 }
 .source_video_back {
-    background-image: url(image/image_demo.jpg);
+    background-image: url(/static/image/image_demo.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0px 25px;
@@ -147,8 +147,7 @@ button#myBtn {
     /*height: 380px;*/
     background: #69ace0;
     background-image: linear-gradient(to right, #70b2df , #0069b0);
-	position: relative;
-    top: 18rem;
+	
 }
 .background-banner h3 {
         font-size: 28px;
@@ -181,8 +180,83 @@ span.pries {
     font-size: 16px;
 }
 
+
 /*member_section section css end */
 
+
+
+/*contact_form_section section css start */
+
+
+.this_contant.text-center {
+  padding: 30px 0;
+   font-size: 18px;
+}
+
+.Form_section {
+   width: 100%;
+   margin: 0 auto;
+  background: white; 
+   padding: 30px;
+   box-shadow: 0px 0px 14px 0px #a7a7a7;
+   border-radius: 5px;
+}
+
+.text_box_contant {
+   background: #e7e7e7;
+   box-shadow: 1px 0px 17px 0px lightgrey;
+   width: 100%;
+   height: 200px;
+   border-radius: 10px 10px 0px 0px;
+}
+
+p.Per_month strong {
+   font-size: 32px;
+}
+
+h3.Membership {
+   font-weight: 700;
+   font-size: 26px;
+   background: #418ec5;
+   padding: 15px;
+   color: white;
+   border-radius: 10px 10px 0px 0px;
+}
+.row.form_back {
+  /* background-image: url(/static/image/coding-img.jpg); */
+  padding: 0px !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  margin: 25px;
+  border-radius: 5px;
+}
+.col-md-6.pad_right {
+   padding-left: 0 !important;
+}
+.col-md-6.pad_left {
+  padding-right: 0px !important;
+}
+.sidebar_img img {
+  border-radius: 5px 0 0 5px;
+}
+
+.sidebar_img {
+  height: 100%;
+  box-shadow: 0px 0px 14px 0px #a7a7a7;
+  border-radius: 5px;
+}
+
+.btn-primary.btn_submit {
+  color: #fff;
+  background-color: #418ec5;
+  border-color: #418ec5;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+/*contact_form_section section css end */
 
   </style>
 </head>
@@ -203,8 +277,8 @@ span.pries {
         <a class="nav-link home_list active" href="{% url 'index' %}">Home</a>
       </li>
       
-      <li class="nav-item">
-        <a class="nav-link home_list" href="{% url 'buildmodel' %}">Build Model</a>
+      <li class="nav-item" {% if request.resolver_match.url_name == 'buildmodel' %}class="active"{% endif %}>
+        <a class="nav-link home_list " href="{% url 'buildmodel' %}">Build Model</a>
       </li> 
       <li class="nav-item">
         <a class="nav-link home_list" href="#">My Models</a>
@@ -291,11 +365,11 @@ span.pries {
 	 <p class="Membership_monthly"><span>Membership $25 per month</span></p>
 	 
 	  <p class="Membership_monthly">
-	  includes<br>
-	  Access to text as many models as you want<br>
-	  Save ten models per week<br>
-	  Ability to sell picks to other members<br>
-	  Access to the leaderboard
+      Includes<br>
+      Access to build as many models as you want<br>
+      Save ten models per week<br>
+      Ability to sell picks to other members<br>
+      Access to daily/weekly leaderboard
 	  </p>
 	  <div>
 			<a href="{% url 'stripe_checkout' %}">
@@ -306,6 +380,43 @@ span.pries {
 	 </div>
 
   </div>
+</div>
+
+
+
+<div class="row form_back">
+  <div class="col-md-6 pad_left">
+  <div class="sidebar_img">
+      <img src="/static/image/coding-img.jpg"></a>
+  </div>
+  </div>
+  <div class="col-md-6 pad_right">                
+  <div class="Form_section">
+  
+  <form action="" method="POST">
+  <div class="form-group">
+    <label for="usr">Name:</label>
+    <input type="text" class="form-control" id="usr">
+  </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+      </div>
+   
+      <div class="form-group">
+        <label for="comment">Comment:</label>
+        <textarea class="form-control" rows="5" id="comment"></textarea>
+      </div>
+      
+      <button type="submit" class="btn btn-primary btn_submit">Submit</button>
+    </form>
+  </div>
+</div>
+</div>
 </div>
 
 
@@ -413,6 +524,12 @@ tsParticles.load("tsparticles", {
   retina_detect: true
 });
 
+$(document).ready(function(){
+  $('ul li a').click(function(){
+    $('li a').removeClass("active");
+    $(this).addClass("active");
+});
+});
 
 </script>
 

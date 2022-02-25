@@ -18,7 +18,7 @@ urlpatterns = [
     path('sport',Loginviews.setting,name = 'sport'),
     path('update',Loginviews.update, name ='update'),
     path('buildmodel', Signupviews.buildmodel, name ='buildmodel'),
-
+    path('register',Signupviews.create,name="register"),
 
     
 #payment urls
