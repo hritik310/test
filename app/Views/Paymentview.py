@@ -72,6 +72,7 @@ class SuccessPayment(TemplateView):
     q=StripeCustomer() 
     q.stripeCustomerId=self.request.user.id
     q.stripeSubscriptionId=b
+    q.membershipstatus = 1
     q.save()
 
     context = {}
