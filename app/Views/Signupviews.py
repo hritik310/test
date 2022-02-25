@@ -103,7 +103,7 @@ def activate(request, uidb64, token):
     if users is not None and account_activation_token.check_token(users, token):
         users.is_active = user.objects.filter(id=uid).update(is_active=True)
         login(request, users)
-        messages.success(request,"Successfully Registered")
+        # messages.success(request,"Successfully Registered")
         return redirect('/')
         # return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
