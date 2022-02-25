@@ -34,7 +34,7 @@ def user_login(request):
           return redirect('sport')
 
         else:
-          messages.error(request,"Invalid Credential")
+          
           return redirect('/signup')
               
     return render(request,"signup/signup.html")
@@ -50,7 +50,14 @@ def setting(request):
   return render(request,"login/setting.html")
 
 def update(request):
-  return render (request,"login/update.html")
+  a=StripeCustomer.objects.filter(stripeCustomerId=request.user.id)
+  show=a.values_list('membershipstatus',flat="true")
+  
+  if StripeCustomer.objects.filter(stripeCustomerId=request.user.id).exists():
+      owner_id=show[0]
+  else:
+    owner_id=0   
+  return render (request,"login/update.html",{'show':owner_id})
 
 
 

@@ -66,10 +66,12 @@ button.btn.btn-success.update_profile {
             <div>
                 <ul>
 			<li>
+        {%if show == 1 %}
 				<a href="/stripe-checkout/cancel">
                     <button type="button" class="btn btn-primary cancel_subscription">Cancel Subscription</button>
                 </a>
 			</li>
+        {%endif%}
             </ul>
         </div>
         <div class="btn_sec">

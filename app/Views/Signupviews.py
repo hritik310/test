@@ -77,7 +77,9 @@ def create(request):
             a=accountform.save()
             print(a.id)
             email.send()
-            return render(request,"signup/register.html")
+            messages.success(request,"Thanks for registering with us.Please confirm your email address to complete the registration.")
+            return redirect('/signup')
+              
 
         else:
             print("False")

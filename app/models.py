@@ -47,7 +47,7 @@ class StripeCustomer(models.Model):
     #users = models.OneToOneField(to=user, on_delete=models.CASCADE)
     stripeCustomerId = models.CharField(max_length=300,null=True)
     stripeSubscriptionId = models.CharField(max_length=255,null=True)
-    
+    membershipstatus = models.IntegerField(null=True)
 
     def __str__(self):
         return self.user.username

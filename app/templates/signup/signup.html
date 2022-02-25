@@ -219,6 +219,21 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 }
 
 
+
+
+.alert.alert-success.alert-dismissible {
+    margin-top: 20px;
+    margin-right: 45px;
+    display: flex;
+    font-size: 12px;
+}
+.image_check {
+    width: 40px;
+    height: 30px;
+    padding: 4px;
+} 
+
+
       </style>
    </head>
    <body>
@@ -255,15 +270,15 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 					<div class="col-md-12 text-right">
 					  <span class="psw mb-4">Forgot <a href="#">password?</a></span>
 					</div> 
-                    {% if messages%}
+                     {% comment %} {% if messages%}
                     <ul class="messages">
                         {% for message in messages %}
                         <div class="container-fluid p-0">
                           <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
                         <center>{{ message }}</center> 
                         {% endfor %}
-                    </ul>
-                    {% endif %} 
+                    </ul> 
+                    {% endif %}  {% endcomment %}
                     		<div class="col-md-12 text-center">
 						<button type="submit" class="btn btn-primary Sign_Up">Login</button>
 					</div>
@@ -347,7 +362,7 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 				                <div class="item form-group {% if form.password.errors %} has-error  {% endif %}"> 
                                     <label for="pwd">Password</label>
                                     {{form.password}}
-                                    {% if form.password.errors %}
+                                              {% if form.password.errors %}
                                     {% for error in form.password.errors %}
                                     <span class="error text-danger">
                                         <strong>{{ error|escape }}</strong>
@@ -512,7 +527,22 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 	                    <div class="col-md-12 text-center">	
 	                        <button type="submit" name="commit" value="" class="btn-xl btn-primary btn-wrap-text" />Submit</button>
 	                    </div>
+                    {% if messages%}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <div class="container-fluid p-0">
+                            <div class="row">
+                                {% comment %} <div class="col-sm-2">
+                            <div class="image_check"><img src="/static/image/check.jpg"></div></div> {% endcomment %}
+                            <div class="col-sm-12"><div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                                <div class="image_check"><img src="/static/image/check.jpg"></div>
+                                <center>{{ message }}</center> 
+                        {% endfor %}
+                    </ul> 
+                      {%endif%}
 	                  </div>
+                    </div>
+                    </div>
 					</div>
 	           	 </form>
 	         </div>
