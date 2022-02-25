@@ -25,10 +25,15 @@ img {
     width: 100%;
     height: 100%;
 }
-  a.navbar-brand.logo_name {
-    height: 65px;
-    width: 150px;
-    padding: 0;
+/* a.navbar-brand.logo_name {
+  height: 65px;
+  width: 150px;
+  padding: 0;
+} */
+a.navbar-brand.logo_name {
+  height: 100px;
+  width: 170px;
+  padding: 0;
 }
 
 
@@ -263,10 +268,10 @@ h3.Membership {
 <body>
 {%if user.is_authenticated %}
 
-<nav class="navbar navbar-expand-md p-0">
+<nav class="navbar navbar-expand-md">
 <div class="container">
  <div class="logo_section">
-		 <a class="navbar-brand logo_name" href="{% url 'index' %}"><img src="/static/image/datasport-logo.jpg"></a>
+		 <a class="navbar-brand logo_name" href="{% url 'index' %}"><img src="/static/image/logo-1.jpg"></a>
 	  </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -296,13 +301,13 @@ h3.Membership {
   </div>  
   </div>
 </nav>
-<br>
+
 
 {%else%}
-<nav class="navbar navbar-expand-md p-0">
+<nav class="navbar navbar-expand-md">
   <div class="container">
    <div class="logo_section">
-       <a class="navbar-brand logo_name" href="{% url 'index'%}"><img src="/static/image/datasport-logo.jpg"></a>
+       <a class="navbar-brand logo_name" href="{% url 'index'%}"><img src="/static/image/logo-1.jpg"></a>
       </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -342,14 +347,16 @@ h3.Membership {
 
 <div class="container-fluid video_sec">
 	<div class="source_video_back">
-		<div class="source_video">
-			<video autoplay muted loop id="myVideo">
-			  <source src="/static/image/mov_bbb.mp4" type="video/mp4">
-			  Your browser does not support HTML5 video.
-			</video>
-			<button id="myBtn" onclick="myFunction()">Pause</button>
-		</div>
-	</div>
+    <div class="source_video">
+      <!-- <video autoplay muted loop id="myVideo">
+      <source src="/static/image/mov_bbb.mp4" type="video/mp4"> 
+        Your browser does not support HTML5 video.
+      </video> -->
+
+      <iframe width="100%" height="409" src="https://www.youtube.com/embed/os-0AjRB_hc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <!-- <button id="myBtn" onclick="myFunction()">Pause</button> -->
+    </div>
+  </div>
 </div>
 
 

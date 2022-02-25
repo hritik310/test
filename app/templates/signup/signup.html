@@ -423,7 +423,7 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 			         	 </div>
 
                           <div class="col-md-12 p-0">
-                              <div class="row">
+                              {% comment %} <div class="row">
                               <div class="col-md-5">
                                 <div class="item form-group {% if form.terms_and_conditions.errors %} has-error  {% endif %}"> 
                                     <label for="pwd">Terms and Conditions</label>
@@ -442,8 +442,8 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
                                     {% endif %}
                                 </div>
                             </div>
-                        </div>
-                            {% comment %} <div class="item form-group {% if form.terms_and_conditions.errors %} has-error  {% endif %}"> 
+                        </div> {% endcomment %}
+                            <div class="item form-group {% if form.terms_and_conditions.errors %} has-error  {% endif %}"> 
                                 <label for="pwd">Terms and Conditions</label>
                                 {{form.terms_and_conditions}}
                                 {% if form.terms_and_conditions.errors %}
@@ -455,7 +455,7 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
                                 {% endif %}
 
                                  
-                             </div> {% endcomment %}
+                             </div>
                         </div>
                     
 

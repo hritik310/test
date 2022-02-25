@@ -104,7 +104,7 @@ def activate(request, uidb64, token):
         users.is_active = user.objects.filter(id=uid).update(is_active=True)
         login(request, users)
         messages.success(request,"Successfully Registered")
-        return redirect('/home')
+        return redirect('/')
         # return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
