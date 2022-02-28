@@ -89,35 +89,36 @@ a.nav-link.home_list.active:hover {
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse navigation_menu" id="collapsibleNavbar">
-    {% with url_name=request.resolver_match.url_name %}
+    {% load active_link_tags %}
     <ul class="navbar-nav navbar-menu" id="MainMenu">
-      <li class="nav-item" >
-        <a class="nav-link home_list" href="{% url 'index' %}">Home</a>
+      <li class="nav-item">
+        <a class="nav-link home_list  {% active_link 'index' 'active' %}" href="{% url 'index' %}">Home</a>
       </li>
       
       <li class="nav-item">
-        <a class="nav-link home_list" href="{% url 'buildmodel' %}">Build Model</a>
+        <a class="nav-link home_list  {% active_link 'buildmodel' 'active' %}" href="{% url 'buildmodel' %}">Build Model</a>
       </li> 
       <li class="nav-item">
         <a class="nav-link home_list" href="#">My Models</a>
       </li> 
-      <li {% if request.resolver_match.setting == 'update' %}class="active"{% endif %}>
-        <a class="nav-link home_list" href="{%url 'update' request.user.id%}">Settings</a>
+      <li class="nav-item">
+        <a class="nav-link home_list  {% active_link 'update'  'active' %}" href="{%url 'update' request.user.id%}">Settings</a>
       </li> 
 
       <li class="nav-item">
-        <a class="nav-link home_list" href="{%url 'sport' %}">Get Started</a>
+        <a class="nav-link home_list  {% active_link 'sport' 'active' %}" href="{%url 'sport' %}">Get Started</a>
       </li> 
       <li class="nav-item">
-        <a class="nav-link home_list" href="{% url 'logout'%}">Logout</a>
+        <a class="nav-link home_list  {% active_link 'logout' 'active' %}" href="{% url 'logout'%}">Logout</a>
       </li>  
     </ul>
   </div>  
   </div>
 </nav>
-{%endwith%}
+
 
 {%else%}
+{% load active_link_tags %}
 
 <nav class="navbar navbar-expand-md">
   <div class="container">
@@ -130,12 +131,12 @@ a.nav-link.home_list.active:hover {
     <div class="collapse navbar-collapse navigation_menu" id="collapsibleNavbar">
       <ul class="navbar-nav navbar-menu" id="MainMenu">
         <li class="nav-item">
-          <a class="nav-link home_list active " href="{% url 'index'%}">Home</a>
+          <a class="nav-link home_list  {% active_link 'index' 'active' %}" href="{% url 'index'%}">Home</a>
+          
         </li>
-        <li class="nav-item">
-          <a class="nav-link home_list" href="{% url 'signup'%}">Signup/Login</a>
+        <li class="nav-item ">
+          <a class="nav-link home_list  {% active_link 'signup' 'active' %}" href="{% url 'signup'%}">Signup/Login</a>
         </li>  
-       
     
         
       </ul>

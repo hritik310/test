@@ -304,6 +304,7 @@ h3.Membership {
 
 
 {%else%}
+{% load active_link_tags %}
 <nav class="navbar navbar-expand-md">
   <div class="container">
    <div class="logo_section">
@@ -314,10 +315,10 @@ h3.Membership {
     </button>
     <div class="collapse navbar-collapse navigation_menu" id="collapsibleNavbar">
       <ul class="navbar-nav navbar-menu">
-        <li class="nav-item">
+        <li class="nav-item {% active_link 'index' 'active' %} ">
           <a class="nav-link home_list active" href="{% url 'index'%}">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item {% active_link 'signup' 'active' %}">
           <a class="nav-link home_list" href="{% url 'signup'%}">Signup/Login</a>
         </li>  
        
@@ -401,6 +402,7 @@ h3.Membership {
   <div class="Form_section">
   
   <form action="" method="POST">
+    {% csrf_token %}
   <div class="form-group">
     <label for="usr">Name:</label>
     <input type="text" class="form-control" id="usr">
@@ -419,14 +421,29 @@ h3.Membership {
         <textarea class="form-control" rows="5" id="comment"></textarea>
       </div>
       
-      <button type="submit" class="btn btn-primary btn_submit">Submit</button>
+      <button type="submit" name="commit" value="" class="btn-xl btn-primary btn-wrap-text" />Submit</button>
+       
     </form>
-  </div>
+    {% if messages%}
+      <ul class="messages">
+          {% for message in messages %}
+          <div class="container-fluid p-0">
+              <div class="row">
+                  {% comment %} <div class="col-sm-2">
+              <div class="image_check"><img src="/static/image/check.jpg"></div></div> {% endcomment %}
+              <div class="col-sm-12"><div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                
+                  <center>{{ message }}</center> 
+          {% endfor %}
+          {%endif%}    
+      </div>
+    </ul>
+
 </div>
 </div>
 </div>
 
-
+{%include "header/footer.html"%}
 
 
 <script src='https://cdn.jsdelivr.net/npm/tsparticles@1.37.4/tsparticles.min.js'></script><script  src="./script.js"></script>
@@ -547,4 +564,4 @@ $(document).ready(function(){
 </body>
 
 </html>
-{%include "header/footer.html"%}
+{% comment %} {%include "header/footer.html"%} {% endcomment %}

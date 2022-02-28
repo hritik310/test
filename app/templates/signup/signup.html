@@ -233,7 +233,9 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
     padding: 4px;
 } 
 
-
+span.error.text-danger {
+    font-size: 12px;
+}
       </style>
    </head>
    <body>
@@ -270,15 +272,20 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 					<div class="col-md-12 text-right">
 					  <span class="psw mb-4">Forgot <a href="#">password?</a></span>
 					</div> 
-                     {% comment %} {% if messages%}
+                     {% if messages%}
                     <ul class="messages">
                         {% for message in messages %}
                         <div class="container-fluid p-0">
+                            {%if "login" in message.tags%}
                           <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-                        <center>{{ message }}</center> 
+                          
+                            <center>{{ message }}</center> 
+                        {%endif%}  
                         {% endfor %}
+                       
                     </ul> 
-                    {% endif %}  {% endcomment %}
+                    {% endif %}  
+                    
                     		<div class="col-md-12 text-center">
 						<button type="submit" class="btn btn-primary Sign_Up">Login</button>
 					</div>
@@ -405,13 +412,13 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 
 
 			         	 <div class="row">
-	                  		<div class="col-md-6">
+	                  		<div class="col-md-12">
 				                <div class="item form-group {% if form.phone_number.errors %} has-error  {% endif %}"> 
 				                    <label for="pwd">Phone number</label>
 				                    {{form.phone_number}}
 		                            {% if form.phone_number.errors %}
 		                            {% for error in form.phone_number.errors %}
-		                            <span class="error text-danger">
+		                            <span class="error text-danger full_width">
 		                                <strong>{{ error|escape }}</strong>
 		                            </span>
 			                        {% endfor %}
@@ -435,6 +442,8 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
 				                     
 				                 </div>
 					        </div> {% endcomment %}
+
+
 			         	 </div>
 
                           <div class="col-md-12 p-0">
@@ -534,10 +543,12 @@ button.btn-xl.btn-primary.btn-wrap-text:hover {
                             <div class="row">
                                 {% comment %} <div class="col-sm-2">
                             <div class="image_check"><img src="/static/image/check.jpg"></div></div> {% endcomment %}
+                            {%if "logout" in message.tags%}
                             <div class="col-sm-12"><div class="alert {{ message.tags }} alert-dismissible" role="alert" >
                                 <div class="image_check"><img src="/static/image/check.jpg"></div>
                                 <center>{{ message }}</center> 
-                        {% endfor %}
+                                {%endif%}
+                                {% endfor %}
                     </ul> 
                       {%endif%}
 	                  </div>

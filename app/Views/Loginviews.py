@@ -6,6 +6,10 @@ from django.contrib.auth import authenticate, login,logout
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib import auth
+from django.views.decorators.cache import cache_control
+from django.contrib.auth.decorators import login_required
+from app.helper import *
+
 
 
 
@@ -15,6 +19,7 @@ from django.contrib import auth
 #     template = loader.get_template('app/index.html')
 #     return HttpResponse(template.render(context, request))
 
+@guest_user
 def user_login(request):
     if request.method == "POST":
         uname= request.POST.get('uname')
@@ -34,13 +39,13 @@ def user_login(request):
           return redirect('sport')
 
         else:
-          #messages.error(request,"Invalid Credential",{'error':0})
+          messages.error(request,"Invalid Credential", extra_tags='login')
           return redirect('/signup')
               
     return render(request,"signup/signup.html")
 
 
-
+@login_required
 def userLogout(request):
   auth.logout(request)
   return redirect('/signup')

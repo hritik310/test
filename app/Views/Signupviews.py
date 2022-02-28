@@ -30,6 +30,8 @@ print(stripe.api_key)
 
 def index(request):   
     context = {'user_list':user.objects.all()}
+    if request.method =="POST":
+        messages.success(request,"Your contact detail is saved")
     return render(request,"signup/home.html",context) 
 
 
@@ -77,7 +79,7 @@ def create(request):
             a=accountform.save()
             print(a.id)
             email.send()
-            messages.success(request,"Thanks for registering with us.Please confirm your email address to complete the registration.")
+            messages.success(request,"Thanks for registering with us.Please confirm your email address to complete the registration.",extra_tags='logout')
             return redirect('/signup')
               
 
@@ -129,3 +131,4 @@ def updateprofile(request,id):
 
 def buildmodel(request):
     return render(request,"signup/buildmodel.html")
+
