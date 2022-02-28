@@ -89,9 +89,10 @@ a.nav-link.home_list.active:hover {
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse navigation_menu" id="collapsibleNavbar">
+    {% with url_name=request.resolver_match.url_name %}
     <ul class="navbar-nav navbar-menu" id="MainMenu">
-      <li class="nav-item">
-        <a class="nav-link home_list active" href="{% url 'index' %}">Home</a>
+      <li class="nav-item" >
+        <a class="nav-link home_list" href="{% url 'index' %}">Home</a>
       </li>
       
       <li class="nav-item">
@@ -100,8 +101,8 @@ a.nav-link.home_list.active:hover {
       <li class="nav-item">
         <a class="nav-link home_list" href="#">My Models</a>
       </li> 
-      <li class="nav-item">
-        <a class="nav-link home_list" href="{%url 'update' %}">Settings</a>
+      <li {% if request.resolver_match.setting == 'update' %}class="active"{% endif %}>
+        <a class="nav-link home_list" href="{%url 'update' request.user.id%}">Settings</a>
       </li> 
 
       <li class="nav-item">
@@ -114,6 +115,7 @@ a.nav-link.home_list.active:hover {
   </div>  
   </div>
 </nav>
+{%endwith%}
 
 {%else%}
 

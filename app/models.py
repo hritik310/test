@@ -16,7 +16,7 @@ class user(AbstractBaseUser,PermissionsMixin):
     password=models.CharField(max_length=220)
     first_name=models.CharField(max_length=200,null=True)
     last_name=models.CharField(max_length=200,null=True)
-    date_of_birth=models.DateField(null=True)
+    date_of_birth=models.DateField(null=True,blank=True)
     zip=models.IntegerField(max_length=6,null=True)
     address=models.CharField(max_length=200,null=True)
     phone_number=PhoneField(null=True,default=0)

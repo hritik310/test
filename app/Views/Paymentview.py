@@ -15,7 +15,8 @@ from app.models import StripeCustomer
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import get_user_model
 from app.models import StripeCustomer 
-
+from django.contrib import messages
+from django.db.models import Q
 
 class StripeCheckoutAPIView(TemplateView):
   template_name = "payment/checkout.html"
@@ -37,8 +38,8 @@ class StripeCheckoutAPIView(TemplateView):
             print("plan",plan_price)
             stripe.api_key = settings.SECTRET_KEY
             checkout_session=stripe.checkout.Session.create(
-                success_url="http://3.92.217.18:8000/stripe-checkout/success/?success=true&session_id={CHECKOUT_SESSION_ID}",
-                cancel_url="http://3.92.217.18:8000/stripe-checkout/cancel/?cancel=true",
+                success_url="http://127.0.0.1:8000/stripe-checkout/success/?success=true&session_id={CHECKOUT_SESSION_ID}",
+                cancel_url="http://127.0.0.1:8000/stripe-checkout/cancel/?cancel=true",
                 payment_method_types=["card"],
                 client_reference_id = self.request.user.id,
                 #metadata = {'user_id':45, 'email':"customer@gmail.com"},
@@ -88,16 +89,29 @@ class CancelPayment(TemplateView):
 
 import json
 @csrf_exempt
-def cancel_subscription(request):
+def cancel_subscription(request,id):
   c= StripeCustomer.objects.values('stripeSubscriptionId')
   print(c)
   a= stripe.Subscription.list(limit=1)
   current=request.user.id
   b= a.data[0].id
-  # b= StripeCustomer.objects.filter(stripeCustomerId=current).get("stripeSubscriptionId")
+  d= StripeCustomer.objects.filter(stripeCustomerId=current)
+  show=d.values_list('stripeSubscriptionId',flat="true")
+  print(show  )
+  if StripeCustomer.objects.filter(stripeCustomerId=request.user.id).exists():
+      owner_id=show[0]
+  else:
+    owner_id=0   
   # print(b)
-  z=stripe.Subscription.delete(b)
-  return redirect("Your subscription is cancel",)
+
+  z=stripe.Subscription.delete(owner_id)
+  print("z",z)
+
+  a=StripeCustomer.objects.filter(stripeCustomerId=request.user.id).delete()
+  # messages.success(request,"Your Subscription is cancel")
+  return render (request,"payment/subcancel.html")
+
+
    
 
 # @csrf_exempt

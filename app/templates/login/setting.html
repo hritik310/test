@@ -257,7 +257,7 @@ h3.Data_sports {
     </div>
     <div class="col-md-4">
       <div class="moon_box">
-        <a href="{% url 'update' %}">
+        <a href="{% url 'update' request.user.id %}">
       <button type="button" class="btn btn-primary center_btn">Settings</button>
         </a>
       </div>

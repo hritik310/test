@@ -289,7 +289,7 @@ h3.Membership {
         <a class="nav-link home_list" href="#">My Models</a>
       </li> 
       <li class="nav-item">
-        <a class="nav-link home_list" href="{%url 'update' %}">Settings</a>
+        <a class="nav-link home_list" href="{%url 'update' request.user.id%}">Settings</a>
       </li> 
       <li class="nav-item">
         <a class="nav-link home_list" href="{%url 'sport' %}">Get Started</a>

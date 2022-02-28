@@ -34,7 +34,7 @@ def user_login(request):
           return redirect('sport')
 
         else:
-          
+          #messages.error(request,"Invalid Credential",{'error':0})
           return redirect('/signup')
               
     return render(request,"signup/signup.html")
@@ -46,10 +46,12 @@ def userLogout(request):
   return redirect('/signup')
 
 
-def setting(request):
-  return render(request,"login/setting.html")
+def setting(request):  
+    return render(request,"login/setting.html",)
 
-def update(request):
+def update(request,id):
+  custom  = user.objects.get(id=id)
+  print("custom",custom)
   a=StripeCustomer.objects.filter(stripeCustomerId=request.user.id)
   show=a.values_list('membershipstatus',flat="true")
   
@@ -57,7 +59,15 @@ def update(request):
       owner_id=show[0]
   else:
     owner_id=0   
-  return render (request,"login/update.html",{'show':owner_id})
+  if request.method == "POST":
+
+        custom.username = request.POST.get('username')
+        custom.email = request.POST.get('email')
+        custom.phone_number= request.POST.get('phone_number')
+        custom.save()
+        return render(request,"login/update.html")
+  
+  return render (request,"login/update.html",{'show':owner_id,'customer':custom})
 
 
 
