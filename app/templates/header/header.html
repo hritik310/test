@@ -102,9 +102,9 @@ a.nav-link.home_list.active:hover {
         <a class="nav-link home_list" href="#">My Models</a>
       </li> 
       <li class="nav-item">
-        
-        <a class="nav-link home_list  {% active_link "" 'active' %} " href="{%url 'update' request.user.id%}">Settings</a>
-        
+        {% with request.resolver_match.url_name as url_name %}
+        <a class="nav-link home_list  {% if url_name == 'update' %}active{% endif %}" href="{%url 'update' request.user.id%}">Settings</a>
+        {% endwith %}
       </li> 
 
       <li class="nav-item">
