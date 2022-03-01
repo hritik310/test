@@ -92,7 +92,7 @@ a.nav-link.home_list.active:hover {
     {% load active_link_tags %}
     <ul class="navbar-nav navbar-menu" id="MainMenu">
       <li class="nav-item">
-        <a class="nav-link home_list  {% active_link 'index' 'active' %}" href="{% url 'index' %}">Home</a>
+        <a class="nav-link home_list  {% active_link '' 'active' %}" href="{% url 'index' %}">Home</a>
       </li>
       
       <li class="nav-item">
@@ -102,7 +102,9 @@ a.nav-link.home_list.active:hover {
         <a class="nav-link home_list" href="#">My Models</a>
       </li> 
       <li class="nav-item">
-        <a class="nav-link home_list  {% active_link 'update'  'active' %}" href="{%url 'update' request.user.id%}">Settings</a>
+        
+        <a class="nav-link home_list  {% active_link "" 'active' %} " href="{%url 'update' request.user.id%}">Settings</a>
+        
       </li> 
 
       <li class="nav-item">
@@ -131,13 +133,13 @@ a.nav-link.home_list.active:hover {
     <div class="collapse navbar-collapse navigation_menu" id="collapsibleNavbar">
       <ul class="navbar-nav navbar-menu" id="MainMenu">
         <li class="nav-item">
-          <a class="nav-link home_list  {% active_link 'index' 'active' %}" href="{% url 'index'%}">Home</a>
+          <a class="nav-link home_list  {% active_link '' 'active' %}" href="{% url 'index'%}">Home</a>
           
         </li>
         <li class="nav-item ">
           <a class="nav-link home_list  {% active_link 'signup' 'active' %}" href="{% url 'signup'%}">Signup/Login</a>
         </li>  
-    
+        
         
       </ul>
     </div>  

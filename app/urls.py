@@ -24,7 +24,7 @@ urlpatterns = [
 #payment urls
     path('stripe-checkout/', Paymentview.StripeCheckoutAPIView.as_view(), name = 'stripe_checkout'),
     path('stripe-checkout/success/',Paymentview.SuccessPayment.as_view(), name="success"),
-    path('stripe-checkout/cancel/<int:id>',Paymentview.cancel_subscription, name="cancel"),
+    path('stripe-checkout/cancel/',Paymentview.cancel_subscription, name="cancel"),
     # path('webhook/', Paymentview.stripe_webhook), # new
     path('activate/<uidb64>/<token>/',Signupviews.activate, name='activate'),
 ]
