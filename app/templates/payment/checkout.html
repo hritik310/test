@@ -1,4 +1,4 @@
-{%include "header/header.html"%}
+{% comment %} {%include "header/header.html"%}
 {%block start%}
 
 
@@ -14,12 +14,32 @@
 
 <div class="from-group">
 <label>Membership type</label>
-<select class="from-control" name="plan">
+{% comment %} <select class="from-control" name="plan"> {% endcomment %}
+  <p class="Membership_monthly">
+    Includes<br>
+    Access to build as many models as you want<br>
+    Save ten models per week<br>
+    Ability to sell picks to other members<br>
+    Access to daily/weekly leaderboard
+  </p>
+  <div>
+  
+      <button class="btn btn-success btn-lg">Checkout</button>
+</div>
+  </div>
+ 
+ </div>
 
-<Option value="daily">Monthly membership</options>
+</div>
+</div>
+
+
+
+
+{% comment %} <Option value="daily">Monthly membership</options> {% endcomment %}
 {% comment %} <Option value="Enterprise">Enterprise</options>
 <Option value="daily">Daily</options>   {% endcomment %}
-</select>
+{% comment %} </select> {% endcomment %}
 
 </div>
 
@@ -31,4 +51,4 @@
 
 </form>
 
-{%endblock%}
+{%endblock%} {% endcomment %}

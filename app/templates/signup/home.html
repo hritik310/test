@@ -273,6 +273,12 @@ button.btn-xl.btn-primary.btn-wrap-text {
   font-size: 16px;
 }
 
+.alert.alert-success.alert-dismissible {
+  margin-top: 20px;
+}
+
+
+
 /*contact_form_section section css end */
 
   </style>
@@ -378,7 +384,8 @@ button.btn-xl.btn-primary.btn-wrap-text {
  
   
   <div class="background-banner ">
-
+  <form action="/stripe-checkout/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
 	<div class="container member_section">
 	 <h3>Members Area</h3>
 	 <p class=""><span class="pries"><strong>$50.00</strong></span><br><span><strong>EVERY MONTH</strong></span></p>
@@ -392,13 +399,13 @@ button.btn-xl.btn-primary.btn-wrap-text {
       Access to daily/weekly leaderboard
 	  </p>
 	  <div>
-			<a href="{% url 'stripe_checkout' %}">
-        <button type="button" class="btn btn-primary Sign_member">Buy now</button></a>
+      <button class="btn btn-primary Sign_member">Buy now</button>
+        {% comment %} <button type="button" class="btn btn-primary Sign_member" id="daily">Buy now</button></a> {% endcomment %}
   </div>
 	  </div>
 	 
 	 </div>
-
+  </form>
   </div>
 </div>
 

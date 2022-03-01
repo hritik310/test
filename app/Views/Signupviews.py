@@ -31,7 +31,7 @@ print(stripe.api_key)
 def index(request):   
     context = {'user_list':user.objects.all()}
     if request.method =="POST":
-        messages.success(request,"Your contact detail is saved")
+        messages.success(request,"Contact request submitted successfully")
     return render(request,"signup/home.html",context) 
 
 

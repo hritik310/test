@@ -31,15 +31,16 @@ class StripeCheckoutAPIView(TemplateView):
         # print("iddddd",request.user.subscription.id)
         if request.method=="POST":
             plans = request.POST.get("plan")
+            print("plans",plans)
             dict = {'Premium':settings.BASIC_PRICE_ID,'daily':settings.MONTHLY_PRICE_ID}
-            plan_price = dict[plans]
+            plan_price =settings.MONTHLY_PRICE_ID
 
             print("dict",dict)
             print("plan",plan_price)
             stripe.api_key = settings.SECTRET_KEY
             checkout_session=stripe.checkout.Session.create(
-                success_url="http://3.92.217.18:8000/stripe-checkout/success/?success=true&session_id={CHECKOUT_SESSION_ID}",
-                cancel_url="http://3.92.217.18:8000/stripe-checkout/cancel/?cancel=true",
+                success_url="http://127.0.0.1:8000/stripe-checkout/success/?success=true&session_id={CHECKOUT_SESSION_ID}",
+                cancel_url="http://127.0.0.1:8000/stripe-checkout/cancel/?cancel=true",
                 payment_method_types=["card"],
                 client_reference_id = self.request.user.id,
                 #metadata = {'user_id':45, 'email':"customer@gmail.com"},
@@ -110,8 +111,8 @@ def cancel_subscription(request):
 
     a=StripeCustomer.objects.filter(stripeCustomerId=request.user.id).delete()
     # messages.success(request,"Your Subscription is cancel")
-    return render (request,"payment/subcancel.html")
-  return render (request,"payment/checkout.html")
+    return render (request,"payment/cancel.html")
+  return render (request,"signup/home.html")
 
    
 
