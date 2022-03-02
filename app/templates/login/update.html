@@ -133,13 +133,24 @@ button.btn-xl.btn-primary.btn-wrap-text {
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                       <div class="x_content">
-                        <form action="" method="POST" >
+                        <form action="" method="POST" novalidate >
                           {% csrf_token %}
                           <div class="form-group">
-                            <div class="form-group">
-                              <label for="User">User Name</label>
-                              <input type="text" class="form-control" id="username" value="{{request.user.username}}"  placeholder="username" name="username" required>
-                            </div>
+                            <div class="row">
+                              <div class="col-md-12">
+                              <div class="item form-group {% if form.username.errors %} has-error  {% endif %}"> 
+                                  <label for="pwd">Username</label>
+                                  {{form.username}}
+                                      {% if form.username.errors %}
+                                      {% for error in form.username.errors %}
+                                      <span class="error text-danger full_width">
+                                          <strong>{{ error|escape }}</strong>
+                                      </span>
+                                    {% endfor %}
+                                    {% endif %}
+      
+                                   
+                               </div>
                           <!-- 	<div class="form-group">
                               <label for="Name">First Name:</label>
                                   <input type="text" class="form-control" id="first_name" placeholder="Firstname" name="first_name" required>
@@ -167,18 +178,31 @@ button.btn-xl.btn-primary.btn-wrap-text {
                         <label for="pwd">Zip</label>
                         <input type="text" class="form-control" id="zip" name="zip" required>
                       </div>  --> 	
-                      <div class="form-group">
+                      {% comment %} <div class="form-group">
                         <label for="pwd">Phone number</label>
+                        
                         <input type="number" class="form-control" id="phone_number" name="phone_number" value="{{request.user.phone_number}}" required>
-                      </div>  
-                      <!-- <div class="form-group">
-                        <label for="pwd">Date of Birth</label>
-                        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required>
-                      </div>  		  
-                      <div class="form-group {% if form.password.errors %} has-error  {% endif %}">
-                        <label for="pwd">Password:</label>
-                        <input type="password" class="form-control" id="password" placeholder="................" name="password" required> 
-                      </div>  -->
+                        
+                      </div>  {% endcomment %}
+                      <div class="row">
+	                  		<div class="col-md-12">
+				                <div class="item form-group {% if form.phone_number.errors %} has-error  {% endif %}"> 
+				                    <label for="pwd">Phone number</label>
+                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{request.user.phone_number}}"> 
+                          
+		                            {% if form.phone_number.errors %}
+		                            {% for error in form.phone_number.errors %}
+		                            <span class="error text-danger full_width">
+		                                <strong>{{ error|escape }}</strong>
+		                            </span>
+			                        {% endfor %}
+			                        {% endif %}
+
+				                     
+				                 </div>
+			             	</div>
+                     
+              
                       <div class="row">
                         <div class="col-md-6">	
                           <button type="submit" name="commit" value="" class="btn-xl btn-primary btn-wrap-text" />Update</button>			
