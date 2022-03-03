@@ -1,8 +1,6 @@
 from django.forms import IntegerField, ModelForm
 from django import forms
 from datetime import datetime
-
-from flask import request
 from app.models import *
 from django.contrib.auth.password_validation import validate_password
 from django.core import validators
