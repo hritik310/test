@@ -1,4 +1,4 @@
-{%include 'header/header.html' %}
+{%include "header/header.html" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,22 +15,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
-
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-	
   <style>
   
  body{
 	/*line-height:0;
 	background: #ebeded;*/
+	
   }
   
- {% comment %} nav.navbar.navbar-inverse.background {
+ nav.navbar.navbar-inverse.background {
     background-color: #fff;
     border-color: #ffffff;
     border-radius: unset;
@@ -76,7 +69,7 @@ a.nav-link.home_list.active:hover {
     margin-left: 10px;
     background: #69ace0;
     border-radius: 30px;
-} {% endcomment %}
+}
 
 
 
@@ -121,11 +114,21 @@ input.form-control.input-number {
 	background: #f2f3f3;
 }	
 
-.input-group.section_number {
+/*.input-group.section_number {
     text-align: center;
     width: 100%;
     margin: 0 auto;
     top: 46%;
+}*/
+
+.input-group.section_number {
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    top: 27%;
+}
+.home_point p {
+    text-align: center;
 }
 @media (max-width:991px) {
   .column {
@@ -137,187 +140,292 @@ input.form-control.input-number {
 }
 }
 
+.section_first {
+    box-shadow: 0px 10px 20px -10px #848484;
+}
+.text-center button.btn.btn-primary {
+    /* width: 145px; */
+    font-size: 16px;
+    font-weight: 500;
+    /* border-radius: 0px; */
+    padding: 10px;
+    border: 2px solid #000000;
+      margin: 20px 0 30px;
+    background: #ffffff;
+    color: #000000;
+}
+	
+.row.btn_section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+button.btn.btn-primary.ModelButton {
+    margin: 10px;
+    background: #69ace0;
+    border: 2px solid #69ace0;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px;
+    width: 200px;
+    border-radius: 30px;
+}
+
+.dropdown_section {
+    width: 20%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.btn-primary.drop {
+    color: #fff;
+    background-color: #000000;
+    border-color: #7c7c7c;
+    padding: 12px;
+    font-size: 18px;
+    width: 100%;
+}
+
+.btn-primary.drop:hover {
+    color: #fff;
+    background-color: #000000;
+    border-color: #7c7c7c;
+}
+.open>.dropdown-menu {
+    display: block;
+    width: 100% !important;
+}
+.open>.dropdown-toggle.btn-primary.drop:focus{
+   color: #fff;
+    background-color: #000000;
+    border-color: #7c7c7c;
+}
   </style>
 </head>
 <body>
 
 
 <div class="container-fluid padding_cont">
-<div class="row_section_grid">
-    <div class="column">
-		<div class="Info-sign">
-			<span class="glyphicon glyphicon-info-sign"></span> 
-		</div>
-		 <div class="input-group section_number">
-		  <span class="input-group-btn">
-					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-						  <span class="glyphicon glyphicon-minus"></span>
-		  </button>
-		  </span>
-		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
-		  <span class="input-group-btn">
-			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
-				  <span class="glyphicon glyphicon-plus"></span>
-		  </button>
-		  </span>
-		</div>
-	
-	</div>
-    <div class="column">
-	<div class="Info-sign">
-			<span class="glyphicon glyphicon-info-sign"></span> 
-		</div>
-		 <div class="input-group section_number">
-		  <span class="input-group-btn">
-					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-						  <span class="glyphicon glyphicon-minus"></span>
-		  </button>
-		  </span>
-		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
-		  <span class="input-group-btn">
-			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
-				  <span class="glyphicon glyphicon-plus"></span>
-		  </button>
-		  </span>
-		</div>
-	</div>
-    <div class="column"><div class="Info-sign">
-			<span class="glyphicon glyphicon-info-sign"></span> 
-		</div>
-		 <div class="input-group section_number">
-		  <span class="input-group-btn">
-					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-						  <span class="glyphicon glyphicon-minus"></span>
-		  </button>
-		  </span>
-		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
-		  <span class="input-group-btn">
-			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
-				  <span class="glyphicon glyphicon-plus"></span>
-		  </button>
-		  </span>
-		</div></div>
-    <div class="column"><div class="Info-sign">
-			<span class="glyphicon glyphicon-info-sign"></span> 
-		</div>
-		 <div class="input-group section_number">
-		  <span class="input-group-btn">
-					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-						  <span class="glyphicon glyphicon-minus"></span>
-		  </button>
-		  </span>
-		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
-		  <span class="input-group-btn">
-			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
-				  <span class="glyphicon glyphicon-plus"></span>
-		  </button>
-		  </span>
-		</div></div>
-    <div class="column"><div class="Info-sign">
-			<span class="glyphicon glyphicon-info-sign"></span> 
-		</div>
-		 <div class="input-group section_number">
-		  <span class="input-group-btn">
-					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-						  <span class="glyphicon glyphicon-minus"></span>
-		  </button>
-		  </span>
-		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
-		  <span class="input-group-btn">
-			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
-				  <span class="glyphicon glyphicon-plus"></span>
-		  </button>
-		  </span>
-		</div></div>
-</div>
-<div class="row_section_grid">
-    <div class="column">
-		<div class="Info-sign">
-			<span class="glyphicon glyphicon-info-sign"></span> 
-		</div>
-		 <div class="input-group section_number">
-		  <span class="input-group-btn">
-					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-						  <span class="glyphicon glyphicon-minus"></span>
-		  </button>
-		  </span>
-		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
-		  <span class="input-group-btn">
-			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
-				  <span class="glyphicon glyphicon-plus"></span>
-		  </button>
-		  </span>
-		</div>
-	
-	</div>
-    <div class="column">
-	<div class="Info-sign">
-			<span class="glyphicon glyphicon-info-sign"></span> 
-		</div>
-		 <div class="input-group section_number">
-		  <span class="input-group-btn">
-					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-						  <span class="glyphicon glyphicon-minus"></span>
-		  </button>
-		  </span>
-		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
-		  <span class="input-group-btn">
-			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
-				  <span class="glyphicon glyphicon-plus"></span>
-		  </button>
-		  </span>
-		</div>
-	</div>
-    <div class="column"><div class="Info-sign">
-			<span class="glyphicon glyphicon-info-sign"></span> 
-		</div>
-		 <div class="input-group section_number">
-		  <span class="input-group-btn">
-					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-						  <span class="glyphicon glyphicon-minus"></span>
-		  </button>
-		  </span>
-		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
-		  <span class="input-group-btn">
-			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
-				  <span class="glyphicon glyphicon-plus"></span>
-		  </button>
-		  </span>
-		</div></div>
-    <div class="column"><div class="Info-sign">
-			<span class="glyphicon glyphicon-info-sign"></span> 
-		</div>
-		 <div class="input-group section_number">
-		  <span class="input-group-btn">
-					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-						  <span class="glyphicon glyphicon-minus"></span>
-		  </button>
-		  </span>
-		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
-		  <span class="input-group-btn">
-			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
-				  <span class="glyphicon glyphicon-plus"></span>
-		  </button>
-		  </span>
-		</div></div>
-    <div class="column"><div class="Info-sign">
-			<span class="glyphicon glyphicon-info-sign"></span> 
-		</div>
-		 <div class="input-group section_number">
-		  <span class="input-group-btn">
-					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-						  <span class="glyphicon glyphicon-minus"></span>
-		  </button>
-		  </span>
-		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
-		  <span class="input-group-btn">
-			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
-				  <span class="glyphicon glyphicon-plus"></span>
-		  </button>
-		  </span>
-		</div></div>
+
+<div class="dropdown_section">
+
+  <div class="dropdown">
+    <button class="btn btn-primary drop dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="#">Select Sports</a></li>
+      <!-- <li><a href="#">CSS</a></li>
+      <li><a href="#">JavaScript</a></li> -->
+    </ul>
+  </div>
 </div>
 
+
+
+
+<div class="section_first">
+<div class="row_section_grid">
+    <div class="column">
+		<div class="Info-sign">
+			<span class="glyphicon glyphicon-info-sign"></span> 
+		</div>
+		<div class="home_point"><p>home_point</p></div>
+		 <div class="input-group section_number">
+		  <span class="input-group-btn">
+					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+						  <span class="glyphicon glyphicon-minus"></span>
+		  </button>
+		  </span>
+		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+		  <span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+				  <span class="glyphicon glyphicon-plus"></span>
+		  </button>
+		  </span>
+		</div>
+	
+	</div>
+    <div class="column">
+	<div class="Info-sign">
+			<span class="glyphicon glyphicon-info-sign"></span> 
+		</div>
+		<div class="home_point"><p>home_field_goals</p></div>
+		 <div class="input-group section_number">
+		  <span class="input-group-btn">
+					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+						  <span class="glyphicon glyphicon-minus"></span>
+		  </button>
+		  </span>
+		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+		  <span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+				  <span class="glyphicon glyphicon-plus"></span>
+		  </button>
+		  </span>
+		</div>
+	</div>
+    <div class="column">
+	<div class="Info-sign">
+			<span class="glyphicon glyphicon-info-sign"></span> 
+		</div>
+		<div class="home_point"><p>home_blocks</p></div>
+		 <div class="input-group section_number">
+		  <span class="input-group-btn">
+					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+						  <span class="glyphicon glyphicon-minus"></span>
+		  </button>
+		  </span>
+		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+		  <span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+				  <span class="glyphicon glyphicon-plus"></span>
+		  </button>
+		  </span>
+		</div></div>
+    <div class="column">
+	<div class="Info-sign">
+			<span class="glyphicon glyphicon-info-sign"></span> 
+		</div>
+		<div class="home_point"><p>home_assist</p></div>
+		 <div class="input-group section_number">
+		  <span class="input-group-btn">
+					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+						  <span class="glyphicon glyphicon-minus"></span>
+		  </button>
+		  </span>
+		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+		  <span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+				  <span class="glyphicon glyphicon-plus"></span>
+		  </button>
+		  </span>
+		</div></div>
+    <div class="column">
+	<div class="Info-sign">
+			<span class="glyphicon glyphicon-info-sign"></span> 
+		</div>
+		<div class="home_point"><p>home_steals</p></div>
+		 <div class="input-group section_number">
+		  <span class="input-group-btn">
+					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+						  <span class="glyphicon glyphicon-minus"></span>
+		  </button>
+		  </span>
+		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+		  <span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+				  <span class="glyphicon glyphicon-plus"></span>
+		  </button>
+		  </span>
+		</div></div>
+</div>
+<div class="row_section_grid">
+    <div class="column">
+		<div class="Info-sign">
+			<span class="glyphicon glyphicon-info-sign"></span> 
+		</div>
+			<div class="home_point"><p>Away_point</p></div>
+		 <div class="input-group section_number">
+		  <span class="input-group-btn">
+					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+						  <span class="glyphicon glyphicon-minus"></span>
+		  </button>
+		  </span>
+		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+		  <span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+				  <span class="glyphicon glyphicon-plus"></span>
+		  </button>
+		  </span>
+		</div>
+	
+	</div>
+    <div class="column">
+	<div class="Info-sign">
+			<span class="glyphicon glyphicon-info-sign"></span> 
+		</div>
+		<div class="home_point"><p>Away_field_goals</p></div>
+		 <div class="input-group section_number">
+		  <span class="input-group-btn">
+					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+						  <span class="glyphicon glyphicon-minus"></span>
+		  </button>
+		  </span>
+		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+		  <span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+				  <span class="glyphicon glyphicon-plus"></span>
+		  </button>
+		  </span>
+		</div>
+	</div>
+    <div class="column">
+	<div class="Info-sign">
+			<span class="glyphicon glyphicon-info-sign"></span> 
+		</div>
+			<div class="home_point"><p>Away_block</p></div>
+		 <div class="input-group section_number">
+		  <span class="input-group-btn">
+					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+						  <span class="glyphicon glyphicon-minus"></span>
+		  </button>
+		  </span>
+		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+		  <span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+				  <span class="glyphicon glyphicon-plus"></span>
+		  </button>
+		  </span>
+		</div></div>
+    <div class="column">
+	<div class="Info-sign">
+			<span class="glyphicon glyphicon-info-sign"></span> 
+		</div>
+		<div class="home_point"><p>Away_assists</p></div>
+		 <div class="input-group section_number">
+		  <span class="input-group-btn">
+					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+						  <span class="glyphicon glyphicon-minus"></span>
+		  </button>
+		  </span>
+		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+		  <span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+				  <span class="glyphicon glyphicon-plus"></span>
+		  </button>
+		  </span>
+		</div></div>
+    <div class="column">
+	<div class="Info-sign">
+			<span class="glyphicon glyphicon-info-sign"></span> 
+		</div>
+			<div class="home_point"><p>Away_steals</p></div>
+		 <div class="input-group section_number">
+		  <span class="input-group-btn">
+					  <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+						  <span class="glyphicon glyphicon-minus"></span>
+		  </button>
+		  </span>
+		  <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+		  <span class="input-group-btn">
+			  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+				  <span class="glyphicon glyphicon-plus"></span>
+		  </button>
+		  </span>
+		</div></div>
+		
+</div>
+<div class="text-center"><button type="button" class="btn btn-primary">Build Model Button</button></div>
+</div>
+<div class="row btn_section">
+	<div>
+		<button type="button" class="btn btn-primary ModelButton">Save Model Button</button>
+	</div>
+	<div>
+		<button type="button" class="btn btn-primary ModelButton">Reset</button>
+	</div>
+</div>
 
 </div>
 <script>
@@ -378,7 +486,6 @@ $('.input-number').change(function() {
 });
  </script>
 </body>
-{%include 'header/footer.html' %}
 </html>
 
 
