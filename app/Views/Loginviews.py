@@ -22,6 +22,7 @@ from app.forms.update import *
 
 @guest_user
 def user_login(request):
+  
     if request.method == "POST":
         uname= request.POST.get('uname')
         print(uname)
@@ -30,15 +31,17 @@ def user_login(request):
         # a=pod_groups.objects.all()
         # for i in a: 
         #   b=i.id
+        
         if request.method == "POST":
+          
           current_user = request.user.id
-    
+
         user = authenticate(username=uname,password=upass)
         print(user) 
         if user is not None:
           login(request,user)
           return redirect('sport')
-
+         
         else:
           messages.error(request,"Invalid Credential", extra_tags='login')
           return redirect('/signup')
@@ -87,7 +90,7 @@ def update(request,id):
     else:      
       print("false")
       return render(request,"login/update.html",{'form':accountform,"context":context})
-
+  
   
   return render (request,"login/update.html",{'show':owner_id,'customer':custom,'form':accountform})
 

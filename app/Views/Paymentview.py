@@ -60,8 +60,11 @@ class StripeCheckoutAPIView(TemplateView):
             # a.stripeCustomerId=self.request.user.id
             # a.stripeSubscriptionId=iddd
             # a.save()
-            return redirect(checkout_session.url)  
-        
+            if request.user.is_authenticated:
+              return redirect(checkout_session.url) 
+            else:
+               
+              return redirect("/signup")
       
     
     

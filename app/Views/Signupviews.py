@@ -36,6 +36,7 @@ def index(request):
 
 
 def create(request):
+   
     context=user.objects.all()
     if request.method == 'POST':
         accountform = AddCreateForm(request.POST)
