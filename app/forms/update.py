@@ -7,7 +7,7 @@ from django.core import validators
 from datetime import date
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
-
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class userform(ModelForm):
@@ -27,12 +27,10 @@ class userform(ModelForm):
 
     ))
 
-    phone_number=forms.IntegerField(label="Phone Number",required = True,widget=forms.TextInput(
+    phone_number=forms.IntegerField(label="Phone Number",required = True, widget=forms.TextInput(
         attrs={
-        'max_length':10,
         'class':'form-control',
         'placeholder':'Enter Phone number',
-        'type':'number'
         
         }
 
@@ -50,7 +48,9 @@ class userform(ModelForm):
           phone_number= cleaned_data.get('phone_number')
           ph_num=str(phone_number)
           print(ph_num)#dflklg
+        
           if len(ph_num)>15 or len(ph_num)<10:
             print("dfs")
             self.add_error("phone_number", forms.ValidationError("Phone number must be between 10 and 15 digit")
             )    
+    

@@ -12,11 +12,13 @@ from django.conf import settings
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from app.models import StripeCustomer 
+from app.models import user
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import get_user_model
 from app.models import StripeCustomer 
 from django.contrib import messages
 from django.db.models import Q
+from django.shortcuts import redirect
 
 class StripeCheckoutAPIView(TemplateView):
   template_name = "payment/checkout.html"
@@ -52,6 +54,8 @@ class StripeCheckoutAPIView(TemplateView):
                 ],
                 mode="subscription",     
             ) 
+
+
             print("checkout",checkout_session)
             iddd=checkout_session.id
             print("detail",iddd)
@@ -86,7 +90,7 @@ class SuccessPayment(TemplateView):
 
 
 class CancelPayment(TemplateView):
-  template_name = 'payment/cancel.html'
+  template_name = 'signup/home.html'
   import stripe
 
 
@@ -94,6 +98,7 @@ class CancelPayment(TemplateView):
 import json
 @csrf_exempt
 def cancel_subscription(request):
+  
   c= StripeCustomer.objects.values('stripeSubscriptionId')
   print(c)
   a= stripe.Subscription.list(limit=1)
@@ -114,7 +119,12 @@ def cancel_subscription(request):
 
     a=StripeCustomer.objects.filter(stripeCustomerId=request.user.id).delete()
     # messages.success(request,"Your Subscription is cancel")
+
     return render (request,"payment/cancel.html")
+  if user.objects.filter(id=request.user.id):
+    return redirect("/")  
+
+
   return render (request,"signup/home.html")
 
    

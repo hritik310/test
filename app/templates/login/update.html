@@ -184,11 +184,12 @@ button.btn-xl.btn-primary.btn-wrap-text {
                         <input type="number" class="form-control" id="phone_number" name="phone_number" value="{{request.user.phone_number}}" required>
                         
                       </div>  {% endcomment %}
+                    
                       <div class="row">
 	                  		<div class="col-md-12">
 				                <div class="item form-group {% if form.phone_number.errors %} has-error  {% endif %}"> 
 				                    <label for="pwd">Phone number</label>
-                            <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{request.user.phone_number}}"> 
+                            {{form.phone_number}}
                           
 		                            {% if form.phone_number.errors %}
 		                            {% for error in form.phone_number.errors %}
