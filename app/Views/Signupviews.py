@@ -23,6 +23,7 @@ from .token import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.contrib.auth import get_user_model
+from app.helper import *
 
 stripe.api_key = settings.SECTRET_KEY # new
 print(stripe.api_key)
@@ -34,7 +35,7 @@ def index(request):
         messages.success(request,"Contact request submitted successfully")
     return render(request,"signup/home.html",context) 
 
-
+@guest_user
 def create(request):
    
     context=user.objects.all()
@@ -81,7 +82,7 @@ def create(request):
             print(a.id)
             email.send()
             messages.success(request,"Thanks for registering with us.Please confirm your email address to complete the registration.",extra_tags='logout')
-            return redirect('/signup')
+            return redirect('signup')
               
 
         else:
