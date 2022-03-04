@@ -6,7 +6,7 @@ import random
 def guest_user(function=None, redirect_url=None):
 
    if not redirect_url:
-       redirect_url = '/index'
+       redirect_url = '/'
 
    actual_decorator = user_passes_test(
        lambda u: u.is_anonymous,

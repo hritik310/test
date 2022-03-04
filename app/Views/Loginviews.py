@@ -20,7 +20,7 @@ from app.forms.update import *
 #     template = loader.get_template('app/index.html')
 #     return HttpResponse(template.render(context, request))
 
-@guest_user
+
 def user_login(request):
   
     if request.method == "POST":
@@ -49,7 +49,7 @@ def user_login(request):
     return render(request,"signup/signup.html")
 
 
-@login_required
+
 def userLogout(request):
   auth.logout(request)
   return redirect('/signup')
