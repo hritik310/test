@@ -46,7 +46,6 @@ def index(request):
         messages.success(request,"Contact request submitted successfully")
     return render(request,"signup/home.html",context) 
 
-@guest_user
 def create(request):
    
     context=user.objects.all()
