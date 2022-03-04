@@ -12,6 +12,7 @@
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> -->
       <style>
          body{
          /*line-height:0;
@@ -182,7 +183,8 @@
    <body>
       <div class="container-fluid padding_cont">
          <div class="dropdown_section">
-            <form action="" method="GET">
+            <form action="" method="POST">
+               {% csrf_token %}
                <select name="cars" id="drop">
                   <option value="" selected disabled hidden>Choose here</option>
                   <option value="">NBA</option>
@@ -195,7 +197,7 @@
                      <span class="glyphicon glyphicon-info-sign"></span> 
                   </div>
                   <div class="home_point">
-                     <p>home_point</p>
+                     <p>home_points</p>
                   </div>
                   <div class="input-group section_number">
                      <span class="input-group-btn">
@@ -205,7 +207,7 @@
                      </span>
                    <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
                      <span class="input-group-btn">
-                     <button type="button" id="id_quant[1]" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                     <button type="button" id="id_quant[1]" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_points" >
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
@@ -226,7 +228,7 @@
                      </span>
                 <!--      <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="10"> -->
                      <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_field_goals">
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
@@ -247,7 +249,7 @@
                      </span>
                      <!-- <input type="text" name="quant[3]" class="form-control input-number" value="1" min="1" max="10"> -->
                      <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_blocks">
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
@@ -258,7 +260,7 @@
                      <span class="glyphicon glyphicon-info-sign"></span> 
                   </div>
                   <div class="home_point">
-                     <p>home_assist</p>
+                     <p>home_assists</p>
                   </div>
                   <div class="input-group section_number">
                      <span class="input-group-btn">
@@ -268,7 +270,7 @@
                      </span>
               <!--        <input type="text" name="quant[4]" class="form-control input-number" value="1" min="1" max="10"> -->
                      <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_assists">
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
@@ -289,7 +291,7 @@
                      </span>
                  <!--     <input type="text" name="quant[5]" class="form-control input-number" value="1" min="1" max="10"> -->
                      <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_steals">
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
@@ -302,7 +304,7 @@
                      <span class="glyphicon glyphicon-info-sign"></span> 
                   </div>
                   <div class="home_point">
-                     <p>Away_point</p>
+                     <p>Away_points</p>
                   </div>
                   <div class="input-group section_number">
                      <span class="input-group-btn">
@@ -312,7 +314,7 @@
                      </span>
                   <!--    <input type="text" name="quant[6]" class="form-control input-number" value="1" min="1" max="10"> -->
                      <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="Away_points" >
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
@@ -333,7 +335,7 @@
                      </span>
                    <!--   <input type="text" name="quant[7]" class="form-control input-number" value="1" min="1" max="10"> -->
                      <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="Away_field_goals">
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
@@ -344,7 +346,7 @@
                      <span class="glyphicon glyphicon-info-sign"></span> 
                   </div>
                   <div class="home_point">
-                     <p>Away_block</p>
+                     <p>Away_blocks</p>
                   </div>
                   <div class="input-group section_number">
                      <span class="input-group-btn">
@@ -354,7 +356,7 @@
                      </span>
                   <!--    <input type="text" name="quant[8]" class="form-control input-number" value="1" min="1" max="10"> -->
                      <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="Away_blocks">
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
@@ -375,7 +377,7 @@
                      </span>
                   <!--    <input type="text" name="quant[9]" class="form-control input-number" value="1" min="1" max="10"> -->
                      <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="Away_assists">
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
@@ -396,7 +398,7 @@
                      </span>
                   <!--    <input type="text" name="quant[10]" class="form-control input-number" value="1" min="1" max="10"> -->
                      <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="Away_steals">
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
@@ -415,7 +417,28 @@
          </div>
      </form>
       </div>
-      <script>
+      <script type="text/javascript">
+         $(document).ready(function(){
+            $(".build").click(function () {
+               var rowId = $(this).attr('data-id');
+               console.log(rowId);
+               $.ajax({
+                 type:"GET",
+                 url: '/buildmodel/status/',
+                 data: {
+                  'id': rowId
+         
+                 },
+                 dataType: 'json',
+                 success: function (data) {
+                  
+                 }
+               });
+
+            });
+
+         });
+
          $('.btn-number').click(function(e) {
            e.preventDefault();
          

@@ -18,6 +18,8 @@ urlpatterns = [
     path('sport',Loginviews.setting,name = 'sport'),
     path('update/<int:id>',Loginviews.update, name ='update'),
     path('buildmodel', Signupviews.buildmodel, name ='buildmodel'),
+    path('buildmodel/status/',Signupviews.buildmodelStatus, name ="buildmodel-status"),
+
     path('register',Signupviews.create,name="register"),
 
     

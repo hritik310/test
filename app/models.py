@@ -51,3 +51,8 @@ class StripeCustomer(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Modelvar(models.Model):
+    title = models.CharField(max_length=255,default="")
+    created_by = models.IntegerField(null=True)
