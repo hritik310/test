@@ -20,7 +20,7 @@ class user(AbstractBaseUser,PermissionsMixin):
     zip=models.IntegerField(max_length=6,null=True)
     address=models.CharField(max_length=200,null=True)
     phone_number=PhoneField(null=True,default=0)
-    terms_and_condition=models.BooleanField(default=0)
+    terms_and_condition=models.BooleanField(default=0,null=False)
     #address=models.CharField(max_length=100,null=True)
     entry_code=models.CharField(max_length=200,null=True)
     is_staff 	= models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.')
