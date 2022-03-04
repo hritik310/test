@@ -182,12 +182,13 @@
    <body>
       <div class="container-fluid padding_cont">
          <div class="dropdown_section">
-            <form action="" method="GET">
+            <form action="" method="POST">
                <select name="cars" id="drop">
                   <option value="" selected disabled hidden>Choose here</option>
                   <option value="">NBA</option>
                </select>
          </div>
+		
          <div class="section_first">
             <div class="row_section_grid">
                <div class="column">
@@ -205,7 +206,7 @@
                      </span>
                    <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
                      <span class="input-group-btn">
-                     <button type="button" id="id_quant[1]" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                     <button type="submit" class="btn btn-default btn-number" id="id_quant[1]" data-type="plus" data-field="quant[1]">
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
@@ -473,5 +474,8 @@
          });
           
       </script>
+	  
+	
+
    </body>
 </html>

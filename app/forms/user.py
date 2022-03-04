@@ -72,13 +72,13 @@ class AddCreateForm(ModelForm):
 
     ))
 
-    date_of_birth=forms.DateField(label="Date of Birth",required = True,widget=forms.DateInput(
-        attrs={
-        'class':'form-control',
-        'type': 'date',
-        'placeholder':'Select date'
-        }
-    ))
+    # date_of_birth=forms.DateField(label="Date of Birth",required = True,widget=forms.DateInput(
+    #     attrs={
+    #     'class':'form-control',
+    #     'type': 'date',
+    #     'placeholder':'Select date'
+    #     }
+    # ))
 
     # address=forms.CharField(label="Address",required = True,widget=forms.TextInput(
     #     attrs={
@@ -107,7 +107,7 @@ class AddCreateForm(ModelForm):
 
     class Meta:
         model = user
-        fields = ["username","last_name","email","password","phone_number","date_of_birth","first_name","terms_and_conditions"]
+        fields = ["username","last_name","email","password","phone_number","first_name","terms_and_conditions"]
 
     #     def clean_date_(self):
     #         dob = self.cleaned_data['date_of_birth']
@@ -129,16 +129,16 @@ class AddCreateForm(ModelForm):
 
     def clean(self):
           cleaned_data=super(AddCreateForm, self).clean()   
-          date_of_birth = cleaned_data.get('date_of_birth')
+          #date_of_birth = cleaned_data.get('date_of_birth')
           phone_number= cleaned_data.get('phone_number')
-          if date_of_birth is None:
-              date_of_birth=11//23/45
-          else:
-           age = (date.today() - date_of_birth).days / 365
-           print("age",age)
-           if age < 18:
-            self.add_error("date_of_birth", forms.ValidationError("Age must be above 18") 
-          )
+        #   if date_of_birth is None:
+        #       date_of_birth=11//23/45
+        #   else:
+        #    age = (date.today() - date_of_birth).days / 365
+        #    print("age",age)
+        #    if age < 18:
+        #     self.add_error("date_of_birth", forms.ValidationError("Age must be above 18") 
+        #   )
     
           ph_num=str(phone_number)
           print(ph_num)#dflklg

@@ -24,6 +24,8 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.contrib.auth import get_user_model
 from app.helper import *
+from django.http import HttpResponse, JsonResponse
+
 
 stripe.api_key = settings.SECTRET_KEY # new
 print(stripe.api_key)
@@ -133,5 +135,10 @@ def updateprofile(request,id):
 
 
 def buildmodel(request):
+    print("sddfgdgd")
+    if request.method == "POST":
+        value=request.POST.get("hrt")
+        print("//////////////",value)
+        # return JsonResponse(status=404, data={'status':'false','message':value})
     return render(request,"signup/buildmodel.html")
 
