@@ -493,10 +493,12 @@ def buildmodelStatus(request):
     print("build",build.title)
     build.created_by = request.user.id
     build.save()
+    
     data = {
     "status":"OK",
-    "messages":"You have selected the item",
-    "message":"You have Selected home_field_goals"
+    "messages":"You have selected home points",
+    "message":"You have Selected home_field_goals",
+    "value":0,
     }
 
     return JsonResponse(data)

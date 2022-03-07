@@ -210,7 +210,7 @@
                      </span>
                    <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
                      <span class="input-group-btn">
-                     <button type="button" id="id_quant[1]" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_points" >
+                     <button type="button" id="id_quant[2]" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_points" >
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
@@ -235,7 +235,7 @@
                      </span>
                 <!--      <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="10"> -->
                      <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_field_goals">
+                     <button type="button" id="id_quant[1]" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_field_goals">
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
@@ -438,7 +438,15 @@
                  },
                  dataType: 'json',
                  success: function (data) {
-                  $('#output').html(data.messages)
+                  if (rowId == "home_field_goals")
+                  {
+                     $('#output').html(data.message)
+                    
+                  }
+                  else
+                  {
+                     $('#output').html(data.messages)
+                  }
                  
                   console.log(data.messages)
                   
