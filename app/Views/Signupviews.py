@@ -302,7 +302,21 @@ def buildmodel(request):
         
         #as a user selects and drops a variable it will be added and dropped 
         # to this list. This list is the list of variables used in the model
-        modelVars=answers_list
+        if answers_list:
+            modelVars=answers_list
+        else:
+            modelVars=['num',
+            'away_defensive_rating',
+            'away_offensive_rating',
+            'away_three_point_attempt_rate',
+            'away_true_shooting_percentage',
+            'away_turnover_percentage',
+            'home_defensive_rating',
+            'home_offensive_rating',
+            'home_three_point_attempt_rate',
+            'home_true_shooting_percentage',
+            'home_turnover_percentage',
+            'pace']
         
         #we build two models but kind of use them just as one. We have the same
         #variables in both just a different target variable
@@ -482,4 +496,17 @@ def buildmodelStatus(request):
     }
 
     return JsonResponse(data)
+
+def buildmodelremove(request):
+
+    b = Modelvar.objects.filter(title =request.GET.get('id')).last()
+    b.delete()
+    print(b)
+  
+    data = {
+    "status":"OK"
+    }
+
+    return JsonResponse(data)
+
 
