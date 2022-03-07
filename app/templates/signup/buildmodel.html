@@ -190,13 +190,15 @@
                   <option value="">NBA</option>
                </select>
          </div>
-		
+         <div id="output">
+         </div>
          <div class="section_first">
             <div class="row_section_grid">
                <div class="column">
                   <div class="Info-sign">
                      <span class="glyphicon glyphicon-info-sign"></span> 
                   </div>
+                 
                   <div class="home_point">
                      <p>home_points</p>
                   </div>
@@ -212,7 +214,11 @@
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
+                     
                   </div>
+                  
+               </div>
+               <div id="out">
                </div>
                <div class="column">
                   <div class="Info-sign">
@@ -432,6 +438,9 @@
                  },
                  dataType: 'json',
                  success: function (data) {
+                  $('#output').html(data.messages)
+                 
+                  console.log(data.messages)
                   
                  }
                });
