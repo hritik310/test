@@ -22,6 +22,7 @@ from app.forms.update import *
 
 
 def user_login(request):
+    
   
     if request.method == "POST":
         uname= request.POST.get('uname')
