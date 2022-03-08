@@ -442,7 +442,7 @@
                      <span class="glyphicon glyphicon-minus"></span>
                      </button>
                      </span>
-                  <!--    <input type="text" name="quant[10]" class="form-control input-number" value="1" min="1" max="10"> -->
+                
                      <span class="input-group-btn">
                      <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{df.9}}>
                      <span class="glyphicon glyphicon-plus"></span>
@@ -451,6 +451,7 @@
                   </div>
                </div>
             </div>
+            {% endcomment %}
             <div class="text-center">
                <button type="button" class="btn btn-primary buildmodelbutton">Build Model Button</button>
 
@@ -475,6 +476,7 @@
             
                </div>
          </div>
+         
 
          <div class="row btn_section">
             <div>
@@ -495,8 +497,9 @@
                var iddd=$(this).attr('id')
                console.log("sss",rowssId)
                console.log("ssssssdss",rowId)
-            //    {% comment %} $( ".column" ).closest( ".column" ).css( "background-color", "red" );
-            //   {% endcomment %}
+           
+
+            
                $("#"+rowssId).prop("disabled",true);
                
               
@@ -573,7 +576,7 @@
             $(".column").click(function () {
                var ro = $(this).attr('id');
                console.log("show",ro)
-               $("#"+ro).css( "background-color", "red" );
+               $("#"+ro).css( "background-color", "#69ace0" );
             });
 
          });
