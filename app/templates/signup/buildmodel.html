@@ -185,6 +185,10 @@
          padding: 10px;
          display: none;
          }
+
+         .coloradd{
+            background-color: #69ace0;
+         }
       </style>
    </head>
    <body>
@@ -213,15 +217,15 @@
          </div> 
          <div class="input-group section_number">
          <span class="input-group-btn">
-         <button type="button" id="id_quant[1]" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data={{i}}>
-         <span class="glyphicon glyphicon-minus"></span>
+         <button type="button" id="id_quant" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data={{i}}>
+         <span class="glyphicon remove glyphicon-minus" rem = "{{forloop.counter}}"></span>
          </button>
          </span>
          <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
          {% comment %} {%if status == 1%} {% endcomment %}
          <span class="input-group-btn"> 
          <button type="button" id="id_quant_{{forloop.counter}}" class="btn btn-default btn-number build"  data-type="plus" data-field="quant[1]" data-id={{i}}>
-         <span class="glyphicon glyphicon-plus"></span>
+         <span class="glyphicon add glyphicon-plus" make = "{{forloop.counter}}"></span>
          </button>
          </span>
          </div>
@@ -462,7 +466,7 @@
            
          
             
-               $("#"+rowssId).prop("disabled",true);
+               //$("#"+rowssId).prop("",true);
                
               
          
@@ -534,13 +538,30 @@
          
                
             });
-         
-            $(".column").click(function () {
-               var ro = $(this).attr('id');
-               console.log("show",ro)
-               $("#"+ro).css( "background-color", "#69ace0" );
+
+            $(".add").on('click',function () {
+               console.log('hiii');
+               var ro = $(this).attr('make');
+               console.log("show_id",ro) 
+               var def = 'id_'+ro   
+               console.log(def,'def')         
+               //$("#"+def).css("background-color", "#69ace0" );
+               $(this).parent().parent().parent().prev().prev().parent().addClass('coloradd');
             });
-         
+
+            $(".remove").on('click',function () {
+               console.log('hiii');
+               var ro = $(this).attr('rem');
+               console.log("show_id",ro) 
+               var rem = 'id_'+ro   
+               console.log(rem,'def')     
+               $(this).parent().parent().parent().prev().prev().parent().removeClass('coloradd');
+              // $("#"+rem).removeAttr('style');
+               ;
+            });
+          
+
+      
          });
          
          $('.btn-number').click(function(e) {
