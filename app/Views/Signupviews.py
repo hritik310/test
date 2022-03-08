@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.contrib.auth.hashers import make_password
 from app.forms.user import *
 from django.db.models import F
-
+import random
 from django.http import JsonResponse
 import stripe
 from django.conf import settings
@@ -42,6 +42,107 @@ print(stripe.api_key)
 
 
 def index(request):   
+    df = ["datetime",
+    "spread_total",
+    "over_under_total",
+    "decimal_odds",
+    "american_odds",
+    "event",
+    "participant_score",
+    "participant",
+    "participant_full_name",
+    "underdog_score",
+    "underdog_team",
+    "underdog_abb",
+    "home",
+    "away",
+    "dateForJoin",
+    "away_assist_percentage",
+    "away_assists",
+    "away_block_percentage",
+    "away_blocks",
+    "away_defensive_rating",
+    "away_defensive_rebound_percentage",
+    "away_defensive_rebounds",
+    "away_effective_field_goal_percentage",
+    "away_field_goal_attempts",
+    "away_field_goal_percentage",
+    "away_field_goals",
+    "away_free_throw_attempt_rate",
+    "away_free_throw_attempts",
+    "away_free_throw_percentage",
+    "away_free_throws",
+    "away_losses",
+    "away_minutes_played",
+    "away_offensive_rating",
+    "away_offensive_rebound_percentage",
+    "away_offensive_rebounds",
+    "away_personal_fouls",
+    "away_points",
+    "away_steal_percentage",
+    "away_steals",
+    "away_three_point_attempt_rate",
+    "away_three_point_field_goal_attempts",
+    "away_three_point_field_goal_percentage",
+    "away_three_point_field_goals",
+    "away_total_rebound_percentage",
+    "away_total_rebounds",
+    "away_true_shooting_percentage",
+    "away_turnover_percentage",
+    "away_turnovers",
+    "away_two_point_field_goal_attempts",
+    "away_two_point_field_goal_percentage",
+    "away_two_point_field_goals",
+    "away_wins",
+    "home_assist_percentage",
+    "home_assists",
+    "home_block_percentage",
+    "home_blocks",
+    "home_defensive_rating",
+    "home_defensive_rebound_percentage",
+    "home_defensive_rebounds",
+    "home_effective_field_goal_percentage",
+    "home_field_goal_attempts",
+    "home_field_goal_percentage",
+    "home_field_goals",
+    "home_free_throw_attempt_rate",
+    "home_free_throw_attempts",
+    "home_free_throw_percentage",
+    "home_free_throws",
+    "home_losses",
+    "home_minutes_played",
+    "home_offensive_rating",
+    "home_offensive_rebound_percentage",
+    "home_offensive_rebounds",
+    "home_personal_fouls",
+    "home_points",
+    "home_steal_percentage",
+    "home_steals",
+    "home_three_point_attempt_rate",
+    "home_three_point_field_goal_attempts",
+    "home_three_point_field_goal_percentage",
+    "home_three_point_field_goals",
+    "home_total_rebound_percentage",
+    "home_total_rebounds",
+    "home_true_shooting_percentage",
+    "home_turnover_percentage",
+    "home_turnovers",
+    "home_two_point_field_goal_attempts",
+    "home_two_point_field_goal_percentage",
+    "home_two_point_field_goals",
+    "home_wins",
+    "location",
+    "losing_abbr",
+    "losing_name",
+    "pace",
+    "winner",
+    "winning_abbr",
+    "winning_name",
+    "num"]
+    for i in df:
+        print(i)
+        a=random.choice(i) 
+        print(a)
     context = {'user_list':user.objects.all()}
     if request.method =="POST":
         messages.success(request,"Contact request submitted successfully")
@@ -144,6 +245,13 @@ def updateprofile(request,id):
 
 
 def buildmodel(request):
+    all=Modelvar.objects.all()
+    a=Modelvar.objects.filter(created_by=request.user.id).values_list("title",flat="True")
+    if Modelvar.objects.filter(created_by=request.user.id).exists():
+        status=list(a)
+        print("sssssssssssssss",status)
+    else:
+        status=0
     df = pd.read_csv('finalDS.csv')
 
     df = df.dropna()
@@ -165,17 +273,17 @@ def buildmodel(request):
 
 
     df = df[["datetime",
-    "spread / total",
+    "spread_total",
     "over_under_total",
-    "decimal odds",
-    "american odds",
+    "decimal_odds",
+    "american_odds",
     "event",
-    "participant score",
+    "participant_score",    
     "participant",
-    "participant full name",
-    "underdog score",
-    "underdog team",
-    "underdog abb",
+    "participant_full_name",
+    "underdog_score",
+    "underdog_team",
+    "underdog_abb",
     "home",
     "away",
     "dateForJoin",
@@ -258,15 +366,20 @@ def buildmodel(request):
     "losing_name",
     "pace",
     "winner",
-    "winning_abbr",
+    "winning_abbr",   
     "winning_name",
     "num"]]
-
+    # for i in list(df):
+    #     print("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",i)
+    #     sh=i
+    # a=random.sample(list(df),12) 
+    # print("ssssssssssssssssssssssssssssssss",a)
 
 
 
     #getting shape. We will use this for back testing / training
     amountOfGames = df.shape[0]
+    print("ssddd",amountOfGames)
 
 
 
@@ -305,11 +418,12 @@ def buildmodel(request):
         
         #as a user selects and drops a variable it will be added and dropped 
         # to this list. This list is the list of variables used in the model
-        if answers_list:
+        if len(answers_list)==12:
             modelVars=answers_list
+         
         else:
             modelVars=['num',
-            'away_defensive_rating',
+            'away_defensive_rating',    
             'away_offensive_rating',
             'away_three_point_attempt_rate',
             'away_true_shooting_percentage',
@@ -320,7 +434,7 @@ def buildmodel(request):
             'home_true_shooting_percentage',
             'home_turnover_percentage',
             'pace']
-        
+    
         #we build two models but kind of use them just as one. We have the same
         #variables in both just a different target variable
         X = np.asarray(training[modelVars])
@@ -400,7 +514,7 @@ def buildmodel(request):
             
             
             #code to get the record for the model
-            if home == row['participant full name']:
+            if home == row['participant_full_name']:
                
         
         
@@ -408,10 +522,10 @@ def buildmodel(request):
              
 
         
-                if point_diff > abs(row['spread / total']):
-                    if row['participant score']-row['underdog score']>abs(row['spread / total']):
+                if point_diff > abs(row['spread_total']):
+                    if row['participant_score']-row['underdog_score']>abs(row['spread_total']):
                          wins = wins + 1
-                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                    elif row['participant_score']-row['underdog_score']==abs(row['spread_total']):
                         ties = ties + 1
 
                     else:
@@ -420,11 +534,11 @@ def buildmodel(request):
 
                    
             
-                if point_diff < abs(row['spread / total']):
-                    if row['participant score']-row['underdog score']<abs(row['spread / total']):
+                if point_diff < abs(row['spread_total']):
+                    if row['participant_score']-row['underdog_score']<abs(row['spread_total']):
                         wins = wins + 1
                 
-                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                    elif row['participant_score']-row['underdog_score']==abs(row['spread_total']):
                         ties = ties + 1
                         
                     else:                
@@ -434,19 +548,19 @@ def buildmodel(request):
                 
         
                 
-            if away == row['participant full name']:
+            if away == row['participant_full_name']:
                 
                 
                 point_diff = home_points-away_points
                 
-                if point_diff > abs(row['spread / total']):
-                    if row['participant score']-row['underdog score']>row['spread / total']:
+                if point_diff > abs(row['spread_total']):
+                    if row['participant_score']-row['underdog_score']>row['spread_total']:
                         wins = wins + 1
                            
                         
                         
                         
-                    elif row['participant score']-row['underdog score']==row['spread / total']:
+                    elif row['participant_score']-row['underdog_score']==row['spread_total']:
                         ties = ties + 1
                     
                     
@@ -456,12 +570,12 @@ def buildmodel(request):
 
                         
                         
-                if point_diff < abs(row['spread / total']):
-                    if row['participant score']-row['underdog score']<abs(row['spread / total']):
+                if point_diff < abs(row['spread_total']):
+                    if row['participant_score']-row['underdog_score']<abs(row['spread_total']):
                         wins = wins + 1
                         
                    
-                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                    elif row['participant_score']-row['underdog_score']==abs(row['spread_total']):
                         ties = ties + 1
 
                     else:
@@ -510,9 +624,7 @@ def buildmodel(request):
 
         print(data_list) 
 
-
-
-    return render(request,"signup/buildmodel.html",{'H':data_list})
+    return render(request,"signup/buildmodel.html",{'H':data_list,"df":list(df),'status':status,"all":all})
 
 
 def buildmodelStatus(request):
@@ -522,11 +634,13 @@ def buildmodelStatus(request):
     print("build",build.title)
     build.created_by = request.user.id
     build.save()
+    build.status=Modelvar.objects.filter(created_by=request.user.id).update(status=1)
+    print("/////////////////",build.status)
     
     data = {
     "status":"OK",
-    "messages":"You have selected home points",
-    "message":"You have Selected home_field_goals",
+    "messages":"You have selected the item",
+    "message":"You have Selected the item",
     "value":0,
     }
 
