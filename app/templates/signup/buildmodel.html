@@ -73,7 +73,7 @@
          .row_section_grid{
          display:flex;
          }
-         .column {
+         .column{
          width: 18%;
          margin: 1%;
          border:2px solid;
@@ -96,7 +96,7 @@
          input.form-control.input-number {
          text-align: center;
          background: #f2f3f3;
-         }	
+         }  
          /*.input-group.section_number {
          text-align: center;
          width: 100%;
@@ -178,6 +178,13 @@
          background-color: #000000;
          border-color: #7c7c7c;
          }
+         .Games_box {
+         width: 20%;
+         margin: 0 auto;
+         border: 2px solid #000000;
+         padding: 10px;
+         display: none;
+         }
       </style>
    </head>
    <body>
@@ -190,245 +197,277 @@
                   <option value="">NBA</option>
                </select>
          </div>
+      
          <div id="output">
          </div>
          <div class="section_first">
-            <div class="row_section_grid">
-               <div class="column">
-                  <div class="Info-sign">
-                     <span class="glyphicon glyphicon-info-sign"></span> 
-                  </div>
-                 
-                  <div class="home_point">
-                     <p>home_points</p>
-                  </div>
-                  <div class="input-group section_number">
-                     <span class="input-group-btn">
-                     <button type="button" id="id_quant[1]" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="home_points">
-                     <span class="glyphicon glyphicon-minus"></span>
-                     </button>
-                     </span>
-                   <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
-                     <span class="input-group-btn">
-                     <button type="button" id="id_quant[1]" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_points" >
-                     <span class="glyphicon glyphicon-plus"></span>
-                     </button>
-                     </span>
-                     
-                  </div>
-                  
+            
+         <div class="row_section_grid">
+         {%for i in df%}
+         <div class="column" id="id_{{forloop.counter}}">
+         <div class="Info-sign">
+         <span class="glyphicon glyphicon-info-sign"></span> 
+         </div>
+         <div class="home_point">
+         <p>home_points</p>
+         </div> 
+         <div class="input-group section_number">
+         <span class="input-group-btn">
+         <button type="button" id="id_quant[1]" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data={{i}}>
+         <span class="glyphicon glyphicon-minus"></span>
+         </button>
+         </span>
+         <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
+         {% comment %} {%if status == 1%} {% endcomment %}
+         <span class="input-group-btn"> 
+         <button type="button" id="id_quant_{{forloop.counter}}" class="btn btn-default btn-number build"  data-type="plus" data-field="quant[1]" data-id={{i}}>
+         <span class="glyphicon glyphicon-plus"></span>
+         </button>
+         </span>
+         </div>
+         </div>
+         {%endfor%}
+         <!--  {% comment %} <div id="out">
+            </div>
+            <div class="column">
+               <div class="Info-sign">
+                  <span class="glyphicon glyphicon-info-sign"></span> 
                </div>
-               <div id="out">
+              
+               <div class="home_point">
+                  <p>home_field_goals</p>
                </div>
-               <div class="column">
-                  <div class="Info-sign">
-                     <span class="glyphicon glyphicon-info-sign"></span> 
-                  </div>
-                  <div class="home_point">
-                     <p>home_field_goals</p>
-                  </div>
-                  <div class="input-group section_number">
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="home_field_goals">
-                     <span class="glyphicon glyphicon-minus"></span>
-                     </button>
-                     </span>
-                <!--      <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="10"> -->
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_field_goals">
-                     <span class="glyphicon glyphicon-plus"></span>
-                     </button>
-                     </span>
-                  </div>
+               <div class="input-group section_number">
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="home_field_goals">
+                  <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+                  </span>
+            
+                  <span class="input-group-btn">
+                     {%if forloop.counter%}
+                  <button type="button"american_odds
+            
+            </div>
+            
+            <div class="column">
+               <div class="Info-sign">
+                  <span class="glyphicon glyphicon-info-sign"></span> 
                </div>
-               <div class="column">
-                  <div class="Info-sign">
-                     <span class="glyphicon glyphicon-info-sign"></span> 
-                  </div>
-                  <div class="home_point">
-                     <p>home_blocks</p>
-                  </div>
-                  <div class="input-group section_number">
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="home_blocks">
-                     <span class="glyphicon glyphicon-minus"></span>
-                     </button>
-                     </span>
-                     <!-- <input type="text" name="quant[3]" class="form-control input-number" value="1" min="1" max="10"> -->
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_blocks">
-                     <span class="glyphicon glyphicon-plus"></span>
-                     </button>
-                     </span>
-                  </div>
+               <div class="home_point">
+                  <p>home_blocks</p>
                </div>
-               <div class="column">
-                  <div class="Info-sign">
-                     <span class="glyphicon glyphicon-info-sign"></span> 
-                  </div>
-                  <div class="home_point">
-                     <p>home_assists</p>
-                  </div>
-                  <div class="input-group section_number">
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build1"  data-type="minus" data-field="quant[1]" data="home_assists">
-                     <span class="glyphicon glyphicon-minus"></span>
-                     </button>
-                     </span>
-              <!--        <input type="text" name="quant[4]" class="form-control input-number" value="1" min="1" max="10"> -->
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_assists">
-                     <span class="glyphicon glyphicon-plus"></span>
-                     </button>
-                     </span>
-                  </div>
-               </div>
-               <div class="column">
-                  <div class="Info-sign">
-                     <span class="glyphicon glyphicon-info-sign"></span> 
-                  </div>
-                  <div class="home_point">
-                     <p>home_steals</p>
-                  </div>
-                  <div class="input-group section_number">
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="home_steals">
-                     <span class="glyphicon glyphicon-minus"></span>
-                     </button>
-                     </span>
-                 <!--     <input type="text" name="quant[5]" class="form-control input-number" value="1" min="1" max="10"> -->
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="home_steals">
-                     <span class="glyphicon glyphicon-plus"></span>
-                     </button>
-                     </span>
-                  </div>
+               <div class="input-group section_number">
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="home_blocks">
+                  <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+                  </span>
+            
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{i}}>
+                  <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                  </span>
                </div>
             </div>
-            <div class="row_section_grid">
-               <div class="column">
-                  <div class="Info-sign">
-                     <span class="glyphicon glyphicon-info-sign"></span> 
-                  </div>
-                  <div class="home_point">
-                     <p>Away_points</p>
-                  </div>
-                  <div class="input-group section_number">
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="Away_points">
-                     <span class="glyphicon glyphicon-minus"></span>
-                     </button>
-                     </span>
-                  <!--    <input type="text" name="quant[6]" class="form-control input-number" value="1" min="1" max="10"> -->
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="Away_points" >
-                     <span class="glyphicon glyphicon-plus"></span>
-                     </button>
-                     </span>
-                  </div>
+            <div class="column">
+               <div class="Info-sign">
+                  <span class="glyphicon glyphicon-info-sign"></span> 
                </div>
-               <div class="column">
-                  <div class="Info-sign">
-                     <span class="glyphicon glyphicon-info-sign"></span> 
-                  </div>
-                  <div class="home_point">
-                     <p>Away_field_goals</p>
-                  </div>
-                  <div class="input-group section_number">
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="Away_field_goals">
-                     <span class="glyphicon glyphicon-minus"></span>
-                     </button>
-                     </span>
-                   <!--   <input type="text" name="quant[7]" class="form-control input-number" value="1" min="1" max="10"> -->
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="Away_field_goals">
-                     <span class="glyphicon glyphicon-plus"></span>
-                     </button>
-                     </span>
-                  </div>
+               <div class="home_point">
+                  <p>home_assists</p>
                </div>
-               <div class="column">
-                  <div class="Info-sign">
-                     <span class="glyphicon glyphicon-info-sign"></span> 
-                  </div>
-                  <div class="home_point">
-                     <p>Away_blocks</p>
-                  </div>
-                  <div class="input-group section_number">
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="Away_blocks">
-                     <span class="glyphicon glyphicon-minus"></span>
-                     </button>
-                     </span>
-                  <!--    <input type="text" name="quant[8]" class="form-control input-number" value="1" min="1" max="10"> -->
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="Away_blocks" >
-                     <span class="glyphicon glyphicon-plus"></span>
-                     </button>
-                     </span>
-                  </div>
-               </div>
-               <div class="column">
-                  <div class="Info-sign">
-                     <span class="glyphicon glyphicon-info-sign"></span> 
-                  </div>
-                  <div class="home_point">
-                     <p>Away_assists</p>
-                  </div>
-                  <div class="input-group section_number">
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="Away_assists">
-                     <span class="glyphicon glyphicon-minus"></span>
-                     </button>
-                     </span>
-                  <!--    <input type="text" name="quant[9]" class="form-control input-number" value="1" min="1" max="10"> -->
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="Away_assists">
-                     <span class="glyphicon glyphicon-plus"></span>
-                     </button>
-                     </span>
-                  </div>
-               </div>
-               <div class="column">
-                  <div class="Info-sign">
-                     <span class="glyphicon glyphicon-info-sign"></span> 
-                  </div>
-                  <div class="home_point">
-                     <p>Away_steals</p>
-                  </div>
-                  <div class="input-group section_number">
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="Away_steals">
-                     <span class="glyphicon glyphicon-minus"></span>
-                     </button>
-                     </span>
-                  <!--    <input type="text" name="quant[10]" class="form-control input-number" value="1" min="1" max="10"> -->
-                     <span class="input-group-btn">
-                     <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ="Away_steals">
-                     <span class="glyphicon glyphicon-plus"></span>
-                     </button>
-                     </span>
-                  </div>
+               <div class="input-group section_number">
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build1"  data-type="minus" data-field="quant[1]" data="home_assists">
+                  <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+                  </span>
+            
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{i}}>
+                  <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                  </span>
                </div>
             </div>
-            <div class="text-center"><button type="button" class="btn btn-primary">Build Model Button</button></div>
+            <div class="column">
+               <div class="Info-sign">
+                  <span class="glyphicon glyphicon-info-sign"></span> 
+               </div>
+               <div class="home_point">
+                  <p>home_steals</p>
+               </div>
+               <div class="input-group section_number">
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="home_steals">
+                  <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+                  </span>
+            
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{i.1}}>
+                  <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                  </span>
+               </div>
+            </div>
+            </div>
+            
+            <div class="row_section_grid">
+            <div class="column">
+               <div class="Info-sign">
+                  <span class="glyphicon glyphicon-info-sign"></span> 
+               </div>
+               <div class="home_point">
+                  <p>Away_points</p>
+               </div>
+               <div class="input-group section_number">
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="away_points">
+                  <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+                  </span>
+            
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{df.5}} >
+                  <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                  </span>
+               </div>
+            </div>
+            <div class="column">
+               <div class="Info-sign">
+                  <span class="glyphicon glyphicon-info-sign"></span> 
+               </div>
+               <div class="home_point">
+                  <p>Away_field_goals</p>
+               </div>
+               <div class="input-group section_number">
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="away_field_goals">
+                  <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+                  </span>
+            
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{df.6}}>
+                  <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                  </span>
+               </div>
+            </div>
+            <div class="column">
+               <div class="Info-sign">
+                  <span class="glyphicon glyphicon-info-sign"></span> 
+               </div>
+               <div class="home_point">
+                  <p>Away_blocks</p>
+               </div>
+               <div class="input-group section_number">
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="away_blocks">
+                  <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+                  </span>
+            
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{df.7}} >
+                  <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                  </span>
+               </div>
+            </div>
+            <div class="column">
+               <div class="Info-sign">
+                  <span class="glyphicon glyphicon-info-sign"></span> 
+               </div>
+               <div class="home_point">
+                  <p>Away_assists</p>
+               </div>
+               <div class="input-group section_number">
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="away_assists">
+                  <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+                  </span>
+            
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{df.8}}>
+                  <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                  </span>
+               </div>
+            </div>
+            <div class="column">
+               <div class="Info-sign">
+                  <span class="glyphicon glyphicon-info-sign"></span> 
+               </div>
+               <div class="home_point">
+                  <p>Away_steals</p>
+               </div>
+               <div class="input-group section_number">
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="away_steals">
+                  <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+                  </span>
+             
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{df.9}}>
+                  <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                  </span>
+               </div>
+            </div>
+            </div>
+            {% endcomment %} -->
+         </div>
+         </div>
+         <div class="text-center">
+         <button type="button" class="btn btn-primary buildmodelbutton">Build Model Button</button>
+         </div>
+         <div class="Games_box">
+         <h6>Recent Games Record</h6>
+         {% for i in H %}
+         <div class="row">
+         <div class="col-md-6 text-left">
+         <p class="text-left">{{i.last_games}} :</p>
+         </div>
+         <div class="col-md-6 text_right">
+         <p class="text-right">{{i.wins}}-{{i.loss}}</p>
+         </div>
+         </div> 
+         {% endfor %} 
          </div>
          <div class="row btn_section">
-            <div>
-               <button type="button" class="btn btn-primary ModelButton">Save Model Button</button>
-            </div>
-            <div>
-               <button type="button" class="btn btn-primary ModelButton">Reset</button>
-            </div>
+         <div>
+         <button type="button" class="btn btn-primary ModelButton">Save Model Button</button>
          </div>
-     </form>
+         <div>
+         <button type="button" class="btn btn-primary ModelButton">Reset</button>
+         </div>
+         </div>
+         </form>
       </div>
       <script type="text/javascript">
          $(document).ready(function(){
             $(".build").click(function () {
                var rowId = $(this).attr('data-id');
-               console.log(rowId);
+               var rowssId=$(this).attr('id')
+               var iddd=$(this).attr('id')
+               console.log("sss",rowssId)
+               console.log("ssssssdss",rowId)
+           
+         
+            
+               $("#"+rowssId).prop("disabled",true);
+               
+              
+         
+              
+               console.log(rowId)
                $.ajax({
                  type:"GET",
                  url: '/buildmodel/status/',
@@ -438,15 +477,23 @@
                  },
                  dataType: 'json',
                  success: function (data) {
-                  $('#output').html(data.messages)
-                 
+                  if (rowId == "home_field_goals")
+                  {
+                     $('#output').html(data.message)
+                    
+                  }
+                  else
+                  {
+                     $('#output').html(data.messages)
+                  }
+                
                   console.log(data.messages)
                   
                  }
                });
-
+         
             });
-
+         
             $(".build1").click(function () {
                var rowId = $(this).attr('data');
                console.log(rowId);
@@ -462,12 +509,40 @@
                   
                  }
                });
-
+         
             });
-
-
+         
+            $('.buildmodelbutton').on('click', function() {
+               $( ".Games_box" ).show();
+               $.ajaxSetup({
+                  data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+               });
+               $.ajax({
+                 type:"POST",
+                 url: '/buildmodel/',
+                 data: {
+         
+         
+                  
+         
+                 },
+                 dataType: 'json',
+                 success: function (data) {
+                  
+                 }
+               });
+         
+               
+            });
+         
+            $(".column").click(function () {
+               var ro = $(this).attr('id');
+               console.log("show",ro)
+               $("#"+ro).css( "background-color", "#69ace0" );
+            });
+         
          });
-
+         
          $('.btn-number').click(function(e) {
            e.preventDefault();
          
@@ -525,8 +600,5 @@
          });
           
       </script>
-	  
-	
-
    </body>
 </html>
