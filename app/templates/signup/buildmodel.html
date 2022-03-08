@@ -191,7 +191,7 @@
                   <option value="">NBA</option>
                </select>
          </div>
-         {%for i in df%} 
+      
          
          <div id="output">
          </div>
@@ -200,6 +200,7 @@
          <div class="section_first">
             
             <div class="row_section_grid">
+               {%for i in df %} 
                <div class="column">
                   
                
@@ -216,24 +217,27 @@
                   <div class="input-group section_number">
                     
                      <span class="input-group-btn">
-                     <button type="button" id="id_quant[1]" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="home_points">
+                     <button type="button" btn.style.color = 'red'; id="id_quant_{{forloop.counter}}" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="home_points">
                      <span class="glyphicon glyphicon-minus"></span>
                      </button>
                      </span>
                    <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
                    
                    <span class="input-group-btn">
+                     
                      <button type="button" id="id_quant[2]" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id={{i}}>
                      <span class="glyphicon glyphicon-plus"></span>
                      </button>
                      </span>
                      
-                 
+                     
                   </div>
                   
-                
+                  
+             
                </div>
-               
+               {%endfor%}
+                 {% comment %} {%endfor%}  {% endcomment %}
                <div id="out">
                </div>
                <div class="column">
@@ -326,7 +330,7 @@
                   </div>
                </div>
             </div>
-            {%endfor%}
+           
             <div class="row_section_grid">
                <div class="column">
                   <div class="Info-sign">

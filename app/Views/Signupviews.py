@@ -43,17 +43,17 @@ print(stripe.api_key)
 
 def index(request):   
     df = ["datetime",
-    "spread / total",
+    "spread_total",
     "over_under_total",
-    "decimal odds",
-    "american odds",
+    "decimal_odds",
+    "american_odds",
     "event",
-    "participant score",
+    "participant_score",
     "participant",
-    "participant full name",
-    "underdog score",
-    "underdog team",
-    "underdog abb",
+    "participant_full_name",
+    "underdog_score",
+    "underdog_team",
+    "underdog_abb",
     "home",
     "away",
     "dateForJoin",
@@ -266,17 +266,17 @@ def buildmodel(request):
 
 
     df = df[["datetime",
-    "spread / total",
+    "spread_total",
     "over_under_total",
-    "decimal odds",
-    "american odds",
+    "decimal_odds",
+    "american_odds",
     "event",
-    "participant score",
+    "participant_score",    
     "participant",
-    "participant full name",
-    "underdog score",
-    "underdog team",
-    "underdog abb",
+    "participant_full_name",
+    "underdog_score",
+    "underdog_team",
+    "underdog_abb",
     "home",
     "away",
     "dateForJoin",
@@ -504,7 +504,7 @@ def buildmodel(request):
             
             
             #code to get the record for the model
-            if home == row['participant full name']:
+            if home == row['participant_full_name']:
                
         
         
@@ -512,10 +512,10 @@ def buildmodel(request):
              
 
         
-                if point_diff > abs(row['spread / total']):
-                    if row['participant score']-row['underdog score']>abs(row['spread / total']):
+                if point_diff > abs(row['spread_total']):
+                    if row['participant_score']-row['underdog_score']>abs(row['spread_total']):
                          wins = wins + 1
-                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                    elif row['participant_score']-row['underdog_score']==abs(row['spread_total']):
                         ties = ties + 1
 
                     else:
@@ -524,11 +524,11 @@ def buildmodel(request):
 
                    
             
-                if point_diff < abs(row['spread / total']):
-                    if row['participant score']-row['underdog score']<abs(row['spread / total']):
+                if point_diff < abs(row['spread_total']):
+                    if row['participant_score']-row['underdog_score']<abs(row['spread_total']):
                         wins = wins + 1
                 
-                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                    elif row['participant_score']-row['underdog_score']==abs(row['spread_total']):
                         ties = ties + 1
                         
                     else:                
@@ -538,19 +538,19 @@ def buildmodel(request):
                 
         
                 
-            if away == row['participant full name']:
+            if away == row['participant_full_name']:
                 
                 
                 point_diff = home_points-away_points
                 
-                if point_diff > abs(row['spread / total']):
-                    if row['participant score']-row['underdog score']>row['spread / total']:
+                if point_diff > abs(row['spread_total']):
+                    if row['participant_score']-row['underdog_score']>row['spread_total']:
                         wins = wins + 1
                            
                         
                         
                         
-                    elif row['participant score']-row['underdog score']==row['spread / total']:
+                    elif row['participant_score']-row['underdog_score']==row['spread_total']:
                         ties = ties + 1
                     
                     
@@ -560,12 +560,12 @@ def buildmodel(request):
 
                         
                         
-                if point_diff < abs(row['spread / total']):
-                    if row['participant score']-row['underdog score']<abs(row['spread / total']):
+                if point_diff < abs(row['spread_total']):
+                    if row['participant_score']-row['underdog_score']<abs(row['spread_total']):
                         wins = wins + 1
                         
                    
-                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                    elif row['participant_score']-row['underdog_score']==abs(row['spread_total']):
                         ties = ties + 1
 
                     else:
@@ -589,7 +589,7 @@ def buildmodel(request):
         print('             ')
 
 
-    return render(request,"signup/buildmodel.html",{"df":list(df)})
+    return render(request,"signup/buildmodel.html",{"df":list(df),"show":0})
 
 
 def buildmodelStatus(request):
