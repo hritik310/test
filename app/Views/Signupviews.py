@@ -634,8 +634,6 @@ def buildmodelStatus(request):
     print("build",build.title)
     build.created_by = request.user.id
     build.save()
-    build.status=Modelvar.objects.filter(created_by=request.user.id).update(status=1)
-    print("/////////////////",build.status)
     
     data = {
     "status":"OK",
