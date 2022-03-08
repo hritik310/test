@@ -288,6 +288,8 @@ def buildmodel(request):
     # for i in show:
     #     lst=list(i)
         #print(lst)
+
+    data_list =[]
     for i in backTest:
         training = df[:amountOfGames-i]
         print(training.shape)
@@ -464,8 +466,7 @@ def buildmodel(request):
 
                     else:
                         losses = losses + 1
-        
-        
+
         print('Last ' + str(abs(i)) + ' games')
         print('wins over/under: ' + str(total_wins))
         print('losses over/under: ' + str(total_losses))
@@ -480,10 +481,38 @@ def buildmodel(request):
         print('ties spread: ' + str(ties))
         games = abs(i)-ties
         print('win% spread: ' + str(wins/games))
+        print('             ')                
+        
+        
+        h='Last ' + str(abs(i))
+        j=str(total_wins)
+        k=str(total_losses)
+        l=str(total_ties)
+        games = abs(i)-total_ties
+        m='win% over/under: ' + str(total_wins/games)
+        print('             ')               
+                        
+        n='Last ' + str(abs(i)) + ' games'
+        o='wins spread: ' + str(wins)
+        p='losses spread: ' + str(losses)
+        q='ties spread: ' + str(ties)
+        games = abs(i)-ties
+        s='win% spread: ' + str(wins/games)
         print('             ')
+        data = {
+                    'last_games':h,
+                    'wins':j,
+                    'loss':k,
+                    'ties':l
+                }
+
+        data_list.append(data) 
+
+        print(data_list) 
 
 
-    return render(request,"signup/buildmodel.html")
+
+    return render(request,"signup/buildmodel.html",{'H':data_list})
 
 
 def buildmodelStatus(request):

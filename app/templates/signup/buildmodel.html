@@ -178,6 +178,17 @@
          background-color: #000000;
          border-color: #7c7c7c;
          }
+
+
+
+
+         .Games_box {
+          width: 20%;
+          margin: 0 auto;
+          border: 2px solid #000000;
+          padding: 10px;
+          display: none;
+          }
       </style>
    </head>
    <body>
@@ -412,7 +423,29 @@
                   </div>
                </div>
             </div>
-            <div class="text-center"><button type="button" class="btn btn-primary">Build Model Button</button></div>
+            <div class="text-center">
+               <button type="button" class="btn btn-primary buildmodelbutton">Build Model Button</button>
+
+
+            </div>
+       
+          
+            
+              <div class="Games_box">
+               <h6>Recent Games Record</h6>
+               {% for i in H %}
+                <div class="row">
+                   <div class="col-md-6 text-left">
+                      <p class="text-left">{{i.last_games}} :</p>
+                   </div>
+                    <div class="col-md-6 text_right">
+                        <p class="text-right">{{i.wins}}-{{i.loss}}</p>
+                   </div>
+                </div> 
+                {% endfor %} 
+                  
+            
+               </div>
          </div>
          <div class="row btn_section">
             <div>
@@ -471,6 +504,29 @@
                  }
                });
 
+            });
+
+            $('.buildmodelbutton').on('click', function() {
+               $( ".Games_box" ).show();
+               $.ajaxSetup({
+                  data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+               });
+               $.ajax({
+                 type:"POST",
+                 url: '/buildmodel/',
+                 data: {
+
+
+                  
+         
+                 },
+                 dataType: 'json',
+                 success: function (data) {
+                  
+                 }
+               });
+
+               
             });
 
 
