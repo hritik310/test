@@ -245,6 +245,13 @@ def updateprofile(request,id):
 
 
 def buildmodel(request):
+    all=Modelvar.objects.all()
+    a=Modelvar.objects.filter(created_by=request.user.id).values_list("title",flat="True")
+    if Modelvar.objects.filter(created_by=request.user.id).exists():
+        status=list(a)
+        print("sssssssssssssss",status)
+    else:
+        status=0
     df = pd.read_csv('finalDS.csv')
 
     df = df.dropna()
@@ -372,6 +379,7 @@ def buildmodel(request):
 
     #getting shape. We will use this for back testing / training
     amountOfGames = df.shape[0]
+    print("ssddd",amountOfGames)
 
 
 
@@ -589,7 +597,7 @@ def buildmodel(request):
         print('             ')
 
 
-    return render(request,"signup/buildmodel.html",{"df":list(df)})
+    return render(request,"signup/buildmodel.html",{"df":list(df),'status':status,"all":all})
 
 
 def buildmodelStatus(request):
@@ -599,6 +607,8 @@ def buildmodelStatus(request):
     print("build",build.title)
     build.created_by = request.user.id
     build.save()
+    build.status=Modelvar.objects.filter(created_by=request.user.id).update(status=1)
+    print("/////////////////",build.status)
     
     data = {
     "status":"OK",

@@ -73,7 +73,7 @@
          .row_section_grid{
          display:flex;
          }
-         .column {
+         .column{
          width: 18%;
          margin: 1%;
          border:2px solid;
@@ -182,6 +182,9 @@
    </head>
    <body>
      
+      
+     
+     
       <div class="container-fluid padding_cont">
          <div class="dropdown_section">
             <form action="" method="POST">
@@ -191,8 +194,8 @@
                   <option value="">NBA</option>
                </select>
          </div>
-         {%for i in df%} 
-         
+         {% comment %} {%for i in df%}  {% endcomment %}
+      
          <div id="output">
          </div>
          
@@ -200,7 +203,10 @@
          <div class="section_first">
             
             <div class="row_section_grid">
-               <div class="column">
+               {%for i in df%}
+               
+               
+               <div class="column" id="id_{{forloop.counter}}">
                   
                
                   <div class="Info-sign">
@@ -210,31 +216,36 @@
                
                   <div class="home_point">
                      <p>home_points</p>
+                     
                    
                   </div> 
                   
                   <div class="input-group section_number">
                     
                      <span class="input-group-btn">
-                     <button type="button" id="id_quant[1]" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="home_points">
+                     <button type="button" id="id_quant[1]" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data={{i}}>
                      <span class="glyphicon glyphicon-minus"></span>
                      </button>
                      </span>
                    <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
-                   
-                   <span class="input-group-btn">
-                     <button type="button" id="id_quant[2]" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id={{i}}>
+                   {% comment %} {%if status == 1%} {% endcomment %}
+                   <span class="input-group-btn"> 
+                  
+                      
+                      <button type="button" id="id_quant_{{forloop.counter}}" class="btn btn-default btn-number build"  data-type="plus" data-field="quant[1]" data-id={{i}}>
                      <span class="glyphicon glyphicon-plus"></span>
+                    
+                    
                      </button>
                      </span>
-                     
+                   
                  
                   </div>
-                  
-                
                </div>
+               {%endfor%}
+               {% comment %} {%endfor%} {% endcomment %}
                
-               <div id="out">
+               {% comment %} <div id="out">
                </div>
                <div class="column">
                   <div class="Info-sign">
@@ -326,7 +337,7 @@
                   </div>
                </div>
             </div>
-            {%endfor%}
+            
             <div class="row_section_grid">
                <div class="column">
                   <div class="Info-sign">
@@ -433,7 +444,7 @@
                      </span>
                   </div>
                </div>
-            </div>
+            </div> {% endcomment %}
             <a href="{% url 'buildmodel' %}">  
             <div class="text-center"><button type="button" class="btn btn-primary">Build Model Button</button></div>
             </a>
@@ -454,7 +465,18 @@
          $(document).ready(function(){
             $(".build").click(function () {
                var rowId = $(this).attr('data-id');
-               console.log(rowId);
+               var rowssId=$(this).attr('id')
+               var iddd=$(this).attr('id')
+               console.log("sss",rowssId)
+               console.log("ssssssdss",rowId)
+               {% comment %} $( ".column" ).closest( ".column" ).css( "background-color", "red" );
+              {% endcomment %}
+               $("#"+rowssId).prop("disabled",true);
+               
+              
+    
+              
+               console.log(rowId)
                $.ajax({
                  type:"GET",
                  url: '/buildmodel/status/',
@@ -473,7 +495,7 @@
                   {
                      $('#output').html(data.messages)
                   }
-                 
+                
                   console.log(data.messages)
                   
                  }
@@ -498,7 +520,11 @@
                });
 
             });
-
+            $(".column").click(function () {
+               var ro = $(this).attr('id');
+               console.log("show",ro)
+               $("#"+ro).css( "background-color", "red" );
+            });
 
          });
 
