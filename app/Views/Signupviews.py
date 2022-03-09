@@ -42,109 +42,6 @@ print(stripe.api_key)
 
 
 def index(request):   
-    df = [["datetime",
-"spread / total",
-"over_under_total",
-"decimalodds",
-"americanodds",
-"event",
-"participantscore",
-"participant",
-"participantfullname",
-"underdogscore",
-"underdogteam",
-"underdogabb",
-"home",
-"away",
-"dateForJoin",
-"away_assist_percentage",
-"away_assists",
-"away_block_percentage",
-"away_blocks",
-"away_defensive_rating",
-"away_defensive_rebound_percentage",
-"away_defensive_rebounds",
-"away_effective_field_goal_percentage",
-"away_field_goal_attempts",
-"away_field_goal_percentage",
-"away_field_goals",
-"away_free_throw_attempt_rate",
-"away_free_throw_attempts",
-"away_free_throw_percentage",
-"away_free_throws",
-"away_losses",
-"away_minutes_played",
-"away_offensive_rating",
-"away_offensive_rebound_percentage",
-"away_offensive_rebounds",
-"away_personal_fouls",
-"away_points",
-"away_steal_percentage",
-"away_steals",
-"away_three_point_attempt_rate",
-"away_three_point_field_goal_attempts",
-"away_three_point_field_goal_percentage",
-"away_three_point_field_goals",
-"away_total_rebound_percentage",
-"away_total_rebounds",
-"away_true_shooting_percentage",
-"away_turnover_percentage",
-"away_turnovers",
-"away_two_point_field_goal_attempts",
-"away_two_point_field_goal_percentage",
-"away_two_point_field_goals",
-"away_wins",
-"home_assist_percentage",
-"home_assists",
-"home_block_percentage",
-"home_blocks",
-"home_defensive_rating",
-"home_defensive_rebound_percentage",
-"home_defensive_rebounds",
-"home_effective_field_goal_percentage",
-"home_field_goal_attempts",
-"home_field_goal_percentage",
-"home_field_goals",
-"home_free_throw_attempt_rate",
-"home_free_throw_attempts",
-"home_free_throw_percentage",
-"home_free_throws",
-"home_losses",
-"home_minutes_played",
-"home_offensive_rating",
-"home_offensive_rebound_percentage",
-"home_offensive_rebounds",
-"home_personal_fouls",
-"home_points",
-"home_steal_percentage",
-"home_steals",
-"home_three_point_attempt_rate",
-"home_three_point_field_goal_attempts",
-"home_three_point_field_goal_percentage",
-"home_three_point_field_goals",
-"home_total_rebound_percentage",
-"home_total_rebounds",
-"home_true_shooting_percentage",
-"home_turnover_percentage",
-"home_turnovers",
-"home_two_point_field_goal_attempts",
-"home_two_point_field_goal_percentage",
-"home_two_point_field_goals",
-"home_wins",
-"location",
-"losing_abbr",
-"losing_name",
-"pace",
-"winner",
-"winning_abbr",
-"winning_name",
-"num"]]
-
-
-    for i in df:
-        print(i)
-        a=random.choice(i) 
-        print(a)
     context = {'user_list':user.objects.all()}
     if request.method =="POST":
         messages.success(request,"Contact request submitted successfully")
@@ -659,6 +556,7 @@ def buildmodelbutton(request):
     a=Modelvar.objects.filter(created_by=request.user.id).values_list("title",flat="True")
     if Modelvar.objects.filter(created_by=request.user.id).exists():
         status=list(a)
+        
     else:
         status=0
     df = pd.read_csv('finalDS.csv')
@@ -681,18 +579,18 @@ def buildmodelbutton(request):
     df['num'] = 1
 
 
-    df =df = df[["datetime",
-"spread / total",
+    df = df[["datetime",
+"spreadtotal",
 "over_under_total",
-"decimal odds",
-"american odds",
+"decimalodds",
+"americanodds",
 "event",
-"participant score",
+"participantscore",
 "participant",
-"participant full name",
-"underdog score",
-"underdog team",
-"underdog abb",
+"participantfullname",
+"underdogscore",
+"underdogteam",
+"underdogabb",
 "home",
 "away",
 "dateForJoin",
@@ -778,14 +676,27 @@ def buildmodelbutton(request):
 "winning_abbr",
 "winning_name",
 "num"]]
+   
+
+    #getting shape. We will use this for back testing / training
     amountOfGames = df.shape[0]
 
+
+
+
     df['actual_total_points'] = df['home_points'] + df['away_points']
+
+
+    # In[117]:
+
 
     backTest = [10,25,50,100]
     var = Modelvar.objects.filter(created_by = request.user.id).values_list("title",flat=True)
     answers_list = list(var)
     print(answers_list)
+ 
+
+
 
     data_list =[]
     for i in backTest:
@@ -805,6 +716,8 @@ def buildmodelbutton(request):
         # to this list. This list is the list of variables used in the model
         if len(answers_list)==12:
             modelVars=answers_list
+
+            print("sssssssssssssss",modelVars)
          
         else:
             modelVars=['num',
@@ -830,9 +743,13 @@ def buildmodelbutton(request):
         home_model = xgb.XGBRegressor()
         away_model = xgb.XGBRegressor()
 
-
+        
         home_model.fit(X,Y_home)
-        away_model.fit(X,Y_away)     
+        away_model.fit(X,Y_away)
+        
+        
+        
+        
         
         for index, row in predictionGames.iterrows():
             home = row['home']
@@ -895,18 +812,18 @@ def buildmodelbutton(request):
             
             
             #code to get the record for the model
-            if home == row['participant full name']:
+            if home == row['participantfullname']:
                
         
         
                 point_diff = home_points-away_points
              
 
-                if point_diff < abs(row['spread / total']):
-                    if row['participant score']-row['underdog score']<abs(row['spread / total']):
-                        wins = wins + 1
-            
-                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+        
+                if point_diff > abs(row['spreadtotal']):
+                    if row['participantscore']-row['underdogscore']>abs(row['spreadtotal']):
+                         wins = wins + 1
+                    elif row['participantscore']-row['underdogscore']==abs(row['spreadtotal']):
                         ties = ties + 1
                     
                     else:                
@@ -918,11 +835,11 @@ def buildmodelbutton(request):
 
                    
             
-                if point_diff < abs(row['spread / total']):
-                    if row['participant score']-row['underdog score']<abs(row['spread / total']):
+                if point_diff < abs(row['spreadtotal']):
+                    if row['participantscore']-row['underdogscore']<abs(row['spreadtotal']):
                         wins = wins + 1
                 
-                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                    elif row['participantscore']-row['underdogscore']==abs(row['spreadtotal']):
                         ties = ties + 1
                         
                     else:                
@@ -932,19 +849,19 @@ def buildmodelbutton(request):
                 
         
                 
-            if away == row['participant full name']:
+            if away == row['participantfullname']:
                 
                 
                 point_diff = home_points-away_points
                 
-                if point_diff > abs(row['spread / total']):
-                    if row['participant score']-row['underdog score']>row['spread / total']:
+                if point_diff > abs(row['spreadtotal']):
+                    if row['participantscore']-row['underdogscore']>row['spreadtotal']:
                         wins = wins + 1
                            
                         
                         
                         
-                    elif row['participant score']-row['underdog score']==row['spread / total']:
+                    elif row['participantscore']-row['underdogscore']==row['spreadtotal']:
                         ties = ties + 1
                     
                     
@@ -954,17 +871,17 @@ def buildmodelbutton(request):
 
                         
                         
-                if point_diff < abs(row['spread / total']):
-                    if row['participant score']-row['underdog score']<abs(row['spread / total']):
+                if point_diff < abs(row['spreadtotal']):
+                    if row['participantscore']-row['underdogscore']<abs(row['spreadtotal']):
                         wins = wins + 1
                         
                    
-                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                    elif row['participantscore']-row['underdogscore']==abs(row['spreadtotal']):
                         ties = ties + 1
 
                     else:
                         losses = losses + 1
-              
+
         
         
         h='Last ' + str(abs(i))
