@@ -249,7 +249,7 @@ def buildmodel(request):
     a=Modelvar.objects.filter(created_by=request.user.id).values_list("title",flat="True")
     if Modelvar.objects.filter(created_by=request.user.id).exists():
         status=list(a)
-        print("sssssssssssssss",status)
+        # print("sssssssssssssss",status)
     else:
         status=0
     df = pd.read_csv('finalDS.csv')
@@ -272,114 +272,107 @@ def buildmodel(request):
     df['num'] = 1
 
 
-    df = df[["datetime",
-    "spread_total",
-    "over_under_total",
-    "decimal_odds",
-    "american_odds",
-    "event",
-    "participant_score",    
-    "participant",
-    "participant_full_name",
-    "underdog_score",
-    "underdog_team",
-    "underdog_abb",
-    "home",
-    "away",
-    "dateForJoin",
-    "away_assist_percentage",
-    "away_assists",
-    "away_block_percentage",
-    "away_blocks",
-    "away_defensive_rating",
-    "away_defensive_rebound_percentage",
-    "away_defensive_rebounds",
-    "away_effective_field_goal_percentage",
-    "away_field_goal_attempts",
-    "away_field_goal_percentage",
-    "away_field_goals",
-    "away_free_throw_attempt_rate",
-    "away_free_throw_attempts",
-    "away_free_throw_percentage",
-    "away_free_throws",
-    "away_losses",
-    "away_minutes_played",
-    "away_offensive_rating",
-    "away_offensive_rebound_percentage",
-    "away_offensive_rebounds",
-    "away_personal_fouls",
-    "away_points",
-    "away_steal_percentage",
-    "away_steals",
-    "away_three_point_attempt_rate",
-    "away_three_point_field_goal_attempts",
-    "away_three_point_field_goal_percentage",
-    "away_three_point_field_goals",
-    "away_total_rebound_percentage",
-    "away_total_rebounds",
-    "away_true_shooting_percentage",
-    "away_turnover_percentage",
-    "away_turnovers",
-    "away_two_point_field_goal_attempts",
-    "away_two_point_field_goal_percentage",
-    "away_two_point_field_goals",
-    "away_wins",
-    "home_assist_percentage",
-    "home_assists",
-    "home_block_percentage",
-    "home_blocks",
-    "home_defensive_rating",
-    "home_defensive_rebound_percentage",
-    "home_defensive_rebounds",
-    "home_effective_field_goal_percentage",
-    "home_field_goal_attempts",
-    "home_field_goal_percentage",
-    "home_field_goals",
-    "home_free_throw_attempt_rate",
-    "home_free_throw_attempts",
-    "home_free_throw_percentage",
-    "home_free_throws",
-    "home_losses",
-    "home_minutes_played",
-    "home_offensive_rating",
-    "home_offensive_rebound_percentage",
-    "home_offensive_rebounds",
-    "home_personal_fouls",
-    "home_points",
-    "home_steal_percentage",
-    "home_steals",
-    "home_three_point_attempt_rate",
-    "home_three_point_field_goal_attempts",
-    "home_three_point_field_goal_percentage",
-    "home_three_point_field_goals",
-    "home_total_rebound_percentage",
-    "home_total_rebounds",
-    "home_true_shooting_percentage",
-    "home_turnover_percentage",
-    "home_turnovers",
-    "home_two_point_field_goal_attempts",
-    "home_two_point_field_goal_percentage",
-    "home_two_point_field_goals",
-    "home_wins",
-    "location",
-    "losing_abbr",
-    "losing_name",
-    "pace",
-    "winner",
-    "winning_abbr",   
-    "winning_name",
-    "num"]]
-    # for i in list(df):
-    #     print("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",i)
-    #     sh=i
-    # a=random.sample(list(df),12) 
-    # print("ssssssssssssssssssssssssssssssss",a)
-
-
+    df =df = df[["datetime",
+"spread / total",
+"over_under_total",
+"decimal odds",
+"american odds",
+"event",
+"participant score",
+"participant",
+"participant full name",
+"underdog score",
+"underdog team",
+"underdog abb",
+"home",
+"away",
+"dateForJoin",
+"away_assist_percentage",
+"away_assists",
+"away_block_percentage",
+"away_blocks",
+"away_defensive_rating",
+"away_defensive_rebound_percentage",
+"away_defensive_rebounds",
+"away_effective_field_goal_percentage",
+"away_field_goal_attempts",
+"away_field_goal_percentage",
+"away_field_goals",
+"away_free_throw_attempt_rate",
+"away_free_throw_attempts",
+"away_free_throw_percentage",
+"away_free_throws",
+"away_losses",
+"away_minutes_played",
+"away_offensive_rating",
+"away_offensive_rebound_percentage",
+"away_offensive_rebounds",
+"away_personal_fouls",
+"away_points",
+"away_steal_percentage",
+"away_steals",
+"away_three_point_attempt_rate",
+"away_three_point_field_goal_attempts",
+"away_three_point_field_goal_percentage",
+"away_three_point_field_goals",
+"away_total_rebound_percentage",
+"away_total_rebounds",
+"away_true_shooting_percentage",
+"away_turnover_percentage",
+"away_turnovers",
+"away_two_point_field_goal_attempts",
+"away_two_point_field_goal_percentage",
+"away_two_point_field_goals",
+"away_wins",
+"home_assist_percentage",
+"home_assists",
+"home_block_percentage",
+"home_blocks",
+"home_defensive_rating",
+"home_defensive_rebound_percentage",
+"home_defensive_rebounds",
+"home_effective_field_goal_percentage",
+"home_field_goal_attempts",
+"home_field_goal_percentage",
+"home_field_goals",
+"home_free_throw_attempt_rate",
+"home_free_throw_attempts",
+"home_free_throw_percentage",
+"home_free_throws",
+"home_losses",
+"home_minutes_played",
+"home_offensive_rating",
+"home_offensive_rebound_percentage",
+"home_offensive_rebounds",
+"home_personal_fouls",
+"home_points",
+"home_steal_percentage",
+"home_steals",
+"home_three_point_attempt_rate",
+"home_three_point_field_goal_attempts",
+"home_three_point_field_goal_percentage",
+"home_three_point_field_goals",
+"home_total_rebound_percentage",
+"home_total_rebounds",
+"home_true_shooting_percentage",
+"home_turnover_percentage",
+"home_turnovers",
+"home_two_point_field_goal_attempts",
+"home_two_point_field_goal_percentage",
+"home_two_point_field_goals",
+"home_wins",
+"location",
+"losing_abbr",
+"losing_name",
+"pace",
+"winner",
+"winning_abbr",
+"winning_name",
+"num"]]
+   
 
     #getting shape. We will use this for back testing / training
     amountOfGames = df.shape[0]
-    print("ssddd",amountOfGames)
 
 
 
@@ -396,11 +389,7 @@ def buildmodel(request):
     print(answers_list)
  
 
-    # show=var.values_list("title",flat=True)
-    # print("show",show)
-    # for i in show:
-    #     lst=list(i)
-        #print(lst)
+
 
     data_list =[]
     for i in backTest:
@@ -514,31 +503,34 @@ def buildmodel(request):
             
             
             #code to get the record for the model
-            if home == row['participant_full_name']:
+            if home == row['participant full name']:
                
         
         
                 point_diff = home_points-away_points
              
 
-        
-                if point_diff > abs(row['spread_total']):
-                    if row['participant_score']-row['underdog_score']>abs(row['spread_total']):
-                         wins = wins + 1
-                    elif row['participant_score']-row['underdog_score']==abs(row['spread_total']):
+                if point_diff < abs(row['spread / total']):
+                    if row['participant score']-row['underdog score']<abs(row['spread / total']):
+                        wins = wins + 1
+            
+                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
                         ties = ties + 1
-
-                    else:
+                    
+                    else:                
                         losses = losses + 1
+
+
+            
 
 
                    
             
-                if point_diff < abs(row['spread_total']):
-                    if row['participant_score']-row['underdog_score']<abs(row['spread_total']):
+                if point_diff < abs(row['spread / total']):
+                    if row['participant score']-row['underdog score']<abs(row['spread / total']):
                         wins = wins + 1
                 
-                    elif row['participant_score']-row['underdog_score']==abs(row['spread_total']):
+                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
                         ties = ties + 1
                         
                     else:                
@@ -548,19 +540,19 @@ def buildmodel(request):
                 
         
                 
-            if away == row['participant_full_name']:
+            if away == row['participant full name']:
                 
                 
                 point_diff = home_points-away_points
                 
-                if point_diff > abs(row['spread_total']):
-                    if row['participant_score']-row['underdog_score']>row['spread_total']:
+                if point_diff > abs(row['spread / total']):
+                    if row['participant score']-row['underdog score']>row['spread / total']:
                         wins = wins + 1
                            
                         
                         
                         
-                    elif row['participant_score']-row['underdog_score']==row['spread_total']:
+                    elif row['participant score']-row['underdog score']==row['spread / total']:
                         ties = ties + 1
                     
                     
@@ -570,12 +562,12 @@ def buildmodel(request):
 
                         
                         
-                if point_diff < abs(row['spread_total']):
-                    if row['participant_score']-row['underdog_score']<abs(row['spread_total']):
+                if point_diff < abs(row['spread / total']):
+                    if row['participant score']-row['underdog score']<abs(row['spread / total']):
                         wins = wins + 1
                         
                    
-                    elif row['participant_score']-row['underdog_score']==abs(row['spread_total']):
+                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
                         ties = ties + 1
 
                     else:
@@ -612,7 +604,6 @@ def buildmodel(request):
         q='ties spread: ' + str(ties)
         games = abs(i)-ties
         s='win% spread: ' + str(wins/games)
-        print('             ')
         data = {
                     'last_games':h,
                     'wins':j,
@@ -625,7 +616,7 @@ def buildmodel(request):
         print(data_list) 
 
     return render(request,"signup/buildmodel.html",{'H':data_list,"df":list(df),'status':status,"all":all})
-
+   
 
 def buildmodelStatus(request):
   
@@ -655,5 +646,359 @@ def buildmodelremove(request):
     }
 
     return JsonResponse(data)
+
+
+
+def buildmodelbutton(request):
+    all=Modelvar.objects.all()
+    a=Modelvar.objects.filter(created_by=request.user.id).values_list("title",flat="True")
+    if Modelvar.objects.filter(created_by=request.user.id).exists():
+        status=list(a)
+    else:
+        status=0
+    df = pd.read_csv('finalDS.csv')
+
+    df = df.dropna()
+
+    df = df.replace(to_replace ="New Orleans",value ="New Orleans Pelicans")
+    df = df.replace(to_replace ="L.A. Clippers Clippers",value ="Los Angeles Clippers")
+    df = df.replace(to_replace ="L.A. Clippers",value ="Los Angeles Clippers")
+    df = df.replace(to_replace ="LA Clippers",value ="Los Angeles Clippers")
+    df = df.replace(to_replace ="Oklahoma City",value ="Oklahoma City Thunder")
+    df = df.replace(to_replace ="Golden State",value ="Golden State Warriors")
+    df = df.replace(to_replace ="New York",value ="New York Knicks")
+    df = df.replace(to_replace ="L.A. Lakers Lakers",value ="Los Angeles Lakers")
+    df = df.replace(to_replace ="LA Lakers",value ="Los Angeles Lakers")
+    df = df.replace(to_replace ="L.A. Lakers",value ="Los Angeles Lakers")
+    df = df.replace(to_replace ="San Antonio",value ="San Antonio Spurs")
+
+
+    df['num'] = 1
+
+
+    df =df = df[["datetime",
+"spread / total",
+"over_under_total",
+"decimal odds",
+"american odds",
+"event",
+"participant score",
+"participant",
+"participant full name",
+"underdog score",
+"underdog team",
+"underdog abb",
+"home",
+"away",
+"dateForJoin",
+"away_assist_percentage",
+"away_assists",
+"away_block_percentage",
+"away_blocks",
+"away_defensive_rating",
+"away_defensive_rebound_percentage",
+"away_defensive_rebounds",
+"away_effective_field_goal_percentage",
+"away_field_goal_attempts",
+"away_field_goal_percentage",
+"away_field_goals",
+"away_free_throw_attempt_rate",
+"away_free_throw_attempts",
+"away_free_throw_percentage",
+"away_free_throws",
+"away_losses",
+"away_minutes_played",
+"away_offensive_rating",
+"away_offensive_rebound_percentage",
+"away_offensive_rebounds",
+"away_personal_fouls",
+"away_points",
+"away_steal_percentage",
+"away_steals",
+"away_three_point_attempt_rate",
+"away_three_point_field_goal_attempts",
+"away_three_point_field_goal_percentage",
+"away_three_point_field_goals",
+"away_total_rebound_percentage",
+"away_total_rebounds",
+"away_true_shooting_percentage",
+"away_turnover_percentage",
+"away_turnovers",
+"away_two_point_field_goal_attempts",
+"away_two_point_field_goal_percentage",
+"away_two_point_field_goals",
+"away_wins",
+"home_assist_percentage",
+"home_assists",
+"home_block_percentage",
+"home_blocks",
+"home_defensive_rating",
+"home_defensive_rebound_percentage",
+"home_defensive_rebounds",
+"home_effective_field_goal_percentage",
+"home_field_goal_attempts",
+"home_field_goal_percentage",
+"home_field_goals",
+"home_free_throw_attempt_rate",
+"home_free_throw_attempts",
+"home_free_throw_percentage",
+"home_free_throws",
+"home_losses",
+"home_minutes_played",
+"home_offensive_rating",
+"home_offensive_rebound_percentage",
+"home_offensive_rebounds",
+"home_personal_fouls",
+"home_points",
+"home_steal_percentage",
+"home_steals",
+"home_three_point_attempt_rate",
+"home_three_point_field_goal_attempts",
+"home_three_point_field_goal_percentage",
+"home_three_point_field_goals",
+"home_total_rebound_percentage",
+"home_total_rebounds",
+"home_true_shooting_percentage",
+"home_turnover_percentage",
+"home_turnovers",
+"home_two_point_field_goal_attempts",
+"home_two_point_field_goal_percentage",
+"home_two_point_field_goals",
+"home_wins",
+"location",
+"losing_abbr",
+"losing_name",
+"pace",
+"winner",
+"winning_abbr",
+"winning_name",
+"num"]]
+    amountOfGames = df.shape[0]
+
+    df['actual_total_points'] = df['home_points'] + df['away_points']
+
+    backTest = [10,25,50,100]
+    var = Modelvar.objects.filter(created_by = request.user.id).values_list("title",flat=True)
+    answers_list = list(var)
+    print(answers_list)
+
+    data_list =[]
+    for i in backTest:
+        training = df[:amountOfGames-i]
+        print(training.shape)
+        predictionGames = df[i*-1:]
+        print(predictionGames.shape)
+        wins = 0
+        losses = 0
+        ties = 0
+        
+        total_wins = 0
+        total_losses = 0
+        total_ties = 0
+        
+        #as a user selects and drops a variable it will be added and dropped 
+        # to this list. This list is the list of variables used in the model
+        if len(answers_list)==12:
+            modelVars=answers_list
+         
+        else:
+            modelVars=['num',
+            'away_defensive_rating',    
+            'away_offensive_rating',
+            'away_three_point_attempt_rate',
+            'away_true_shooting_percentage',
+            'away_turnover_percentage',
+            'home_defensive_rating',
+            'home_offensive_rating',
+            'home_three_point_attempt_rate',
+            'home_true_shooting_percentage',
+            'home_turnover_percentage',
+            'pace']
+    
+        #we build two models but kind of use them just as one. We have the same
+        #variables in both just a different target variable
+        X = np.asarray(training[modelVars])
+        Y_home=np.asarray(training['home_points'])
+        Y_away=np.asarray(training['away_points'])
+        #fit the model for home_points and away_points
+
+        home_model = xgb.XGBRegressor()
+        away_model = xgb.XGBRegressor()
+
+
+        home_model.fit(X,Y_home)
+        away_model.fit(X,Y_away)     
+        
+        for index, row in predictionGames.iterrows():
+            home = row['home']
+            away = row['away']
+
+            
+           
+            homeTeam = df.loc[df['home']==home]
+            awayTeam = df.loc[df['away']==away]
+            #get the averages of the playing
+            #we use averages to make predictions
+            homeTeamAverages = homeTeam.mean()
+            awayTeamAverages = awayTeam.mean()
+            
+            #NEED HELP HERE
+            #so the user adds the variables into the list modelVars
+            #but I am not sure how we can dynamically use that list to 
+            #select them from the averages dataframe we create.
+            row2 = [1,
+              awayTeamAverages['away_defensive_rating'],
+              awayTeamAverages['away_offensive_rating'],
+              awayTeamAverages['away_three_point_attempt_rate'],
+              awayTeamAverages['away_true_shooting_percentage'],
+              awayTeamAverages['away_turnover_percentage'],
+              homeTeamAverages['home_defensive_rating'],
+               homeTeamAverages['home_offensive_rating'],
+               homeTeamAverages['home_three_point_attempt_rate'],
+               homeTeamAverages['home_true_shooting_percentage'],
+               homeTeamAverages['home_turnover_percentage'],
+               (homeTeamAverages['pace'] + awayTeamAverages['pace'])/2,
+                   ]
+        
+            new_data = asarray([row2])
+            home_points = home_model.predict(new_data)[0]
+          
+            away_points = away_model.predict(new_data)[0]
+
+            prediction_total_points = home_points + away_points
+            
+        
+            if prediction_total_points>row['over_under_total']:
+                if row['actual_total_points']>row['over_under_total']:
+                    total_wins = total_wins + 1
+                elif row['actual_total_points']==row['over_under_total']:
+                    total_ties = total_ties + 1
+                else:
+                    total_losses = total_losses + 1
+            
+            if prediction_total_points<row['over_under_total']:
+                if row['actual_total_points']<row['over_under_total']:
+                    total_wins = total_wins + 1
+                elif row['actual_total_points']==row['over_under_total']:
+                    total_ties = total_ties + 1
+                else:
+                    total_losses = total_losses + 1
+            
+            
+                
+            
+            
+            
+            #code to get the record for the model
+            if home == row['participant full name']:
+               
+        
+        
+                point_diff = home_points-away_points
+             
+
+                if point_diff < abs(row['spread / total']):
+                    if row['participant score']-row['underdog score']<abs(row['spread / total']):
+                        wins = wins + 1
+            
+                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                        ties = ties + 1
+                    
+                    else:                
+                        losses = losses + 1
+
+
+            
+
+
+                   
+            
+                if point_diff < abs(row['spread / total']):
+                    if row['participant score']-row['underdog score']<abs(row['spread / total']):
+                        wins = wins + 1
+                
+                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                        ties = ties + 1
+                        
+                    else:                
+                        losses = losses + 1
+
+
+                
+        
+                
+            if away == row['participant full name']:
+                
+                
+                point_diff = home_points-away_points
+                
+                if point_diff > abs(row['spread / total']):
+                    if row['participant score']-row['underdog score']>row['spread / total']:
+                        wins = wins + 1
+                           
+                        
+                        
+                        
+                    elif row['participant score']-row['underdog score']==row['spread / total']:
+                        ties = ties + 1
+                    
+                    
+                    else:
+                        losses = losses + 1
+
+
+                        
+                        
+                if point_diff < abs(row['spread / total']):
+                    if row['participant score']-row['underdog score']<abs(row['spread / total']):
+                        wins = wins + 1
+                        
+                   
+                    elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                        ties = ties + 1
+
+                    else:
+                        losses = losses + 1
+              
+        
+        
+        h='Last ' + str(abs(i))
+        j=str(total_wins)
+        k=str(total_losses)
+        l=str(total_ties)
+        games = abs(i)-total_ties
+        m='win% over/under: ' + str(total_wins/games)
+        print('             ')               
+                        
+        n='Last ' + str(abs(i)) + ' games'
+        o='wins spread: ' + str(wins)
+        p='losses spread: ' + str(losses)
+        q='ties spread: ' + str(ties)
+        games = abs(i)-ties
+        s='win% spread: ' + str(wins/games)
+        data = {
+                    'last_games':h,
+                    'wins':j,
+                    'loss':k,
+                    'ties':l
+                }
+
+        data_list.append(data) 
+
+        print(data_list) 
+  
+    data1 = {
+    "status":"OK",
+    "total":data_list,
+    "win":j,
+    "loss":k,
+    "ties":l
+    }
+
+
+    mod = Modelvar.objects.all().delete()
+
+    return JsonResponse(data1)
+
 
 

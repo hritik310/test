@@ -20,6 +20,7 @@ urlpatterns = [
     path('buildmodel/', Signupviews.buildmodel, name ='buildmodel'),
     path('buildmodel/status/',Signupviews.buildmodelStatus, name ="buildmodel-status"),
     path('buildmodel/remove/',Signupviews.buildmodelremove, name ="buildmodel-remove"),
+    path('buildmodelbutton',Signupviews.buildmodelbutton, name ="buildmodel-button"),
 
     path('register',Signupviews.create,name="register"),
 
