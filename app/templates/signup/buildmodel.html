@@ -183,7 +183,7 @@
          margin: 0 auto;
          border: 2px solid #000000;
          padding: 10px;
-         display: none;
+      
          }
       </style>
    </head>
@@ -209,7 +209,7 @@
          <span class="glyphicon glyphicon-info-sign"></span> 
          </div>
          <div class="home_point">
-         <p>home_points</p>
+         <p>{{i}}</p>
          </div> 
          <div class="input-group section_number">
          <span class="input-group-btn">
@@ -426,7 +426,8 @@
          </div>
          </div>
          <div class="text-center">
-         <button type="button" class="btn btn-primary buildmodelbutton">Build Model Button</button>
+            <a href="{% url 'buildmodel' %}">
+         <button type="button" class="btn btn-primary buildmodelbutton">Build Model </button>
          </div>
          <div class="Games_box">
          <h6>Recent Games Record</h6>
@@ -443,7 +444,7 @@
          </div>
          <div class="row btn_section">
          <div>
-         <button type="button" class="btn btn-primary ModelButton">Save Model Button</button>
+         <button type="button" class="btn btn-primary ModelButton">Save Model</button>
          </div>
          <div>
          <button type="button" class="btn btn-primary ModelButton">Reset</button>
@@ -470,7 +471,7 @@
                console.log(rowId)
                $.ajax({
                  type:"GET",
-                 url: '/buildmodel/status/',
+                 url: 'status',
                  data: {
                   'id': rowId
          
