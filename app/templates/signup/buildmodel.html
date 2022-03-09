@@ -44,14 +44,6 @@
          a.navbar-brand.logo_name {
          width: 200px;
          height: 70px;
-         padding: 0 !important;
-         margin-left: 10px !important;
-         }
-         ul.nav.navbar-nav.navbar-right.nav_menu {
-         padding-top: 15px;
-         }
-         a.nav-link.home_list.active {
-         color: #69ace0 !important;
          font-weight: 700;
          }
          a.nav-link.home_list:hover {
@@ -185,6 +177,11 @@
          padding: 10px;
          display: none;
         
+      
+         }
+
+         .coloradd{
+            background-color: #69ace0;
          }
 
 
@@ -203,6 +200,7 @@
       </style>
    </head>
    <body>
+   <div class ="col"> 
       <div class="container-fluid padding_cont">
          <div class="dropdown_section">
             <form action="" method="POST">
@@ -228,15 +226,17 @@
          </div> 
          <div class="input-group section_number">
          <span class="input-group-btn">
-         <button type="button" id="id_quant[1]" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data={{i}}>
-         <span class="glyphicon glyphicon-minus"></span>
+         <button type="button" id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default  btn-number build1" data-type="minus"data-field="quant[1]" data={{i}} >
+         <span class="glyphicon remove glyphicon-minus" rem="{{forloop.counter}}"></span>
          </button>
          </span>
          <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
          {% comment %} {%if status == 1%} {% endcomment %}
          <span class="input-group-btn"> 
-         <button type="button" id="id_quant_{{forloop.counter}}" class="btn btn-default btn-number build"  data-type="plus" data-field="quant[1]" data-id={{i}}>
-         <span class="glyphicon glyphicon-plus"></span>
+            {%if home_points not in df %}
+         <button type="button" id="id_quant_{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"  data-type="plus" data-field="quant[1]" data-id={{i}}>
+            {%endif%}
+         <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
          </button>
          </span>
          </div>
@@ -266,26 +266,28 @@
          </div>
          </form>
       </div>
+   </div>
       <script type="text/javascript">
          $(document).ready(function(){
             $(".build").click(function () {
+               console.log('add onclick')
                var rowId = $(this).attr('data-id');
+               var rowssIdget=$(this).attr('makes')
                var rowssId=$(this).attr('id')
-               var iddd=$(this).attr('id')
-               console.log("sss",rowssId)
-               console.log("ssssssdss",rowId)
-           
-         
-            
-               $("#"+rowssId).prop("disabled",true);
                
+               console.log("rowssId",rowssId)
+               console.log("rowssIdget",rowssIdget)
+               console.log("rowId",rowId)
+
+
+               $("#"+rowssId).prop("disabled",true);
+               console.log("true")
               
-         
               
                console.log(rowId)
                $.ajax({
                  type:"GET",
-                 url: '/buildmodel/status/',
+                 url: 'status',
                  data: {
                   'id': rowId
          
@@ -309,23 +311,31 @@
          
             });
          
+           
+               
+               
             $(".build1").click(function () {
                var rowId = $(this).attr('data');
+               
+               
+            
                console.log(rowId);
+            
                $.ajax({
-                 type:"GET",
-                 url: '/buildmodel/remove/',
-                 data: {
+               type:"GET",
+               url: '/buildmodel/remove/',
+               data: {
                   'id': rowId
          
-                 },
-                 dataType: 'json',
-                 success: function (data) {
+               },
+               dataType: 'json',
+               success: function (data) {
                   
-                 }
-               });
-         
+               
+               }
             });
+            });
+         });
          
             $('.buildmodelbutton').on('click', function() {
                $( ".Games_box" ).show();
@@ -361,14 +371,43 @@
          
                
             });
-         
-            $(".column").click(function () {
-               var ro = $(this).attr('id');
-               console.log("show",ro)
-               $("#"+ro).css( "background-color", "#69ace0" );
+
+            $(".build").on('click',function () {
+               console.log('addd');
+               var ro = $(this).attr('makes');
+               console.log("show_id",ro) 
+               var def =ro   
+               console.log(def,'def')         
+               //$("#"+def).css("background-color", "#69ace0" );
+            //   $(this).parent().parent().parent().prev().prev().parent().addClass('coloradd');
+               $("#"+def).addClass("coloradd");  
             });
+            
+            $(".build").click(function () {
+               console.log('add onclick')
+               var rowssId=$(this).attr('id')
+               $(".build1").on('click',function () {
+                  console.log('remove');
+                  
+                  var rem_id = $(this).attr('makes');
+                  var rembt_id = $(this).attr('id');
+                  console.log("rem_id",rem_id) 
+                  var rem = rem_id   
+                  var de="id_quant_"+rembt_id
+                  console.log(rem,'remove_val') 
+                  
+                  $("#"+rem).removeClass("coloradd");    
+                  $("#"+de).prop("disabled",false);
+                  
+
+                  // $(this).parent().parent().parent().prev().prev().parent().removeClass('coloradd');
+               // $("#"+rem).removeAttr('style');
+               });
+            });
+          
+
+      
          
-         });
          
          $('.btn-number').click(function(e) {
            e.preventDefault();
