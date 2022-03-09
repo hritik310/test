@@ -43,15 +43,7 @@
          }
          a.navbar-brand.logo_name {
          width: 200px;
-         height: 70px;
-         padding: 0 !important;
-         margin-left: 10px !important;
-         }
-         ul.nav.navbar-nav.navbar-right.nav_menu {
-         padding-top: 15px;
-         }
-         a.nav-link.home_list.active {
-         color: #69ace0 !important;
+         height: 70px;0
          font-weight: 700;
          }
          a.nav-link.home_list:hover {
@@ -64,7 +56,7 @@
          margin-left: 10px;
          background: #69ace0;
          border-radius: 30px;
-         }
+         }0
          .container-fluid.padding_cont {
          padding: 30px;
          background: #ebeded;
@@ -192,6 +184,7 @@
       </style>
    </head>
    <body>
+   <div class ="col"> 
       <div class="container-fluid padding_cont">
          <div class="dropdown_section">
             <form action="" method="POST">
@@ -217,216 +210,22 @@
          </div> 
          <div class="input-group section_number">
          <span class="input-group-btn">
-         <button type="button" id="id_quant" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data={{i}}>
-         <span class="glyphicon remove glyphicon-minus" rem = "{{forloop.counter}}"></span>
+         <button type="button" id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default  btn-number build1" data-type="minus"data-field="quant[1]" data={{i}} >
+         <span class="glyphicon remove glyphicon-minus" rem="{{forloop.counter}}"></span>
          </button>
          </span>
          <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
          {% comment %} {%if status == 1%} {% endcomment %}
          <span class="input-group-btn"> 
-         <button type="button" id="id_quant_{{forloop.counter}}" class="btn btn-default btn-number build"  data-type="plus" data-field="quant[1]" data-id={{i}}>
-         <span class="glyphicon add glyphicon-plus" make = "{{forloop.counter}}"></span>
+            {%if home_points not in df %}
+         <button type="button" id="id_quant_{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"  data-type="plus" data-field="quant[1]" data-id={{i}}>
+            {%endif%}
+         <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
          </button>
          </span>
          </div>
          </div>
          {%endfor%}
-         <!--  {% comment %} <div id="out">
-            </div>
-            <div class="column">
-               <div class="Info-sign">
-                  <span class="glyphicon glyphicon-info-sign"></span> 
-               </div>
-              
-               <div class="home_point">
-                  <p>home_field_goals</p>
-               </div>
-               <div class="input-group section_number">
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="home_field_goals">
-                  <span class="glyphicon glyphicon-minus"></span>
-                  </button>
-                  </span>
-            
-                  <span class="input-group-btn">
-                     {%if forloop.counter%}
-                  <button type="button"american_odds
-            
-            </div>
-            
-            <div class="column">
-               <div class="Info-sign">
-                  <span class="glyphicon glyphicon-info-sign"></span> 
-               </div>
-               <div class="home_point">
-                  <p>home_blocks</p>
-               </div>
-               <div class="input-group section_number">
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="home_blocks">
-                  <span class="glyphicon glyphicon-minus"></span>
-                  </button>
-                  </span>
-            
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{i}}>
-                  <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-                  </span>
-               </div>
-            </div>
-            <div class="column">
-               <div class="Info-sign">
-                  <span class="glyphicon glyphicon-info-sign"></span> 
-               </div>
-               <div class="home_point">
-                  <p>home_assists</p>
-               </div>
-               <div class="input-group section_number">
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build1"  data-type="minus" data-field="quant[1]" data="home_assists">
-                  <span class="glyphicon glyphicon-minus"></span>
-                  </button>
-                  </span>
-            
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{i}}>
-                  <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-                  </span>
-               </div>
-            </div>
-            <div class="column">
-               <div class="Info-sign">
-                  <span class="glyphicon glyphicon-info-sign"></span> 
-               </div>
-               <div class="home_point">
-                  <p>home_steals</p>
-               </div>
-               <div class="input-group section_number">
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="home_steals">
-                  <span class="glyphicon glyphicon-minus"></span>
-                  </button>
-                  </span>
-            
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{i.1}}>
-                  <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-                  </span>
-               </div>
-            </div>
-            </div>
-            
-            <div class="row_section_grid">
-            <div class="column">
-               <div class="Info-sign">
-                  <span class="glyphicon glyphicon-info-sign"></span> 
-               </div>
-               <div class="home_point">
-                  <p>Away_points</p>
-               </div>
-               <div class="input-group section_number">
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="away_points">
-                  <span class="glyphicon glyphicon-minus"></span>
-                  </button>
-                  </span>
-            
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{df.5}} >
-                  <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-                  </span>
-               </div>
-            </div>
-            <div class="column">
-               <div class="Info-sign">
-                  <span class="glyphicon glyphicon-info-sign"></span> 
-               </div>
-               <div class="home_point">
-                  <p>Away_field_goals</p>
-               </div>
-               <div class="input-group section_number">
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="away_field_goals">
-                  <span class="glyphicon glyphicon-minus"></span>
-                  </button>
-                  </span>
-            
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{df.6}}>
-                  <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-                  </span>
-               </div>
-            </div>
-            <div class="column">
-               <div class="Info-sign">
-                  <span class="glyphicon glyphicon-info-sign"></span> 
-               </div>
-               <div class="home_point">
-                  <p>Away_blocks</p>
-               </div>
-               <div class="input-group section_number">
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="away_blocks">
-                  <span class="glyphicon glyphicon-minus"></span>
-                  </button>
-                  </span>
-            
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{df.7}} >
-                  <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-                  </span>
-               </div>
-            </div>
-            <div class="column">
-               <div class="Info-sign">
-                  <span class="glyphicon glyphicon-info-sign"></span> 
-               </div>
-               <div class="home_point">
-                  <p>Away_assists</p>
-               </div>
-               <div class="input-group section_number">
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="away_assists">
-                  <span class="glyphicon glyphicon-minus"></span>
-                  </button>
-                  </span>
-            
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{df.8}}>
-                  <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-                  </span>
-               </div>
-            </div>
-            <div class="column">
-               <div class="Info-sign">
-                  <span class="glyphicon glyphicon-info-sign"></span> 
-               </div>
-               <div class="home_point">
-                  <p>Away_steals</p>
-               </div>
-               <div class="input-group section_number">
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build1" data-type="minus" data-field="quant[1]" data="away_steals">
-                  <span class="glyphicon glyphicon-minus"></span>
-                  </button>
-                  </span>
-             
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default btn-number build" data-type="plus" data-field="quant[1]" data-id ={{df.9}}>
-                  <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-                  </span>
-               </div>
-            </div>
-            </div>
-            {% endcomment %} -->
          </div>
          </div>
          <div class="text-center">
@@ -456,21 +255,23 @@
          </div>
          </form>
       </div>
+   </div>
       <script type="text/javascript">
          $(document).ready(function(){
             $(".build").click(function () {
+               console.log('add onclick')
                var rowId = $(this).attr('data-id');
+               var rowssIdget=$(this).attr('makes')
                var rowssId=$(this).attr('id')
-               var iddd=$(this).attr('id')
-               console.log("sss",rowssId)
-               console.log("ssssssdss",rowId)
-           
-         
-            
-               //$("#"+rowssId).prop("",true);
                
+               console.log("rowssId",rowssId)
+               console.log("rowssIdget",rowssIdget)
+               console.log("rowId",rowId)
+
+
+               $("#"+rowssId).prop("disabled",true);
+               console.log("true")
               
-         
               
                console.log(rowId)
                $.ajax({
@@ -499,23 +300,31 @@
          
             });
          
+           
+               
+               
             $(".build1").click(function () {
                var rowId = $(this).attr('data');
+               
+               
+            
                console.log(rowId);
+            
                $.ajax({
-                 type:"GET",
-                 url: '/buildmodel/remove/',
-                 data: {
+               type:"GET",
+               url: '/buildmodel/remove/',
+               data: {
                   'id': rowId
          
-                 },
-                 dataType: 'json',
-                 success: function (data) {
+               },
+               dataType: 'json',
+               success: function (data) {
                   
-                 }
-               });
-         
+               
+               }
             });
+            });
+         });
          
             $('.buildmodelbutton').on('click', function() {
                $( ".Games_box" ).show();
@@ -540,30 +349,42 @@
                
             });
 
-            $(".add").on('click',function () {
-               console.log('hiii');
-               var ro = $(this).attr('make');
+            $(".build").on('click',function () {
+               console.log('addd');
+               var ro = $(this).attr('makes');
                console.log("show_id",ro) 
-               var def = 'id_'+ro   
+               var def =ro   
                console.log(def,'def')         
                //$("#"+def).css("background-color", "#69ace0" );
-               $(this).parent().parent().parent().prev().prev().parent().addClass('coloradd');
+            //   $(this).parent().parent().parent().prev().prev().parent().addClass('coloradd');
+               $("#"+def).addClass("coloradd");  
             });
+            
+            $(".build").click(function () {
+               console.log('add onclick')
+               var rowssId=$(this).attr('id')
+               $(".build1").on('click',function () {
+                  console.log('remove');
+                  
+                  var rem_id = $(this).attr('makes');
+                  var rembt_id = $(this).attr('id');
+                  console.log("rem_id",rem_id) 
+                  var rem = rem_id   
+                  var de="id_quant_"+rembt_id
+                  console.log(rem,'remove_val') 
+                  
+                  $("#"+rem).removeClass("coloradd");    
+                  $("#"+de).prop("disabled",false);
+                  
 
-            $(".remove").on('click',function () {
-               console.log('hiii');
-               var ro = $(this).attr('rem');
-               console.log("show_id",ro) 
-               var rem = 'id_'+ro   
-               console.log(rem,'def')     
-               $(this).parent().parent().parent().prev().prev().parent().removeClass('coloradd');
-              // $("#"+rem).removeAttr('style');
-               ;
+                  // $(this).parent().parent().parent().prev().prev().parent().removeClass('coloradd');
+               // $("#"+rem).removeAttr('style');
+               });
             });
           
 
       
-         });
+         
          
          $('.btn-number').click(function(e) {
            e.preventDefault();

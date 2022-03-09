@@ -654,12 +654,12 @@ def buildmodelStatus(request):
 
 def buildmodelremove(request):
 
-    b = Modelvar.objects.filter(title =request.GET.get('id')).last()
+    b = Modelvar.objects.filter(title =request.GET.get('id'))
     b.delete()
     print(b)
   
     data = {
-    "status":"OK"
+    "status":"OK",
     }
 
     return JsonResponse(data)
