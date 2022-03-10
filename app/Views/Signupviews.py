@@ -34,7 +34,7 @@ import numpy as np
 import xgboost as xgb
 from sklearn.model_selection import train_test_split
 from math import sqrt
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_pinball_loss, mean_squared_error
 from numpy import asarray
 
 stripe.api_key = settings.SECTRET_KEY # new
@@ -147,7 +147,7 @@ def buildmodel(request):
     all=Modelvar.objects.all()
     a=Modelvar.objects.filter(created_by=request.user.id).values_list("title",flat="True")
     if Modelvar.objects.filter(created_by=request.user.id).exists():
-        status=list(a)
+        status=a[0]
         # print("sssssssssssssss",status)
     else:
         status=0
@@ -303,6 +303,9 @@ def buildmodel(request):
         total_wins = 0
         total_losses = 0
         total_ties = 0
+
+        ml_wins = 0
+        ml_losses = 0
         
         #as a user selects and drops a variable it will be added and dropped 
         # to this list. This list is the list of variables used in the model
@@ -380,6 +383,17 @@ def buildmodel(request):
             away_points = away_model.predict(new_data)[0]
 
             prediction_total_points = home_points + away_points
+
+            if home_points > away_points and row['home_points']>row['away_points']:
+                ml_wins = ml_wins + 1
+            elif home_points > away_points and row['home_points']<row['away_points']:
+                ml_losses = ml_losses + 1
+
+            if away_points > home_points and row['away_points']>row['home_points']:
+                ml_wins = ml_wins + 1
+            elif away_points > home_points and row['away_points']<row['home_points']:
+                ml_losses = ml_losses + 1
+           
             
         
             if prediction_total_points>row['over_under_total']:
@@ -475,6 +489,12 @@ def buildmodel(request):
                         losses = losses + 1
 
         print('Last ' + str(abs(i)) + ' games')
+        print('wins ML:' +str(ml_wins))
+        print('Losses ML:'+str(ml_losses))
+        print('win% over/under:'+str(ml_wins/(ml_wins + ml_losses)))
+        print("                 ")
+
+        print('Last ' + str(abs(i)) + ' games')
         print('wins over/under: ' + str(total_wins))
         print('losses over/under: ' + str(total_losses))
         print('ties over/under: ' + str(total_ties))
@@ -490,7 +510,11 @@ def buildmodel(request):
         print('win% spread: ' + str(wins/games))
         print('             ')                
         
-        
+        y='Last '+str(abs(i))
+        w=str(ml_wins)
+        e=str(ml_losses)
+        r=str(ml_wins/(ml_wins + ml_losses))
+
         h='Last ' + str(abs(i))
         j=str(total_wins)
         k=str(total_losses)
@@ -509,12 +533,16 @@ def buildmodel(request):
                     'last_games':h,
                     'wins':j,
                     'loss':k,
-                    'ties':l
+                    'ties':l,
+                    'ML_last_games':y,
+                    'ML_wins':w,
+                    'ML_loss':e,
+                    'ML_ties':r,
                 }
 
         data_list.append(data) 
 
-        print(data_list) 
+        print("sssssssssssssss",data_list) 
 
     return render(request,"signup/buildmodel.html",{'H':data_list,"df":list(df),'status':status,"all":all})
    
@@ -712,6 +740,8 @@ def buildmodelbutton(request):
         total_losses = 0
         total_ties = 0
         
+        ml_wins = 0
+        ml_losses = 0
         #as a user selects and drops a variable it will be added and dropped 
         # to this list. This list is the list of variables used in the model
         if len(answers_list)==12:
@@ -789,6 +819,18 @@ def buildmodelbutton(request):
 
             prediction_total_points = home_points + away_points
             
+            if home_points > away_points and row['home_points']>row['away_points']:
+                ml_wins = ml_wins + 1
+            elif home_points > away_points and row['home_points']<row['away_points']:
+                ml_losses = ml_losses + 1
+
+            if away_points > home_points and row['away_points']>row['home_points']:
+                ml_wins = ml_wins + 1
+            elif away_points > home_points and row['away_points']<row['home_points']:
+                ml_losses = ml_losses + 1
+           
+            
+                
         
             if prediction_total_points>row['over_under_total']:
                 if row['actual_total_points']>row['over_under_total']:
@@ -806,8 +848,7 @@ def buildmodelbutton(request):
                 else:
                     total_losses = total_losses + 1
             
-            
-                
+          
             
             
             
@@ -828,6 +869,7 @@ def buildmodelbutton(request):
                     
                     else:                
                         losses = losses + 1
+
 
 
             
@@ -883,6 +925,11 @@ def buildmodelbutton(request):
                         losses = losses + 1
 
         
+        y='Last '+str(abs(i))
+        w=str(ml_wins)
+        e=str(ml_losses)
+        r=str(ml_wins/(ml_wins + ml_losses))
+
         
         h='Last ' + str(abs(i))
         j=str(total_wins)
@@ -893,16 +940,24 @@ def buildmodelbutton(request):
         print('             ')               
                         
         n='Last ' + str(abs(i)) + ' games'
-        o='wins spread: ' + str(wins)
-        p='losses spread: ' + str(losses)
-        q='ties spread: ' + str(ties)
+        o=str(wins)
+        p=str(losses)
+        q=str(ties)
         games = abs(i)-ties
         s='win% spread: ' + str(wins/games)
         data = {
                     'last_games':h,
                     'wins':j,
                     'loss':k,
-                    'ties':l
+                    'ties':l,
+                    'ML_last_games':y,
+                    'ML_wins':w,
+                    'ML_loss':e,
+                    'ML_ties':r,
+                    "spread_last_games":n,
+                    "spread_wins":o,
+                    'spread_loss':p,
+                    'spread_ties':q,
                 }
 
         data_list.append(data) 
@@ -914,7 +969,15 @@ def buildmodelbutton(request):
     "total":data_list,
     "win":j,
     "loss":k,
-    "ties":l
+    "ties":l,
+    'ML_last_games':y,
+    'ML_wins':w,
+    'ML_loss':e,
+    'ML_ties':r,
+    "spread_last_games":n,
+    "spread_wins":o,
+    'spread_loss':p,
+    'spread_ties':q,
     }
 
 

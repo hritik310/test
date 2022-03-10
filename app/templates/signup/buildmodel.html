@@ -171,102 +171,110 @@
          border-color: #7c7c7c;
          }
          .Games_box {
-         width: 20%;
+         width: 100%;
          margin: 0 auto;
          border: 2px solid #000000;
          padding: 10px;
          display: none;
-        
-      
          }
-
          .coloradd{
-            background-color: #69ace0;
+         background-color: #69ace0;
          }
-
-
          span.number {
-             padding: 0px 0px 0px 100px;
+         padding: 0px 0px 0px 100px;
          }
-         .row.results p {
-             margin-left: 20px;
-            text-align: justify;
+         .para-sec p {
+         margin-left: 20px;
+         text-align: justify;
          }
-         .row.results {
-             display: block !important;
+         .row.results, .row.show {
+         display: block !important;
          }
-
-
       </style>
    </head>
    <body>
-   <div class ="col"> 
-      <div class="container-fluid padding_cont">
-         <div class="dropdown_section">
-            <form action="" method="POST">
-               {% csrf_token %}
-               <select name="cars" id="drop">
-                  <option value="" selected disabled hidden>Choose here</option>
-                  <option value="">NBA</option>
-               </select>
-         </div>
-      
-         <div id="output">
-         </div>
-         <div class="section_first">
-
-         <div class="row_section_grid">
-         {%for i in df%}
-         <div class="column" id="id_{{forloop.counter}}">
-         <div class="Info-sign">
-         <span class="glyphicon glyphicon-info-sign"></span> 
-         </div>
-         <div class="home_point">
-         <p>{{i}}</p>
-         </div> 
-         <div class="input-group section_number">
-         <span class="input-group-btn">
-         <button type="button" id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default  btn-number build1" data-type="minus"data-field="quant[1]" data={{i}} >
-         <span class="glyphicon remove glyphicon-minus" rem="{{forloop.counter}}"></span>
-         </button>
-         </span>
-         <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
-         {% comment %} {%if status == 1%} {% endcomment %}
-         <span class="input-group-btn"> 
-            {%if home_points not in df %}
-         <button type="button" id="id_quant_{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"  data-type="plus" data-field="quant[1]" data-id={{i}}>
-            {%endif%}
-         <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
-         </button>
-         </span>
-         </div>
-         </div>
-         {%endfor%}
-         </div>
-         </div>
-         <div class="text-center">
-            <a>
-         <button type="button" class="btn btn-primary buildmodelbutton">Build Model</button></a>
-         </div>
-         <div class="Games_box">
-         <h6>Recent Games Record</h6>
-         <div class="row results">
+      <div class ="col  ">
+         <div class="container-fluid padding_cont">
+            <div class="dropdown_section">
+               <form action="" method="GET">
+                  {% csrf_token %}
+                  <select name="cars" id="drop">
+                     <option value="" selected disabled hidden>Choose here</option>
+                     <option value="">NBA</option>
+                  </select>
+            </div>
+            <div id="output">
+            </div>
+            <div class="section_first">
+            <div class="row_section_grid">
+            {%for i in df%}
+            <div class="column   {%for z in all%}  {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
+            <div class="Info-sign">
+            <span class="glyphicon glyphicon-info-sign"></span> 
+            </div>
+            <div class="home_point">
+            <p>{{i}}</p>
+            </div> 
+            <div class="input-group section_number">
+            <span class="input-group-btn">
+            <button type="button" id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default  btn-number build1" data-type="minus"data-field="quant[1]" data={{i}} >
+            <span class="glyphicon remove glyphicon-minus" rem="{{forloop.counter}}"></span>
+            </button>
+            </span>
+            <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
+            {% comment %} {%if status == 1%} {% endcomment %}
+            <span class="input-group-btn"> 
             
-         
-         </div> 
+            <button type="button" id="id_quant_{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id={{i}}>
+            
+            <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
+            </button>
+            </span>
+            </div>
+            </div>
+            {%endfor%}
+            </div>
+            </div>
+            <div class="text-center">
+            <a>
+            <button type="button" class="btn btn-primary buildmodelbutton">Build Model</button></a>
+            </div>
+            <div class="row">
+            <div class="col-md-4">
+            <div class="Games_box">
+            <h6>ML Recent Games Record</h6>
+            <div class="row results para-sec">
+            </div> 
+            </div>
+            </div>
+            <div class="col-md-4">
+            <div class="Games_box"> 
+            <h6>Over Under Recent Games Record</h6>
+            <div class="row para-sec show">
+            </div> 
+            </div>
+            </div>
+
+            <div class="col-md-4">
+            <div class="Games_box"> 
+            <h6>Spread Recent Games Record</h6>
+            <div class="row para-sec spread">
+            </div> 
+            </div>
+            </div>
+            </div>
+            <div class="row btn_section">
+            <div>
+            <!--  <a href="{% url 'buildmodel' %}"> -->
+            <button type="button" class="btn btn-primary ModelButton">Save Model</button>
+            </div>
+            <div>
+            <button type="button" class="btn btn-primary ModelButton">Reset</button>
+            </div>
+            </div>
+            </form>
          </div>
-         <div class="row btn_section">
-         <div>
-        <!--  <a href="{% url 'buildmodel' %}"> -->
-         <button type="button" class="btn btn-primary ModelButton">Save Model</button>
-         </div>
-         <div>
-         <button type="button" class="btn btn-primary ModelButton">Reset</button>
-         </div>
-         </div>
-         </form>
       </div>
-   </div>
       <script type="text/javascript">
          $(document).ready(function(){
             $(".build").click(function () {
@@ -274,12 +282,13 @@
                var rowId = $(this).attr('data-id');
                var rowssIdget=$(this).attr('makes')
                var rowssId=$(this).attr('id')
-               
+         
                console.log("rowssId",rowssId)
                console.log("rowssIdget",rowssIdget)
                console.log("rowId",rowId)
-
-
+         
+      
+                  
                $("#"+rowssId).prop("disabled",true);
                console.log("true")
               
@@ -311,7 +320,15 @@
          
             });
          
-           
+            $(document).ready(function(){
+               $('coloradd').on('show.bs.tab', function(e) {
+                   localStorage.setItem('activeTab', $(e.target).attr('href'));
+               });
+               var activeTab = localStorage.getItem('activeTab');
+               if(activeTab){
+                   $('#myTab a[href="' + activeTab + '"]').tab('show');
+               }
+           });
                
                
             $(".build1").click(function () {
@@ -354,32 +371,38 @@
                  success: function (data1) {
                   console.log(data1);
                         var html = '';
+                        var over_html= '';
+                        var spread_html= '';
                         $.each(data1.total, function(index, value) {
-
-                        html += "<p>" + value.last_games +" : <span class='number'>"+value.wins+"-"+ value.loss +"-"+value.ties+ "</span></p>";
-
-
+         
+                        html += "<p>" + value.ML_last_games +" : <span class='number'>"+value.ML_wins+"-"+ value.ML_loss +"-"+value.ML_ties+ "</span></p>";
+                        over_html += "<p>" + value.last_games +" : <span class='number'>"+value.wins+"-"+ value.loss +"-"+value.ties+ "</span></p>";
+                        spread_html+= "<p>" + value.spread_last_games +" : <span class='number'>"+value.spread_wins+"-"+ value.spread_loss +"-"+value.spread_ties+ "</span></p>";
+         
                      });
-
+         
                      // $(html).appendTo('.results');
                      $('.results').html(html);
-
-
+                     $('.show').html(over_html);
+                     $('.spread').html( spread_html);
+         
+         
          
                  }
                });
          
                
             });
-
+         
             $(".build").on('click',function () {
                console.log('addd');
                var ro = $(this).attr('makes');
                console.log("show_id",ro) 
                var def =ro   
                console.log(def,'def')         
-               //$("#"+def).css("background-color", "#69ace0" );
-            //   $(this).parent().parent().parent().prev().prev().parent().addClass('coloradd');
+         
+         
+         
                $("#"+def).addClass("coloradd");  
             });
             
@@ -399,14 +422,14 @@
                   $("#"+rem).removeClass("coloradd");    
                   $("#"+de).prop("disabled",false);
                   
-
+         
                   // $(this).parent().parent().parent().prev().prev().parent().removeClass('coloradd');
                // $("#"+rem).removeAttr('style');
                });
             });
           
-
-      
+         
+         
          
          
          $('.btn-number').click(function(e) {
