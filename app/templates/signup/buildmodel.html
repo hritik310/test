@@ -229,6 +229,7 @@
             <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
             </button>
             </span>
+         
             </div>
             </div>
             </div>
@@ -268,8 +269,13 @@
             <button type="button" class="btn btn-primary ModelButton">Save Model</button>
             </div>
             <div>
+            
+            <a href="{% url 'reset' %}">
             <button type="button" class="btn btn-primary ModelButton">Reset</button>
+            </a>
+               
             </div>
+
             </div>
             </form>
          </div>
