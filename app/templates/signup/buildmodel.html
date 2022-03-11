@@ -62,16 +62,14 @@
          background: #ebeded;
          box-shadow: inset 0px 11px 8px 0px #ccc;
          }
-         .row_section_grid{
-         display:flex;
-         }
-         .column{
-         width: 18%;
-         margin: 1%;
-         border:2px solid;
-         height: 160px;
-         background: #ffffff;
-         }
+        .column {
+    /* width: 18%; */
+    /* margin: 1%; */
+    border: 2px solid;
+    height: 160px;
+    background: #ffffff;
+    margin-bottom: 24px;
+}
          span.glyphicon.glyphicon-info-sign {
          font-size: 25px;
          float: right;
@@ -207,7 +205,7 @@
             </div>
             <div class="section_first">
             <div class="row_section_grid">
-            {% for i in df %}
+            {% for i in df|slice:"1:97" %}
             <div class="col-md-2">
             <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
             <div class="Info-sign">
@@ -233,9 +231,10 @@
             </div>
             </div>
             </div>
+              {% endfor %} 
             </div>
             </div>
-            {% endfor %} 
+       
             <div class="text-center">
             <a>
             <button type="button" class="btn btn-primary buildmodelbutton">Build Model</button></a>
