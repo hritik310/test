@@ -208,8 +208,7 @@
             <div class="section_first">
             <div class="row_section_grid">
             {%for i in df%}
-            <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
-            
+            <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">   
             <div class="Info-sign">
             <span class="glyphicon glyphicon-info-sign"></span> 
             </div>
@@ -231,6 +230,7 @@
             <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
             </button>
             </span>
+         
             </div>
             </div>
             {%endfor%}
@@ -270,8 +270,13 @@
             <button type="button" class="btn btn-primary ModelButton">Save Model</button>
             </div>
             <div>
+            
+            <a href="{% url 'reset' %}">
             <button type="button" class="btn btn-primary ModelButton">Reset</button>
+            </a>
+               
             </div>
+
             </div>
             </form>
          </div>
