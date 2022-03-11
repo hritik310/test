@@ -207,9 +207,9 @@
             </div>
             <div class="section_first">
             <div class="row_section_grid">
-            {%for i in df%}
+            {% for i in df %}
+            <div class="col-md-2">
             <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
-            
             <div class="Info-sign">
             <span class="glyphicon glyphicon-info-sign"></span> 
             </div>
@@ -225,17 +225,16 @@
             <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
             {% comment %} {%if status == 1%} {% endcomment %}
             <span class="input-group-btn"> 
-            
             <button type="button" id="id_quant_{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id={{i}}>
-            
             <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
             </button>
             </span>
             </div>
             </div>
-            {%endfor%}
             </div>
             </div>
+            </div>
+            {% endfor %} 
             <div class="text-center">
             <a>
             <button type="button" class="btn btn-primary buildmodelbutton">Build Model</button></a>
@@ -255,7 +254,6 @@
             </div> 
             </div>
             </div>
-
             <div class="col-md-4">
             <div class="Games_box"> 
             <h6>Spread Recent Games Record</h6>
@@ -288,7 +286,7 @@
                console.log("rowssIdget",rowssIdget)
                console.log("rowId",rowId)
          
-      
+         
                   
                $("#"+rowssId).prop("disabled",true);
                console.log("true")

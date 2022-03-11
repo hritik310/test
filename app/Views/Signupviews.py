@@ -268,6 +268,8 @@ def buildmodel(request):
 "winning_abbr",
 "winning_name",
 "num"]]
+
+
    
 
     #getting shape. We will use this for back testing / training
@@ -703,6 +705,7 @@ def buildmodelbutton(request):
 "winning_abbr",
 "winning_name",
 "num"]]
+
    
 
     #getting shape. We will use this for back testing / training
@@ -934,7 +937,8 @@ def buildmodelbutton(request):
         y='Last '+str(abs(i))
         w=str(ml_wins)
         e=str(ml_losses)
-        r=str(ml_wins/(ml_wins + ml_losses))
+        r=ml_wins/(ml_wins + ml_losses)
+        percentage = "{:.0%}".format(r)
 
         
         h='Last ' + str(abs(i))
@@ -959,7 +963,7 @@ def buildmodelbutton(request):
                     'ML_last_games':y,
                     'ML_wins':w,
                     'ML_loss':e,
-                    'ML_ties':r,
+                    'ML_ties':percentage,
                     "spread_last_games":n,
                     "spread_wins":o,
                     'spread_loss':p,
@@ -979,7 +983,7 @@ def buildmodelbutton(request):
     'ML_last_games':y,
     'ML_wins':w,
     'ML_loss':e,
-    'ML_ties':r,
+    'ML_ties':percentage,
     "spread_last_games":n,
     "spread_wins":o,
     'spread_loss':p,
