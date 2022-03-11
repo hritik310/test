@@ -980,7 +980,7 @@ def buildmodelbutton(request):
     'spread_ties':q,
     }
 
-
+#e
     mod = Modelvar.objects.all().delete()
 
     return JsonResponse(data1)
