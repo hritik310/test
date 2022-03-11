@@ -284,8 +284,13 @@ def buildmodel(request):
 
     backTest = [10,25,50,100]
     var = Modelvar.objects.filter(created_by = request.user.id).values_list("title",flat=True)
+  
     answers_list = list(var)
     print(answers_list)
+
+    # for i in range(car,12):
+    #     answers_list.append("num")
+    # print(answers_list)
  
 
 
@@ -312,7 +317,8 @@ def buildmodel(request):
         if len(answers_list)==12:
             modelVars=answers_list
 
-            print("sssssssssssssss",modelVars)
+
+            # print("sssssssssssssss",modelVars)
          
         else:
             modelVars=['num',
@@ -502,13 +508,13 @@ def buildmodel(request):
         print('win% over/under: ' + str(total_wins/games))
         print('             ')               
                         
-        print('Last ' + str(abs(i)) + ' games')
-        print('wins spread: ' + str(wins))
-        print('losses spread: ' + str(losses))
-        print('ties spread: ' + str(ties))
-        games = abs(i)-ties
-        print('win% spread: ' + str(wins/games))
-        print('             ')                
+        # print('Last ' + str(abs(i)) + ' games')
+        # print('wins spread: ' + str(wins))
+        # print('losses spread: ' + str(losses))
+        # print('ties spread: ' + str(ties))
+        # games = abs(i)-ties
+        # print('win% spread: ' + str(wins/games))
+        # print('             ')                
         
         y='Last '+str(abs(i))
         w=str(ml_wins)
@@ -580,13 +586,6 @@ def buildmodelremove(request):
 
 
 def buildmodelbutton(request):
-    all=Modelvar.objects.all()
-    a=Modelvar.objects.filter(created_by=request.user.id).values_list("title",flat="True")
-    if Modelvar.objects.filter(created_by=request.user.id).exists():
-        status=list(a)
-        
-    else:
-        status=0
     df = pd.read_csv('finalDS.csv')
 
     df = df.dropna()
@@ -720,8 +719,16 @@ def buildmodelbutton(request):
 
     backTest = [10,25,50,100]
     var = Modelvar.objects.filter(created_by = request.user.id).values_list("title",flat=True)
+    car = len(var)
+
     answers_list = list(var)
     print(answers_list)
+
+    for i in range(car,12):
+        answers_list.append("num")
+    print(answers_list)
+  
+
  
 
 
@@ -746,22 +753,21 @@ def buildmodelbutton(request):
         # to this list. This list is the list of variables used in the model
         if len(answers_list)==12:
             modelVars=answers_list
-
-            print("sssssssssssssss",modelVars)
+            print(modelVars)
          
-        else:
-            modelVars=['num',
-            'away_defensive_rating',    
-            'away_offensive_rating',
-            'away_three_point_attempt_rate',
-            'away_true_shooting_percentage',
-            'away_turnover_percentage',
-            'home_defensive_rating',
-            'home_offensive_rating',
-            'home_three_point_attempt_rate',
-            'home_true_shooting_percentage',
-            'home_turnover_percentage',
-            'pace']
+        # else:
+        #     modelVars=['num',
+        #     'away_defensive_rating',    
+        #     'away_offensive_rating',
+        #     'away_three_point_attempt_rate',
+        #     'away_true_shooting_percentage',
+        #     'away_turnover_percentage',
+        #     'home_defensive_rating',
+        #     'home_offensive_rating',
+        #     'home_three_point_attempt_rate',
+        #     'home_true_shooting_percentage',
+        #     'home_turnover_percentage',
+        #     'pace']
     
         #we build two models but kind of use them just as one. We have the same
         #variables in both just a different target variable
