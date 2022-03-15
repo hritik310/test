@@ -183,11 +183,36 @@
          }
          .para-sec p {
          margin-left: 20px;
-         text-align: justify;
+         /*text-align: justify;*/
          }
          .row.results, .row.show {
          display: block !important;
          }
+         .modal {
+          display:    none;
+          position:   fixed;
+          z-index:    1000;
+          top:        0;
+          left:       0;
+          height:     100%;
+          width:      100%;
+          background: rgba( 255, 255, 255, .8 ) 
+                      url('http://i.stack.imgur.com/FhHRx.gif') 
+                      50% 50% 
+                      no-repeat;
+      }
+
+      /* When the body has the loading class, we turn
+         the scrollbar off with overflow:hidden */
+      body.loading .modal {
+          overflow: hidden;   
+      }
+
+      /* Anytime the body has the loading class, our
+         modal element will be visible */
+      body.loading .modal {
+          display: block;
+      }
       </style>
    </head>
    <body>
@@ -199,13 +224,14 @@
                   <select name="cars" id="drop">
                      <option value="" selected disabled hidden>Choose here</option>
                      <option value="">NBA</option>
+                     <option value="">NCAAB</option>
                   </select>
             </div>
             <div id="output">
             </div>
             <div class="section_first">
             <div class="row_section_grid">
-            {% for i in df|slice:"1:97" %}
+            {% for i in df|slice:"1:73" %}
             <div class="col-md-2">
             <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
             <div class="Info-sign">
@@ -234,7 +260,7 @@
               {% endfor %} 
             </div>
             </div>
-       
+            <div class="modal"><!-- Place at bottom of page --></div>
             <div class="text-center">
             <a>
             <button type="button" class="btn btn-primary buildmodelbutton">Build Model</button></a>
@@ -242,22 +268,29 @@
             <div class="row">
             <div class="col-md-4">
             <div class="Games_box">
-            <h6>ML Recent Games Record</h6>
+            <h5>ML Recent Games Record</h5>
             <div class="row results para-sec">
             </div> 
             </div>
             </div>
             <div class="col-md-4">
             <div class="Games_box"> 
-            <h6>Over Under Recent Games Record</h6>
+            <h5>Over Under Recent Games Record</h5>
             <div class="row para-sec show">
             </div> 
             </div>
             </div>
             <div class="col-md-4">
             <div class="Games_box"> 
-            <h6>Spread Recent Games Record</h6>
+            <h5>Spread Recent Games Record</h5>
             <div class="row para-sec spread">
+            </div> 
+            </div>
+            </div>
+            <div class="col-md-4">
+            <div class="Games_box"> 
+            <h5>Today's Predictions</h5>
+            <div class="row para-sec predict">
             </div> 
             </div>
             </div>
@@ -374,9 +407,12 @@
                  dataType: 'json',
                  success: function (data1) {
                   console.log(data1);
+                  console.log(data1.total)
+                  console.log(data1.totalagain)
                         var html = '';
                         var over_html= '';
                         var spread_html= '';
+                        
                         $.each(data1.total, function(index, value) {
          
                         html += "<p>" + value.ML_last_games +" : <span class='number'>"+value.ML_wins+"-"+ value.ML_loss +"-"+value.ML_ties+ "</span></p>";
@@ -384,11 +420,18 @@
                         spread_html+= "<p>" + value.spread_last_games +" : <span class='number'>"+value.spread_wins+"-"+ value.spread_loss +"-"+value.spread_ties+ "</span></p>";
          
                      });
+                     var predict_html='';
+                     // console.log(data1.totalagain);
+                     $.each(data1.totalagain, function(index, predict) {
+                     predict_html+= "<p>"+predict.home+"</p>";
+         
+                     });
          
                      // $(html).appendTo('.results');
                      $('.results').html(html);
                      $('.show').html(over_html);
                      $('.spread').html( spread_html);
+                     $('.predict').html( predict_html);
          
          
          
@@ -433,8 +476,13 @@
             });
           
          
-         
-         
+          $body = $("body");
+
+         $(document).on({
+             ajaxStart: function() { $body.addClass("loading");    },
+              ajaxStop: function() { $body.removeClass("loading"); }    
+         });
+                  
          
          $('.btn-number').click(function(e) {
            e.preventDefault();

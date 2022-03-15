@@ -37,6 +37,7 @@ from math import sqrt
 from sklearn.metrics import mean_pinball_loss, mean_squared_error
 from numpy import asarray
 from pysbr import *
+import json
 
 stripe.api_key = settings.SECTRET_KEY # new
 print(stripe.api_key)
@@ -271,7 +272,83 @@ def buildmodel(request):
 "num"]]
 
 
+    df_away=df[["away_assist_percentage",
+"away_assists",
+"away_block_percentage",
+"away_blocks",
+"away_defensive_rating",
+"away_defensive_rebound_percentage",
+"away_defensive_rebounds",
+"away_effective_field_goal_percentage",
+"away_field_goal_attempts",
+"away_field_goal_percentage",
+"away_field_goals",
+"away_free_throw_attempt_rate",
+"away_free_throw_attempts",
+"away_free_throw_percentage",
+"away_free_throws",
+"away_losses",
+"away_minutes_played",
+"away_offensive_rating",
+"away_offensive_rebound_percentage",
+"away_offensive_rebounds",
+"away_personal_fouls",
+"away_points",
+"away_steal_percentage",
+"away_steals",
+"away_three_point_attempt_rate",
+"away_three_point_field_goal_attempts",
+"away_three_point_field_goal_percentage",
+"away_three_point_field_goals",
+"away_total_rebound_percentage",
+"away_total_rebounds",
+"away_true_shooting_percentage",
+"away_turnover_percentage",
+"away_turnovers",
+"away_two_point_field_goal_attempts",
+"away_two_point_field_goal_percentage",
+"away_two_point_field_goals",
+"away_wins",
+"home_assist_percentage",
+"home_assists",
+"home_block_percentage",
+"home_blocks",
+"home_defensive_rating",
+"home_defensive_rebound_percentage",
+"home_defensive_rebounds",
+"home_effective_field_goal_percentage",
+"home_field_goal_attempts",
+"home_field_goal_percentage",
+"home_field_goals",
+"home_free_throw_attempt_rate",
+"home_free_throw_attempts",
+"home_free_throw_percentage",
+"home_free_throws",
+"home_losses",
+"home_minutes_played",
+"home_offensive_rating",
+"home_offensive_rebound_percentage",
+"home_offensive_rebounds",
+"home_personal_fouls",
+"home_points",
+"home_steal_percentage",
+"home_steals",
+"home_three_point_attempt_rate",
+"home_three_point_field_goal_attempts",
+"home_three_point_field_goal_percentage",
+"home_three_point_field_goals",
+"home_total_rebound_percentage",
+"home_total_rebounds",
+"home_true_shooting_percentage",
+"home_turnover_percentage",
+"home_turnovers",
+"home_two_point_field_goal_attempts",
+"home_two_point_field_goal_percentage",
+"home_two_point_field_goals",
+"home_wins",
+]]
    
+
 
     #getting shape. We will use this for back testing / training
     amountOfGames = df.shape[0]
@@ -553,137 +630,8 @@ def buildmodel(request):
 
         print("sssssssssssssss",data_list) 
 
-    nba = NBA()
-    sb = Sportsbook()
-    cols = ['event', 'participant', 'spread / total', 'decimal odds', 'american odds']
 
-
-    # In[132]:
-
-
-    today= datetime.today()
-    year = today.year
-    month = today.month
-    day = today.day
-
-
-    # In[133]:
-
-
-    today = str(year) + '-' + str(month) + '-' + str(day)
-
-
-    # In[134]:
-
-
-    dt = datetime.strptime(today, '%Y-%m-%d')
-    e = EventsByDate(nba.league_id, dt)
-    spread = CurrentLines(e.ids(), nba.market_ids('pointspread'), sb.ids('Bovada')[0])
-    spread = spread.dataframe(e)
-
-
-    # In[135]:
-
-
-    favSpread = spread.loc[spread['spread / total'] <0]
-    undSpread = spread.loc[spread['spread / total'] >0]
-
-
-    # In[136]:
-
-
-    #get underdog score,team, and abbreviation 
-    undTeam = []
-    undAbb = []
-    for index, row in undSpread.iterrows():
-        undTeam.append(row['participant full name'])
-        undAbb.append(row['participant'])
-
-
-    # In[137]:                                                     
-
-
-    favSpread['underdog team'] = undTeam
-    favSpread['underdog abb'] = undAbb
-
-
-    # In[138]:
-
-
-    filtered_spread = favSpread
-
-
-    # In[143]:
-
-
-    #find home and away teams
-
-    home = []
-    away = []
-
-    for index, row in filtered_spread.iterrows():
-        findIndex = row['event'].find('@')
-        home.append(row['event'][findIndex+1:])
-        away.append(row['event'][:findIndex])
-    filtered_spread['home'] = home
-    filtered_spread['away'] = away
-
-
-    # In[144]:
-
-    #preprocessing to match up names
-    filtered_spread = filtered_spread.replace(to_replace ="New Orleans",value ="New Orleans Pelicans")
-    filtered_spread = filtered_spread.replace(to_replace ="L.A. Clippers Clippers",value ="Los Angeles Clippers")
-    filtered_spread = filtered_spread.replace(to_replace ="LA Clippers",value ="Los Angeles Clippers")
-    filtered_spread = filtered_spread.replace(to_replace ="Oklahoma City",value ="Oklahoma City Thunder")
-    filtered_spread = filtered_spread.replace(to_replace ="Golden State",value ="Golden State Warriors")
-    filtered_spread = filtered_spread.replace(to_replace ="New York",value ="New York Knicks")
-    filtered_spread = filtered_spread.replace(to_replace ="L.A. Lakers Lakers",value ="Los Angeles Lakers")
-    filtered_spread = filtered_spread.replace(to_replace ="LA Lakers",value ="Los Angeles Lakers")
-    filtered_spread = filtered_spread.replace(to_replace ="L.A. Lakers",value ="Los Angeles Lakers")
-    filtered_spread = filtered_spread.replace(to_replace ="San Antonio",value ="San Antonio Spurs")
-
-
-    # In[146]:
-
-
-    for index, row in filtered_spread.iterrows():
-        homeTeam = df.loc[df['home']==row['home']]
-        awayTeam = df.loc[df['away']==row['away']]
-
-        
-        homeTeamAverages = homeTeam.mean()
-        awayTeamAverages = awayTeam.mean()
-        
-        print(row['home'] + ' vs ' + row['away'])
-        
-        pred = [1,
-            awayTeamAverages['away_defensive_rating'],
-            awayTeamAverages['away_offensive_rating'],
-            awayTeamAverages['away_three_point_attempt_rate'],
-            awayTeamAverages['away_true_shooting_percentage'],
-            awayTeamAverages['away_turnover_percentage'],
-            homeTeamAverages['home_defensive_rating'],
-            homeTeamAverages['home_offensive_rating'],
-            homeTeamAverages['home_three_point_attempt_rate'],
-            homeTeamAverages['home_true_shooting_percentage'],
-            homeTeamAverages['home_turnover_percentage'],
-            (homeTeamAverages['pace'] + awayTeamAverages['pace'])/2,
-                ]
-        
-        
-        
-        
-        new_data = asarray([pred])
-        home_points = home_model.predict(new_data)[0]
-        away_points = away_model.predict(new_data)[0]
-
-        
-        print('Prediction')
-        print(row['home'] + ' ' + str(home_points))
-        print(row['away'] + ' ' + str(away_points))
-
-    return render(request,"signup/buildmodel.html",{'H':data_list,"df":list(df),'status':status,"all":all})
+    return render(request,"signup/buildmodel.html",{'H':data_list,"df":list(df_away),'status':status,"all":all})
    
 
 def buildmodelStatus(request):
@@ -837,8 +785,8 @@ def buildmodelbutton(request):
 "winning_name",
 "num"]]
 
-   
 
+    
     #getting shape. We will use this for back testing / training
     amountOfGames = df.shape[0]
 
@@ -856,7 +804,7 @@ def buildmodelbutton(request):
     car = len(var)
 
     answers_list = list(var)
-    print(answers_list)
+    # print(answers_list)
 
     for i in range(car,12):
         answers_list.append("num")
@@ -868,6 +816,7 @@ def buildmodelbutton(request):
 
 
     data_list =[]
+    
     for i in backTest:
         training = df[:amountOfGames-i]
         print(training.shape)
@@ -1064,7 +1013,150 @@ def buildmodelbutton(request):
                     else:
                         losses = losses + 1
 
-        
+
+
+        nba = NBA()
+        sb = Sportsbook()
+        cols = ['event', 'participant', 'spread / total', 'decimal odds', 'american odds']
+
+
+        # In[132]:
+
+
+        today= datetime.today()
+        year = today.year
+        month = today.month
+        day = today.day
+
+
+        # In[133]:
+
+
+        today = str(year) + '-' + str(month) + '-' + str(day)
+
+
+        # In[134]:
+
+
+        dt = datetime.strptime(today, '%Y-%m-%d')
+        et = EventsByDate(nba.league_id, dt)
+        spread = CurrentLines(et.ids(), nba.market_ids('pointspread'), sb.ids('Bovada')[0])
+        spread = spread.dataframe(et)
+
+
+        # In[135]:
+
+
+        favSpread = spread.loc[spread['spread / total'] <0]
+        undSpread = spread.loc[spread['spread / total'] >0]
+
+
+        # In[136]:
+
+
+        #get underdog score,team, and abbreviation 
+        undTeam = []
+        undAbb = []
+        another_list=[]
+        for index, row in undSpread.iterrows():
+            undTeam.append(row['participant full name'])
+            undAbb.append(row['participant'])
+
+
+        # In[137]:
+
+
+        favSpread['underdog team'] = undTeam
+        favSpread['underdog abb'] = undAbb
+
+
+        # In[138]:
+
+
+        filtered_spread = favSpread
+
+
+        # In[143]:
+
+
+        #find home and away teams
+
+        home = []
+        away = []
+
+        for index, row in filtered_spread.iterrows():
+            findIndex = row['event'].find('@')
+            home.append(row['event'][findIndex+1:])
+            away.append(row['event'][:findIndex])
+        filtered_spread['home'] = home
+        filtered_spread['away'] = away
+
+
+        # In[144]:
+
+
+        #preprocessing to match up names
+        filtered_spread = filtered_spread.replace(to_replace ="New Orleans",value ="New Orleans Pelicans")
+        filtered_spread = filtered_spread.replace(to_replace ="L.A. Clippers Clippers",value ="Los Angeles Clippers")
+        filtered_spread = filtered_spread.replace(to_replace ="LA Clippers",value ="Los Angeles Clippers")
+        filtered_spread = filtered_spread.replace(to_replace ="Oklahoma City",value ="Oklahoma City Thunder")
+        filtered_spread = filtered_spread.replace(to_replace ="Golden State",value ="Golden State Warriors")
+        filtered_spread = filtered_spread.replace(to_replace ="New York",value ="New York Knicks")
+        filtered_spread = filtered_spread.replace(to_replace ="L.A. Lakers Lakers",value ="Los Angeles Lakers")
+        filtered_spread = filtered_spread.replace(to_replace ="LA Lakers",value ="Los Angeles Lakers")
+        filtered_spread = filtered_spread.replace(to_replace ="L.A. Lakers",value ="Los Angeles Lakers")
+        filtered_spread = filtered_spread.replace(to_replace ="San Antonio",value ="San Antonio Spurs")
+
+
+        # In[146]:
+
+
+        for index, row in filtered_spread.iterrows():
+            homeTeam = df.loc[df['home']==row['home']]
+            awayTeam = df.loc[df['away']==row['away']]
+
+            
+            homeTeamAverages = homeTeam.mean()
+            awayTeamAverages = awayTeam.mean()
+
+
+            print(row['home'] + ' vs ' + row['away'])
+            
+            pred = [1,
+                  awayTeamAverages['away_defensive_rating'],
+                  awayTeamAverages['away_offensive_rating'],
+                  awayTeamAverages['away_three_point_attempt_rate'],
+                  awayTeamAverages['away_true_shooting_percentage'],
+                  awayTeamAverages['away_turnover_percentage'],
+                  homeTeamAverages['home_defensive_rating'],
+                   homeTeamAverages['home_offensive_rating'],
+                   homeTeamAverages['home_three_point_attempt_rate'],
+                   homeTeamAverages['home_true_shooting_percentage'],
+                   homeTeamAverages['home_turnover_percentage'],
+                   (homeTeamAverages['pace'] + awayTeamAverages['pace'])/2,
+                       ]
+            
+            
+            
+            
+            new_data = asarray([pred])
+            home_points = home_model.predict(new_data)[0]
+            away_points = away_model.predict(new_data)[0]
+
+            
+            print('Prediction')
+            print(row['home'] + ' ' + str(home_points))
+            print(row['away'] + ' ' + str(away_points))
+
+            hme=row['home']  + str(home_points) + ' vs ' + row['away'] + str(away_points)
+            awy=row['away'] + ' ' + str(away_points)
+            datar={
+
+            'home':hme,
+            'away':awy,
+            }
+            another_list.append(datar) 
+            print(another_list)   
         y='Last '+str(abs(i))
         w=str(ml_wins)
         e=str(ml_losses)
@@ -1075,7 +1167,8 @@ def buildmodelbutton(request):
         h='Last ' + str(abs(i))
         j=str(total_wins)
         k=str(total_losses)
-        l=str(total_ties)
+        l=total_ties/(total_wins + total_losses+total_ties)
+        percent_over = "{:.0%}".format(l)
         games = abs(i)-total_ties
         m='win% over/under: ' + str(total_wins/games)
         print('             ')               
@@ -1083,14 +1176,18 @@ def buildmodelbutton(request):
         n='Last ' + str(abs(i)) + ' games'
         o=str(wins)
         p=str(losses)
-        q=str(ties)
+        q=ties/(wins+losses+ties)
+        percent_spread= "{:.0%}".format(q)
         games = abs(i)-ties
         s='win% spread: ' + str(wins/games)
+
+
+
         data = {
                     'last_games':h,
                     'wins':j,
                     'loss':k,
-                    'ties':l,
+                    'ties':percent_over,
                     'ML_last_games':y,
                     'ML_wins':w,
                     'ML_loss':e,
@@ -1098,7 +1195,9 @@ def buildmodelbutton(request):
                     "spread_last_games":n,
                     "spread_wins":o,
                     'spread_loss':p,
-                    'spread_ties':q,
+                    'spread_ties':percent_spread,
+                    'home':hme,
+                    
                 }
 
         data_list.append(data) 
@@ -1108,9 +1207,10 @@ def buildmodelbutton(request):
     data1 = {
     "status":"OK",
     "total":data_list,
+    "totalagain":another_list,
     "win":j,
     "loss":k,
-    "ties":l,
+    "ties":percent_over,
     'ML_last_games':y,
     'ML_wins':w,
     'ML_loss':e,
@@ -1118,13 +1218,17 @@ def buildmodelbutton(request):
     "spread_last_games":n,
     "spread_wins":o,
     'spread_loss':p,
-    'spread_ties':q,
+    'spread_ties':percent_spread,
+    'home':hme,
+    
     }
 
-#e
+
     mod = Modelvar.objects.all().delete()
 
     return JsonResponse(data1)
+
+
 
 
 def reset(request):

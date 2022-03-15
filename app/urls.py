@@ -21,7 +21,7 @@ urlpatterns = [
     path('buildmodel/status/',Signupviews.buildmodelStatus, name ="buildmodel-status"),
     path('buildmodel/remove/',Signupviews.buildmodelremove, name ="buildmodel-remove"),
     path('buildmodelbutton',Signupviews.buildmodelbutton, name ="buildmodel-button"),
-    path("buildmodel/1",Signupviews.reset,name="reset"),
+    path("reset",Signupviews.reset,name="reset"),
     path('register',Signupviews.create,name="register"),
 
     
