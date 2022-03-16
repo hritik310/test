@@ -175,6 +175,15 @@
          padding: 10px;
          display: none;
          }
+         .prediction {
+         width: 100%;
+         margin: 0 auto;
+         border: 2px solid #000000;
+         padding: 10px;
+         display: none;
+         margin-left: 430px;
+         margin-top: 30px;
+         }
          .coloradd{
          background-color: #69ace0;
          }
@@ -220,11 +229,10 @@
          <div class="container-fluid padding_cont">
             <div class="dropdown_section">
                <form action="" method="GET">
-                  {% csrf_token %}
                   <select name="cars" id="drop">
                      <option value="" selected disabled hidden>Choose here</option>
-                     <option value="">NBA</option>
-                     <option value="">NCAAB</option>
+                     <option value="nba">NBA</option>
+                     <option value="ncaab">NCAAB</option>
                   </select>
             </div>
             <div id="output">
@@ -288,7 +296,7 @@
             </div>
             </div>
             <div class="col-md-4">
-            <div class="Games_box"> 
+            <div class="prediction"> 
             <h5>Today's Predictions</h5>
             <div class="row para-sec predict">
             </div> 
@@ -393,6 +401,7 @@
          
             $('.buildmodelbutton').on('click', function() {
                $( ".Games_box" ).show();
+               $( ".prediction" ).show();
                console.log('manpreet');
          
                $.ajax({
@@ -439,6 +448,10 @@
                });
          
                
+            });
+
+            $("#drop").on('change',function() {
+               this.form.submit();
             });
          
             $(".build").on('click',function () {
