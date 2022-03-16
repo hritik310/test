@@ -52,10 +52,11 @@ class StripeCheckoutAPIView(TemplateView):
                         "price": plan_price 
                     },
                 ],
+
                 mode="subscription",     
             ) 
 
-
+#d
             print("checkout",checkout_session)
             iddd=checkout_session.id
             print("detail",iddd)

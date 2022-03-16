@@ -49,7 +49,7 @@ ALLOWED_HOSTS = ['3.86.247.236']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    'django.contrib.admin', 
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -176,8 +176,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-PUBLISH_KEY = 'pk_test_51KR8onSF4o4pBHwpQer2dr9JWzMioxPtk60gknl4gmuwjIuMlhco11muEyApTshOM6WF9VVEi6gPwLX38bCwk4ZO00m2As3twU'
-SECTRET_KEY = 'sk_test_51KR8onSF4o4pBHwpEbvzOhoSepVcczo3y7voulkh2OQwzt2PovTdTFAPKga4XKJjCrpn2JEB1sYRaWu5a9courlW00O0nRY5IT'
+PUBLISH_KEY = 'pk_test_51KRAVuSAx8Z22VypAjVaLYRlBICJiZXfBjQIAQRuZ264VoiG4pE8P4qjSVvAIQ1I52Wlh3ZLaZzKL2Z17ZPnHMKb00hjxpUo5M'
+SECTRET_KEY = 'sk_test_51KRAVuSAx8Z22VypxLp1N9Y1zJAfWclo7M0RuGsU0aIW5M6W4FF7MtXelcUisjXIVF1E7GQObFiCD3lvMYGK7n2D00eudT2Hql'
 STRIPE_SIGNING_SECRET='whsec_41b779a2f382cc951f9705c8ca00a473f31201319eab5416d1ae614fe63007eb'
 
 
@@ -185,7 +185,7 @@ STRIPE_SIGNING_SECRET='whsec_41b779a2f382cc951f9705c8ca00a473f31201319eab5416d1a
 BASIC_PRICE_ID = 'price_1KTJNlSF4o4pBHwpoV9oCZ3J'
 # PROF_PRICE_ID = 'price_1KTJMvSF4o4pBHwpvI4g7UJP'    
 # DAILY_PRICE_ID="price_1KTJMGSF4o4pBHwpBywN1s7q"
-MONTHLY_PRICE_ID="price_1KYNbSSF4o4pBHwpapAGjMck"
+MONTHLY_PRICE_ID="price_1Kdvo5SAx8Z22Vyp1xuMYnu8"
 # PROFE_PRICE_ID = 'price_1KTP23SF4o4pBHwpzwN3GQrE'
 
 
