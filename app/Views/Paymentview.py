@@ -56,7 +56,7 @@ class StripeCheckoutAPIView(TemplateView):
                 mode="subscription",     
             ) 
 
-
+#d
             print("checkout",checkout_session)
             iddd=checkout_session.id
             print("detail",iddd)
