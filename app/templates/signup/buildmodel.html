@@ -175,6 +175,15 @@
          padding: 10px;
          display: none;
          }
+         .prediction {
+         width: 100%;
+         margin: 0 auto;
+         border: 2px solid #000000;
+         padding: 10px;
+         display: none;
+         margin-left: 430px;
+         margin-top: 30px;
+         }
          .coloradd{
          background-color: #69ace0;
          }
@@ -287,7 +296,7 @@
             </div>
             </div>
             <div class="col-md-4">
-            <div class="Games_box"> 
+            <div class="prediction"> 
             <h5>Today's Predictions</h5>
             <div class="row para-sec predict">
             </div> 
@@ -392,6 +401,7 @@
          
             $('.buildmodelbutton').on('click', function() {
                $( ".Games_box" ).show();
+               $( ".prediction" ).show();
                console.log('manpreet');
          
                $.ajax({
