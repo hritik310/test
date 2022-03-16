@@ -4,6 +4,7 @@ from app.Views import Loginviews
 from app.Views import Signupviews
 from app.Views import Paymentview
 from app.Views import  Paymentview
+from app.Views import NccabView
 
 
 
@@ -31,6 +32,11 @@ urlpatterns = [
     path('stripe-checkout/cancel/',Paymentview.cancel_subscription, name="cancel"),
     # path('webhook/', Paymentview.stripe_webhook), # new
     path('activate/<uidb64>/<token>/',Signupviews.activate, name='activate'),
+
+#NCAAB.urls
+    path('create',NccabView.create,name="create"),
+
+
 ]
 
 

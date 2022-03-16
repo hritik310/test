@@ -220,11 +220,10 @@
          <div class="container-fluid padding_cont">
             <div class="dropdown_section">
                <form action="" method="GET">
-                  {% csrf_token %}
                   <select name="cars" id="drop">
                      <option value="" selected disabled hidden>Choose here</option>
-                     <option value="">NBA</option>
-                     <option value="">NCAAB</option>
+                     <option value="nba">NBA</option>
+                     <option value="ncaab">NCAAB</option>
                   </select>
             </div>
             <div id="output">
@@ -439,6 +438,10 @@
                });
          
                
+            });
+
+            $("#drop").on('change',function() {
+               this.form.submit();
             });
          
             $(".build").on('click',function () {
