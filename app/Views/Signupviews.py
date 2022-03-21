@@ -433,6 +433,7 @@ def buildmodel(request):
         #     print('win% spread: ' + str(wins/games))
         #     print('             ')
 
+                # prediction_total_points = home_points + away_points
 
         # # In[ ]:
 
@@ -951,6 +952,17 @@ def buildmodel(request):
 
                 
 
+                       
+                
+                    # if point_diff < abs(row['spreadtotal']):
+                    #     if row['participantscore']-row['underdogscore']<abs(row['spreadtotal']):
+                    #         wins = wins + 1
+                    
+                    #     elif row['participantscore']-row['underdogscore']==abs(row['spreadtotal']):
+                    #         ties = ties + 1
+                            
+                    #     else:                
+                    #         losses = losses + 1
 
                        
                 
