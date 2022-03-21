@@ -229,17 +229,16 @@
          <div class="container-fluid padding_cont">
             <div class="dropdown_section">
                <form action="" method="GET">
-                  <select name="cars" id="drop">
-                     <option value="" selected disabled hidden>Choose here</option>
-                     <option value="nba">NBA</option>
-                     <option value="ncaab">NCAAB</option>
+                  <select name="cars" id="drop"> 
+                     <option value="nba"{% if re == 'nba' %} selected {% endif %}>NBA</option>
+                     <option value="ncaab"{% if re == 'ncaab' %} selected {% endif %}>NCAAB</option>
                   </select>
             </div>
             <div id="output">
             </div>
             <div class="section_first">
             <div class="row_section_grid">
-            {% for i in df|slice:"1:73" %}
+            {% for i in df|slice:"1:61" %}
             <div class="col-md-2">
             <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
             <div class="Info-sign">
@@ -271,7 +270,7 @@
             <div class="modal"><!-- Place at bottom of page --></div>
             <div class="text-center">
             <a>
-            <button type="button" class="btn btn-primary buildmodelbutton">Build Model</button></a>
+            <button type="button" class="btn btn-primary buildmodelbutton" predict={{re}}>Build Model</button></a>
             </div>
             <div class="row">
             <div class="col-md-4">
@@ -324,6 +323,7 @@
          $(document).ready(function(){
             $(".build").click(function () {
                console.log('add onclick')
+
                var rowId = $(this).attr('data-id');
                var rowssIdget=$(this).attr('makes')
                var rowssId=$(this).attr('id')
@@ -400,27 +400,59 @@
          });
          
             $('.buildmodelbutton').on('click', function() {
+               var prev = $(this).attr('predict');
+               console.log(prev)
+
                $( ".Games_box" ).show();
                $( ".prediction" ).show();
+
                console.log('manpreet');
          
                $.ajax({
                  type:"GET",
                  url: '/buildmodelbutton',
                  data: {
-         
-         
-                  
+
+                     'id':prev
+                   
          
                  },
-                 dataType: 'json',
+                 //dataType: 'json',
                  success: function (data1) {
-                  console.log(data1);
-                  console.log(data1.total)
-                  console.log(data1.totalagain)
-                        var html = '';
+                    if(data1.data == 'ncaab'){
+                       var html = '';
                         var over_html= '';
                         var spread_html= '';
+                        var predict_html='';
+                        
+                        $.each(data1.total, function(index, value) {
+         
+         
+                        html += "<p>" + value.last_games +" : <span class='number'>"+value.wins+"-"+ value.loss +"</span></p>";
+                        over_html += "<p>" + value.last_games +" : <span class='number'>"+value.winoverunder+"-"+ value.lossoverunder +"-"+value.tiesoverunder+ "</span></p>";
+                        spread_html+= "<p>" + value.last_games +" : <span class='number'>"+value.winspread+"-"+ value.lossspread +"-"+value.tiesspread+ "</span></p>";
+                     });
+                        $.each(data1.ncaab, function(index, predict) {
+                           predict_html+= "<p>"+predict.home+"</p>";
+            
+                     });
+   
+                     // console.log(data1.totalagain);
+                   
+         
+                     // $(html).appendTo('.results');
+                     $('.results').html(html);
+                     $('.show').html(over_html);
+                     $('.spread').html( spread_html);
+                     $('.predict').html( predict_html);
+                    
+         
+
+                    }
+                    else{
+                       var html = '';
+                       var over_html= '';
+                       var spread_html= '';
                         
                         $.each(data1.total, function(index, value) {
          
@@ -442,9 +474,12 @@
                      $('.spread').html( spread_html);
                      $('.predict').html( predict_html);
          
+
+                    }                
+            
          
          
-                 }
+                 } 
                });
          
                
@@ -487,7 +522,6 @@
                // $("#"+rem).removeAttr('style');
                });
             });
-          
          
           $body = $("body");
 
