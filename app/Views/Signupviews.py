@@ -125,10 +125,13 @@ def activate(request, uidb64, token):
         users.is_active = user.objects.filter(id=uid).update(is_active=True)
         login(request, users)
         # messages.success(request,"Successfully Registered")
-        return redirect('/')
+        return redirect('account')
         # return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+def account(request):
+    return render (request,"signup/account.html")
 
 
 def updateprofile(request,id):
@@ -182,9 +185,9 @@ def buildmodel(request):
         #some are needed to back test models and test accuracy
         #probably dont need all of these but these will be good to start
         df_away = df[['joinValue', 'over_under_total',
-               'spread / total', 
-               'participant score', 'participant', 'participant full name',
-               'underdog score', 'underdog team', 'underdog abb', 'home', 'away',
+               'spreadtotal', 
+               'participantscore', 'participant', 'participantfullname',
+               'underdogscore', 'underdogteam', 'underdogabb', 'home', 'away',
                'dateForJoin', 'links', 
                'homeTeam', 'awayTeam', 'homeRank', 'awayRank', 'homeScore',
                'awayScore', 'awayMP', 'awayFG', 'awayFGA', 'awayFGperc', 'away2P',
@@ -1141,9 +1144,9 @@ def buildmodelbutton(request):
         #some are needed to back test models and test accuracy
         #probably dont need all of these but these will be good to start
         df_away = df[['joinValue', 'over_under_total',
-               'spread / total', 
-               'participant score', 'participant', 'participant full name',
-               'underdog score', 'underdog team', 'underdog abb', 'home', 'away',
+               'spreadtotal', 
+               'participantscore', 'participant', 'participantfullname',
+               'underdogscore', 'underdogteam', 'underdogabb', 'home', 'away',
                'dateForJoin', 'links', 
                'homeTeam', 'awayTeam', 'homeRank', 'awayRank', 'homeScore',
                'awayScore', 'awayMP', 'awayFG', 'awayFGA', 'awayFGperc', 'away2P',
@@ -1318,7 +1321,7 @@ def buildmodelbutton(request):
                 
                 
                 #code to get the record for the model
-                if home == row['participant full name']:
+                if home == row['participantfullname']:
                    
             
             
@@ -1326,10 +1329,10 @@ def buildmodelbutton(request):
                  
 
             
-                    if point_diff > abs(row['spread / total']):
-                        if row['participant score']-row['underdog score']>abs(row['spread / total']):
+                    if point_diff > abs(row['spreadtotal']):
+                        if row['participantscore']-row['underdogscore']>abs(row['spreadtotal']):
                              wins = wins + 1
-                        elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                        elif row['participantscore']-row['underdogscore']==abs(row['spreadtotal']):
                             ties = ties + 1
 
                         else:
@@ -1338,11 +1341,11 @@ def buildmodelbutton(request):
 
                        
                 
-                    if point_diff < abs(row['spread / total']):
-                        if row['participant score']-row['underdog score']<abs(row['spread / total']):
+                    if point_diff < abs(row['spreadtotal']):
+                        if row['participantscore']-row['underdogscore']<abs(row['spreadtotal']):
                             wins = wins + 1
                     
-                        elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                        elif row['participantscore']-row['underdogscore']==abs(row['spreadtotal']):
                             ties = ties + 1
                             
                         else:                
@@ -1352,19 +1355,19 @@ def buildmodelbutton(request):
                     
             
                     
-                if away == row['participant full name']:
+                if away == row['participantfullname']:
                     
                     
                     point_diff = home_points-away_points
                     
-                    if point_diff > abs(row['spread / total']):
-                        if row['participant score']-row['underdog score']>row['spread / total']:
+                    if point_diff > abs(row['spreadtotal']):
+                        if row['participantscore']-row['underdogscore']>row['spreadtotal']:
                             wins = wins + 1
                                
                             
                             
                             
-                        elif row['participant score']-row['underdog score']==row['spread / total']:
+                        elif row['participantscore']-row['underdogscore']==row['spreadtotal']:
                             ties = ties + 1
                         
                         
@@ -1374,40 +1377,40 @@ def buildmodelbutton(request):
 
                             
                             
-                    if point_diff < abs(row['spread / total']):
-                        if row['participant score']-row['underdog score']<abs(row['spread / total']):
+                    if point_diff < abs(row['spreadtotal']):
+                        if row['participantscore']-row['underdogscore']<abs(row['spreadtotal']):
                             wins = wins + 1
                             
                        
-                        elif row['participant score']-row['underdog score']==abs(row['spread / total']):
+                        elif row['participantscore']-row['underdogscore']==abs(row['spreadtotal']):
                             ties = ties + 1
 
                         else:
                             losses = losses + 1
             
-            print('Last ' + str(abs(i)) + ' games')
-            print('wins ML: ' + str(ml_wins))
-            print('losses ML: ' + str(ml_losses))
-            print('win% over/under: ' + str(ml_wins/(ml_wins + ml_losses)))
-            print('             ') 
+            # print('Last ' + str(abs(i)) + ' games')
+            # print('wins ML: ' + str(ml_wins))
+            # print('losses ML: ' + str(ml_losses))
+            # print('win% over/under: ' + str(ml_wins/(ml_wins + ml_losses)))
+            # print('             ') 
             
-            print('Last ' + str(abs(i)) + ' games')
-            print('wins over/under: ' + str(total_wins))
-            print('losses over/under: ' + str(total_losses))
-            print('ties over/under: ' + str(total_ties))
-            games = abs(i)-total_ties
-            print('win% over/under: ' + str(total_wins/games))
-            print('             ')               
+            # print('Last ' + str(abs(i)) + ' games')
+            # print('wins over/under: ' + str(total_wins))
+            # print('losses over/under: ' + str(total_losses))
+            # print('ties over/under: ' + str(total_ties))
+            # games = abs(i)-total_ties
+            # print('win% over/under: ' + str(total_wins/games))
+            # print('             ')               
                             
-            print('Last ' + str(abs(i)) + ' games')
-            print('wins spread: ' + str(wins))
-            print('losses spread: ' + str(losses))
-            print('ties spread: ' + str(ties))
-            games = abs(i)-ties
-            print('win% spread: ' + str(wins/games))
-            print('             ')
+            # print('Last ' + str(abs(i)) + ' games')
+            # print('wins spread: ' + str(wins))
+            # print('losses spread: ' + str(losses))
+            # print('ties spread: ' + str(ties))
+            # games = abs(i)-ties
+            # print('win% spread: ' + str(wins/games))
+            # print('             ')
 
-            last = 'Last' + str(abs(i)) + 'games'
+            last = 'Last ' + str(abs(i)) + ' games'
             print('last',last)
             wi =str(ml_wins)
             print("wins",wi)
@@ -1582,13 +1585,13 @@ def buildmodelbutton(request):
             
             
             new_data = asarray([pred])
-            home_points = home_model.predict(new_data)[0]
-            away_points = away_model.predict(new_data)[0]
+            home_points = round(home_model.predict(new_data)[0],1)
+            away_points = round(away_model.predict(new_data)[0],1)
 
             if home_points > 50 and away_points>50:
                 print(row['home'] + ' vs ' + row['away'])
                 print('Prediction')
-                homerow = row['home']  + str(home_points) + ' vs ' + row['away'] + str(away_points)
+                homerow = row['home'] + ' ' + str(home_points) + ' vs ' + row['away'] + ' ' + str(away_points)
                 awayrow=row['away'] + ' ' + str(away_points)
                 data ={
 
@@ -2091,15 +2094,15 @@ def buildmodelbutton(request):
                 
                 
                 new_data = asarray([pred])
-                home_points = home_model.predict(new_data)[0]
-                away_points = away_model.predict(new_data)[0]
+                home_points = round(home_model.predict(new_data)[0],1)
+                away_points = round(away_model.predict(new_data)[0],1)
 
                 
                 print('Prediction')
                 print(row['home'] + ' ' + str(home_points))
                 print(row['away'] + ' ' + str(away_points))
 
-                hme=row['home']  + str(home_points) + ' vs ' + row['away'] + str(away_points)
+                hme=row['home'] + ' ' + str(home_points) + '  vs  ' + row['away'] + ' ' + str(away_points)
                 awy=row['away'] + ' ' + str(away_points)
                 datar={
 

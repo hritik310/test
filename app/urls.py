@@ -33,6 +33,8 @@ urlpatterns = [
     # path('webhook/', Paymentview.stripe_webhook), # new
     path('activate/<uidb64>/<token>/',Signupviews.activate, name='activate'),
 
+    path('account',Signupviews.account,name="account"),
+
 #NCAAB.urls
     path('create',NccabView.create,name="create"),
 

@@ -1,0 +1,43 @@
+{%include "header/header.html" %}
+<html>
+<head>
+<style>
+h2 {text-align: center;}
+.container-gluid{
+    text-align: center;
+}
+
+</style>
+</head>
+<body>
+    <h2>Your account activated successfully!</h5>
+
+    <h2>To access the Build Model, please continue to Buy subscription</h5>
+    <div class="container-gluid">
+        <div class="background-banner ">
+            <form action="/stripe-checkout/" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="container member_section">
+                    <h3>Members Area</h3>
+                    <p class=""><span class="pries"><strong>$50.00</strong></span><br><span><strong>EVERY MONTH</strong></span></p>
+                    <p class="Membership_monthly"><span>Membership $50 per month</span></p>
+                    <p class="Membership_monthly">
+                        Includes<br>
+                        Access to build as many models as you want<br>
+                        Save ten models per week<br>
+                        Ability to sell picks to other members<br>
+                        Access to daily/weekly leaderboard
+                    </p>
+                </div>
+           
+                <button class="btn btn-primary Sign_member">Buy now</button>
+ 
+            </form>
+        </div>
+    </div>
+    
+
+
+</body>
+</html>
+
