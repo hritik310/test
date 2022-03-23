@@ -34,7 +34,7 @@ urlpatterns = [
     path('activate/<uidb64>/<token>/',Signupviews.activate, name='activate'),
 
     path('account',Signupviews.account,name="account"),
-
+    path('membership',Signupviews.membership,name="membership"),
 #NCAAB.urls
     path('create',NccabView.create,name="create"),
 
