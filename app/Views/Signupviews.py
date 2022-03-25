@@ -193,12 +193,7 @@ def buildmodel(request):
             #some are needed for building ml. We will offer those
             #some are needed to back test models and test accuracy
             #probably dont need all of these but these will be good to start
-            df_away = df[['joinValue', 'over_under_total',
-                'spreadtotal', 
-                'participantscore', 'participant', 'participantfullname',
-                'underdogscore', 'underdogteam', 'underdogabb', 'home', 'away',
-                'dateForJoin', 'links', 
-                'homeTeam', 'awayTeam', 'homeRank', 'awayRank', 'homeScore',
+            df_away = df[['joinValue', 'homeRank', 'awayRank', 'homeScore',
                 'awayScore', 'awayMP', 'awayFG', 'awayFGA', 'awayFGperc', 'away2P',
                 'away2PA', 'away2Pperc', 'away3P', 'away3PA', 'away3Pperc', 'awayFT',
                 'awayFTA', 'awayFTperc', 'awayORB', 'awayDRB', 'awayTRB', 'awayAST',
@@ -206,7 +201,7 @@ def buildmodel(request):
                 'homeFG', 'homeFGA', 'homeFGperc', 'home2P', 'home2PA', 'home2Pperc',
                 'home3P', 'home3PA', 'home3Pperc', 'homeFT', 'homeFTA', 'homeFTperc',
                 'homeORB', 'homeDRB', 'homeTRB', 'homeAST', 'homeSTL', 'homeBLK',
-                'homeTOV', 'homePF', 'homePTS', 'num']]
+                'homeTOV', 'homePF', 'homePTS']]
 
 
             # In[23]:
@@ -1207,7 +1202,7 @@ def buildmodelbutton(request):
         ans_list = list(mode)
         # print(answers_list)
 
-        for i in range(carlen,10):
+        for i in range(carlen,12):
             ans_list.append("num")
         print(ans_list)
       
@@ -1230,7 +1225,7 @@ def buildmodelbutton(request):
             
             #as a user selects and drops a variable it will be added and dropped 
             # to this list. This list is the list of variables used in the model
-            if len(ans_list)==10:
+            if len(ans_list)==12:
                 modelVars=ans_list
                 print(modelVars)
              
@@ -1285,16 +1280,19 @@ def buildmodelbutton(request):
                   homeTeamAverages['homeFTperc'],
                   homeTeamAverages['homeORB'],
                   homeTeamAverages['homeTRB'],
+                  homeTeamAverages['home3P'],
                   awayTeamAverages['away2Pperc'],
                   awayTeamAverages['awayBLK'],
                    awayTeamAverages['awayFTA'],
                    awayTeamAverages['awayFTperc'],
                    awayTeamAverages['away3P'],
+                   awayTeamAverages['awayFGperc'],
                        ]
             
                 new_data = asarray([row2])
                 home_points = home_model.predict(new_data)[0]
                 away_points = away_model.predict(new_data)[0]
+   
                 prediction_total_points = home_points + away_points
 
                 if home_points > away_points and row['homePTS']>row['awayPTS']:
@@ -1586,11 +1584,13 @@ def buildmodelbutton(request):
                   homeTeamAverages['homeFTperc'],
                   homeTeamAverages['homeORB'],
                   homeTeamAverages['homeTRB'],
+                  homeTeamAverages['home3P'],
                   awayTeamAverages['away2Pperc'],
                   awayTeamAverages['awayBLK'],
                    awayTeamAverages['awayFTA'],
                    awayTeamAverages['awayFTperc'],
                    awayTeamAverages['away3P'],
+                   awayTeamAverages['awayFGperc'],
                        ]
             
             
@@ -1772,7 +1772,7 @@ def buildmodelbutton(request):
         answers_list = list(var)
         # print(answers_list)
 
-        for i in range(car,12):
+        for i in range(car,14):
             answers_list.append("num")
         print(answers_list)
       
@@ -1800,7 +1800,7 @@ def buildmodelbutton(request):
             ml_losses = 0
             #as a user selects and drops a variable it will be added and dropped 
             # to this list. This list is the list of variables used in the model
-            if len(answers_list)==12:
+            if len(answers_list)==14:
                 modelVars=answers_list
                 print(modelVars)
             modelVars = answers_list
@@ -1856,11 +1856,13 @@ def buildmodelbutton(request):
                 #select them from the averages dataframe we create.
                 row2 = [1,
                   awayTeamAverages['away_defensive_rating'],
+                  awayTeamAverages['away_steal_percentage'],
                   awayTeamAverages['away_offensive_rating'],
                   awayTeamAverages['away_three_point_attempt_rate'],
                   awayTeamAverages['away_true_shooting_percentage'],
                   awayTeamAverages['away_turnover_percentage'],
                   homeTeamAverages['home_defensive_rating'],
+                   homeTeamAverages['home_steal_percentage'],
                    homeTeamAverages['home_offensive_rating'],
                    homeTeamAverages['home_three_point_attempt_rate'],
                    homeTeamAverages['home_true_shooting_percentage'],
@@ -2095,11 +2097,13 @@ def buildmodelbutton(request):
                       awayTeamAverages['away_three_point_attempt_rate'],
                       awayTeamAverages['away_true_shooting_percentage'],
                       awayTeamAverages['away_turnover_percentage'],
+                      awayTeamAverages['away_steal_percentage'],
                       homeTeamAverages['home_defensive_rating'],
                        homeTeamAverages['home_offensive_rating'],
                        homeTeamAverages['home_three_point_attempt_rate'],
                        homeTeamAverages['home_true_shooting_percentage'],
                        homeTeamAverages['home_turnover_percentage'],
+                       homeTeamAverages['home_steal_percentage'],
                        (homeTeamAverages['pace'] + awayTeamAverages['pace'])/2,
                            ]
                 
