@@ -156,6 +156,7 @@ def updateprofile(request,id):
 
 def buildmodel(request):
     req = request.GET.get('cars')
+    print("Request",req)
     st = StripeCustomer.objects.filter(stripeCustomerId = request.user.id).values_list("membershipstatus",flat=True)
     membership=list(st)
     print(membership)
@@ -1085,7 +1086,6 @@ def buildmodel(request):
    
 
 def buildmodelStatus(request):
-  
     build = Modelvar()
     build.title=request.GET.get('id')
     print("build",build.title)
@@ -1202,9 +1202,9 @@ def buildmodelbutton(request):
         ans_list = list(mode)
         # print(answers_list)
 
-        for i in range(carlen,12):
-            ans_list.append("num")
-        print(ans_list)
+        # for i in range(carlen,12):
+        #     ans_list.append("num")
+        # print(ans_list)
       
         total_list=[]
         for i in backTest:
@@ -1225,10 +1225,10 @@ def buildmodelbutton(request):
             
             #as a user selects and drops a variable it will be added and dropped 
             # to this list. This list is the list of variables used in the model
-            if len(ans_list)==12:
-                modelVars=ans_list
-                print(modelVars)
-             
+            # if len(ans_list)==12:
+            #     modelVars=ans_list
+            #     print(modelVars)
+            modelVars=ans_list 
             # modelVars=['num',
             # 'homeFGperc',
             #    'homeFTperc',
@@ -1275,19 +1275,14 @@ def buildmodelbutton(request):
                 #so the user adds the variables into the list modelVars
                 #but I am not sure how we can dynamically use that list to 
                 #select them from the averages dataframe we create.
-                row2 = [1,
-                  homeTeamAverages['homeFGperc'],
-                  homeTeamAverages['homeFTperc'],
-                  homeTeamAverages['homeORB'],
-                  homeTeamAverages['homeTRB'],
-                  homeTeamAverages['home3P'],
-                  awayTeamAverages['away2Pperc'],
-                  awayTeamAverages['awayBLK'],
-                   awayTeamAverages['awayFTA'],
-                   awayTeamAverages['awayFTperc'],
-                   awayTeamAverages['away3P'],
-                   awayTeamAverages['awayFGperc'],
-                       ]
+                row2 = []
+                for val in ans_list:
+                    if val.startswith("away"):
+                        row2.append(awayTeamAverages[val])
+                    else:
+                        row2.append(homeTeamAverages[val])
+                print("row2",row2)
+                       
             
                 new_data = asarray([row2])
                 home_points = home_model.predict(new_data)[0]
@@ -1579,19 +1574,13 @@ def buildmodelbutton(request):
             
             
             
-            pred = [1,
-                  homeTeamAverages['homeFGperc'],
-                  homeTeamAverages['homeFTperc'],
-                  homeTeamAverages['homeORB'],
-                  homeTeamAverages['homeTRB'],
-                  homeTeamAverages['home3P'],
-                  awayTeamAverages['away2Pperc'],
-                  awayTeamAverages['awayBLK'],
-                   awayTeamAverages['awayFTA'],
-                   awayTeamAverages['awayFTperc'],
-                   awayTeamAverages['away3P'],
-                   awayTeamAverages['awayFGperc'],
-                       ]
+            pred = []
+            for values in ans_list:
+                if values.startswith("away"):
+                    pred.append(awayTeamAverages[values])
+                else:
+                    pred.append(homeTeamAverages[values])
+                       
             
             
             
@@ -1767,14 +1756,15 @@ def buildmodelbutton(request):
 
         backTest = [10,25,50,100]
         var = Modelvar.objects.filter(created_by = request.user.id).values_list("title",flat=True)
+
         car = len(var)
 
         answers_list = list(var)
-        # print(answers_list)
+        # print('answers_list',answers_list)
 
-        for i in range(car,14):
-            answers_list.append("num")
-        print(answers_list)
+        # for i in range(car,12):
+        #     answers_list.append("num")
+        # print(answers_list)
       
 
      
@@ -1800,9 +1790,9 @@ def buildmodelbutton(request):
             ml_losses = 0
             #as a user selects and drops a variable it will be added and dropped 
             # to this list. This list is the list of variables used in the model
-            if len(answers_list)==14:
-                modelVars=answers_list
-                print(modelVars)
+            # if len(answers_list)==12:
+            #     modelVars=answers_list
+            #     print(modelVars)
             modelVars = answers_list
              
             # else:
@@ -1844,7 +1834,9 @@ def buildmodelbutton(request):
                 
                
                 homeTeam = df.loc[df['home']==home]
+    
                 awayTeam = df.loc[df['away']==away]
+             
                 #get the averages of the playing
                 #we use averages to make predictions
                 homeTeamAverages = homeTeam.mean()
@@ -1854,22 +1846,18 @@ def buildmodelbutton(request):
                 #so the user adds the variables into the list modelVars
                 #but I am not sure how we can dynamically use that list to 
                 #select them from the averages dataframe we create.
-                row2 = [1,
-                  awayTeamAverages['away_defensive_rating'],
-                  awayTeamAverages['away_steal_percentage'],
-                  awayTeamAverages['away_offensive_rating'],
-                  awayTeamAverages['away_three_point_attempt_rate'],
-                  awayTeamAverages['away_true_shooting_percentage'],
-                  awayTeamAverages['away_turnover_percentage'],
-                  homeTeamAverages['home_defensive_rating'],
-                   homeTeamAverages['home_steal_percentage'],
-                   homeTeamAverages['home_offensive_rating'],
-                   homeTeamAverages['home_three_point_attempt_rate'],
-                   homeTeamAverages['home_true_shooting_percentage'],
-                   homeTeamAverages['home_turnover_percentage'],
-                   (homeTeamAverages['pace'] + awayTeamAverages['pace'])/2,
-                       ]
-            
+                row2=[]
+                for val in answers_list:
+                    if val.startswith("away"):
+                        row2.append(awayTeamAverages[val])
+                    else:
+                        row2.append(homeTeamAverages[val])
+                print("row2",row2)
+
+
+               
+             
+    
                 new_data = asarray([row2])
                 home_points = home_model.predict(new_data)[0]
               
@@ -2091,21 +2079,12 @@ def buildmodelbutton(request):
 
                 print(row['home'] + ' vs ' + row['away'])
                 
-                pred = [1,
-                      awayTeamAverages['away_defensive_rating'],
-                      awayTeamAverages['away_offensive_rating'],
-                      awayTeamAverages['away_three_point_attempt_rate'],
-                      awayTeamAverages['away_true_shooting_percentage'],
-                      awayTeamAverages['away_turnover_percentage'],
-                      awayTeamAverages['away_steal_percentage'],
-                      homeTeamAverages['home_defensive_rating'],
-                       homeTeamAverages['home_offensive_rating'],
-                       homeTeamAverages['home_three_point_attempt_rate'],
-                       homeTeamAverages['home_true_shooting_percentage'],
-                       homeTeamAverages['home_turnover_percentage'],
-                       homeTeamAverages['home_steal_percentage'],
-                       (homeTeamAverages['pace'] + awayTeamAverages['pace'])/2,
-                           ]
+                pred = []
+                for value in answers_list:
+                    if value.startswith("away"):
+                        pred.append(awayTeamAverages[value])
+                    else:
+                        pred.append(homeTeamAverages[value])
                 
                 
                 

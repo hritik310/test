@@ -327,6 +327,8 @@
                var rowId = $(this).attr('data-id');
                var rowssIdget=$(this).attr('makes')
                var rowssId=$(this).attr('id')
+              //var brands = $('#drop').val();
+      
          
                console.log("rowssId",rowssId)
                console.log("rowssIdget",rowssIdget)
@@ -344,6 +346,7 @@
                  url: 'status',
                  data: {
                   'id': rowId
+                 
          
                  },
                  dataType: 'json',
