@@ -41,7 +41,7 @@ from pysbr import *
 import json
 
 stripe.api_key = settings.SECTRET_KEY # new
-print(stripe.api_key)
+# print(stripe.api_key)
 
 
 def index(request):   
