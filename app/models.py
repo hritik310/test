@@ -56,5 +56,6 @@ class StripeCustomer(models.Model):
 class Modelvar(models.Model):
     title = models.CharField(max_length=255,default="")
     created_by = models.IntegerField(null=True)
+    percent_value = models.IntegerField(null=True)
 
     # status=models.IntegerField(default=0)

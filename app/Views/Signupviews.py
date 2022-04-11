@@ -1,3 +1,5 @@
+from cgi import print_form
+from distutils.command.build import build
 from urllib import response
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -590,6 +592,8 @@ def buildmodel(request):
             else:
                 status=0
             df = pd.read_csv('finalDS.csv')
+            
+            print(df)
 
             df = df.dropna()
 
@@ -1090,6 +1094,9 @@ def buildmodelStatus(request):
     build.title=request.GET.get('id')
     print("build",build.title)
     build.created_by = request.user.id
+    build.percent_value =request.GET.get('info')
+    if  build.percent_value == "":
+        build.percent_value=0
     build.save()
     # dele=Modelvar.objects.all()
     # dele.delete()
@@ -1113,6 +1120,19 @@ def buildmodelremove(request):
     }
 
     return JsonResponse(data)
+
+# def buildmodelpercent(request):
+
+#     buil = Modelvar()
+    
+#     buil.percent_value = request.GET.get('id')
+#     buil.save()
+#     data = {
+#     "status":"OK",
+#     }
+
+#     return JsonResponse(data)
+
 
 
 
@@ -1164,6 +1184,7 @@ def buildmodelbutton(request):
                'home3P', 'home3PA', 'home3Pperc', 'homeFT', 'homeFTA', 'homeFTperc',
                'homeORB', 'homeDRB', 'homeTRB', 'homeAST', 'homeSTL', 'homeBLK',
                'homeTOV', 'homePF', 'homePTS', 'num']]
+        
 
 
         # In[23]:
@@ -1617,10 +1638,6 @@ def buildmodelbutton(request):
 
 
     
-
-
-
-
     else:
         df = pd.read_csv('finalDS.csv')
 
@@ -1760,6 +1777,8 @@ def buildmodelbutton(request):
         car = len(var)
 
         answers_list = list(var)
+        print("answer",answers_list)
+        
         # print('answers_list',answers_list)
 
         # for i in range(car,12):
@@ -1830,6 +1849,7 @@ def buildmodelbutton(request):
             for index, row in predictionGames.iterrows():
                 home = row['home']
                 away = row['away']
+               
 
                 
                
@@ -1846,12 +1866,37 @@ def buildmodelbutton(request):
                 #so the user adds the variables into the list modelVars
                 #but I am not sure how we can dynamically use that list to 
                 #select them from the averages dataframe we create.
+                # dpanda=list(df[answers_list])
+                # print("ddd",dpanda)
+                king=Modelvar.objects.filter(created_by=request.user.id).values_list("percent_value",flat=True)
+                for nt in king:
+                    print(nt)
+                
+            
+              
+                
+                # avgfg=dpanda*rere/100 
+                # tt=dpanda+avgfg
+                # showt=list(tt)
+                # print("showt",showt)
                 row2=[]
+               
                 for val in answers_list:
                     if val.startswith("away"):
-                        row2.append(awayTeamAverages[val])
+                        averageValue = awayTeamAverages[val]
+                        print(averageValue)
+                        if king:
+                            averageValue = (averageValue + (averageValue*nt/100))
+
+                        row2.append(averageValue)
+
                     else:
-                        row2.append(homeTeamAverages[val])
+                        averageValue = homeTeamAverages[val]
+                        if king:
+                            averageValue = (averageValue + (averageValue*nt)/100)
+
+                        row2.append(averageValue)
+                
                 print("row2",row2)
 
 
@@ -1864,7 +1909,7 @@ def buildmodelbutton(request):
                 away_points = away_model.predict(new_data)[0]
 
                 prediction_total_points = home_points + away_points
-                
+                 
                 if home_points > away_points and row['home_points']>row['away_points']:
                     ml_wins = ml_wins + 1
                 elif home_points > away_points and row['home_points']<row['away_points']:
@@ -2077,7 +2122,7 @@ def buildmodelbutton(request):
                 awayTeamAverages = awayTeam.mean()
 
 
-                print(row['home'] + ' vs ' + row['away'])
+                # print(row['home'] + ' vs ' + row['away'])
                 
                 pred = []
                 for value in answers_list:
@@ -2085,7 +2130,6 @@ def buildmodelbutton(request):
                         pred.append(awayTeamAverages[value])
                     else:
                         pred.append(homeTeamAverages[value])
-                
                 
                 
                 
@@ -2106,7 +2150,7 @@ def buildmodelbutton(request):
                 'away':awy,
                 }
                 another_list.append(datar) 
-                print(another_list)   
+                # print(another_list)   
             y='Last '+str(abs(i))
             w=str(ml_wins)
             e=str(ml_losses)
@@ -2152,7 +2196,7 @@ def buildmodelbutton(request):
 
             data_list.append(data) 
 
-            print(data_list) 
+            # print(data_list) 
       
         data1 = {
         "status":"OK",

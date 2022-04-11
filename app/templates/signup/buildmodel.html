@@ -66,7 +66,7 @@
     /* width: 18%; */
     /* margin: 1%; */
     border: 2px solid;
-    height: 160px;
+    {% comment %} height: 160px; {% endcomment %}
     background: #ffffff;
     margin-bottom: 24px;
 }
@@ -222,10 +222,15 @@
       body.loading .modal {
           display: block;
       }
+      input.input-box {
+         width: 100px;
+         margin-left: 30px;
+         margin-bottom: 20px;
+     }
       </style>
    </head>
    <body>
-      <div class ="col  ">
+      <div class ="col">
          <div class="container-fluid padding_cont">
             <div class="dropdown_section">
                <form action="" method="GET">
@@ -246,6 +251,7 @@
             </div>
             <div class="home_point">
             <p>{{i}}</p>
+            <input type="number" min="0" max="10"class="input-box"name="percent" id ="block_{{forloop.counter}}">
             </div> 
             <div class="input-group section_number">
             <span class="input-group-btn">
@@ -256,7 +262,7 @@
             <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
             {% comment %} {%if status == 1%} {% endcomment %}
             <span class="input-group-btn"> 
-            <button type="button" id="id_quant_{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id={{i}}>
+            <button type="button" id="id_quant_{{forloop.counter}}" date-id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id={{i}}>
             <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
             </button>
             </span>
@@ -265,6 +271,7 @@
             </div>
             </div>
               {% endfor %} 
+
             </div>
             </div>
             <div class="modal"><!-- Place at bottom of page --></div>
@@ -327,6 +334,8 @@
                var rowId = $(this).attr('data-id');
                var rowssIdget=$(this).attr('makes')
                var rowssId=$(this).attr('id')
+               var rowssIddata=$(this).attr('date-id')
+               var inputval= $('#block_'+rowssIddata).val();
               //var brands = $('#drop').val();
       
          
@@ -345,7 +354,8 @@
                  type:"GET",
                  url: 'status',
                  data: {
-                  'id': rowId
+                  'id': rowId,
+                  'info':inputval,
                  
          
                  },
@@ -401,6 +411,26 @@
             });
             });
          });
+         {% comment %} $(".input-box").keyup(function () {
+            var rowId = $(this).val();
+                 
+            console.log(rowId);
+            $.ajax({
+               type:"GET",
+               url: '/buildmodel/percent/',
+               data: {
+                  'id': rowId
+         
+               },
+               dataType: 'json',
+               success: function (data) {
+                  
+               
+               }
+            });
+            });
+          {% endcomment %}
+           
          
             $('.buildmodelbutton').on('click', function() {
                var prev = $(this).attr('predict');
@@ -499,6 +529,9 @@
                var def =ro   
                console.log(def,'def')         
          
+
+
+               
          
          
                $("#"+def).addClass("coloradd");  
@@ -507,6 +540,7 @@
             $(".build").click(function () {
                console.log('add onclick')
                var rowssId=$(this).attr('id')
+               
                $(".build1").on('click',function () {
                   console.log('remove');
                   

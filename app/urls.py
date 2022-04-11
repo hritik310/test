@@ -25,6 +25,8 @@ urlpatterns = [
     path("reset",Signupviews.reset,name="reset"),
     path('register',Signupviews.create,name="register"),
 
+    # path('buildmodel/percent/',Signupviews.buildmodelpercent, name ="buildmodel-percent"),
+
     
 #payment urls
     path('stripe-checkout/', Paymentview.StripeCheckoutAPIView.as_view(), name = 'stripe_checkout'),
