@@ -592,8 +592,7 @@ def buildmodel(request):
             else:
                 status=0
             df = pd.read_csv('finalDS.csv')
-            
-            print(df)
+  
 
             df = df.dropna()
 
@@ -2017,139 +2016,139 @@ def buildmodelbutton(request):
 
 
 
-            nba = NBA()
-            sb = Sportsbook()
-            cols = ['event', 'participant', 'spread / total', 'decimal odds', 'american odds']
+            # nba = NBA()
+            # sb = Sportsbook()
+            # cols = ['event', 'participant', 'spread / total', 'decimal odds', 'american odds']
 
 
-            # In[132]:
+            # # In[132]:
 
 
-            today= datetime.today()
-            year = today.year
-            month = today.month
-            day = today.day
+            # today= datetime.today()
+            # year = today.year
+            # month = today.month
+            # day = today.day
 
 
-            # In[133]:
+            # # In[133]:
 
 
-            today = str(year) + '-' + str(month) + '-' + str(day)
+            # today = str(year) + '-' + str(month) + '-' + str(day)
 
 
-            # In[134]:
+            # # In[134]:
 
 
-            dt = datetime.strptime(today, '%Y-%m-%d')
-            et = EventsByDate(nba.league_id, dt)
-            spread = CurrentLines(et.ids(), nba.market_ids('pointspread'), sb.ids('Bovada')[0])
-            spread = spread.dataframe(et)
+            # dt = datetime.strptime(today, '%Y-%m-%d')
+            # et = EventsByDate(nba.league_id, dt)
+            # spread = CurrentLines(et.ids(), nba.market_ids('pointspread'), sb.ids('Bovada')[0])
+            # spread = spread.dataframe(et)
 
 
-            # In[135]:
+            # # In[135]:
 
 
-            favSpread = spread.loc[spread['spread / total'] <0]
-            undSpread = spread.loc[spread['spread / total'] >0]
+            # favSpread = spread.loc[spread['spread / total'] <0]
+            # undSpread = spread.loc[spread['spread / total'] >0]
 
 
-            # In[136]:
+            # # In[136]:
 
 
-            #get underdog score,team, and abbreviation 
-            undTeam = []
-            undAbb = []
-            another_list=[]
-            for index, row in undSpread.iterrows():
-                undTeam.append(row['participant full name'])
-                undAbb.append(row['participant'])
+            # #get underdog score,team, and abbreviation 
+            # undTeam = []
+            # undAbb = []
+            # another_list=[]
+            # for index, row in undSpread.iterrows():
+            #     undTeam.append(row['participant full name'])
+            #     undAbb.append(row['participant'])
 
 
-            # In[137]:
+            # # In[137]:
 
 
-            favSpread['underdog team'] = undTeam
-            favSpread['underdog abb'] = undAbb
+            # favSpread['underdog team'] = undTeam
+            # favSpread['underdog abb'] = undAbb
 
 
-            # In[138]:
+            # # In[138]:
 
 
-            filtered_spread = favSpread
+            # filtered_spread = favSpread
 
 
-            # In[143]:
+            # # In[143]:
 
 
-            #find home and away teams
+            # #find home and away teams
 
-            home = []
-            away = []
+            # home = []
+            # away = []
 
-            for index, row in filtered_spread.iterrows():
-                findIndex = row['event'].find('@')
-                home.append(row['event'][findIndex+1:])
-                away.append(row['event'][:findIndex])
-            filtered_spread['home'] = home
-            filtered_spread['away'] = away
-
-
-            # In[144]:
+            # for index, row in filtered_spread.iterrows():
+            #     findIndex = row['event'].find('@')
+            #     home.append(row['event'][findIndex+1:])
+            #     away.append(row['event'][:findIndex])
+            # filtered_spread['home'] = home
+            # filtered_spread['away'] = away
 
 
-            #preprocessing to match up names
-            filtered_spread = filtered_spread.replace(to_replace ="New Orleans",value ="New Orleans Pelicans")
-            filtered_spread = filtered_spread.replace(to_replace ="L.A. Clippers Clippers",value ="Los Angeles Clippers")
-            filtered_spread = filtered_spread.replace(to_replace ="LA Clippers",value ="Los Angeles Clippers")
-            filtered_spread = filtered_spread.replace(to_replace ="Oklahoma City",value ="Oklahoma City Thunder")
-            filtered_spread = filtered_spread.replace(to_replace ="Golden State",value ="Golden State Warriors")
-            filtered_spread = filtered_spread.replace(to_replace ="New York",value ="New York Knicks")
-            filtered_spread = filtered_spread.replace(to_replace ="L.A. Lakers Lakers",value ="Los Angeles Lakers")
-            filtered_spread = filtered_spread.replace(to_replace ="LA Lakers",value ="Los Angeles Lakers")
-            filtered_spread = filtered_spread.replace(to_replace ="L.A. Lakers",value ="Los Angeles Lakers")
-            filtered_spread = filtered_spread.replace(to_replace ="San Antonio",value ="San Antonio Spurs")
+            # # In[144]:
 
 
-            # In[146]:
+            # #preprocessing to match up names
+            # filtered_spread = filtered_spread.replace(to_replace ="New Orleans",value ="New Orleans Pelicans")
+            # filtered_spread = filtered_spread.replace(to_replace ="L.A. Clippers Clippers",value ="Los Angeles Clippers")
+            # filtered_spread = filtered_spread.replace(to_replace ="LA Clippers",value ="Los Angeles Clippers")
+            # filtered_spread = filtered_spread.replace(to_replace ="Oklahoma City",value ="Oklahoma City Thunder")
+            # filtered_spread = filtered_spread.replace(to_replace ="Golden State",value ="Golden State Warriors")
+            # filtered_spread = filtered_spread.replace(to_replace ="New York",value ="New York Knicks")
+            # filtered_spread = filtered_spread.replace(to_replace ="L.A. Lakers Lakers",value ="Los Angeles Lakers")
+            # filtered_spread = filtered_spread.replace(to_replace ="LA Lakers",value ="Los Angeles Lakers")
+            # filtered_spread = filtered_spread.replace(to_replace ="L.A. Lakers",value ="Los Angeles Lakers")
+            # filtered_spread = filtered_spread.replace(to_replace ="San Antonio",value ="San Antonio Spurs")
 
 
-            for index, row in filtered_spread.iterrows():
-                homeTeam = df.loc[df['home']==row['home']]
-                awayTeam = df.loc[df['away']==row['away']]
-
-                
-                homeTeamAverages = homeTeam.mean()
-                awayTeamAverages = awayTeam.mean()
+            # # In[146]:
 
 
-                # print(row['home'] + ' vs ' + row['away'])
-                
-                pred = []
-                for value in answers_list:
-                    if value.startswith("away"):
-                        pred.append(awayTeamAverages[value])
-                    else:
-                        pred.append(homeTeamAverages[value])
-                
-                
-                
-                new_data = asarray([pred])
-                home_points = round(home_model.predict(new_data)[0],1)
-                away_points = round(away_model.predict(new_data)[0],1)
+            # for index, row in filtered_spread.iterrows():
+            #     homeTeam = df.loc[df['home']==row['home']]
+            #     awayTeam = df.loc[df['away']==row['away']]
 
                 
-                print('Prediction')
-                print(row['home'] + ' ' + str(home_points))
-                print(row['away'] + ' ' + str(away_points))
+            #     homeTeamAverages = homeTeam.mean()
+            #     awayTeamAverages = awayTeam.mean()
 
-                hme=row['home'] + ' ' + str(home_points) + '  vs  ' + row['away'] + ' ' + str(away_points)
-                awy=row['away'] + ' ' + str(away_points)
-                datar={
 
-                'home':hme,
-                'away':awy,
-                }
-                another_list.append(datar) 
+            #     # print(row['home'] + ' vs ' + row['away'])
+                
+            #     pred = []
+            #     for value in answers_list:
+            #         if value.startswith("away"):
+            #             pred.append(awayTeamAverages[value])
+            #         else:
+            #             pred.append(homeTeamAverages[value])
+                
+                
+                
+            #     new_data = asarray([pred])
+            #     home_points = round(home_model.predict(new_data)[0],1)
+            #     away_points = round(away_model.predict(new_data)[0],1)
+
+                
+            #     print('Prediction')
+            #     print(row['home'] + ' ' + str(home_points))
+            #     print(row['away'] + ' ' + str(away_points))
+
+            #     hme=row['home'] + ' ' + str(home_points) + '  vs  ' + row['away'] + ' ' + str(away_points)
+            #     awy=row['away'] + ' ' + str(away_points)
+            #     datar={
+
+            #     'home':hme,
+            #     'away':awy,
+            #     }
+            #     another_list.append(datar) 
                 # print(another_list)   
             y='Last '+str(abs(i))
             w=str(ml_wins)
@@ -2190,7 +2189,7 @@ def buildmodelbutton(request):
                         "spread_wins":o,
                         'spread_loss':p,
                         'spread_ties':percent_spread,
-                        'home':hme,
+                        # 'home':hme,
                         
                     }
 
@@ -2202,7 +2201,7 @@ def buildmodelbutton(request):
         "status":"OK",
         "data":reqs,
         "total":data_list,
-        "totalagain":another_list,
+        # "totalagain":another_list,
         "win":j,
         "loss":k,
         "ties":percent_over,
@@ -2214,7 +2213,7 @@ def buildmodelbutton(request):
         "spread_wins":o,
         'spread_loss':p,
         'spread_ties':percent_spread,
-        'home':hme,
+        # 'home':hme,
         
         }
 
