@@ -1295,12 +1295,25 @@ def buildmodelbutton(request):
                 #so the user adds the variables into the list modelVars
                 #but I am not sure how we can dynamically use that list to 
                 #select them from the averages dataframe we create.
+                king=Modelvar.objects.filter(created_by=request.user.id).values_list("percent_value",flat=True)
+                for nt in king:
+                    print(nt)
                 row2 = []
                 for val in ans_list:
                     if val.startswith("away"):
-                        row2.append(awayTeamAverages[val])
+                        averageValue = awayTeamAverages[val]
+                        print(averageValue)
+                        if king:
+                            averageValue = (averageValue + (averageValue*nt/100))
+ 
+                        row2.append(averageValue)
+
                     else:
-                        row2.append(homeTeamAverages[val])
+                        averageValue = homeTeamAverages[val]
+                        if king:
+                            averageValue = (averageValue + (averageValue*nt)/100)
+
+                        row2.append(averageValue)
                 print("row2",row2)
                        
             
@@ -1496,138 +1509,138 @@ def buildmodelbutton(request):
         # In[34]:
 
 
-        ncaab = NCAAB()
-        sb = Sportsbook()
-        cols = ['event', 'participant', 'spread / total', 'decimal odds', 'american odds']
+        # ncaab = NCAAB()
+        # sb = Sportsbook()
+        # cols = ['event', 'participant', 'spread / total', 'decimal odds', 'american odds']
 
 
-        # In[35]:
+        # # In[35]:
 
 
-        today= datetime.today()
-        year = today.year
-        month = today.month
-        day = today.day
+        # today= datetime.today()
+        # year = today.year
+        # month = today.month
+        # day = today.day
 
 
-        # In[36]:
+        # # In[36]:
 
 
-        today = str(year) + '-' + str(month) + '-' + str(day)
+        # today = str(year) + '-' + str(month) + '-' + str(day)
 
 
-        # In[38]:
+        # # In[38]:
 
 
-        dt = datetime.strptime(today, '%Y-%m-%d')
-        e = EventsByDate(ncaab.league_id, dt)
-        spread = CurrentLines(e.ids(), ncaab.market_ids('pointspread'), sb.ids('Bovada')[0])
-        spread = spread.dataframe(e)
+        # dt = datetime.strptime(today, '%Y-%m-%d')
+        # e = EventsByDate(ncaab.league_id, dt)
+        # spread = CurrentLines(e.ids(), ncaab.market_ids('pointspread'), sb.ids('Bovada')[0])
+        # spread = spread.dataframe(e)
 
 
-        # In[39]:
+        # # In[39]:
 
 
-        favSpread = spread.loc[spread['spread / total'] <0]
-        undSpread = spread.loc[spread['spread / total'] >0]
+        # favSpread = spread.loc[spread['spread / total'] <0]
+        # undSpread = spread.loc[spread['spread / total'] >0]
 
 
-        # In[40]:
-        favSpread = favSpread.drop_duplicates(subset='event', keep='last')
-        undSpread = undSpread.drop_duplicates(subset='event', keep='last')
+        # # In[40]:
+        # favSpread = favSpread.drop_duplicates(subset='event', keep='last')
+        # undSpread = undSpread.drop_duplicates(subset='event', keep='last')
 
 
-        #get underdog score,team, and abbreviation 
-        undTeam = []
-        undAbb = []
-        ncaab_list = []
-        for index, row in undSpread.iterrows():
-            undTeam.append(row['participant full name'])
-            undAbb.append(row['participant'])
+        # #get underdog score,team, and abbreviation 
+        # undTeam = []
+        # undAbb = []
+        # ncaab_list = []
+        # for index, row in undSpread.iterrows():
+        #     undTeam.append(row['participant full name'])
+        #     undAbb.append(row['participant'])
 
 
-        # In[41]:
+        # # In[41]:
 
 
-        favSpread['underdog team'] = undTeam
-        favSpread['underdog abb'] = undAbb
+        # favSpread['underdog team'] = undTeam
+        # favSpread['underdog abb'] = undAbb
 
 
-        # In[42]:
+        # # In[42]:
 
 
-        filtered_spread = favSpread
+        # filtered_spread = favSpread
 
 
-        # In[43]:
+        # # In[43]:
 
 
-        #find home and away teams
+        # #find home and away teams
 
-        home = []
-        away = []
+        # home = []
+        # away = []
 
-        for index, row in filtered_spread.iterrows():
-            findIndex = row['event'].find('@')
-            home.append(row['event'][findIndex+1:])
-            away.append(row['event'][:findIndex])
-        filtered_spread['home'] = home
-        filtered_spread['away'] = away
-
-
-        # In[46]:
+        # for index, row in filtered_spread.iterrows():
+        #     findIndex = row['event'].find('@')
+        #     home.append(row['event'][findIndex+1:])
+        #     away.append(row['event'][:findIndex])
+        # filtered_spread['home'] = home
+        # filtered_spread['away'] = away
 
 
-        filtered_spread=filtered_spread.drop_duplicates(subset=['event id'], keep='last')
+        # # In[46]:
 
 
-        # In[48]:
+        # filtered_spread=filtered_spread.drop_duplicates(subset=['event id'], keep='last')
 
 
-        for index, row in filtered_spread.iterrows():
-            homeTeam = df.loc[df['home']==row['home']]
-            awayTeam = df.loc[df['away']==row['away']]
+        # # In[48]:
+
+
+        # for index, row in filtered_spread.iterrows():
+        #     homeTeam = df.loc[df['home']==row['home']]
+        #     awayTeam = df.loc[df['away']==row['away']]
 
             
-            homeTeamAverages = homeTeam.mean()
-            awayTeamAverages = awayTeam.mean()
+        #     homeTeamAverages = homeTeam.mean()
+        #     awayTeamAverages = awayTeam.mean()
             
             
             
-            pred = []
-            for values in ans_list:
-                if values.startswith("away"):
-                    pred.append(awayTeamAverages[values])
-                else:
-                    pred.append(homeTeamAverages[values])
+        #     pred = []
+        #     for values in ans_list:
+        #         if values.startswith("away"):
+        #             pred.append(awayTeamAverages[values])
+        #         else:
+        #             pred.append(homeTeamAverages[values])
                        
             
             
             
             
-            new_data = asarray([pred])
-            home_points = round(home_model.predict(new_data)[0],1)
-            away_points = round(away_model.predict(new_data)[0],1)
+        #     new_data = asarray([pred])
+        #     home_points = round(home_model.predict(new_data)[0],1)
+        #     away_points = round(away_model.predict(new_data)[0],1)
 
-            if home_points > 50 and away_points>50:
-                print(row['home'] + ' vs ' + row['away'])
-                print('Prediction')
-                homerow = row['home'] + ' ' + str(home_points) + ' vs ' + row['away'] + ' ' + str(away_points)
-                awayrow=row['away'] + ' ' + str(away_points)
-                data ={
+        #     if home_points > 50 and away_points>50:
+        #         print(row['home'] + ' vs ' + row['away'])
+        #         print('Prediction')
+        #         homerow = row['home'] + ' ' + str(home_points) + ' vs ' + row['away'] + ' ' + str(away_points)
+        #         awayrow=row['away'] + ' ' + str(away_points)
+        #         data ={
 
-                    'home':homerow,
-                    'away':awayrow,
+        #             'home':homerow,
+        #             'away':awayrow,
 
-                }
-                ncaab_list.append(data)
-                print(ncaab_list)
+        #         }
+        #         ncaab_list.append(data)
+        #         print(ncaab_list)
 
         data1 = {
         "status":"OK",
         "data":reqs,
         "total":total_list,
-        "ncaab":ncaab_list,
+        # "ncaab":ncaab_list,
         "win":wi,
         "loss":lo,
 
@@ -1883,7 +1896,7 @@ def buildmodelbutton(request):
                 for val in answers_list:
                     if val.startswith("away"):
                         averageValue = awayTeamAverages[val]
-                        print(averageValue)
+                        # print(averageValue)
                         if king:
                             averageValue = (averageValue + (averageValue*nt/100))
 
@@ -1896,7 +1909,7 @@ def buildmodelbutton(request):
 
                         row2.append(averageValue)
                 
-                print("row2",row2)
+                # print("row2",row2)
 
 
                
