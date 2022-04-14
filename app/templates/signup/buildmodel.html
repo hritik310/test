@@ -452,6 +452,7 @@
                  },
                  //dataType: 'json',
                  success: function (data1) {
+                    console.log(data1)
                     if(data1.data == 'ncaab'){
                        var html = '';
                         var over_html= '';
@@ -462,8 +463,8 @@
          
          
                         html += "<p>" + value.last_games +" : <span class='number'>"+value.wins+"-"+ value.loss +"</span></p>";
-                        over_html += "<p>" + value.last_games +" : <span class='number'>"+value.winoverunder+"-"+ value.lossoverunder +"-"+value.tiesoverunder+ "</span></p>";
-                        spread_html+= "<p>" + value.last_games +" : <span class='number'>"+value.winspread+"-"+ value.lossspread +"-"+value.tiesspread+ "</span></p>";
+                        over_html += "<p>" + value.last_games +" : <span class='number'>"+value.winoverunder+"-"+ value.lossoverunder +"-"+value.tiesoverunder+" "+value.overunder_percent+ "</span></p>";
+                        spread_html+= "<p>" + value.last_games +" : <span class='number'>"+value.winspread+"-"+ value.lossspread +"-"+value.tiesspread+" "+value.spread_percent+ "</span></p>";
                      });
                         $.each(data1.ncaab, function(index, predict) {
                            predict_html+= "<p>"+predict.home+"</p>";
@@ -490,8 +491,8 @@
                         $.each(data1.total, function(index, value) {
          
                         html += "<p>" + value.ML_last_games +" : <span class='number'>"+value.ML_wins+"-"+ value.ML_loss +"-"+value.ML_ties+ "</span></p>";
-                        over_html += "<p>" + value.last_games +" : <span class='number'>"+value.wins+"-"+ value.loss +"-"+value.ties+ "</span></p>";
-                        spread_html+= "<p>" + value.spread_last_games +" : <span class='number'>"+value.spread_wins+"-"+ value.spread_loss +"-"+value.spread_ties+ "</span></p>";
+                        over_html += "<p>" + value.last_games +" : <span class='number'>"+value.wins+"-"+ value.loss +"-"+value.ties+" "+value.percent+ "</span></p>";
+                        spread_html+= "<p>" + value.spread_last_games +" : <span class='number'>"+value.spread_wins+"-"+ value.spread_loss +"-"+value.spread_ties+" "+value.spread_percent+"</span></p>";
          
                      });
                      var predict_html='';

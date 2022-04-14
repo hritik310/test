@@ -1461,6 +1461,8 @@ def buildmodelbutton(request):
             winoverunder = str(total_wins)
             lossoverunder = str(total_losses)
             tiesoverunder = str(total_ties)
+            l=total_wins/(total_wins + total_losses+total_ties)
+            percent_over = "{:.0%}".format(l)
             games = abs(i)-total_ties
             winpercent ='win% over/under: ' + str(total_wins/games) 
 
@@ -1468,6 +1470,8 @@ def buildmodelbutton(request):
             winspread = str(wins)
             lossspread = str(losses)
             tiesspread =  str(ties)
+            q=wins/(wins+losses+ties)
+            percent_spread= "{:.0%}".format(q)
             games = abs(i)-ties
             winpercentspread ='win% spread: ' + str(wins/games)
             data = {
@@ -1478,9 +1482,11 @@ def buildmodelbutton(request):
                         'winoverunder':winoverunder,
                         'lossoverunder':lossoverunder,
                         'tiesoverunder':tiesoverunder,
+                        'overunder_percent':percent_over,
                         'winspread':winspread,
                         'lossspread':lossspread,
                         'tiesspread':tiesspread,
+                        'spread_percent':percent_spread,
 
                         
                     }
@@ -1669,6 +1675,8 @@ def buildmodelbutton(request):
 
 
         df['num'] = 1
+        pert=df['americanodds'].max()
+        print("pert",pert)
 
 
         df = df[["datetime",
@@ -1850,9 +1858,14 @@ def buildmodelbutton(request):
             home_model = xgb.XGBRegressor()
             away_model = xgb.XGBRegressor()
 
-            
+            # feature = []
             home_model.fit(X,Y_home)
+            too = home_model.feature_importances_
+            # for featu in too:
+            #     feature.append(featu)
+            # print(feature)
             away_model.fit(X,Y_away)
+            print(away_model.feature_importances_)
             
             
             
@@ -2171,18 +2184,20 @@ def buildmodelbutton(request):
 
             
             h='Last ' + str(abs(i))
-            j=str(total_wins)
+            j=total_wins
             k=str(total_losses)
-            l=total_ties/(total_wins + total_losses+total_ties)
+            pri = str(total_ties)
+            l=j/(total_wins + total_losses+total_ties)
             percent_over = "{:.0%}".format(l)
             games = abs(i)-total_ties
             m='win% over/under: ' + str(total_wins/games)
             print('             ')               
                             
             n='Last ' + str(abs(i)) + ' games'
-            o=str(wins)
+            o=wins
             p=str(losses)
-            q=ties/(wins+losses+ties)
+            spread_tie = str(ties)
+            q=o/(wins+losses+ties)
             percent_spread= "{:.0%}".format(q)
             games = abs(i)-ties
             s='win% spread: ' + str(wins/games)
@@ -2193,7 +2208,8 @@ def buildmodelbutton(request):
                         'last_games':h,
                         'wins':j,
                         'loss':k,
-                        'ties':percent_over,
+                        'ties':pri,
+                        'percent':percent_over,
                         'ML_last_games':y,
                         'ML_wins':w,
                         'ML_loss':e,
@@ -2201,7 +2217,8 @@ def buildmodelbutton(request):
                         "spread_last_games":n,
                         "spread_wins":o,
                         'spread_loss':p,
-                        'spread_ties':percent_spread,
+                        'spread_ties':spread_tie,
+                        'spread_percent':percent_spread,
                         # 'home':hme,
                         
                     }
@@ -2217,7 +2234,8 @@ def buildmodelbutton(request):
         # "totalagain":another_list,
         "win":j,
         "loss":k,
-        "ties":percent_over,
+        'ties':pri,
+        "percent":percent_over,
         'ML_last_games':y,
         'ML_wins':w,
         'ML_loss':e,
@@ -2225,7 +2243,8 @@ def buildmodelbutton(request):
         "spread_last_games":n,
         "spread_wins":o,
         'spread_loss':p,
-        'spread_ties':percent_spread,
+        'spread_ties':spread_tie,
+        'spread_percent':percent_spread,
         # 'home':hme,
         
         }
