@@ -64,6 +64,18 @@ button.btn-xl.btn-primary.btn-wrap-text {
   width: 90px;
 }
 
+a.change-password {
+  float: right;
+    text-align: right;
+    width: 300PX;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+button.btn-xl.btn-primary.btn-wrap-text {
+  width: 50%;
+}
+
   </style>
 </head>
 <body>
@@ -169,7 +181,8 @@ button.btn-xl.btn-primary.btn-wrap-text {
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" value="{{request.user.email}}" required readonly> 
                       </div>
-        
+
+                      
                   <!-- 		<div class="form-group">
                         <label for="street">Street Address:</label>
                         <input type="text" class="form-control" id="address" placeholder="................" name="address" required>
@@ -202,12 +215,15 @@ button.btn-xl.btn-primary.btn-wrap-text {
 				                     
 				                 </div>
 			             	</div>
-                     
+    
               
                       <div class="row">
-                        <div class="col-md-6">	
+                        <div class="col-md-12 d-flex">	
+                          
                           <button type="submit" name="commit" value="" class="btn-xl btn-primary btn-wrap-text" />Update</button>			
+                          <a class="change-password" href="{%url 'passwordchange' request.user.id%}">change Password</a>
                         </div>
+  
                       </div>
                     </div>
                   </form>

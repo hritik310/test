@@ -11,6 +11,8 @@ from django.views.decorators.cache import cache_control
 from django.contrib.auth.decorators import login_required
 from app.helper import *
 from app.forms.update import *
+from django.contrib.auth.hashers import make_password,check_password
+from django.contrib.auth import update_session_auth_hash
 
 
 
@@ -75,7 +77,6 @@ def update(request,id):
   
   accountform =  userform(instance=custom)
   print("request",request.user)
-  print("accountform",accountform)
   if request.method == "POST":
     accountform = userform(request.POST,instance=custom)
     if accountform.is_valid():
@@ -94,6 +95,43 @@ def update(request,id):
   
   
   return render (request,"login/update.html",{'show':owner_id,'customer':custom,'form':accountform})
+
+def passwordchange(request,id):
+  custom  = user.objects.get(id=id)
+
+  if request.method == 'POST':
+    old_password = request.POST.get("old_password")
+    new_password=request.POST.get("new_password")
+    confirm=request.POST.get("confirm")
+    if old_password and new_password and confirm:
+      if request.user.is_authenticated:
+        users = user.objects.get(username= request.user.username)
+        if not users.check_password(old_password):
+          messages.warning(request, "your old password is not correct!")
+        else:
+          if new_password != confirm:
+            messages.warning(request, "your new password not match the confirm password !")
+                    
+          
+
+                    
+
+          else:
+            users.set_password(new_password)
+            users.save()
+            update_session_auth_hash(request, users)
+
+            messages.success(request, "your password has been changed successfuly.!")
+
+            return redirect('buildmodel-button')
+
+    else:
+      messages.warning(request, " sorry , all fields are required !")
+    
+  
+    
+            
+  return render(request,"login/changepassword.html")
 
 
 

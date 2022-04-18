@@ -74,13 +74,15 @@ a.nav-link.home_list.active:hover {
     text-align: center;
     margin-left: 10px;  
 }
-
+.header-sec{
+  margin-bottom:0 !important;
+}
 
   </style>
 </head>
 <body>
 {%if user.is_authenticated%}
-<nav class="navbar navbar-expand-md">
+<nav class="navbar navbar-expand-md header-sec">
 <div class="container">
  <div class="logo_section">
 		 <a class="navbar-brand logo_name" href="{% url 'index' %}"><img src="/static/image/logo-1.jpg"></a>
