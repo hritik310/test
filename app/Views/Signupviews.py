@@ -1860,7 +1860,7 @@ def buildmodelbutton(request):
             feats = {}
             home_model.fit(X,Y_home)
             for feature, importance in zip(answers_list,home_model.feature_importances_):
-                feats[feature] = str(round(importance,2)) #add the name/value pair 
+                feats[feature] = str(round(importance*100))#add the name/value pair
             print("featuer_importance_home_model",feats)
             feats_feature = feats
             print(feats_feature)
