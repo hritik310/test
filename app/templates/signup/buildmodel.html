@@ -62,14 +62,14 @@
          background: #ebeded;
          box-shadow: inset 0px 11px 8px 0px #ccc;
          }
-        .column {
-    /* width: 18%; */
-    /* margin: 1%; */
-    border: 2px solid;
-    {% comment %} height: 160px; {% endcomment %}
-    background: #ffffff;
-    margin-bottom: 24px;
-}
+         .column {
+         /* width: 18%; */
+         /* margin: 1%; */
+         border: 2px solid;
+         {% comment %} height: 160px; {% endcomment %}
+         background: #ffffff;
+         margin-bottom: 24px;
+         }
          span.glyphicon.glyphicon-info-sign {
          font-size: 25px;
          float: right;
@@ -198,35 +198,33 @@
          display: block !important;
          }
          .modal {
-          display:    none;
-          position:   fixed;
-          z-index:    1000;
-          top:        0;
-          left:       0;
-          height:     100%;
-          width:      100%;
-          background: rgba( 255, 255, 255, .8 ) 
-                      url('http://i.stack.imgur.com/FhHRx.gif') 
-                      50% 50% 
-                      no-repeat;
-      }
-
-      /* When the body has the loading class, we turn
+         display:    none;
+         position:   fixed;
+         z-index:    1000;
+         top:        0;
+         left:       0;
+         height:     100%;
+         width:      100%;
+         background: rgba( 255, 255, 255, .8 ) 
+         url('http://i.stack.imgur.com/FhHRx.gif') 
+         50% 50% 
+         no-repeat;
+         }
+         /* When the body has the loading class, we turn
          the scrollbar off with overflow:hidden */
-      body.loading .modal {
-          overflow: hidden;   
-      }
-
-      /* Anytime the body has the loading class, our
+         body.loading .modal {
+         overflow: hidden;   
+         }
+         /* Anytime the body has the loading class, our
          modal element will be visible */
-      body.loading .modal {
-          display: block;
-      }
-      input.input-box {
+         body.loading .modal {
+         display: block;
+         }
+         input.input-box {
          width: 100px;
          margin-left: 30px;
          margin-bottom: 20px;
-     }
+         }
       </style>
    </head>
    <body>
@@ -235,8 +233,8 @@
             <div class="dropdown_section">
                <form action="" method="GET">
                   <select name="cars" id="drop"> 
-                     <option value="nba"{% if re == 'nba' %} selected {% endif %}>NBA</option>
-                     <option value="ncaab"{% if re == 'ncaab' %} selected {% endif %}>NCAAB</option>
+                  <option value="nba"{% if re == 'nba' %} selected {% endif %}>NBA</option>
+                  <option value="ncaab"{% if re == 'ncaab' %} selected {% endif %}>NCAAB</option>
                   </select>
             </div>
             <div id="output">
@@ -267,12 +265,10 @@
             <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
             </button>
             </span>
-         
             </div>
             </div>
             </div>
-              {% endfor %} 
-
+            {% endfor %} 
             </div>
             </div>
             <div class="modal"><!-- Place at bottom of page --></div>
@@ -302,8 +298,8 @@
             </div> 
             </div>
             </div>
-         </div>
-         <div class="row">
+            </div>
+            <div class="row">
             <div class="col-md-4">
             <div class="prediction"> 
             <h5> Variable Importance</h5>
@@ -312,44 +308,64 @@
             </div>
             </div>
             <div class="col-md-4">
-               <div class="prediction"> 
-               <h5>Today's Predictions</h5>
-               <div class="row para-sec predict">
-               </div> 
-               </div>
-               </div>
-               </div>
+            <div class="prediction"> 
+            <h5>Today's Predictions</h5>
+            <div class="row para-sec predict">
+            </div> 
             </div>
-            
-            <div class="row btn_section">
-            <div>
-            <!--  <a href="{% url 'buildmodel' %}"> -->
-            <button type="button" class="btn btn-primary ModelButton">Save Model</button>
-            </div>
-            <div>
-            
-            <a href="{% url 'reset' %}">
-            <button type="button" class="btn btn-primary ModelButton">Reset</button>
-            </a>
-               
             </div>
 
+            <div class="col-md-4">
+               <div class="prediction">  
+               <ul class="nav nav-tabs">
+               {% comment %} <li class="active"><a data-toggle="tab" href="#home">Home</a></li> {% endcomment %}
+               <li><a data-toggle="tab" class="menu1" href="#menu1">Weight</a></li>
+               <li><a data-toggle="tab" href="#menu2">cover</a></li>
+               <li><a data-toggle="tab" href="#menu3">total_gain</a></li>
+               <li><a data-toggle="tab" href="#menu4">total_cover</a></li>
+               </ul>
+               <div class="tab-content">
+               <div id="menu1" class="tab-pane fade">
+               </div>
+               <div id="menu2" class="tab-pane fade">
+               </div>
+               <div id="menu3" class="tab-pane fade">
+               </div>
+               <div id="menu4" class="tab-pane fade">
+               </div>
+               </div>
+               </div>
+
             </div>
-            </form>
+            
+            </div>
          </div>
+         <div class="row btn_section">
+         <div>
+         <!--  <a href="{% url 'buildmodel' %}"> -->
+         <button type="button" class="btn btn-primary ModelButton">Save Model</button>
+         </div>
+         <div>
+         <a href="{% url 'reset' %}">
+         <button type="button" class="btn btn-primary ModelButton">Reset</button>
+         </a>
+         </div>
+         </div>
+         </form>
+      </div>
       </div>
       <script type="text/javascript">
          $(document).ready(function(){
             $(".build").click(function () {
                console.log('add onclick')
-
+         
                var rowId = $(this).attr('data-id');
                var rowssIdget=$(this).attr('makes')
                var rowssId=$(this).attr('id')
                var rowssIddata=$(this).attr('date-id')
                var inputval= $('#block_'+rowssIddata).val();
               //var brands = $('#drop').val();
-      
+         
          
                console.log("rowssId",rowssId)
                console.log("rowssIdget",rowssIdget)
@@ -447,17 +463,17 @@
             $('.buildmodelbutton').on('click', function() {
                var prev = $(this).attr('predict');
                console.log(prev)
-
+         
                $( ".Games_box" ).show();
                $( ".prediction" ).show();
-
+         
                console.log('manpreet');
          
                $.ajax({
                  type:"GET",
                  url: '/buildmodelbutton',
                  data: {
-
+         
                      'id':prev
                    
          
@@ -465,6 +481,8 @@
                  //dataType: 'json',
                  success: function (data1) {
                     console.log(data1)
+                    console.log(data1.weight)
+            
                     if(data1.data == 'ncaab'){
                        var html = '';
                         var over_html= '';
@@ -482,7 +500,7 @@
                            predict_html+= "<p>"+predict.home+"</p>";
             
                      });
-   
+         
                      // console.log(data1.totalagain);
                    
          
@@ -493,7 +511,7 @@
                      $('.predict').html( predict_html);
                     
          
-
+         
                     }
                     else{
                        var html = '';
@@ -509,6 +527,10 @@
                      });
                      var predict_html='';
                      var feature_html='';
+                     var weight = '';
+                     var cover = '';
+                     var total_gain = '';
+                     var total_cover = '';
                      // console.log(data1.totalagain);
                      $.each(data1.totalagain, function(index, predict) {
                      predict_html+= "<p>"+predict.home+"</p>";
@@ -516,17 +538,36 @@
                      });
                      var featureData = data1.feature
                      console.log('featureData',featureData)
-
+         
                      $.each(featureData, function(index, feats) {
-
+         
                         console.log('feats',index,feats);
                     
-
+         
                         feature_html+= `<p>${index} : <span>${feats}%</span> </p>`;
-
+         
+                     });
+                     var featureD = data1.weight 
+                     $.each(featureD, function(index, feat) {
+                        weight+= `<p>${index} : <span>${feat}</span> </p>`;
+         
+                     });
+                     var featureD = data1.cover 
+                     $.each(featureD, function(index, feat) {
+                        cover+= `<p>${index} : <span>${feat}</span> </p>`;
+         
                      }); 
-                     
-
+                     var featureD = data1.total_gain 
+                     $.each(featureD, function(index, feat) {
+                        total_gain+= `<p>${index} : <span>${feat}</span> </p>`;
+         
+                     }); 
+                     var featureD = data1.total_cover 
+                     $.each(featureD, function(index, feat) {
+                        total_cover+= `<p>${index} : <span>${feat}</span> </p>`;
+         
+                     });  
+         
                   
             
          
@@ -536,8 +577,12 @@
                      $('.spread').html( spread_html);
                      $('.predict').html( predict_html);
                      $('.feats').html(feature_html);
+                     $('#menu1').html(weight);
+                     $('#menu2').html(cover);
+                     $('#menu3').html(total_gain);
+                     $('#menu4').html(total_cover);
          
-
+         
                     }             
             
          
@@ -547,7 +592,7 @@
          
                
             });
-
+         
             $("#drop").on('change',function() {
                this.form.submit();
             });
@@ -559,8 +604,8 @@
                var def =ro   
                console.log(def,'def')         
          
-
-
+         
+         
                
          
          
@@ -591,7 +636,7 @@
             });
          
           $body = $("body");
-
+         
          $(document).on({
              ajaxStart: function() { $body.addClass("loading");    },
               ajaxStop: function() { $body.removeClass("loading"); }    

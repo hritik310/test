@@ -1861,12 +1861,21 @@ def buildmodelbutton(request):
             home_model.fit(X,Y_home)
             for feature, importance in zip(answers_list,home_model.feature_importances_):
                 feats[feature] = str(round(importance*100))#add the name/value pair
-            print("featuer_importance_home_model",feats)
+            # print("featuer_importance_home_model",home_model.importance_type)
+
+            weight= home_model.get_booster().get_score(importance_type='weight')
+
+            total_gain = home_model.get_booster().get_score(importance_type='total_gain')
+
+            cover = home_model.get_booster().get_score(importance_type='cover')
+
+            total_cover = home_model.get_booster().get_score(importance_type='total_cover')
+
             feats_feature = feats
-            print(feats_feature)
+            # print(feats_feature)
 
             away_model.fit(X,Y_away)
-            print("featuer_importance_away_model",away_model.feature_importances_)
+            # print("featuer_importance_away_model",away_model)
             
             
             
@@ -1892,8 +1901,6 @@ def buildmodelbutton(request):
                 #so the user adds the variables into the list modelVars
                 #but I am not sure how we can dynamically use that list to 
                 #select them from the averages dataframe we create.
-                # dpanda=list(df[answers_list])
-                # print("ddd",dpanda)
                 king=Modelvar.objects.filter(created_by=request.user.id).values_list("percent_value",flat=True)
                 for nt in king:
                     pass
@@ -2247,6 +2254,10 @@ def buildmodelbutton(request):
         'spread_ties':spread_tie,
         'spread_percent':percent_spread,
         'home':hme,
+        'weight':weight,
+        'total_gain':total_gain,
+        'cover':cover,
+        'total_cover':total_cover,
         
         }
 
