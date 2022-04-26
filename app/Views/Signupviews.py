@@ -157,6 +157,7 @@ def updateprofile(request,id):
 
 
 def buildmodel(request):
+    all=Modelvar.objects.all()
     req = request.GET.get('cars')
     print("Request",req)
     st = StripeCustomer.objects.filter(stripeCustomerId = request.user.id).values_list("membershipstatus",flat=True)
@@ -587,7 +588,7 @@ def buildmodel(request):
             all=Modelvar.objects.all()
             a=Modelvar.objects.filter(created_by=request.user.id).values_list("title",flat="True")
             if Modelvar.objects.filter(created_by=request.user.id).exists():
-                status=a[0]
+                status=a
                 # print("sssssssssssssss",status)
             else:
                 status=0
@@ -1084,7 +1085,7 @@ def buildmodel(request):
         return redirect('membership') 
 
 
-    return render(request,"signup/buildmodel.html",{'re':req,"df":list(df_away)})
+    return render(request,"signup/buildmodel.html",{'re':req,"df":list(df_away),"all":all})
     # return render(request,"signup/buildmodel.html",{'H':data"df":list(df_away),'status':status,"all":all})
    
 
@@ -2262,7 +2263,7 @@ def buildmodelbutton(request):
         }
 
 
-    mod = Modelvar.objects.all().delete()
+    # mod = Modelvar.objects.all().delete()
 
     return JsonResponse(data1)
 

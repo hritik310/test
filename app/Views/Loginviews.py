@@ -13,6 +13,7 @@ from app.helper import *
 from app.forms.update import *
 from django.contrib.auth.hashers import make_password,check_password
 from django.contrib.auth import update_session_auth_hash
+import pandas as pd
 
 
 
@@ -144,6 +145,9 @@ def passwordchange(request,id):
     
             
   return render(request,"login/changepassword.html")
+
+
+
 
 
 

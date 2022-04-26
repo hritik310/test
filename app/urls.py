@@ -25,7 +25,6 @@ urlpatterns = [
     path("reset",Signupviews.reset,name="reset"),
     path('register',Signupviews.create,name="register"),
     path('passwordchange/<int:id>',Loginviews.passwordchange, name ='passwordchange'),
-
     # path('buildmodel/percent/',Signupviews.buildmodelpercent, name ="buildmodel-percent"),
 
     

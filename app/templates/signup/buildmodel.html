@@ -220,11 +220,20 @@
          body.loading .modal {
          display: block;
          }
-         input.input-box {
+         {% comment %} input.input-box {
          width: 100px;
          margin-left: 30px;
          margin-bottom: 20px;
-         }
+         } {% endcomment %}
+
+         input.input-box {
+            width: 100px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
       </style>
    </head>
    <body>
@@ -241,7 +250,9 @@
             </div>
             <div class="section_first">
             <div class="row_section_grid">
+               <h1>{{status}}</h1>
             {% for i in df|slice:"1:73" %}
+
             <div class="col-md-2">
             <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
             <div class="Info-sign">
@@ -249,7 +260,7 @@
             </div>
             <div class="home_point">
             <p>{{i}}</p>
-            <input type="number" min="0" max="10"class="input-box"name="percent" id ="block_{{forloop.counter}}">
+            <input type="number" {%for z in all %} {%if  i in z.title  %} value="{{z.percent_value}}" {%endif%}{%endfor%} min="0" max="10"class="input-box"name="percent" id ="block_{{forloop.counter}}">
             <span class="feature-importance"></span> 
             </div> 
             <div class="input-group section_number">
@@ -350,6 +361,7 @@
          <button type="button" class="btn btn-primary ModelButton">Reset</button>
          </a>
          </div>
+
          </div>
          </form>
       </div>
@@ -408,7 +420,7 @@
          
             $(document).ready(function(){
                $('coloradd').on('show.bs.tab', function(e) {
-                   localStorage.setItem('activeTab', $(e.target).attr('href'));
+                  localStorage.setItem('activeTab', $(e.target).attr('href'));
                });
                var activeTab = localStorage.getItem('activeTab');
                if(activeTab){
@@ -419,6 +431,18 @@
                
             $(".build1").click(function () {
                var rowId = $(this).attr('data');
+               console.log('hritik');
+                  
+               var rem_id = $(this).attr('makes');
+               var rembt_id = $(this).attr('id');
+               console.log("rem_id",rem_id) 
+               var rem = rem_id   
+               var de="id_quant_"+rembt_id
+               console.log(rem,'remove_val') 
+               
+               $("#"+rem).removeClass("coloradd");    
+               $("#"+de).prop("disabled",false);
+                  
                
                
             
@@ -612,28 +636,11 @@
                $("#"+def).addClass("coloradd");  
             });
             
-            $(".build").click(function () {
+            {% comment %} $(".build").click(function () {
                console.log('add onclick')
                var rowssId=$(this).attr('id')
                
-               $(".build1").on('click',function () {
-                  console.log('remove');
-                  
-                  var rem_id = $(this).attr('makes');
-                  var rembt_id = $(this).attr('id');
-                  console.log("rem_id",rem_id) 
-                  var rem = rem_id   
-                  var de="id_quant_"+rembt_id
-                  console.log(rem,'remove_val') 
-                  
-                  $("#"+rem).removeClass("coloradd");    
-                  $("#"+de).prop("disabled",false);
-                  
-         
-                  // $(this).parent().parent().parent().prev().prev().parent().removeClass('coloradd');
-               // $("#"+rem).removeAttr('style');
-               });
-            });
+            }); {% endcomment %}
          
           $body = $("body");
          
