@@ -1865,12 +1865,19 @@ def buildmodelbutton(request):
             # print("featuer_importance_home_model",home_model.importance_type)
 
             weight= home_model.get_booster().get_score(importance_type='weight')
+            a_dict = {key: value for key, value in zip(answers_list, weight.values())}
 
             total_gain = home_model.get_booster().get_score(importance_type='total_gain')
+            a_total = {key: round(value,2) for key, value in zip(answers_list, total_gain.values())}
+    
 
             cover = home_model.get_booster().get_score(importance_type='cover')
-
+            a_cover = {key: round(value,2) for key, value in zip(answers_list, cover.values())}
+            
+ 
             total_cover = home_model.get_booster().get_score(importance_type='total_cover')
+            a_total_cover = {key: value for key, value in zip(answers_list, total_cover.values())}
+            
 
             feats_feature = feats
             # print(feats_feature)
@@ -2255,10 +2262,10 @@ def buildmodelbutton(request):
         'spread_ties':spread_tie,
         'spread_percent':percent_spread,
         'home':hme,
-        'weight':weight,
-        'total_gain':total_gain,
-        'cover':cover,
-        'total_cover':total_cover,
+        'weight':a_dict,
+        'total_gain':a_total,
+        'cover':a_cover,
+        'total_cover':a_total_cover,
         
         }
 
