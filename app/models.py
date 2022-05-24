@@ -34,8 +34,6 @@ class user(AbstractBaseUser,PermissionsMixin):
 # class store(model.Model):
     
 
-
-
     USERNAME_FIELD 	='username'
     objects = CustomUserManager()
 
@@ -58,4 +56,19 @@ class Modelvar(models.Model):
     created_by = models.IntegerField(null=True)
     percent_value = models.IntegerField(null=True)
 
+
     # status=models.IntegerField(default=0)
+
+class Modelname(models.Model):
+    modelname = models.CharField(max_length=255,null=True,unique=True)
+
+
+class Var(models.Model):
+    created_by = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Selectvar(models.Model):
+    title = models.CharField(max_length=255,default="")
+    percent_value = models.IntegerField(null=True)
+    varid = models.ForeignKey(Var,on_delete=models.CASCADE,null=True)

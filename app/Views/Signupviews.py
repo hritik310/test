@@ -41,6 +41,13 @@ from sklearn.metrics import mean_pinball_loss, mean_squared_error
 from numpy import asarray
 from pysbr import *
 import json
+import seaborn as sb
+import matplotlib.pyplot as mp
+from django.core.mail import send_mail 
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.core import mail
 
 stripe.api_key = settings.SECTRET_KEY # new
 # print(stripe.api_key)
@@ -584,16 +591,37 @@ def buildmodel(request):
             #         print(row['away'] + ' ' + str(away_points))
 
         else:
-                
+           
             all=Modelvar.objects.all()
             a=Modelvar.objects.filter(created_by=request.user.id).values_list("title",flat="True")
             if Modelvar.objects.filter(created_by=request.user.id).exists():
                 status=a
-                # print("sssssssssssssss",status)
+                # print("s",status)
             else:
+                
                 status=0
+            var = Modelvar.objects.filter(created_by = request.user.id).values_list("title",flat=True)
+
+            car = len(var)
+
+            answers_list = list(var)
+            print("answer",answers_list)
             df = pd.read_csv('finalDS.csv')
+            # man=df[df.columns[1:]].corr()['home_steals'].sort_values(ascending=False)[:10]
+            # print(man)
+           
+            # hrit = df.corr()
+            # for j in answers_list:
+               
+            #     print(hrit[j].sort_values(ascending=False)[:10])
+            # hrit.to_csv("output.csv")
+            # dataplot = sb.heatmap(df.corr(), cmap="YlGnBu", annot=True)
+            # dataplot.figure.savefig('result.png')
   
+# displaying heatmap
+            # mp.show()
+
+         
 
             df = df.dropna()
 
@@ -791,7 +819,8 @@ def buildmodel(request):
 
 
             #getting shape. We will use this for back testing / training
-            # amountOfGames = df.shape[0]
+            amountOfGames = df.shape[0]
+            print(amountOfGames)
 
 
 
@@ -1089,6 +1118,32 @@ def buildmodel(request):
     # return render(request,"signup/buildmodel.html",{'H':data"df":list(df_away),'status':status,"all":all})
    
 
+# def buildmodelStatus(request):
+#     build = Var()
+#     select = Selectvar()
+#     build.created_by = request.user.id
+#     good = Var.objects.filter(created_by= request.user.id)
+#     print("good",good.query)
+#     if good == 1:
+#         build.save()
+#     select.percent_value =request.GET.get('info')
+#     select.title=request.GET.get('id')
+  
+#     print("build",select.title)
+
+#     if  select.percent_value == "":
+#         select.percent_value=0
+#     select.save()
+#     # dele=Modelvar.objects.all()
+#     # dele.delete()  
+#     data = {
+#     "status":"OK",
+#     "messages":"You have selected the item",
+#     "message":"You have Selected the item",
+#     "value":0,
+#     }
+
+#     return JsonResponse(data)
 def buildmodelStatus(request):
     build = Modelvar()
     build.title=request.GET.get('id')
@@ -1098,8 +1153,6 @@ def buildmodelStatus(request):
     if  build.percent_value == "":
         build.percent_value=0
     build.save()
-    # dele=Modelvar.objects.all()
-    # dele.delete()
     data = {
     "status":"OK",
     "messages":"You have selected the item",
@@ -1139,6 +1192,7 @@ def buildmodelremove(request):
 def buildmodelbutton(request):
 
     reqs = request.GET.get('id',None)
+    print(request.GET)
     if reqs == 'ncaab':
         df = pd.read_csv('mainDSNCAAB.csv')
         # In[19]:
@@ -1782,6 +1836,7 @@ def buildmodelbutton(request):
         
         #getting shape. We will use this for back testing / training
         amountOfGames = df.shape[0]
+    
 
 
 
@@ -2238,7 +2293,7 @@ def buildmodelbutton(request):
                         
                     }
 
-            data_list.append(data) 
+            data_list.append(data)
 
             # print(data_list) 
       
@@ -2269,6 +2324,13 @@ def buildmodelbutton(request):
         
         }
 
+        subject, from_email, to = 'hello', 'testsood981@gmail.com', 'mandeep@codenomad.net'
+        text_content = 'This is an important message.'
+        html_content = render_to_string('signup/email.html',{'y':data_list})
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
 
     # mod = Modelvar.objects.all().delete()
 
@@ -2281,3 +2343,30 @@ def reset(request):
     del_model=Modelvar.objects.all().delete()
 
     return redirect("/buildmodel")
+
+def new(request):
+    return render(request,"signup/new.html")
+
+def heatmap(request):
+    return render(request,"signup/buildmodel1.html")
+
+# def modelname(request):
+#     if request.method == "POST":
+#         name = Modelname()
+
+#         name.modelname = request.POST.get("modelname")
+#         name.save()
+
+
+#     return render(request,"signup/modelname.html")
+
+def selectml(request):
+    return render(request,"signup/buildmodel2.html")
+
+def selectvariable(request):
+    return render(request,"signup/buildmodel3.html")
+def training(request):
+    return render(request,"signup/buildmodel4.html")
+
+def modelname(request):
+    return render(request,"signup/buildmodel5.html")

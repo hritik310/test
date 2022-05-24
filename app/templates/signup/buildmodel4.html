@@ -13,6 +13,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <style>
          body{
          /*line-height:0;
@@ -41,7 +42,7 @@
          height: 100px;
          font-weight: 700;
          }
-      
+        
          .navbar-inverse .navbar-nav>li:hover {
          margin-left: 10px;
          background: #69ace0;
@@ -56,7 +57,7 @@
          /* width: 18%; */
          /* margin: 1%; */
          border: 2px solid;
-         {% comment %} height: 160px; {% endcomment %}
+         /* {% comment %} height: 160px; {% endcomment %} */
          background: #ffffff;
          margin-bottom: 24px;
          }
@@ -120,8 +121,6 @@
          align-items: center;
          justify-content: center;
          margin-top: 20px;
-         margin-left: 0 !important;
-         margin-right: 0 !important;
          }
          button.btn.btn-primary.ModelButton {
          margin: 10px;
@@ -140,8 +139,8 @@
          }
          #drop {
          color: #fff;
-         background-color: #69ade0;
-         border-color: #69ade0;
+         background-color: #000000;
+         border-color: #7c7c7c;
          padding: 12px;
          font-size: 18px;
          width: 100%;
@@ -173,7 +172,7 @@
          border: 2px solid #000000;
          padding: 10px;
          display: none;
-         {% comment %} margin-left: 430px; {% endcomment %}
+         /* {% comment %} margin-left: 430px; {% endcomment %} */
          margin-top: 30px;
          }
          .coloradd{
@@ -212,11 +211,11 @@
          body.loading .modal {
          display: block;
          }
-         {% comment %} input.input-box {
+         /* {% comment %} input.input-box {
          width: 100px;
          margin-left: 30px;
          margin-bottom: 20px;
-         } {% endcomment %}
+         } {% endcomment %} */
          input.input-box {
          width: 100px;
          margin: 0 auto;
@@ -225,61 +224,177 @@
          align-items: center;
          justify-content: center;
          }
-         .home_point p {
-         text-align: center;
-         white-space: nowrap;
-         overflow: hidden;
-         text-overflow: ellipsis;
-         }
-         .home_point p:hover {
-         overflow: visible;
-         }
-         .bildmoddal-sec {
-         width: 100%;
-         overflow: scroll;
-         height: 860px;
-         }
-         .col-md-4.row-box {
-         width: 100%;
-         height: 50px;
-         background: #69ade0;
-         margin-top: 30px;
-         color: white;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-}
-         }
-         .drop_section {
-         width: 60%;
-         margin: 0 auto;
-         padding: 20px;
-         }
-         select#drop_section {
-         color: #fff;
-         background-color: #69ade0;
-         border-color: #69ade0;
-         padding: 12px;
-         font-size: 18px;
-         width: 100%;
-         }
-         button.Secondarybtn {
-         background:#69ade0;
-         margin-top: 20px;
-         border-radius: unset;
-         padding: 10px;
-         font-size: 16px;
-         width: 100px;
+
+
+
+
+
+
+        /* buildmodel2 page css start */
+
+
+        .map-download {
+            text-align: center;
          }
 
-         .row.nextbtnsec {
-            margin: 0 !important;
-            padding: 20px;
-        }
-        .row-box p {
-         margin: 0;
-         font-size: 18px;
-     }
+         .container.tabdiv {
+            padding: 40px;
+         }
+         .container-box {   
+            margin-top: 30px !important;
+            width: 30%;
+            /* height: 200px; */
+            margin: 0 auto;
+            text-align: center;
+         }
+
+         button.map-downloadbtn {
+         font-size: 16px;
+         padding: 10px 20px;
+         border-radius: 30px;
+         background: #69ade0;
+         border: 1px solid #69ade0;
+         }
+         button.btn.btn-info {
+         padding: 10px 30px;
+         border-radius: 30px;
+         font-size: 16px;
+         border: 1px solid #69ade0;
+         background: #69ade0;
+      }
+
+
+      .Modelbox_div {
+        width: 100%;
+        border: 1px solid black;
+        margin-top: 20px;
+        padding: 10px;
+        height: 100px;
+    }
+
+    button.btn_second {
+    font-weight: 600;
+    background: #69ade0;
+    font-size: 16px;
+    padding: 10px 30px;
+    border-radius: 30px;
+}
+
+button.btn_second:hover{
+    color:#ffffff;
+}
+
+
+
+.btn:focus {
+    color: #ffffff !important;
+    text-decoration: none;
+    background-color: #69ade0 !important;
+}
+       /* progress-bar css start */
+
+       .step-container > div {
+  height:auto;
+  padding:20px;
+   background: #ccc
+}
+
+.progressbar {
+      margin:20px;
+      counter-reset: step; 
+  }
+  .progressbar li {
+      list-style-type: none;
+      width: 16%;
+      float: left;
+      font-size: 12px;
+      position: relative;
+      text-align: center;
+      text-transform: uppercase;
+      color: #7d7d7d;
+  }
+  .progressbar li:before {
+      width: 15px;
+      height: 15px;
+      content: '';
+      line-height: 30px;
+      border: 2px solid #7d7d7d;
+      background-color: #7d7d7d;
+      display: block;
+      text-align: center;
+      margin: 0 auto 10px auto;
+      border-radius: 50%;
+      transition: all .8s;
+  }
+  .progressbar li:after {
+      width: 100%;
+      height: 2px;
+      content: '';
+      position: absolute;
+      background-color: #7d7d7d;
+      top: 7px;
+      left: -50%;
+      z-index: -1;
+      transition: all .8s;
+  }
+  .progressbar li:first-child:after {
+      content: none;
+  }
+  .progressbar li.active:before {
+      border-color: #69ade0;
+      background-color: #69ade0;
+      transition: all .8s;
+  }
+  .progressbar li.active:after {
+      background-color: #69ade0;
+      transition: all .8s;
+  }
+
+.backbtn{
+  background-color: #69ade0;
+  margin: 5px;
+  width: 75px;
+  color: white;
+}
+.backbtn:hover {
+  color: white; 
+}
+.backbtn:focus {
+  color: white;
+}
+.btn-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+        /* progress-bar css end*/
+ /* buildmodel1 page css end */
+
+ @media only screen and (max-width: 600px) {
+
+
+.container-box {
+    margin-top: 10px !important;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.container.tabdiv {
+    padding: 0px;
+}
+button.btn.btn-info {
+    width: 100%;
+}
+
+button.btn_second {
+    width: 100%;
+}
+
+}
 
 
       </style>
@@ -287,194 +402,109 @@
    <body>
       <div class ="col">
          <div class="container-fluid padding_cont">
-            <div class="dropdown_section">
-               <form action="" method="GET">
-                  <select name="cars" id="drop"> 
-                  <option value="nba"{% if re == 'nba' %} selected {% endif %}>NBA</option>
-                  <option value="ncaab"{% if re == 'ncaab' %} selected {% endif %}>NCAAB</option>
-                  </select>
-            </div>
-            <div class="row">
-            <div class="col-md-3"> </div> 
-            <div class="col-md-3"> 
-            <div class="dropdown_sectiones">
-            <select name="cars" id="drop">
-            <option value="" selected disabled hidden>Select Time frame</option> 
-            <option value=""  >Minimum year data</option>   
-            </select>
-            </div>
-            </div>
-            <div class="col-md-3">
-            <div class="dropdown_sectiones">
-            <select name="cars" id="drop">
-            <option value="" selected disabled hidden>Select Time frame</option> 
-            <option value="" >Maximum Year data</option>  
-            </select>
-            </div>
-            </div>
-            <div class="col-md-3"> </div> 
-            </div> 
-            <div class="row">
-            <div class="col-md-4"> </div> 
-            <div class="col-md-4 row-box"> <p>Dataset size</p></div> 
-            <div class="col-md-4"> </div> 
-            </div>
-         </div>
-         <div class="bildmoddal-sec">
-         <div id="output">
-         </div>
-         <div class="section_first">
-         <div class="row_section_grid">
-         <h1>{{status}}</h1>
-         {% for i in df|slice:"1:73" %}
-         <div class="col-md-2">
-         <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
-         <div class="Info-sign">
-         <span class="glyphicon glyphicon-info-sign"></span> 
-         </div>
-         <div class="home_point">
-         <p>{{i}}</p>
-         <input type="number" {%for z in all %} {%if  i in z.title  %} value="{{z.percent_value}}" {%endif%}{%endfor%} min="0" max="10"class="input-box"name="percent" id ="block_{{forloop.counter}}">
-         <span class="feature-importance"></span> 
-         </div> 
-         <div class="input-group section_number">
-         <span class="input-group-btn">
-         <button type="button" id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default  btn-number build1" data-type="minus"data-field="quant[1]" data={{i}} >
-         <span class="glyphicon remove glyphicon-minus" rem="{{forloop.counter}}"></span>
-         </button>
-         </span>
-         <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
-         {% comment %} {%if status == 1%} {% endcomment %}
-         <span class="input-group-btn"> 
-         <button type="button" id="id_quant_{{forloop.counter}}" date-id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id={{i}}>
-         <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
-         </button>
-         </span>
-         </div>
-         </div>
-         </div>
-         {% endfor %} 
-         </div>
-         </div>
-         </div>
-         <div class="modal"><!-- Place at bottom of page --></div>
-         <div class="row">
-         <div class="col-md-4"></div>
-         <div class="col-md-4">
-         <div class="drop_section">
-         <form action="" method="GET">
-         <select name="cars" id="drop_section">
-         <option value="" selected disabled hidden> Target variable</option>    
-         <option value="total" >Total</option>
-         <option value="team">team vs team</option>
-         <option value="win">Win%</option>
-         </select>
-         </form>
-         </div>
-         </div>
-         <div class="col-md-4"></div>
-      </div>
-         {% comment %} <div class="text-center">
-            <a>
-            <button type="button" class="btn btn-primary buildmodelbutton" predict={{re}}>Build Model</button></a>
-         </div> {% endcomment %}
-         <div class="row">
-            <div class="col-md-4">
-               <div class="Games_box">
-                  <h5>ML Recent Games Record</h5>
-                  <div class="row results para-sec">
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4">
-               <div class="Games_box">
-                  <h5>Over Under Recent Games Record</h5>
-                  <div class="row para-sec show">
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4">
-               <div class="Games_box">
-                  <h5>Spread Recent Games Record</h5>
-                  <div class="row para-sec spread">
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-md-4">
-               <div class="prediction">
-                  <h5> Variable Importance</h5>
-                  <div class="row para-sec feats ">
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4">
-               <div class="prediction">
-                  <h5>Today's Predictions</h5>
-                  <div class="row para-sec predict">
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4">
-               <div class="prediction">
-                  <ul class="nav nav-tabs">
-                     {% comment %} 
-                     <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                     {% endcomment %}
-                     <li><a data-toggle="tab" class="menu1" href="#menu1">Weight</a></li>
-                     <li><a data-toggle="tab" href="#menu2">cover</a></li>
-                     <li><a data-toggle="tab" href="#menu3">total_gain</a></li>
-                     <li><a data-toggle="tab" href="#menu4">total_cover</a></li>
-                  </ul>
-                  <div class="tab-content">
-                     <div id="menu1" class="tab-pane fade">
-                     </div>
-                     <div id="menu2" class="tab-pane fade">
-                     </div>
-                     <div id="menu3" class="tab-pane fade">
-                     </div>
-                     <div id="menu4" class="tab-pane fade">
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      {% comment %} <div class="row btn_section">
-         <div>
-            <!--  <a href="{% url 'buildmodel' %}"> -->
-            <button type="button" class="btn btn-primary ModelButton">Save Model</button>
-         </div>
-         <div>
-            <a href="{% url 'reset' %}">
-            <button type="button" class="btn btn-primary ModelButton">Reset</button>
-            </a>
-         </div>
-      </div> {% endcomment %}
+                <div class="container text-center tabdiv">
+                <a href="#"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Training Metrics</button></a>
+                <div id="demo" class="collapse container-box">
+                    <div class="prediction" style="display: block;"> 
+                        <h5> Variable Importance</h5>
+                        <div class="row para-sec feats ">
+                            <p>Mean Absolute Error: <span>30%</span> </p>
+                            <p>Mean Squared Error: <span>37%</span> </p>
+                            <p>Root Mean Squared Error: <span>33%</span> </p>
+                            <p>R2: <span>33%</span> </p>
+                        </div> 
+                    </div> 
+                </div>
+              </div>
 
 
-         <div class="row nextbtnsec">
-            <div class="col-md-10"></div>
-            <div class="col-md-2">
-               <a href="{% url 'buildmodel1' %}">
-               <button type="button" class="btn btn-secondary Secondarybtn">NEXT</button></div>
-               </a>
-            </div>
+              <div class="container">
+                <div class="row"> 
+                    <div class="container-box">
+                         <button type="button" class="btn btn-secondary btn_second">Variable list</button>
+                    </div>
+                </div>
+              
+             </div>
+             <div class="container">
+                <div class="row"> 
+                    <div class="container-box">
+                         <button type="button" class="btn btn-secondary btn_second">Past Records</button>
+                    </div>
+                </div>
+              
+             </div>
+
          </div>
-      </form>
+         <!-- <div class="container">
+            <div class="row"> 
+                <div class="container-box">
+                     <button type="button" class="btn btn-secondary btn_second">Variable list</button>
+                </div>
+            </div>
+          
+         </div>
+         <div class="container">
+            <div class="row"> 
+                <div class="container-box">
+                     <button type="button" class="btn btn-secondary btn_second">Past Records</button>
+                </div>
+            </div>
+          
+         </div> -->
+
+
+         <!-- progress-bar html start -->
+
+         <div class="container p-5">
+          <!-- <div class="row">
+                <div class="col-md-12 step-container">
+                  
+                    <div class="step">Step 1</div>
+                    <div class="step">Step 2</div>
+                    <div class="step">Step 3</div>
+                    <div class="step">Step 4</div>
+                    <div class="step">Step 5</div>
+                    <div class="step">Step 4</div>
+                  
+                  
+                </div>
+          </div> -->
+        </div>
+        <div class="container p-5">
+                    <div class="row">
+                      <div class="col-lg-9 p-4">
+                    <ul id="progress-bar" class="progressbar">
+                   <li class="active">Step 1</li>
+                   <li class="active">Step 2</li>
+                   <li class="active">Step 3</li>
+                   <li class="active">Step 4</li>
+                   <li class="active">Step 5</li>
+                   <li>Step 6</li>
+                </ul>
+                      </div>
+                      <div class="col-lg-3" style="padding:20px">
+                        <a href="{% url 'buildmodel3' %}">
+                            <button class="btn backbtn" id="next">Back</button>
+                        </a>
+                    <a href="{% url 'buildmodel5' %}">
+                        <button class="btn backbtn" id="next">Next</button>
+                    </a>
+                    <button class="action submit btn btn-success">Submit</button>
+                      </div>
+                  </div>
+                    </div>
+
+ <!-- progress-bar html end-->
+         
       </div>
-      </div>
+     
       <script type="text/javascript">
          $(document).ready(function(){
             $(".build").click(function () {
                console.log('add onclick')
-
+         
                var rowId = $(this).attr('data-id');
-               console.log("rowId",rowId)
-               if(rowId == ""){
-                  ale
-               }
                var rowssIdget=$(this).attr('makes')
                var rowssId=$(this).attr('id')
                var rowssIddata=$(this).attr('date-id')
@@ -536,7 +566,13 @@
                var rowId = $(this).attr('data');
                console.log('hritik');
                   
-               var rem_id = $(this).aname.modelname
+               var rem_id = $(this).attr('makes');
+               var rembt_id = $(this).attr('id');
+               console.log("rem_id",rem_id) 
+               var rem = rem_id   
+               var de="id_quant_"+rembt_id
+               console.log(rem,'remove_val') 
+               
                $("#"+rem).removeClass("coloradd");    
                $("#"+de).prop("disabled",false);
                   
@@ -560,25 +596,25 @@
             });
             });
          });
-         {% comment %} $(".input-box").keyup(function () {
-            var rowId = $(this).val();
+         //  {% comment %} $(".input-box").keyup(function () {
+         //     var rowId = $(this).val();
                  
-            console.log(rowId);
-            $.ajax({
-               type:"GET",
-               url: '/buildmodel/percent/',
-               data: {
-                  'id': rowId
+         //     console.log(rowId);
+         //     $.ajax({
+         //        type:"GET",
+         //        url: '/buildmodel/percent/',
+         //        data: {
+         //           'id': rowId
          
-               },
-               dataType: 'json',
-               success: function (data) {
+         //        },
+         //        dataType: 'json',
+         //        success: function (data) {
                   
                
-               }
-            });
-            });
-          {% endcomment %}
+         //        }
+         //     });
+         //     });
+         //   {% endcomment %}
            
          
             $('.buildmodelbutton').on('click', function() {
@@ -733,11 +769,11 @@
                $("#"+def).addClass("coloradd");  
             });
             
-            {% comment %} $(".build").click(function () {
-               console.log('add onclick')
-               var rowssId=$(this).attr('id')
+            // {% comment %} $(".build").click(function () {
+            //    console.log('add onclick')
+            //    var rowssId=$(this).attr('id')
                
-            }); {% endcomment %}
+            // }); {% endcomment %}
          
           $body = $("body");
          
@@ -802,6 +838,92 @@
            }
          
          });
+
+
+
+
+
+
+
+
+
+
+      //  progress-bar js start
+      $(document).ready(function(){
+  //steps ui
+  var progressBar = {
+  Bar : $('#progress-bar'),
+  Reset : function(){
+    
+  },
+  Next: function(){
+    $('#progress-bar li:not(.active):first').addClass('active');
+  },
+  Back: function(){
+    $('#progress-bar li.active:last').removeClass('active');
+  }
+}
+  
+  var current = 1;
+	
+	widget      = $(".step");
+	btnnext     = $(".next");
+	btnback     = $(".back"); 
+	btnsubmit   = $(".submit");
+
+	// Init buttons and UI
+	widget.not(':eq(0)').hide();
+	hideButtons(current);
+	setProgress(current);
+
+	// Next button click action
+	btnnext.click(function(){
+	    if(current < widget.length) { 			
+            widget.show(); 			
+            widget.not(':eq('+(current++)+')').hide();
+  	        setProgress(current); 
+            //alert("I was called from btnNext");
+        } 		
+       hideButtons(current); 
+    progressBar.Next();
+   });
+   
+  // Back button click action 	
+  btnback.click(function(){ 		
+      if(current > 1){
+		    current = current - 2;
+		    //btnnext.trigger('click'); why do you need this?
+        
+	    }else{ //added an else here so the button hides only at the beginning step
+        hideButtons(current);
+      }
+        //hideButtons(current);
+    progressBar.Back();
+    });		
+});
+
+// Change progress bar action
+setProgress = function(currstep){
+	var percent = parseFloat(100 / widget.length) * currstep;
+	percent = percent.toFixed();
+	$(".progress-bar")
+        .css("width",percent+"%")
+        .html(percent+"%");		
+}
+
+
+// Hide buttons according to the current step
+hideButtons = function(current){
+	var limit = parseInt(widget.length); 
+
+	$(".action").hide();
+
+	if(current < limit) btnnext.show(); 	
+  if(current > 1) btnback.show();
+	if(current == limit) { btnnext.hide(); btnsubmit.show(); }
+}
+
+//  progress-bar js end
           
       </script>
    </body>

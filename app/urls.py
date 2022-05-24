@@ -18,7 +18,18 @@ urlpatterns = [
     path('logout',Loginviews.userLogout,name='logout'),
     path('sport',Loginviews.setting,name = 'sport'),
     path('update/<int:id>',Loginviews.update, name ='update'),
+
+
+ # build model urls
     path('buildmodel/', Signupviews.buildmodel, name ='buildmodel'),
+    path('buildmodel1/', Signupviews.heatmap, name ='buildmodel1'),
+    path('buildmodel2/', Signupviews.selectml, name='buildmodel2'),
+    path('buildmodel3/', Signupviews.selectvariable, name='buildmodel3'),
+    path('buildmodel4/', Signupviews.training, name='buildmodel4'),
+    path('buildmodel5/', Signupviews.modelname, name='buildmodel5'),
+
+
+
     path('buildmodel/status/',Signupviews.buildmodelStatus, name ="buildmodel-status"),
     path('buildmodel/remove/',Signupviews.buildmodelremove, name ="buildmodel-remove"),
     path('buildmodelbutton',Signupviews.buildmodelbutton, name ="buildmodel-button"),
@@ -26,6 +37,7 @@ urlpatterns = [
     path('register',Signupviews.create,name="register"),
     path('passwordchange/<int:id>',Loginviews.passwordchange, name ='passwordchange'),
     # path('buildmodel/percent/',Signupviews.buildmodelpercent, name ="buildmodel-percent"),
+    path('new',Signupviews.new,name="new"),
 
     
 #payment urls

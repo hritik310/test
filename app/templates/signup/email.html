@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+</head>
+<body>
+   <div class="row">
+        <div class="col-md-4">
+           <div style="border: 2px solid;width: 20%;margin: 0 auto;padding: 0px;text-align: center;">
+              <h5 style="text-align: center; font-size: 16px;">ML Recent Games Record</h5>
+              {% for i in y %} 
+              {{i.ML_last_games}}:{{i.ML_wins}}-{{i.ML_loss}}-{{i.ML_ties}}
+             {% comment %} {{i.ML_last_games +" : <span class='number'>"+i.ML_wins+"-"+ i.ML_loss +"-"+i.ML_ties+ "</span>}} {% endcomment %}
+              {% endfor %} 
+              <div class="row results para-sec">
+              </div>
+           </div>
+        </div>
+   </div>
+
+       
+</body>
+</html>
