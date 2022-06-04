@@ -40,7 +40,7 @@ urlpatterns = [
     # path('buildmodel/percent/',Signupviews.buildmodelpercent, name ="buildmodel-percent"),
     path('new',Signupviews.new,name="new"),
     
-    path('download',Signupviews.send_file,name='download'),
+    path('downloadimg',Signupviews.send_file,name='downloadimg'),
 
 
 
