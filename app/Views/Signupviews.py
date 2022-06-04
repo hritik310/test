@@ -239,7 +239,7 @@ def buildmodel(request):
 
             answers_list = list(var)
             print("answer",answers_list)
-            df = pd.read_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/finalDS.csv')
+            df = pd.read_csv('totalcsv/finalDS.csv')
             # man=df[df.columns[1:]].corr()['home_steals'].sort_values(ascending=False)[:10]
             # print(man)
            
