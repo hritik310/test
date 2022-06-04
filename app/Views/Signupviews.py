@@ -1688,7 +1688,7 @@ def buildmodelbutton(request):
 
 
 def download_file(request):
-    filename = "/home/codenomad/Documents/GitHub/datasport/totalcsv/output.csv"
+    filename = "totalcsv/output.csv"
     download_name ="example.xlsx"
     with open(filename, 'r') as f:
         file_data = f.read()
@@ -1736,7 +1736,7 @@ def modelname(request):
 
 def send_file(request):
     img = open('/home/codenomad/Documents/GitHub/datasport/result.png', 'rb')
-    dow="h.png"
+    dow="h.png" 
     response = HttpResponse(img)
     response['Content-Disposition'] = 'attachment; filename=%s.png' %dow 
 
