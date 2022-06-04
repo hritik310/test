@@ -43,8 +43,8 @@ MESSAGE_TAGS = {
  }
 
 
-# ALLOWED_HOSTS = ['3.86.247.236']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['3.86.247.236']
+# ALLOWED_HOSTS = []
 
 # Application definition        
 
@@ -105,41 +105,41 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#        'ENGINE': 'django.db.backends.mysql', 
-#        'NAME': 'myapp',
-#        'HOST': 'localhost',
-#        'PORT': '3306',
-#        'USER': 'root',
-#        'PASSWORD': 'AdMiN@12345',
-#        'OPTIONS': {
-#             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
-                     
-#         }
-#     }
-# }
-
-
-
-
-
-
 DATABASES = {
     'default': {
-       'ENGINE': 'django.db.backends.mysql',   
+       'ENGINE': 'django.db.backends.mysql', 
        'NAME': 'myapp',
        'HOST': 'localhost',
        'PORT': '3306',
        'USER': 'root',
-       'PASSWORD': '',
+       'PASSWORD': 'AdMiN@12345',
        'OPTIONS': {
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
-            
-             
+                     
         }
     }
 }
+
+
+
+
+
+
+# DATABASES = {
+#     'default': {
+#        'ENGINE': 'django.db.backends.mysql',   
+#        'NAME': 'myapp',
+#        'HOST': 'localhost',
+#        'PORT': '3306',
+#        'USER': 'root',
+#        'PASSWORD': '',
+#        'OPTIONS': {
+#             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
+            
+             
+#         }
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
