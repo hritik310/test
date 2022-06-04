@@ -12,17 +12,19 @@ import time
 from django.core.mail import send_mail as sm
 	
 from crontab import CronTab
+
 pd.options.mode.chained_assignment = None
 
-def today():
-    res = sm(
-    subject = 'Subject here',
-    message = 'Hii there. I am Inspector',
-    from_email = 'testsood981@gmail.com',
-    recipient_list = ['davinder@codenomad.net'],
-    fail_silently=False,
-    )
+def today():  
+    # res = sm(
+    # subject = 'Subject here',
+    # message = 'Hii there. I am Inspector',
+    # from_email = 'testsood981@gmail.com',
+    # recipient_list = ['davinder@codenomad.net'],
+    # fail_silently=False,
+    # )
     gameDay = datetime.today()
+   
 
 
     day = gameDay.day
@@ -65,15 +67,15 @@ def today():
 def gettoday():
  
 #get over under
-    res = sm(
-    subject = 'Subject here',
-    message = 'Hii there. I am don',
-    from_email = 'testsood981@gmail.com',
-    recipient_list = ['davinder@codenomad.net'],
-    fail_silently=False,
-    )
+    # res = sm(
+    # subject = 'Subject here',
+    # message = 'Hii there. I am don',
+    # from_email = 'testsood981@gmail.com',
+    # recipient_list = ['davinder@codenomad.net'],
+    # fail_silently=False,
+    # )
 
-    oldTotals = pd.read_csv('totals.csv')
+    oldTotals = pd.read_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/totals.csv')
 
 
 
@@ -243,7 +245,7 @@ def gettoday():
 
 
 
-    result_total.to_csv('to.csv')
+    result_total.to_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/to.csv')
 
     #drop duplicates
     result_total = result_total.drop_duplicates(subset=['joinValue'], keep='last')
@@ -255,13 +257,13 @@ def gettoday():
 
 
     #training data
-    df = pd.read_csv('finalDS.csv')
+    df = pd.read_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/finalDS.csv')
 
 
     # df = df.join(joinTotals.set_index('joinValue'),on='joinValue')
 
 
-    df.to_csv('finalDS.csv')
+    df.to_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/finalDS.csv')
 
 
 

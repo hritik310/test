@@ -529,7 +529,12 @@ input#chec {
         </div>
         <div class="container p-5">
                     <div class="row">
-                      <div class="col-lg-9 p-4">
+                      <div class="col-lg-1">
+                        <a href="{% url 'buildmodel4' %}">
+                          <button class="btn backbtn" id="back">Back</button>
+                         </a>
+                      </div>
+                      <div class="col-lg-10 p-4">
                     <ul id="progress-bar" class="progressbar">
                    <li class="active">Step 1</li>
                    <li class="active">Step 2</li>
@@ -539,11 +544,7 @@ input#chec {
                    <li class="active">Step 6</li>
                 </ul>
                       </div>
-                      <div class="col-lg-3" style="padding:20px">
-                    <a href="{% url 'buildmodel4' %}">
-                     <button class="btn backbtn" id="back">Back</button>
-                    </a>
-            
+                      <div class="col-lg-1" style="padding:20px">
                     <button class="action submit btn btn-success">Submit</button>
                       </div>
                   </div>

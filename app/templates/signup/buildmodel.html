@@ -316,7 +316,7 @@
             </div> 
             <div class="row">
             <div class="col-md-4"> </div> 
-            <div class="col-md-4 row-box"> <p>Dataset size</p></div> 
+            <div class="col-md-4 row-box"> <p>{{amount}}</p></div> 
             <div class="col-md-4"> </div> 
             </div>
          </div>
@@ -534,10 +534,12 @@
                
             $(".build1").click(function () {
                var rowId = $(this).attr('data');
-               console.log('hritik');
+               console.log('hritik',rowId);
                   
-               var rem_id = $(this).aname.modelname
-               $("#"+rem).removeClass("coloradd");    
+               var rem_id = $(this).attr('makes')
+               var rembt_id = $(this).attr('id')
+               var de="id_quant_"+rembt_id
+               $("#"+rem_id).removeClass("coloradd");    
                $("#"+de).prop("disabled",false);
                   
                

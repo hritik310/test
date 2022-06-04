@@ -47,7 +47,10 @@
          margin-left: 10px;
          background: #69ace0;
          border-radius: 30px;
-         }
+         }a href="{% url 'buildmodel2' %}">
+
+         <button class="btn backbtn" id="back">Back</button>
+         </a>
          .container-fluid.padding_cont {
          padding: 30px;
          background: #ebeded;
@@ -473,7 +476,12 @@ button.btn_second {
         </div>
         <div class="container p-5">
                     <div class="row">
-                      <div class="col-lg-9 p-4">
+                     <div class="col-lg-1">
+                        <a href="{% url 'buildmodel3' %}">
+                           <button class="btn backbtn" id="next">Back</button>
+                       </a>
+                      </div>
+                      <div class="col-lg-10 p-4">
                     <ul id="progress-bar" class="progressbar">
                    <li class="active">Step 1</li>
                    <li class="active">Step 2</li>
@@ -483,10 +491,8 @@ button.btn_second {
                    <li>Step 6</li>
                 </ul>
                       </div>
-                      <div class="col-lg-3" style="padding:20px">
-                        <a href="{% url 'buildmodel3' %}">
-                            <button class="btn backbtn" id="next">Back</button>
-                        </a>
+                      <div class="col-lg-1" style="padding:20px">
+                        
                     <a href="{% url 'buildmodel5' %}">
                         <button class="btn backbtn" id="next">Next</button>
                     </a>

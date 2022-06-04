@@ -521,7 +521,8 @@ span.error.text-danger {
 	                  </div> {% endcomment %}
 	                  {% comment %} <div class="item form-group {% if form.zip.errors %} has-error  {% endif %}"> 
 	                    <label for="pwd">Zip</label>
-	                    {{form.zip}}
+	                     <label for="pwd">Zip</label>
+	                   {{form.zip}}
                         {% if form.zip.errors %}
                         {% for error in form.zip.errors %}
                         <span class="error text-danger">

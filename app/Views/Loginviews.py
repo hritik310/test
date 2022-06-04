@@ -18,12 +18,6 @@ import pandas as pd
 
 
 
-# def index(request):
-#     context = {}
-#     template = loader.get_template('app/index.html')
-#     return HttpResponse(template.render(context, request))
-
-
 def user_login(request):
     
   
@@ -84,11 +78,6 @@ def update(request,id):
         print("True")
         accountform.save()
 
-        # custom.username = request.POST.get('username')
-        # custom.email = request.POST.get('email')
-        # custom.phone_number= request.POST.get('phone_number')
-        # custom.save()
-          
     
     else:      
       print("false")
@@ -115,28 +104,6 @@ def passwordchange(request,id):
         update_session_auth_hash(request,u)
         messages.success(request, 'Your password has been changed successfuly.!')   
         return redirect("passwordchange",id=id) 
-
-
-      # if request.user.is_authenticated:
-      #   users = user.objects.get(username= request.user.username)
-      #   if not users.check_password(old_password):
-      #     messages.warning(request, "your old password is not correct!")
-      #   else:
-      #     if new_password != confirm:
-      #       messages.warning(request, "your new password not match the confirm password !")
-                    
-          
-
-                    
-
-      #     else:
-      #       users.set_password(new_password)
-      #       users.save()
-      #       # update_session_auth_hash(request, users)
-
-      #       messages.success(request, "your password has been changed successfuly.!")
-
-      #       return redirect('buildmodel-button')
 
     else:
       messages.error(request, 'All fields are required.')

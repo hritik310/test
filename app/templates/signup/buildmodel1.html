@@ -400,8 +400,8 @@
 
 .backbtn {
   background-color: #69ade0;
-  margin: 5px;
-  width: 75px;
+  {% comment %} margin: 5px;
+  width: 75px; {% endcomment %}
   color: white;
 }
 .backbtn :hover {
@@ -418,6 +418,10 @@
   bottom: 0;
 }
 
+
+{% comment %} .section-progressbar {
+  margin-top: 60px;
+} {% endcomment %}
         /* progress-bar css end*/
 
         
@@ -429,24 +433,24 @@
       <div class ="col">
          <div class="container-fluid padding_cont">
             <div class="map-download">
-               <a href="#"> <button type="button" class="btn btn-primary map-downloadbtn">Map Download</button></a>
+               <a href="{% url 'download' %}"> <button type="button" class="btn btn-primary map-downloadbtn">Map Download</button></a>
             </div>
 
             <div class="container text-center tabdiv">
                <a href="#"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Top Ten List</button></a>
                <div id="demo" class="collapse container-box">
-                 Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                 {{top_ten}}
+                
                </div>
              </div>
+             <div class="row btn_section"> 
+              <div>
+                 <a href="{% url 'download' %}"><button type="button" class="btn btn-primary ModelButton">Download variable</button></a>
+              </div>
+            
+           </div>
          </div>
-         <div class="row btn_section"> 
-            <div>
-               <a href="#"><button type="button" class="btn btn-primary ModelButton">Download variable</button></a>
-            </div>
-          
-         </div>
+       
 
 
          <!-- progress-bar html start -->
@@ -468,7 +472,14 @@
         </div>
         <div class="container p-5">
                     <div class="row">
-                      <div class="col-lg-9 p-4">
+
+                      <div class="col-lg-1">
+                        <a href="{% url 'buildmodel' %}">
+                      <button class="btn backbtn" id="back">Back</button>
+                        </a>
+                      </div>
+
+                      <div class="col-lg-10 p-4 section-progressbar">
                     <ul id="progress-bar" class="progressbar">
                    <li class="active">Step 1</li>
                    <li class="active">Step 2</li>
@@ -478,15 +489,11 @@
                    <li>Step 6</li>
                 </ul>
                       </div>
-                      <div class="col-lg-3" style="padding:20px">
-                        <a href="{% url 'buildmodel' %}">
-
-                      <button class="btn backbtn" id="back">Back</button>
-                        </a>
-                        <a href="{% url 'buildmodel3' %}">
+                      <div class="col-lg-1">
+                        <a href="{% url 'buildmodel2' %}">
                          <button class="btn backbtn" id="next">Next</button>
                         </a>
-                      <button class="action submit btn btn-success">Submit</button>
+                      <button class="action submit btn btn-success">Submit</button> 
                       </div>
                   </div>
                     </div>

@@ -4,7 +4,7 @@ from app.Views import Loginviews
 from app.Views import Signupviews
 from app.Views import Paymentview
 from app.Views import  Paymentview
-from app.Views import NccabView
+
 
 
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('buildmodel3/', Signupviews.selectvariable, name='buildmodel3'),
     path('buildmodel4/', Signupviews.training, name='buildmodel4'),
     path('buildmodel5/', Signupviews.modelname, name='buildmodel5'),
+    path('download',Signupviews.download_file,name='download'),
 
 
 
@@ -38,6 +39,10 @@ urlpatterns = [
     path('passwordchange/<int:id>',Loginviews.passwordchange, name ='passwordchange'),
     # path('buildmodel/percent/',Signupviews.buildmodelpercent, name ="buildmodel-percent"),
     path('new',Signupviews.new,name="new"),
+    
+    path('download',Signupviews.send_file,name='download'),
+
+
 
     
 #payment urls
@@ -49,8 +54,6 @@ urlpatterns = [
 
     path('account',Signupviews.account,name="account"),
     path('membership',Signupviews.membership,name="membership"),
-#NCAAB.urls
-    path('create',NccabView.create,name="create"),
 
 
 ]

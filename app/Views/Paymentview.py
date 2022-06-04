@@ -129,24 +129,3 @@ def cancel_subscription(request):
   return render (request,"signup/home.html")
 
    
-
-# @csrf_exempt
-# def stripe_webhook(request):
-#   payload = request.body.decode('utf-8')  
-#   sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-#   event = None
-
-#   try:
-#     event = stripe.Webhook.construct_event(
-#     payload, sig_header, settings.STRIPE_SIGNING_SECRET
-#     )
-#   except ValueError as e:
-#     # Invalid payload
-#     return HttpResponse(status=400)
-#   except stripe.error.SignatureVerificationError as e:
-#     # Invalid signature
-#     return HttpResponse(status=400)
-
-#   # Do something with event
-
-#   return HttpResponse(status=200)
