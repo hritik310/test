@@ -44,7 +44,7 @@ MESSAGE_TAGS = {
 
 
 ALLOWED_HOSTS = ['3.86.247.236']
-#ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 # Application definition        
 
