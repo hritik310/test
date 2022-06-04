@@ -1819,7 +1819,7 @@ def heatmap(request):
 
             answers_lists = list(var)
             print("answer",answers_lists)
-            df = pd.read_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/finalDS.csv')
+            df = pd.read_csv('totalcsv/finalDS.csv')
             # man=df[df.columns[1:]].corr()['home_steals'].sort_values(ascending=False)[:10]
             # print(man)
            
