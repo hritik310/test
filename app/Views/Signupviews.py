@@ -1735,7 +1735,7 @@ def modelname(request):
 
 
 def send_file(request):
-    img = open('/home/codenomad/Documents/GitHub/datasport/result.png', 'rb')
+    img = open('result.png', 'rb')
     dow="h.png" 
     response = HttpResponse(img)
     response['Content-Disposition'] = 'attachment; filename=%s.png' %dow 
