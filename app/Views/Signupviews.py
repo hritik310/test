@@ -173,7 +173,7 @@ def buildmodel(request):
         if not req:
             req = "nba"
         if req == 'ncaab':
-            df = pd.read_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/mainDSNCAAB.csv')
+            df = pd.read_csv('totalcsv/mainDSNCAAB.csv')
             # In[19]:
 
 
@@ -544,7 +544,7 @@ def buildmodelbutton(request):
     reqs = request.GET.get('id',None)
     print(request.GET)
     if reqs == 'ncaab':
-        df = pd.read_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/mainDSNCAAB.csv')
+        df = pd.read_csv('totalcsv/mainDSNCAAB.csv')
         # In[19]:
 
 
@@ -1062,7 +1062,7 @@ def buildmodelbutton(request):
 
     
     else:
-        df = pd.read_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/finalDS.csv')
+        df = pd.read_csv('totalcsv/finalDS.csv')
 
         df = df.dropna()
 
