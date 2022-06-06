@@ -242,14 +242,29 @@ def buildmodel(request):
             df = pd.read_csv('totalcsv/finalDS.csv')
             # man=df[df.columns[1:]].corr()['home_steals'].sort_values(ascending=False)[:10]
             # print(man)
-           
-            # hrit = df.corr()
-            # for j in answers_list:
+        #     df_columns = df[["home_steal_percentage",
+        # "home_steals",
+        # "home_three_point_attempt_rate",
+        # "home_three_point_field_goal_attempts",
+        # "home_three_point_field_goal_percentage",
+        # "home_three_point_field_goals",
+        # "home_total_rebound_percentage",
+        # "home_total_rebounds",
+        # "home_true_shooting_percentage",
+        # "home_turnover_percentage",
+        # "home_turnovers",
+        # "home_two_point_field_goal_attempts",
+        # "home_two_point_field_goal_percentage",
+        # "home_two_point_field_goals",
+        # "home_wins"]]
+            # dfw = df.corr()
+            # dataplot = sb.heatmap(df_columns.corr(), cmap="YlGnBu", annot=True)
+            # dataplot.figure.savefig('resul.png')
+            # # for j in answers_list:
                
             #     print(hrit[j].sort_values(ascending=False)[:10])
             # hrit.to_csv("/home/codenomad/Documents/GitHub/datasport/totalcsv/output.csv")
-            # dataplot = sb.heatmap(df.corr(), cmap="YlGnBu", annot=True)
-            # dataplot.figure.savefig('result.png')
+            # )
   
 # displaying heatmap
             # mp.show()
@@ -412,16 +427,17 @@ def buildmodel(request):
         "away_wins",
         "home_assist_percentage",
         "home_assists",
-        "home_block_percentage",
-        "home_blocks",
-        "home_defensive_rating",
-        "home_defensive_rebound_percentage",
-        "home_defensive_rebounds",
         "home_effective_field_goal_percentage",
         "home_field_goal_attempts",
         "home_field_goal_percentage",
         "home_field_goals",
         "home_free_throw_attempt_rate",
+        "away_wins",
+        "home_assist_percentage",
+        "home_assists",
+        "away_wins",
+        "home_assist_percentage",
+        "home_assists",
         "home_free_throw_attempts",
         "home_free_throw_percentage",
         "home_free_throws",
@@ -1689,7 +1705,7 @@ def buildmodelbutton(request):
 
 def download_file(request):
     filename = "totalcsv/output.csv"
-    download_name ="example.xlsx"
+    download_name ="example.csv"
     with open(filename, 'r') as f:
         file_data = f.read()
     response = HttpResponse(file_data, content_type='text/csv')
@@ -1735,7 +1751,7 @@ def modelname(request):
 
 
 def send_file(request):
-    img = open('result.png', 'rb')
+    img = open('resul.png', 'rb')
     dow="h.png" 
     response = HttpResponse(img)
     response['Content-Disposition'] = 'attachment; filename=%s.png' %dow 

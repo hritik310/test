@@ -245,7 +245,7 @@
             border: 2px solid black;
             margin-top: 30px !important;
             width: 50%;
-            height: 200px;
+            height: auto;
             margin: 0 auto;
          }
 
@@ -417,6 +417,10 @@
   position: absolute;
   bottom: 0;
 }
+div.top_ten_text {
+  -webkit-user-modify: read-write-plaintext-only;
+  margin-bottom: 12px;
+}
 
 
 {% comment %} .section-progressbar {
@@ -439,7 +443,9 @@
             <div class="container text-center tabdiv">
                <a href="#"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Top Ten List</button></a>
                <div id="demo" class="collapse container-box">
-                 {{top_ten}}
+                <div class="top_ten_text"> 
+                  {{top_ten}}
+                  </div>
                 
                </div>
              </div>
