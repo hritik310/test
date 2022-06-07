@@ -311,10 +311,11 @@ button.btn-xl.btn-primary.btn-wrap-text {
       <li class="nav-item">
         <a class="nav-link home_list " href="{% url 'buildmodel' request.user.id %}">Build Model</a>
       </li>
-  
+      
       <li class="nav-item">
-        <a class="nav-link home_list" href="#">My Models</a>
-      </li> 
+        <a class="nav-link home_list" href="{% url 'mymodel' %}">My Models</a>
+      </li>
+      
       <li class="nav-item">
         <a class="nav-link home_list" href="{%url 'update' request.user.id%}">Settings</a>
       </li> 
