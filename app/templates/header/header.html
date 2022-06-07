@@ -97,12 +97,20 @@ a.nav-link.home_list.active:hover {
         <a class="nav-link home_list  {% active_link '' 'active' %}" href="{% url 'index' %}">Home</a>
       </li>
       
-      <li class="nav-item">
+      {% comment %} <li class="nav-item">
         <a class="nav-link home_list  {% active_link 'buildmodel' 'active' %}" href="{% url 'buildmodel' %}">Build Model</a>
       </li> 
       <li class="nav-item">
         <a class="nav-link home_list" href="#">My Models</a>
+      </li>  {% endcomment %}
+      <li class="nav-item">
+        {% with request.resolver_match.url_name as url_name%}
+        <a class="nav-link home_list    {% if url_name == 'buildmodel' %}active {%endif%}"  href="{% url 'buildmodel' request.user.id %}">Build Model</a>
+        {% endwith %}
       </li> 
+      <li class="nav-item">
+        <a class="nav-link home_list  {% active_link 'mymodel' 'active'  %}" href="{% url 'mymodel' %}">My Models</a>
+      </li>
       <li class="nav-item">
         {% with request.resolver_match.url_name as url_name %}
         <a class="nav-link home_list  {% if url_name == 'update' %}active{% endif %}" href="{%url 'update' request.user.id%}">Settings</a>

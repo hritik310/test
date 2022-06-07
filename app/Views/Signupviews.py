@@ -162,7 +162,7 @@ def updateprofile(request,id):
 
 
 
-def buildmodel(request):
+def buildmodel(request,id):
     all=Modelvar.objects.all()
     req = request.GET.get('cars')
     print("Request",req)
@@ -1726,15 +1726,7 @@ def new(request):
 # def heatmap(request):
 #     return render(request,"signup/buildmodel1.html")
 
-# def modelname(request):
-#     if request.method == "POST":
-#         name = Modelname()
 
-#         name.modelname = request.POST.get("modelname")
-#         name.save()
-
-
-#     return render(request,"signup/modelname.html")
 
 def selectml(request):
     return render(request,"signup/buildmodel2.html")
@@ -1745,7 +1737,28 @@ def training(request):
     return render(request,"signup/buildmodel4.html")
 
 def modelname(request):
+    if request.method == "POST":
+        name = Modelname()  
+        name.modelname = request.POST.get("modelname")
+        name.user_id=request.user.id
+        len_model=Modelname.objects.filter(user_id=request.user.id)
+        if len(len_model)<=2:
+            name.save()
+            return redirect('mymodel')
+        else:
+            print("you can only create 3 model")
+
     return render(request,"signup/buildmodel5.html")
+
+def mymodel(request):
+    val=Modelname.objects.filter(user_id=request.user.id)
+    print(val)
+    if val:
+        print("value")
+    else:
+        return render(request,"signup/mymodel.html")
+
+    return render(request,"signup/mymodel.html",{"model_name":val})
 
 
 

@@ -344,11 +344,11 @@
          <div class="container-fluid padding_cont">
             <div class="dropdown_section">
                <form action="" method="GET">
-                  <select name="cars" id="drop">
+                  {% comment %} <select name="cars" id="drop">
                   <option value="" selected disabled hidden>Select Variable </option>      
                   <option value="nba"{% if re == 'nba' %} selected {% endif %}>NBA</option>
                   <option value="ncaab"{% if re == 'ncaab' %} selected {% endif %}>NCAAB</option>
-                  </select>
+                  </select> {% endcomment %}
             </div>
             <div id="output">
             </div>

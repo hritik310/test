@@ -61,6 +61,7 @@ class Modelvar(models.Model):
 
 class Modelname(models.Model):
     modelname = models.CharField(max_length=255,null=True,unique=True)
+    user=models.ForeignKey(user,on_delete=models.CASCADE,null=True)
 
 
 class Var(models.Model):

@@ -480,7 +480,7 @@ div.top_ten_text {
                     <div class="row">
 
                       <div class="col-lg-1">
-                        <a href="{% url 'buildmodel' %}">
+                        <a href="{% url 'buildmodel' request.user.id%}">
                       <button class="btn backbtn" id="back">Back</button>
                         </a>
                       </div>

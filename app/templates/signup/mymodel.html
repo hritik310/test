@@ -1,0 +1,11 @@
+{%include "header/header.html" %}
+
+
+<h1>Name of your model - </h1> 
+
+
+{%for  i in model_name%}
+<a href ="{% url 'buildmodel' request.user.id %}">
+{{i.modelname}}<br>
+{%endfor%}
+</a>

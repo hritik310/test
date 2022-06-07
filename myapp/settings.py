@@ -121,7 +121,6 @@ DATABASES = {
 }
 
 
-#vsjcvsjvjsvsjfvsjfvsjfvjsfvjsvfjsvfjsvf
 
 
 

@@ -298,18 +298,23 @@
             <div class="col-md-3"> </div> 
             <div class="col-md-3"> 
             <div class="dropdown_sectiones">
-            <select name="cars" id="drop">
+            {% comment %} <select name="cars" id="drop">
             <option value="" selected disabled hidden>Select Time frame</option> 
             <option value=""  >Minimum year data</option>   
-            </select>
+            </select> {% endcomment %}
+            <label>Minimum year data</label>
+            <input type ="date"  id="drop"></input>
             </div>
             </div>
             <div class="col-md-3">
             <div class="dropdown_sectiones">
-            <select name="cars" id="drop">
+            {% comment %} <select name="cars" id="drop">
             <option value="" selected disabled hidden>Select Time frame</option> 
             <option value="" >Maximum Year data</option>  
-            </select>
+            </select> {% endcomment %}
+            <label>Maximum year data</label>
+            <input type ="date" id="drop"></input>
+
             </div>
             </div>
             <div class="col-md-3"> </div> 

@@ -21,7 +21,7 @@ urlpatterns = [
 
 
  # build model urls
-    path('buildmodel/', Signupviews.buildmodel, name ='buildmodel'),
+    path('buildmodel/<int:id>', Signupviews.buildmodel, name ='buildmodel'),
     path('buildmodel1/', Signupviews.heatmap, name ='buildmodel1'),
     path('buildmodel2/', Signupviews.selectml, name='buildmodel2'),
     path('buildmodel3/', Signupviews.selectvariable, name='buildmodel3'),
@@ -54,6 +54,7 @@ urlpatterns = [
 
     path('account',Signupviews.account,name="account"),
     path('membership',Signupviews.membership,name="membership"),
+    path("mymodel",Signupviews.mymodel,name="mymodel"),
 
 
 ]
