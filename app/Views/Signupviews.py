@@ -1,5 +1,4 @@
-from tkinter import N
-from urllib import response
+
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
