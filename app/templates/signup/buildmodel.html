@@ -138,7 +138,7 @@
          margin: 0 auto;
          padding: 20px;
          }
-         #drop {
+         .droping {
          color: #fff;
          background-color: #69ade0;
          border-color: #69ade0;
@@ -146,7 +146,7 @@
          font-size: 18px;
          width: 100%;
          }
-         #drop:hover {
+         .droping:hover {
          color: #fff;
          background-color: #000000;
          border-color: #7c7c7c;
@@ -155,7 +155,7 @@
          display: block;
          width: 100% !important;
          }*/
-         #drop:focus{
+         .droping:focus{
          color: #fff;
          background-color: #000000;
          border-color: #7c7c7c;
@@ -289,7 +289,7 @@
          <div class="container-fluid padding_cont">
             <div class="dropdown_section">
                <form action="" method="GET">
-                  <select name="cars" id="drop"> 
+                  <select name="cars" class="droping" id="drop"> 
                   <option value="nba"{% if re == 'nba' %} selected {% endif %}>NBA</option>
                   <option value="ncaab"{% if re == 'ncaab' %} selected {% endif %}>NCAAB</option>
                   </select>
@@ -303,7 +303,7 @@
             <option value=""  >Minimum year data</option>   
             </select> {% endcomment %}
             <label>Minimum year data</label>
-            <input type ="date"  id="drop"></input>
+            <input type ="date" class="droping"  id="drop1"></input>
             </div>
             </div>
             <div class="col-md-3">
@@ -313,7 +313,7 @@
             <option value="" >Maximum Year data</option>  
             </select> {% endcomment %}
             <label>Maximum year data</label>
-            <input type ="date" id="drop"></input>
+            <input type ="date" class="droping"  id="drop2"></input>
 
             </div>
             </div>
@@ -321,7 +321,7 @@
             </div> 
             <div class="row">
             <div class="col-md-4"> </div> 
-            <div class="col-md-4 row-box"> <p>{{amount}}</p></div> 
+            <div class="col-md-4 row-box"> <p id="cal_amt">{{amount}} </p></div> 
             <div class="col-md-4"> </div> 
             </div>
          </div>
@@ -566,6 +566,37 @@
                }
             });
             });
+            $("#drop1,#drop2").on('change',function () {
+               var min = $('#drop1').val();
+               var max= $('#drop2').val();
+               console.log('start',min);
+               console.log('max',max);
+               $.ajax({
+                  type:"GET",
+                  url: '/minmax',
+                  data: {
+                     'minvalue': min,
+                     'maxvalue':max
+            
+                  },
+                  dataType: 'json',
+                  success: function (data) {
+
+                     console.log(data.dataset)
+                     $('#cal_amt').text(data.dataset)
+
+                     
+                     
+                  
+                  }
+               });
+               
+             
+               
+            });
+
+            
+
          });
          {% comment %} $(".input-box").keyup(function () {
             var rowId = $(this).val();

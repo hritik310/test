@@ -1,3 +1,4 @@
+from tkinter import N
 from urllib import response
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -427,17 +428,16 @@ def buildmodel(request,id):
         "away_wins",
         "home_assist_percentage",
         "home_assists",
+        "home_block_percentage",
+        "home_blocks",
+        "home_defensive_rating",
+        "home_defensive_rebound_percentage",
+        "home_defensive_rebounds",
         "home_effective_field_goal_percentage",
         "home_field_goal_attempts",
         "home_field_goal_percentage",
         "home_field_goals",
         "home_free_throw_attempt_rate",
-        "away_wins",
-        "home_assist_percentage",
-        "home_assists",
-        "away_wins",
-        "home_assist_percentage",
-        "home_assists",
         "home_free_throw_attempts",
         "home_free_throw_percentage",
         "home_free_throws",
@@ -463,7 +463,18 @@ def buildmodel(request,id):
         "home_two_point_field_goal_percentage",
         "home_two_point_field_goals",
         "home_wins",
+
         ]]
+
+            Start = '2019-10-22'
+
+            End = '2019-10-25'
+            df['datetime'] = pd.to_datetime(df['datetime'])
+            mask = (df['datetime'] >= Start) & (df['datetime'] <= End)
+            use1 = df.loc[mask]
+
+            print ("hello0",use1)
+
         
 
 
@@ -2069,3 +2080,35 @@ def heatmap(request):
     else:
         return redirect('membership') 
     return render(request,"signup/buildmodel1.html",{'re':req,"df":list(df_away),"all":all,"amount":amountOfGames,"top_ten":top_ten})
+
+def minmax(request):
+    req = request.GET.get('cars')
+    print("aman",req)
+    start_date=request.GET.get('minvalue')
+    print(start_date)
+    end_date=request.GET.get('maxvalue')
+    print(end_date)
+    # print(df)
+
+    use1 = 0
+    if not req:
+        req = "nba"
+        print(req)
+            
+    if start_date and end_date:
+        df = pd.read_csv('totalcsv/finalDS.csv')       
+        df['datetime'] = pd.to_datetime(df['datetime'])
+        print(df['datetime'])
+        mask = (df['datetime'] >= start_date) & (df['datetime'] <= end_date)
+        print(mask)
+        use1 = len(df.loc[mask])
+
+        print ("hello0",use1)
+    else:
+        ("not ok")
+
+    data = {
+    "status":"OK",
+    "dataset":use1
+    }
+    return JsonResponse(data)

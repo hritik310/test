@@ -57,6 +57,9 @@ urlpatterns = [
     path("mymodel",Signupviews.mymodel,name="mymodel"),
 
 
+    path("minmax",Signupviews.minmax,name="minmax"),
+
+
 ]
 
 
