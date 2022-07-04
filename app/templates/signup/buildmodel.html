@@ -280,6 +280,15 @@
          margin: 0;
          font-size: 18px;
      }
+     #season {
+      color: #fff;
+      background-color: #69ade0;
+      border-color: #69ade0;
+      padding: 12px;
+      font-size: 18px;
+      width: 100%;
+      margin-left: 150px;
+      }
 
 
       </style>
@@ -290,30 +299,33 @@
             <div class="dropdown_section">
                <form action="" method="GET">
                   <select name="cars" class="droping" id="drop"> 
-                  <option value="nba"{% if re == 'nba' %} selected {% endif %}>NBA</option>
-                  <option value="ncaab"{% if re == 'ncaab' %} selected {% endif %}>NCAAB</option>
+                  <option value="nba"{% if re == 'nba' %} selected {% endif %}>NFL</option>
+                  {% comment %} <option value="ncaab"{% if re == 'ncaab' %} selected {% endif %}>NCAAB</option> {% endcomment %}
                   </select>
             </div>
             <div class="row">
             <div class="col-md-3"> </div> 
             <div class="col-md-3"> 
             <div class="dropdown_sectiones">
-            {% comment %} <select name="cars" id="drop">
-            <option value="" selected disabled hidden>Select Time frame</option> 
-            <option value=""  >Minimum year data</option>   
-            </select> {% endcomment %}
-            <label>Minimum year data</label>
+            <select name="season" id="season">
+            <option value="" selected disabled hidden> Select Season</option> 
+            <option value="2018" >2018</option> 
+            <option value="2019" >2019</option>  
+            <option value="2020" >2020</option>  
+            <option value="2021" >2021</option>    
+            </select>
+            {% comment %} <label>Minimum year data</label>
             <input type ="date" class="droping"  id="drop1"></input>
             </div>
             </div>
             <div class="col-md-3">
-            <div class="dropdown_sectiones">
+            <div class="dropdown_sectiones"> {% endcomment %}
             {% comment %} <select name="cars" id="drop">
             <option value="" selected disabled hidden>Select Time frame</option> 
             <option value="" >Maximum Year data</option>  
             </select> {% endcomment %}
-            <label>Maximum year data</label>
-            <input type ="date" class="droping"  id="drop2"></input>
+            {% comment %} <label>Maximum year data</label>
+            <input type ="date" class="droping"  id="drop2"></input> {% endcomment %}
 
             </div>
             </div>
@@ -321,7 +333,7 @@
             </div> 
             <div class="row">
             <div class="col-md-4"> </div> 
-            <div class="col-md-4 row-box"> <p id="cal_amt">{{amount}} </p></div> 
+            <div class="col-md-4 row-box"> <p id="cal_amt">Data Set Size(Games):{{amount}} </p></div> 
             <div class="col-md-4"> </div> 
             </div>
          </div>
@@ -331,7 +343,7 @@
          <div class="section_first">
          <div class="row_section_grid">
          <h1>{{status}}</h1>
-         {% for i in df|slice:"1:73" %}
+         {% for i in df %}
          <div class="col-md-2">
          <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
          <div class="Info-sign">
@@ -339,7 +351,7 @@
          </div>
          <div class="home_point">
          <p>{{i}}</p>
-         <input type="number" {%for z in all %} {%if  i in z.title  %} value="{{z.percent_value}}" {%endif%}{%endfor%} min="0" max="10"class="input-box"name="percent" id ="block_{{forloop.counter}}">
+         {% comment %} <input type="number" {%for z in all %} {%if  i in z.title  %} value="{{z.percent_value}}" {%endif%}{%endfor%} min="0" max="10"class="input-box"name="percent" id ="block_{{forloop.counter}}"> {% endcomment %}
          <span class="feature-importance"></span> 
          </div> 
          <div class="input-group section_number">
@@ -360,21 +372,6 @@
          </div>
          {% endfor %} 
          </div>
-         </div>
-         </div>
-         <div class="modal"><!-- Place at bottom of page --></div>
-         <div class="row">
-         <div class="col-md-4"></div>
-         <div class="col-md-4">
-         <div class="drop_section">
-         <form action="" method="GET">
-         <select name="cars" id="drop_section">
-         <option value="" selected disabled hidden> Target variable</option>    
-         <option value="total" >Total</option>
-         <option value="team">team vs team</option>
-         <option value="win">Win%</option>
-         </select>
-         </form>
          </div>
          </div>
          <div class="col-md-4"></div>
@@ -566,24 +563,22 @@
                }
             });
             });
-            $("#drop1,#drop2").on('change',function () {
-               var min = $('#drop1').val();
-               var max= $('#drop2').val();
+            $("#season").on('change',function () {
+               var min = $('#season').val();
                console.log('start',min);
-               console.log('max',max);
+         
                $.ajax({
                   type:"GET",
                   url: '/minmax',
                   data: {
-                     'minvalue': min,
-                     'maxvalue':max
+                     'minvalue': min
             
                   },
                   dataType: 'json',
                   success: function (data) {
 
                      console.log(data.dataset)
-                     $('#cal_amt').text(data.dataset)
+                     $('#cal_amt').text("Data Set Size(Games):"+data.dataset)
 
                      
                      

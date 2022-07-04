@@ -437,11 +437,11 @@ div.top_ten_text {
       <div class ="col">
          <div class="container-fluid padding_cont">
             <div class="map-download">
-               <a href="{% url 'downloadimg' %}"> <button type="button" class="btn btn-primary map-downloadbtn">Map Download</button></a>
+               <a href="{% url 'downloadimg' %}"> <button type="button" class="btn btn-primary map-downloadbtn">Download Variable Statistics</button></a>
             </div>
 
             <div class="container text-center tabdiv">
-               <a href="#"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Top Ten List</button></a>
+               <a href="#"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Variable Definitions</button></a>
                <div id="demo" class="collapse container-box">
                 <div class="top_ten_text"> 
                   {{top_ten}}
@@ -451,7 +451,7 @@ div.top_ten_text {
              </div>
              <div class="row btn_section"> 
               <div>
-                 <a href="{% url 'download' %}"><button type="button" class="btn btn-primary ModelButton">Download variable</button></a>
+                 <a href="{% url 'download' %}"><button type="button" class="btn btn-primary ModelButton">Correlations</button></a>
               </div>
             
            </div>
@@ -496,7 +496,7 @@ div.top_ten_text {
                 </ul>
                       </div>
                       <div class="col-lg-1">
-                        <a href="{% url 'buildmodel2' %}">
+                        <a href="{% url 'buildmodel3' %}">
                          <button class="btn backbtn" id="next">Next</button>
                         </a>
                       <button class="action submit btn btn-success">Submit</button> 

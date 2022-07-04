@@ -23,7 +23,7 @@ urlpatterns = [
  # build model urls
     path('buildmodel/<int:id>', Signupviews.buildmodel, name ='buildmodel'),
     path('buildmodel1/', Signupviews.heatmap, name ='buildmodel1'),
-    path('buildmodel2/', Signupviews.selectml, name='buildmodel2'),
+    # path('buildmodel2/', Signupviews.selectml, name='buildmodel2'),
     path('buildmodel3/', Signupviews.selectvariable, name='buildmodel3'),
     path('buildmodel4/', Signupviews.training, name='buildmodel4'),
     path('buildmodel5/', Signupviews.modelname, name='buildmodel5'),
