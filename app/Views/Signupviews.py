@@ -1023,8 +1023,8 @@ def buildmodelbutton(request):
 
 
         # df['num'] = 1
-        pert=df['americanodds'].max()
-        print("pert",pert)
+        # pert=df['americanodds'].max()
+        # print("pert",pert)
 
 
         df = df[["homeTeam",
