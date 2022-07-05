@@ -1930,15 +1930,27 @@ def heatmap(request):
     return render(request,"signup/buildmodel1.html",{'re':req,"df":list(df_away),"all":all,"amount":amountOfGames,"top_ten":top_ten})
 
 def minmax(request):
-    req = int(request.GET.get('minvalue'))
-    df = pd.read_csv('totalcsv/finalDS.csv') 
-    start=df.loc[df['season'] == req]
-    use1 = (len(start)) 
-    print(use1)  
+    
+    req = request.POST.getlist('minvalue[]')
+    print("ss",req)
+    df = pd.read_csv('totalcsv/finalDS.csv')
 
+    start = 0
+    newdata = []
+   
+    for i in req:
+        start=df.loc[df['season'] == int(i)] 
+        use1 = (len(start))
+        newdata.append(use1)
+    print(newdata)  
+   
+    if newdata:
+        newlist = sum(newdata)
+    else:
+         newlist=1088
 
     data = {
     "status":"OK",
-    "dataset":use1
+    "dataset":newlist
     }
     return JsonResponse(data)
