@@ -394,27 +394,83 @@
             <div class="row">
             <div class="col-md-4">
             <div class="Games_box">
-            <h5>ML Recent Games Record</h5>
-            <div class="row results para-sec">
-            </div> 
+            <ul class="nav nav-tabs">
+            <li><a data-toggle="tab" class="menu1" href="#menu12">Game Information</a></li>
+            </ul>
+            <div class="tab-content">
+            <div id="menu12" class="tab-pane fade">
+            <h5>Coin Toss Winner</h5>
+            <h5>Indoor/Outdoor</h5>
+            <h5>Field Surface</h5>
+            <h5>Temperature</h5>
+            <h5>Wind</h5>
+            </div>
+            </div>
             </div>
             </div>
             <div class="col-md-4">
             <div class="Games_box"> 
-            <h5>Over Under Recent Games Record</h5>
-            <div class="row para-sec show">
-            </div> 
+            <ul class="nav nav-tabs">
+               <li><a data-toggle="tab"  class="menu22" href="#menu22">Team Stats</a></li>
+            </ul>
+            <div class="tab-content">
+            <div id="menu22" class="tab-pane fade">
+            <h5>First Downs</h5>
+            <h5>Rush Attempts</h5>
+            <h5>Rush Yards</h5>
+            <h5>Rush Yards Per Attempt</h5>
+            <h5>Rush Touchdowns</h5>
+            <h5>Completions</h5>
+            <h5>Attempts</h5>
+            <h5>Pass Yards</h5>
+            <h5>Pass Yards Per Attempt</h5>
+            <h5>Pass Touchdowns</h5>
+            <h5>Interceptions</h5>
+            <h5>Sacked</h5>
+            <h5>Sacked Yards</h5>
+            <h5>Net Pass Yards</h5>
+            <h5>Total Yards</h5>
+            <h5>Fumbles</h5>
+            <h5>Fumbles Lost</h5>
+            <h5>Turnovers</h5>
+            <h5>Penalties</h5>
+            <h5>Penalty Yards</h5>
+            <h5>Third Downs Converted</h5>
+            <h5>Third Downs Attempted</h5>
+            <h5>Third Down Percentage</h5>
+            <h5>Fourth Downs Converted</h5>
+            <h5>Fourth Downs Attempted</h5>
+            <h5>Fourth Downs Attempted</h5>
+            <h5>Time Of Possession</h5>
+            </div>
+            </div>
             </div>
             </div>
             <div class="col-md-4">
             <div class="Games_box"> 
-            <h5>Spread Recent Games Record</h5>
-            <div class="row para-sec spread">
+            <ul class="nav nav-tabs">
+               <li><a data-toggle="tab" class="menu33" href="#menu33">QB data</a></li>
+            </ul>
+            <div class="tab-content">
+            <div id="menu33" class="tab-pane fade">
+            <h5>Completion %</h5>
+            <h5>First Down %</h5>
+            <h5>Intended Air Yards Per Attempt</h5>
+            <h5>Completed Air Yards Per Attempt</h5>
+            <h5>Drop Percentage</h5>
+            <h5>Bad Throw Percentage</h5>
+            <h5>Sacked</h5>
+            <h5>Blitzed</h5>
+            <h5>Hurried</h5>
+            <h5>Hit</h5>
+            <h5>Pressure Percentage</h5>
+            <h5>Yards Per Scramble</h5>
             </div> 
             </div>
             </div>
             </div>
-            <div class="row">
+            </div>
+            {% comment %} <div class="row">
             <div class="col-md-4">
             <div class="prediction"> 
             <h5> Variable Importance</h5>
@@ -428,12 +484,12 @@
             <div class="row para-sec predict">
             </div> 
             </div>
-            </div>
+            </div> {% endcomment %}
 
-            <div class="col-md-4">
+            {% comment %} <div class="col-md-4">
                <div class="prediction">  
                <ul class="nav nav-tabs">
-               {% comment %} <li class="active"><a data-toggle="tab" href="#home">Home</a></li> {% endcomment %}
+        
                <li><a data-toggle="tab" class="menu1" href="#menu1">Weight</a></li>
                <li><a data-toggle="tab" href="#menu2">cover</a></li>
                <li><a data-toggle="tab" href="#menu3">total_gain</a></li>
@@ -453,7 +509,7 @@
 
             </div>
             
-            </div>
+            </div> {% endcomment %}
          </div>
    
          </form>
