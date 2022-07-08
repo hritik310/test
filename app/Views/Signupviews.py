@@ -240,6 +240,8 @@ def buildmodel(request,id):
             answers_list = list(var)
             print("answer",answers_list)
             df = pd.read_csv('totalcsv/finalDS.csv')
+            co = len(df.columns)
+            print("dhfjd",co)
             # man=df[df.columns[1:]].corr()['home_steals'].sort_values(ascending=False)[:10]
             # print(man)
         #     df_columns = df[["home_steal_percentage",
@@ -1103,7 +1105,7 @@ def buildmodelbutton(request):
 
 
 
-        df['actual_total_points'] = df['home_points'] + df['away_points']
+        # df['actual_total_points'] = df['home_points'] + df['away_points']
 
 
         # In[117]:
@@ -1887,4 +1889,53 @@ def minmax(request):
     "status":"OK",
     "dataset":newlist
     }
+    return JsonResponse(data)
+
+def value_select(request):     
+    df = pd.read_csv('totalcsv/finalDS.csv')
+    value_in=[]
+    home_list=[]
+    away_list=[]
+    df_col=df.columns
+    value1=request.GET.getlist("id[]")
+  
+    # print(value1)
+    for z in value1:
+        print(z)
+        for  i in df_col:  
+            if z in i:
+                value_in.append(i)
+    print(value_in)
+    for i in value_in: 
+        if i.startswith("Home"):
+            home_list.append(i)
+        else:
+            away_list.append(i)
+            
+    
+    #home model
+    #INSERT HOME VARIABLES INTO HERE
+    home_X = np.asarray(df[home_list])
+    print(home_X)
+    
+    #STAYS THE SAME
+    home_Y = np.asarray(df[['Home Total']])
+    
+    #away model
+    #INSERT AWAY VARIABLES INTO HERE 
+    away_X = np.asarray(df[away_list])
+    print(away_X)
+    
+    #STAYS THE SAME
+    away_Y = np.asarray(df[[
+    'Away Total']])
+    
+    homeModel = xgb.XGBRegressor()
+    awayModel = xgb.XGBRegressor()
+
+    
+    print("home",homeModel.fit(home_X,home_Y))
+    print("away",awayModel.fit(away_X,away_Y))
+
+    data={"status":"ok"}
     return JsonResponse(data)

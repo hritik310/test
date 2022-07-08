@@ -6,7 +6,7 @@ from app.Views import Paymentview
 from app.Views import  Paymentview
 
 
-
+ 
 
 from . import views
 
@@ -41,6 +41,8 @@ urlpatterns = [
     path('new',Signupviews.new,name="new"),
     
     path('downloadimg',Signupviews.send_file,name='downloadimg'),
+    path("select1",Signupviews.value_select,name='select1'),
+
 
 
 
