@@ -311,6 +311,16 @@
   bottom: 0;
 }
 
+.tab-pane button {
+   margin-top: 10px;
+   {% comment %} background: #69addf;
+   color: #fff;
+   border: none;
+   box-shadow: none;
+   border-radius: 3px;
+   padding: 5px; {% endcomment %}
+}
+
         /* progress-bar css end*/
 
 
@@ -330,6 +340,11 @@
           margin-bottom: 20px;
       }
 
+}
+
+.blue
+{
+    background-color: #337ab7;
 }
 
 
@@ -399,7 +414,6 @@
             </ul>
             <div class="tab-content">
             <div id="menu12" class="tab-pane fade">
-            <button type ="button" value="Coin Toss Winner" name="val1" class="val">Coin Toss Winner</button><br>
             <button type ="button" value="Indoor/Outdoor" name="val1" class="val">Indoor/Outdoor</button><br>
             <button type ="button" value="Field Surface" name="val1" class="val">Field Surface</button><br>
             <button type ="button" value="Temperature" name="val1" class="val">Temperature</button><br>
@@ -621,6 +635,13 @@
                });
          
             });
+            $('button[type="button"]').click(function(){
+               $(this).addClass('blue');
+            });
+            $('.val').click(function(){
+               $(this).prop("disabled",true);
+           });
+         
          
             $(document).ready(function(){
                $('coloradd').on('show.bs.tab', function(e) {

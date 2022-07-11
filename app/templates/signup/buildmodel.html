@@ -139,10 +139,13 @@
          border-radius: 30px;
          }
          .dropdown_section {
-         width: 20%;
-         margin: 0 auto;
-         padding: 20px;
+            width: 20%;
+            margin: 0 auto;
+            padding: 20px;
          }
+
+         
+
          .droping {
          color: #fff;
          background-color: #69ade0;
@@ -306,6 +309,45 @@
    font-size: 18px;
 }
 
+@media only screen and (min-width: 768px) {
+   .dropdown_section form {
+      width: 100%;
+   }
+
+   .season-dropdown {
+      max-width: 100%;
+      flex: 0 0 100%;
+      margin-left: 0 !important;
+      padding-left: 0 !important;
+   }
+
+   .season-dropdown .dropdown_sectiones {
+      width: 100%;
+   }
+
+   .season-dropdown .dropdown_sectiones .dropdown {
+      display: flex;
+      margin: 0 auto;
+   }
+
+   .dropdown_section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 200px;
+      }
+
+      .row-data {
+         display: flex;
+         justify-content: center;
+      }
+
+      .row-data .col-md-4 {
+         max-width: 400px;
+      }
+
+}
+
 
       </style>
    </head>
@@ -320,8 +362,8 @@
                   </select>
             </div>
             <div class="row">
-            <div class="col-md-4"> </div> 
-            <div class="col-md-4 row-boxes"> 
+            {% comment %} <div class="col-md-4"> </div>  {% endcomment %}
+            <div class="col-md-4 row-boxes season-dropdown"> 
             <div class="dropdown_sectiones">
             <select class="selectpicker year_select" multiple>
             <option value="" selected disabled hidden> Select Season</option> 
@@ -334,12 +376,12 @@
 
             </div>
             </div>
-            <div class="col-md-4"> </div> 
+            {% comment %} <div class="col-md-4"> </div>  {% endcomment %}
             </div> 
-            <div class="row">
-            <div class="col-md-4"> </div> 
+            <div class="row row-data">
+            {% comment %} <div class="col-md-4"> </div>  {% endcomment %}
             <div class="col-md-4 row-box"> <p id="cal_amt">Data Set Size(Games):{{amount}} </p></div> 
-            <div class="col-md-4"> </div> 
+            {% comment %} <div class="col-md-4"> </div>  {% endcomment %}
             </div>
          </div>
          <div class="bildmoddal-sec">

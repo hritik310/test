@@ -244,11 +244,15 @@
             padding: 40px;
          }
          .container-box {   
-            margin-top: 30px !important;
+            {% comment %} margin-top: 30px !important; {% endcomment %}
             width: 30%;
             /* height: 200px; */
             margin: 0 auto;
             text-align: center;
+         }
+
+         .container-fluid .container:nth-child(3) {
+            margin-top: 30px;
          }
 
          button.map-downloadbtn {

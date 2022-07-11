@@ -280,7 +280,6 @@ def buildmodel(request,id):
                 "Away Total",
                 "Total Points",
                 "Home _diff",	
-                "Coin Toss Winner",
                 "Indoor/Outdoor",	
                 "Temperature",	
                 "Humidity",	
@@ -1013,7 +1012,6 @@ def buildmodelbutton(request):
             "Away Total",
             "Total Points",
             "Home _diff",	
-            "Coin Toss Winner",
             "Indoor/Outdoor",	
             "Temperature",	
             "Humidity",	
@@ -1130,195 +1128,195 @@ def buildmodelbutton(request):
 
 
 
-        data_list =[]
+        # data_list =[]
         
-        for i in backTest:
-            training = df[:amountOfGames-i]
-            print(training.shape)
-            predictionGames = df[i*-1:]
-            print(predictionGames.shape)
-            wins = 0
-            losses = 0
-            ties = 0
+        # for i in backTest:
+        #     training = df[:amountOfGames-i]
+        #     print(training.shape)
+        #     predictionGames = df[i*-1:]
+        #     print(predictionGames.shape)
+        #     wins = 0
+        #     losses = 0
+        #     ties = 0
             
-            total_wins = 0
-            total_losses = 0
-            total_ties = 0
+        #     total_wins = 0
+        #     total_losses = 0
+        #     total_ties = 0
             
-            ml_wins = 0
-            ml_losses = 0
-            #as a user selects and drops a variable it will be added and dropped 
-            # to this list. This list is the list of variables used in the model
-            # if len(answers_list)==12:
-            #     modelVars=answers_list
-            #     print(modelVars)
-            modelVars = answers_list
+        #     ml_wins = 0
+        #     ml_losses = 0
+        #     #as a user selects and drops a variable it will be added and dropped 
+        #     # to this list. This list is the list of variables used in the model
+        #     # if len(answers_list)==12:
+        #     #     modelVars=answers_list
+        #     #     print(modelVars)
+        #     modelVars = answers_list
              
-            # else:
-            #     modelVars=['num',
-            #     'away_defensive_rating',    
-            #     'away_offensive_rating',
-            #     'away_three_point_attempt_rate',
-            #     'away_true_shooting_percentage',
-            #     'away_turnover_percentage',
-            #     'home_defensive_rating',
-            #     'home_offensive_rating',
-            #     'home_three_point_attempt_rate',
-            #     'home_true_shooting_percentage',
-            #     'home_turnover_percentage',
-            #     'pace']
+        #     # else:
+        #     #     modelVars=['num',
+        #     #     'away_defensive_rating',    
+        #     #     'away_offensive_rating',
+        #     #     'away_three_point_attempt_rate',
+        #     #     'away_true_shooting_percentage',
+        #     #     'away_turnover_percentage',
+        #     #     'home_defensive_rating',
+        #     #     'home_offensive_rating',
+        #     #     'home_three_point_attempt_rate',
+        #     #     'home_true_shooting_percentage',
+        #     #     'home_turnover_percentage',
+        #     #     'pace']
         
-            #we build two models but kind of use them just as one. We have the same
-            #variables in both just a different target variable
-            X = np.asarray(training[modelVars])
-            Y_home=np.asarray(training['home_points'])
-            Y_away=np.asarray(training['away_points'])
-            #fit the model for home_points and away_points
+        #     #we build two models but kind of use them just as one. We have the same
+        #     #variables in both just a different target variable
+        #     # X = np.asarray(training[modelVars])
+        #     # Y_home=np.asarray(training['home_points'])
+        #     # Y_away=np.asarray(training['away_points'])
+        #     #fit the model for home_points and away_points
 
-            home_model = xgb.XGBRegressor()
-            away_model = xgb.XGBRegressor()
-            feats = {}
-            home_model.fit(X,Y_home)
-            for feature, importance in zip(answers_list,home_model.feature_importances_):
-                feats[feature] = str(round(importance*100))#add the name/value pair
-            # print("featuer_importance_home_model",home_model.importance_type)
+        #     home_model = xgb.XGBRegressor()
+        #     away_model = xgb.XGBRegressor()
+        #     feats = {}
+        #     home_model.fit(X,Y_home)
+        #     for feature, importance in zip(answers_list,home_model.feature_importances_):
+        #         feats[feature] = str(round(importance*100))#add the name/value pair
+        #     # print("featuer_importance_home_model",home_model.importance_type)
 
-            weight= home_model.get_booster().get_score(importance_type='weight')
-            a_dict = {key: value for key, value in zip(answers_list, weight.values())}
+        #     weight= home_model.get_booster().get_score(importance_type='weight')
+        #     a_dict = {key: value for key, value in zip(answers_list, weight.values())}
 
-            total_gain = home_model.get_booster().get_score(importance_type='total_gain')
-            a_total = {key: round(value,2) for key, value in zip(answers_list, total_gain.values())}
+        #     total_gain = home_model.get_booster().get_score(importance_type='total_gain')
+        #     a_total = {key: round(value,2) for key, value in zip(answers_list, total_gain.values())}
     
 
-            cover = home_model.get_booster().get_score(importance_type='cover')
-            a_cover = {key: round(value,2) for key, value in zip(answers_list, cover.values())}
+        #     cover = home_model.get_booster().get_score(importance_type='cover')
+        #     a_cover = {key: round(value,2) for key, value in zip(answers_list, cover.values())}
             
  
-            total_cover = home_model.get_booster().get_score(importance_type='total_cover')
-            a_total_cover = {key: value for key, value in zip(answers_list, total_cover.values())}
+        #     total_cover = home_model.get_booster().get_score(importance_type='total_cover')
+        #     a_total_cover = {key: value for key, value in zip(answers_list, total_cover.values())}
             
 
-            feats_feature = feats
-            # print(feats_feature)
+        #     feats_feature = feats
+        #     # print(feats_feature)
 
-            away_model.fit(X,Y_away)
-            # print("featuer_importance_away_model",away_model)
+        #     away_model.fit(X,Y_away)
+        #     # print("featuer_importance_away_model",away_model)
             
             
             
             
             
-            for index, row in predictionGames.iterrows():
-                home = row['home']
-                away = row['away']
+        #     for index, row in predictionGames.iterrows():
+        #         home = row['home']
+        #         away = row['away']
                
 
                 
                
-                homeTeam = df.loc[df['home']==home]
+        #         homeTeam = df.loc[df['home']==home]
     
-                awayTeam = df.loc[df['away']==away]
+        #         awayTeam = df.loc[df['away']==away]
              
-                #get the averages of the playing
-                #we use averages to make predictions
-                homeTeamAverages = homeTeam.mean()
-                awayTeamAverages = awayTeam.mean()
+        #         #get the averages of the playing
+        #         #we use averages to make predictions
+        #         homeTeamAverages = homeTeam.mean()
+        #         awayTeamAverages = awayTeam.mean()
                 
-                #NEED HELP HERE
-                #so the user adds the variables into the list modelVars
-                #but I am not sure how we can dynamically use that list to 
-                #select them from the averages dataframe we create.
-                king=Modelvar.objects.filter(created_by=request.user.id).values_list("percent_value",flat=True)
-                for nt in king:
-                    pass
+        #         #NEED HELP HERE
+        #         #so the user adds the variables into the list modelVars
+        #         #but I am not sure how we can dynamically use that list to 
+        #         #select them from the averages dataframe we create.
+        #         king=Modelvar.objects.filter(created_by=request.user.id).values_list("percent_value",flat=True)
+        #         for nt in king:
+        #             pass
                 
             
               
                 
-                # avgfg=dpanda*rere/100 
-                # tt=dpanda+avgfg
-                # showt=list(tt)
-                # print("showt",showt)
-                row2=[]    
-                for val in answers_list:
-                    if val.startswith("away"):
-                        averageValue = awayTeamAverages[val]
-                        # print(averageValue)
-                        if king:
-                            averageValue = (averageValue + (averageValue*nt/100))
+        #         # avgfg=dpanda*rere/100 
+        #         # tt=dpanda+avgfg
+        #         # showt=list(tt)
+        #         # print("showt",showt)
+        #         row2=[]    
+        #         for val in answers_list:
+        #             if val.startswith("away"):
+        #                 averageValue = awayTeamAverages[val]
+        #                 # print(averageValue)
+        #                 if king:
+        #                     averageValue = (averageValue + (averageValue*nt/100))
 
-                        row2.append(averageValue)
+        #                 row2.append(averageValue)
 
-                    else:
-                        averageValue = homeTeamAverages[val]
-                        if king:
-                            averageValue = (averageValue + (averageValue*nt)/100)
+        #             else:
+        #                 averageValue = homeTeamAverages[val]
+        #                 if king:
+        #                     averageValue = (averageValue + (averageValue*nt)/100)
 
-                        row2.append(averageValue)
+        #                 row2.append(averageValue)
                 
-                # print("row2",row2)
+        #         # print("row2",row2)
 
 
                
              
     
-                new_data = asarray([row2])
-                home_points = home_model.predict(new_data)[0]
+        #         new_data = asarray([row2])
+        #         home_points = home_model.predict(new_data)[0]
               
-                away_points = away_model.predict(new_data)[0]
+        #         away_points = away_model.predict(new_data)[0]
 
-                prediction_total_points = home_points + away_points
+        #         prediction_total_points = home_points + away_points
                  
-                if home_points > away_points and row['home_points']>row['away_points']:
-                    ml_wins = ml_wins + 1
-                elif home_points > away_points and row['home_points']<row['away_points']:
-                    ml_losses = ml_losses + 1
+        #         if home_points > away_points and row['home_points']>row['away_points']:
+        #             ml_wins = ml_wins + 1
+        #         elif home_points > away_points and row['home_points']<row['away_points']:
+        #             ml_losses = ml_losses + 1
 
-                if away_points > home_points and row['away_points']>row['home_points']:
-                    ml_wins = ml_wins + 1
-                elif away_points > home_points and row['away_points']<row['home_points']:
-                    ml_losses = ml_losses + 1
+        #         if away_points > home_points and row['away_points']>row['home_points']:
+        #             ml_wins = ml_wins + 1
+        #         elif away_points > home_points and row['away_points']<row['home_points']:
+        #             ml_losses = ml_losses + 1
                
                 
                     
             
-                if prediction_total_points>row['over_under_total']:
-                    if row['actual_total_points']>row['over_under_total']:
-                        total_wins = total_wins + 1
-                    elif row['actual_total_points']==row['over_under_total']:
-                        total_ties = total_ties + 1
-                    else:
-                        total_losses = total_losses + 1
+        #         if prediction_total_points>row['over_under_total']:
+        #             if row['actual_total_points']>row['over_under_total']:
+        #                 total_wins = total_wins + 1
+        #             elif row['actual_total_points']==row['over_under_total']:
+        #                 total_ties = total_ties + 1
+        #             else:
+        #                 total_losses = total_losses + 1
                 
-                if prediction_total_points<row['over_under_total']:
-                    if row['actual_total_points']<row['over_under_total']:
-                        total_wins = total_wins + 1
-                    elif row['actual_total_points']==row['over_under_total']:
-                        total_ties = total_ties + 1
-                    else:
-                        total_losses = total_losses + 1
+        #         if prediction_total_points<row['over_under_total']:
+        #             if row['actual_total_points']<row['over_under_total']:
+        #                 total_wins = total_wins + 1
+        #             elif row['actual_total_points']==row['over_under_total']:
+        #                 total_ties = total_ties + 1
+        #             else:
+        #                 total_losses = total_losses + 1
                 
               
                 
                 
                 
-                #code to get the record for the model
-                if home == row['participantfullname']:
+        #         #code to get the record for the model
+        #         if home == row['participantfullname']:
                    
             
             
-                    point_diff = home_points-away_points
+        #             point_diff = home_points-away_points
                  
 
             
-                    if point_diff > abs(row['spreadtotal']):
-                        if row['participantscore']-row['underdogscore']>abs(row['spreadtotal']):
-                             wins = wins + 1
-                        elif row['participantscore']-row['underdogscore']==abs(row['spreadtotal']):
-                            ties = ties + 1
+        #             if point_diff > abs(row['spreadtotal']):
+        #                 if row['participantscore']-row['underdogscore']>abs(row['spreadtotal']):
+        #                      wins = wins + 1
+        #                 elif row['participantscore']-row['underdogscore']==abs(row['spreadtotal']):
+        #                     ties = ties + 1
                         
-                        else:                
-                            losses = losses + 1
+        #                 else:                
+        #                     losses = losses + 1
 
 
 
@@ -1327,273 +1325,273 @@ def buildmodelbutton(request):
 
                        
                 
-                    if point_diff < abs(row['spreadtotal']):
-                        if row['participantscore']-row['underdogscore']<abs(row['spreadtotal']):
-                            wins = wins + 1
+        #             if point_diff < abs(row['spreadtotal']):
+        #                 if row['participantscore']-row['underdogscore']<abs(row['spreadtotal']):
+        #                     wins = wins + 1
                     
-                        elif row['participantscore']-row['underdogscore']==abs(row['spreadtotal']):
-                            ties = ties + 1
+        #                 elif row['participantscore']-row['underdogscore']==abs(row['spreadtotal']):
+        #                     ties = ties + 1
                             
-                        else:                
-                            losses = losses + 1
+        #                 else:                
+        #                     losses = losses + 1
 
 
                     
             
                     
-                if away == row['participantfullname']:
+        #         if away == row['participantfullname']:
                     
                     
-                    point_diff = home_points-away_points
+        #             point_diff = home_points-away_points
                     
-                    if point_diff > abs(row['spreadtotal']):
-                        if row['participantscore']-row['underdogscore']>row['spreadtotal']:
-                            wins = wins + 1
+        #             if point_diff > abs(row['spreadtotal']):
+        #                 if row['participantscore']-row['underdogscore']>row['spreadtotal']:
+        #                     wins = wins + 1
                                
                             
                             
                             
-                        elif row['participantscore']-row['underdogscore']==row['spreadtotal']:
-                            ties = ties + 1
+        #                 elif row['participantscore']-row['underdogscore']==row['spreadtotal']:
+        #                     ties = ties + 1
                         
                         
-                        else:
-                            losses = losses + 1
+        #                 else:
+        #                     losses = losses + 1
 
 
                             
                             
-                    if point_diff < abs(row['spreadtotal']):
-                        if row['participantscore']-row['underdogscore']<abs(row['spreadtotal']):
-                            wins = wins + 1
+        #             if point_diff < abs(row['spreadtotal']):
+        #                 if row['participantscore']-row['underdogscore']<abs(row['spreadtotal']):
+        #                     wins = wins + 1
                             
                        
-                        elif row['participantscore']-row['underdogscore']==abs(row['spreadtotal']):
-                            ties = ties + 1
+        #                 elif row['participantscore']-row['underdogscore']==abs(row['spreadtotal']):
+        #                     ties = ties + 1
 
-                        else:
-                            losses = losses + 1
-
-
-
-            nba = NBA()
-            sb = Sportsbook()
-            cols = ['event', 'participant', 'spread / total', 'decimal odds', 'american odds']
+        #                 else:
+        #                     losses = losses + 1
 
 
-            # In[132]:
+
+        #     nba = NBA()
+        #     sb = Sportsbook()
+        #     cols = ['event', 'participant', 'spread / total', 'decimal odds', 'american odds']
 
 
-            today= datetime.today()
-            year = today.year
-            month = today.month
-            day = today.day
+        #     # In[132]:
 
 
-            # In[133]:
+        #     today= datetime.today()
+        #     year = today.year
+        #     month = today.month
+        #     day = today.day
 
 
-            today = str(year) + '-' + str(month) + '-' + str(day)
+        #     # In[133]:
 
 
-            # In[134]:
+        #     today = str(year) + '-' + str(month) + '-' + str(day)
 
 
-            dt = datetime.strptime(today, '%Y-%m-%d')
-            et = EventsByDate(nba.league_id, dt)
-            spread = CurrentLines(et.ids(), nba.market_ids('pointspread'), sb.ids('Bovada')[0])
-            spread = spread.dataframe(et)
+        #     # In[134]:
 
 
-            # In[135]:
+        #     dt = datetime.strptime(today, '%Y-%m-%d')
+        #     et = EventsByDate(nba.league_id, dt)
+        #     spread = CurrentLines(et.ids(), nba.market_ids('pointspread'), sb.ids('Bovada')[0])
+        #     spread = spread.dataframe(et)
 
 
-            favSpread = spread.loc[spread['spread / total'] <0]
-            undSpread = spread.loc[spread['spread / total'] >0]
+        #     # In[135]:
 
 
-            # In[136]:
+        #     favSpread = spread.loc[spread['spread / total'] <0]
+        #     undSpread = spread.loc[spread['spread / total'] >0]
 
 
-            #get underdog score,team, and abbreviation 
-            undTeam = []
-            undAbb = []
-            another_list=[]
-            for index, row in undSpread.iterrows():
-                undTeam.append(row['participant full name'])
-                undAbb.append(row['participant'])
+        #     # In[136]:
 
 
-            # In[137]:
+        #     #get underdog score,team, and abbreviation 
+        #     undTeam = []
+        #     undAbb = []
+        #     another_list=[]
+        #     for index, row in undSpread.iterrows():
+        #         undTeam.append(row['participant full name'])
+        #         undAbb.append(row['participant'])
 
 
-            favSpread['underdog team'] = undTeam
-            favSpread['underdog abb'] = undAbb
+        #     # In[137]:
 
 
-            # In[138]:
+        #     favSpread['underdog team'] = undTeam
+        #     favSpread['underdog abb'] = undAbb
 
 
-            filtered_spread = favSpread
+        #     # In[138]:
 
 
-            # In[143]:
+        #     filtered_spread = favSpread
 
 
-            #find home and away teams
-
-            home = []
-            away = []
-
-            for index, row in filtered_spread.iterrows():
-                findIndex = row['event'].find('@')
-                home.append(row['event'][findIndex+1:])
-                away.append(row['event'][:findIndex])
-            filtered_spread['home'] = home
-            filtered_spread['away'] = away
+        #     # In[143]:
 
 
-            # In[144]:
+        #     #find home and away teams
+
+        #     home = []
+        #     away = []
+
+        #     for index, row in filtered_spread.iterrows():
+        #         findIndex = row['event'].find('@')
+        #         home.append(row['event'][findIndex+1:])
+        #         away.append(row['event'][:findIndex])
+        #     filtered_spread['home'] = home
+        #     filtered_spread['away'] = away
 
 
-            #preprocessing to match up names
-            filtered_spread = filtered_spread.replace(to_replace ="New Orleans",value ="New Orleans Pelicans")
-            filtered_spread = filtered_spread.replace(to_replace ="L.A. Clippers Clippers",value ="Los Angeles Clippers")
-            filtered_spread = filtered_spread.replace(to_replace ="LA Clippers",value ="Los Angeles Clippers")
-            filtered_spread = filtered_spread.replace(to_replace ="Oklahoma City",value ="Oklahoma City Thunder")
-            filtered_spread = filtered_spread.replace(to_replace ="Golden State",value ="Golden State Warriors")
-            filtered_spread = filtered_spread.replace(to_replace ="New York",value ="New York Knicks")
-            filtered_spread = filtered_spread.replace(to_replace ="L.A. Lakers Lakers",value ="Los Angeles Lakers")
-            filtered_spread = filtered_spread.replace(to_replace ="LA Lakers",value ="Los Angeles Lakers")
-            filtered_spread = filtered_spread.replace(to_replace ="L.A. Lakers",value ="Los Angeles Lakers")
-            filtered_spread = filtered_spread.replace(to_replace ="San Antonio",value ="San Antonio Spurs")
+        #     # In[144]:
 
 
-            # In[146]:
+        #     #preprocessing to match up names
+        #     filtered_spread = filtered_spread.replace(to_replace ="New Orleans",value ="New Orleans Pelicans")
+        #     filtered_spread = filtered_spread.replace(to_replace ="L.A. Clippers Clippers",value ="Los Angeles Clippers")
+        #     filtered_spread = filtered_spread.replace(to_replace ="LA Clippers",value ="Los Angeles Clippers")
+        #     filtered_spread = filtered_spread.replace(to_replace ="Oklahoma City",value ="Oklahoma City Thunder")
+        #     filtered_spread = filtered_spread.replace(to_replace ="Golden State",value ="Golden State Warriors")
+        #     filtered_spread = filtered_spread.replace(to_replace ="New York",value ="New York Knicks")
+        #     filtered_spread = filtered_spread.replace(to_replace ="L.A. Lakers Lakers",value ="Los Angeles Lakers")
+        #     filtered_spread = filtered_spread.replace(to_replace ="LA Lakers",value ="Los Angeles Lakers")
+        #     filtered_spread = filtered_spread.replace(to_replace ="L.A. Lakers",value ="Los Angeles Lakers")
+        #     filtered_spread = filtered_spread.replace(to_replace ="San Antonio",value ="San Antonio Spurs")
 
 
-            for index, row in filtered_spread.iterrows():
-                homeTeam = df.loc[df['home']==row['home']]
-                awayTeam = df.loc[df['away']==row['away']]
-
-                
-                homeTeamAverages = homeTeam.mean()
-                awayTeamAverages = awayTeam.mean()
+        #     # In[146]:
 
 
-                # print(row['home'] + ' vs ' + row['away'])
-                
-                pred = []
-                for value in answers_list:
-                    if value.startswith("away"):
-                        pred.append(awayTeamAverages[value])
-                    else:
-                        pred.append(homeTeamAverages[value])
-                
-                
-                
-                new_data = asarray([pred])
-                home_points = round(home_model.predict(new_data)[0],1)
-                away_points = round(away_model.predict(new_data)[0],1)
+        #     for index, row in filtered_spread.iterrows():
+        #         homeTeam = df.loc[df['home']==row['home']]
+        #         awayTeam = df.loc[df['away']==row['away']]
 
                 
-                print('Prediction')
-                print(row['home'] + ' ' + str(home_points))
-                print(row['away'] + ' ' + str(away_points))
+        #         homeTeamAverages = homeTeam.mean()
+        #         awayTeamAverages = awayTeam.mean()
 
-                hme=row['home'] + ' ' + str(home_points) + '  vs  ' + row['away'] + ' ' + str(away_points)
-                awy=row['away'] + ' ' + str(away_points)
-                datar={
 
-                'home':hme,
-                'away':awy,
-                }
-                another_list.append(datar) 
-            # print(another_list)   
-            y='Last '+str(abs(i))
-            w=str(ml_wins)
-            e=str(ml_losses)
-            r=ml_wins/(ml_wins + ml_losses)
-            percentage = "{:.0%}".format(r)
+        #         # print(row['home'] + ' vs ' + row['away'])
+                
+        #         pred = []
+        #         for value in answers_list:
+        #             if value.startswith("away"):
+        #                 pred.append(awayTeamAverages[value])
+        #             else:
+        #                 pred.append(homeTeamAverages[value])
+                
+                
+                
+        #         new_data = asarray([pred])
+        #         home_points = round(home_model.predict(new_data)[0],1)
+        #         away_points = round(away_model.predict(new_data)[0],1)
+
+                
+        #         print('Prediction')
+        #         print(row['home'] + ' ' + str(home_points))
+        #         print(row['away'] + ' ' + str(away_points))
+
+        #         hme=row['home'] + ' ' + str(home_points) + '  vs  ' + row['away'] + ' ' + str(away_points)
+        #         awy=row['away'] + ' ' + str(away_points)
+        #         datar={
+
+        #         'home':hme,
+        #         'away':awy,
+        #         }
+        #         another_list.append(datar) 
+        #     # print(another_list)   
+        #     y='Last '+str(abs(i))
+        #     w=str(ml_wins)
+        #     e=str(ml_losses)
+        #     r=ml_wins/(ml_wins + ml_losses)
+        #     percentage = "{:.0%}".format(r)
 
             
-            h='Last ' + str(abs(i))
-            j=total_wins
-            k=str(total_losses)
-            pri = str(total_ties)
-            l=j/(total_wins + total_losses+total_ties)
-            percent_over = "{:.0%}".format(l)
-            games = abs(i)-total_ties
-            m='win% over/under: ' + str(total_wins/games)
-            print('             ')               
+        #     h='Last ' + str(abs(i))
+        #     j=total_wins
+        #     k=str(total_losses)
+        #     pri = str(total_ties)
+        #     l=j/(total_wins + total_losses+total_ties)
+        #     percent_over = "{:.0%}".format(l)
+        #     games = abs(i)-total_ties
+        #     m='win% over/under: ' + str(total_wins/games)
+        #     print('             ')               
                             
-            n='Last ' + str(abs(i)) + 'games'
-            o=wins
-            p=str(losses)
-            spread_tie = str(ties)
-            q=o/(wins+losses)
-            percent_spread= "{:.0%}".format(q)
-            games = abs(i)-ties
-            s='win% spread: ' + str(wins/games)
+        #     n='Last ' + str(abs(i)) + 'games'
+        #     o=wins
+        #     p=str(losses)
+        #     spread_tie = str(ties)
+        #     q=o/(wins+losses)
+        #     percent_spread= "{:.0%}".format(q)
+        #     games = abs(i)-ties
+        #     s='win% spread: ' + str(wins/games)
 
 
 
-            data = {
-                        'last_games':h,
-                        'wins':j,
-                        'loss':k,
-                        'ties':pri,
-                        'percent':percent_over,
-                        'ML_last_games':y,
-                        'ML_wins':w,
-                        'ML_loss':e,
-                        'ML_ties':percentage,
-                        "spread_last_games":n,
-                        "spread_wins":o,
-                        'spread_loss':p,
-                        'spread_ties':spread_tie,
-                        'spread_percent':percent_spread,
-                        'home':hme,
+        #     data = {
+        #                 'last_games':h,
+        #                 'wins':j,
+        #                 'loss':k,
+        #                 'ties':pri,
+        #                 'percent':percent_over,
+        #                 'ML_last_games':y,
+        #                 'ML_wins':w,
+        #                 'ML_loss':e,
+        #                 'ML_ties':percentage,
+        #                 "spread_last_games":n,
+        #                 "spread_wins":o,
+        #                 'spread_loss':p,
+        #                 'spread_ties':spread_tie,
+        #                 'spread_percent':percent_spread,
+        #                 'home':hme,
                         
-                    }
+        #             }
 
-            data_list.append(data)
+        #     data_list.append(data)
 
             # print(data_list) 
       
         data1 = {
         "status":"OK",
-        "data":reqs,
-        "total":data_list,
-        "totalagain":another_list,
-        'feature':feats,
-        "win":j,
-        "loss":k,
-        'ties':pri,
-        "percent":percent_over,
-        'ML_last_games':y,
-        'ML_wins':w,
-        'ML_loss':e,
-        'ML_ties':percentage,
-        "spread_last_games":n,
-        "spread_wins":o,
-        'spread_loss':p,
-        'spread_ties':spread_tie,
-        'spread_percent':percent_spread,
-        'home':hme,
-        'weight':a_dict,
-        'total_gain':a_total,
-        'cover':a_cover,
-        'total_cover':a_total_cover,
+        # "data":reqs,
+        # "total":data_list,
+        # "totalagain":another_list,
+        # 'feature':feats,
+        # "win":j,
+        # "loss":k,
+        # 'ties':pri,
+        # "percent":percent_over,
+        # 'ML_last_games':y,
+        # 'ML_wins':w,
+        # 'ML_loss':e,
+        # 'ML_ties':percentage,
+        # "spread_last_games":n,
+        # "spread_wins":o,
+        # 'spread_loss':p,
+        # 'spread_ties':spread_tie,
+        # 'spread_percent':percent_spread,
+        # 'home':hme,
+        # 'weight':a_dict,
+        # 'total_gain':a_total,
+        # 'cover':a_cover,
+        # 'total_cover':a_total_cover,
         
         }
 
-        subject, from_email, to = 'hello', 'testsood981@gmail.com', request.user.email
-        text_content = 'This is an important message.'
-        html_content = render_to_string('signup/email.html',{'y':data_list})
-        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-        msg.attach_alternative(html_content, "text/html")
-        msg.send()
+        # subject, from_email, to = 'hello', 'testsood981@gmail.com', request.user.email
+        # text_content = 'This is an important message.'
+        # html_content = render_to_string('signup/email.html',{'y':data_list})
+        # msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        # msg.attach_alternative(html_content, "text/html")
+        # msg.send()
 
 
     # mod = Modelvar.objects.all().delete()
@@ -1771,7 +1769,6 @@ def heatmap(request):
             "Away Total",
             "Total Points",
             "Home _diff",	
-            "Coin Toss Winner",
             "Indoor/Outdoor",	
             "Temperature",	
             "Humidity",	
@@ -1901,16 +1898,23 @@ def value_select(request):
   
     # print(value1)
     for z in value1:
-        print(z)
         for  i in df_col:  
-            if z in i:
+            if "Home "+z == i or "Away "+z ==i or z ==  i :
                 value_in.append(i)
     print(value_in)
     for i in value_in: 
         if i.startswith("Home"):
             home_list.append(i)
-        else:
+        elif i.startswith("Away"):
             away_list.append(i)
+            
+        else:
+    
+            home_list.append(i)
+            away_list.append(i)
+    print(home_list)
+    print(away_list)
+
             
     
     #home model
