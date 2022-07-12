@@ -403,14 +403,14 @@
          </div> 
          <div class="input-group section_number">
          <span class="input-group-btn">
-         <button type="button" id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default  btn-number build1" data-type="minus"data-field="quant[1]" data={{i}} >
+         <button type="button" id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default  btn-number build1" data-type="minus"data-field="quant[1]" data="{{i}}">
          <span class="glyphicon remove glyphicon-minus" rem="{{forloop.counter}}"></span>
          </button>
          </span>
          <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
          {% comment %} {%if status == 1%} {% endcomment %}
          <span class="input-group-btn"> 
-         <button type="button" id="id_quant_{{forloop.counter}}" date-id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id={{i}}>
+         <button type="button" id="id_quant_{{forloop.counter}}" date-id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id="{{i}}">
          <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
          </button>
          </span>
@@ -547,7 +547,7 @@
                  url: 'status',
                  data: {
                   'id': rowId,
-                  'info':inputval,
+               
                  
          
                  },

@@ -421,9 +421,9 @@ def buildmodelStatus(request):
     build.title=request.GET.get('id')
     print("build",build.title)
     build.created_by = request.user.id
-    build.percent_value =request.GET.get('info')
-    if  build.percent_value == "":
-        build.percent_value=0
+    # build.percent_value =request.GET.get('info')
+    # if  build.percent_value == "":
+    #     build.percent_value=0
     build.save()
     data = {
     "status":"OK",
@@ -1748,12 +1748,12 @@ def heatmap(request):
             # man=df[df.columns[1:]].corr()['home_steals'].sort_values(ascending=False)[:10]
             # print(man)
            
-            hrit = df.corr()
-            top_ten="" 
-            for j in answers_lists:
-                print(hrit[j].sort_values(ascending=False)[:10])
-                top_ten=hrit[j].sort_values(ascending=False)[:10]
-                print("toppppp_tennnnn",top_ten)
+            # hrit = df.corr()
+            # top_ten="" 
+            # for j in answers_lists:
+            #     print(hrit[j].sort_values(ascending=False)[:10])
+            #     top_ten=hrit[j].sort_values(ascending=False)[:10]
+            #     print("toppppp_tennnnn",top_ten)
             # hrit.to_csv("output.csv")
             # dataplot = sb.heatmap(df.corr(), cmap="YlGnBu", annot=True)
             # dataplot.figure.savefig('result.png')
@@ -1860,7 +1860,7 @@ def heatmap(request):
 
     else:
         return redirect('membership') 
-    return render(request,"signup/buildmodel1.html",{'re':req,"df":list(df_away),"all":all,"amount":amountOfGames,"top_ten":top_ten})
+    return render(request,"signup/buildmodel1.html",{'re':req,"df":list(df_away),"all":all,"amount":amountOfGames})
 
 def minmax(request):
     
@@ -1899,7 +1899,7 @@ def value_select(request):
     # print(value1)
     for z in value1:
         for  i in df_col:  
-            if "Home "+z == i or "Away "+z ==i or z ==  i :
+            if "Home "+z == i or "Away "+z ==i or z ==  i:
                 value_in.append(i)
     print(value_in)
     for i in value_in: 
