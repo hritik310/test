@@ -370,7 +370,7 @@
             <div class="section_first">
             <div class="row_section_grid">
                <h1>{{status}}</h1>
-            {% for i in df|slice:"1:73" %}
+            {% for i in df%}
 
             <div class="col-md-2">
             <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
@@ -409,81 +409,27 @@
             <div class="row">
             <div class="col-md-4">
             <div class="Games_box">
-            <ul class="nav nav-tabs">
-            <li><a data-toggle="tab" class="menu1" href="#menu12">Game Information</a></li>
-            </ul>
-            <div class="tab-content">
-            <div id="menu12" class="tab-pane fade">
-            <button type ="button" value="Indoor/Outdoor" name="val1" class="val">Indoor/Outdoor</button><br>
-            <button type ="button" value="Field Surface" name="val1" class="val">Field Surface</button><br>
-            <button type ="button" value="Temperature" name="val1" class="val">Temperature</button><br>
-            <button type ="button" value="Wind" name="val1" class="val">Wind</button><br>
-            </div>
+            <h5>Game Information</h5>
+            <div class="tab-pane fade">
             </div>
             </div>
             </div>
             <div class="col-md-4">
             <div class="Games_box"> 
-            <ul class="nav nav-tabs">
-               <li><a data-toggle="tab"  class="menu22" href="#menu22">Team Stats</a></li>
-            </ul>
-            <div class="tab-content">
-            <div id="menu22" class="tab-pane fade">
-            <button type ="button" value="First Downs" name="val1" class="val">First Downs</button><br>
-            <button type ="button" value="Rush Attempts" name="val1" class="val">Rush Attempts</button><br>
-            <button type ="button" value="Rush Yards" name="val1" class="val">Rush Yards</button><br>
-            <button type ="button" value="Rush Yards Per Attempt" name="val1" class="val">Rush Yards Per Attempt</button><br>
-            <button type ="button" value="Rush TD" name="val1" class="val">Rush TD</button><br>
-            <button type ="button" value="Completions" name="val1" class="val">Completions</button><br>
-            <button type ="button" value="Attempts" name="val1" class="val">Attempts</button><br>
-            <button type ="button" value="Pass Yards" name="val1" class="val">Pass Yards</button><br>
-            <button type ="button" value="Pass Yards Per Attempt" name="val1" class="val">Pass Yards Per Attempt</button><br>
-            <button type ="button" value="Pass Touchdowns" name="val1" class="val">Pass Touchdowns</button><br>
-            <button type ="button" value="Interceptions" name="val1" class="val">Interceptions</button><br>
-            <button type ="button" value="Sacked" name="val1" class="val">Sacked</button><br>
-            <button type ="button" value="Sacked Yards" name="val1" class="val">Sacked Yards</button><br>
-            <button type ="button" value="Net Pass Yards" name="val1" class="val">Net Pass Yards</button><br>
-            <button type ="button" value="Total Yards" name="val1" class="val">Total Yards</button><br>
-            <button type ="button" value="Fumbles" name="val1" class="val">Fumbles</button><br>
-            <button type ="button" value="Fumbles Lost" name="val1" class="val">Fumbles Lost</button><br>
-            <button type ="button" value="Turnovers" name="val1" class="val">Turnovers</button><br>
-            <button type ="button" value="Penalties" name="val1" class="val">Penalties</button><br>
-            <button type ="button" value="Penalty Yards" name="val1" class="val">Penalty Yards</button><br>
-            <button type ="button" value="Third Downs Converted" name="val1" class="val">Third Downs Converted</button><br>
-            <button type ="button" value="Third Downs Attempted" name="val1" class="val">Third Downs Attempted</button><br>
-            <button type ="button" value="Third Down Percentage" name="val1" class="val">Third Down Percentage</button><br>
-            <button type ="button" value="Fourth Downs Converted" name="val1" class="val">Fourth Downs Converted</button><br>
-            <button type ="button" value="Fourth Downs Attempted" name="val1" class="val">Fourth Downs Attempted</button><br>
-            <button type ="button" value="Fourth Downs Percentage" name="val1" class="val">Fourth Downs Percentage</button><br>
-            <button type ="button" value="Time Of Possession" name="val1" class="val">Time Of Possession</button><br>
-            </div>
+            <h5>Team Stats</h5>
+            <div class="tab-pane fade">
             </div>
             </div>
             </div>
             <div class="col-md-4">
             <div class="Games_box"> 
-            <ul class="nav nav-tabs">
-               <li><a data-toggle="tab" class="menu33" href="#menu33">QB data</a></li>
-            </ul>
-            <div class="tab-content">
-            <div id="menu33" class="tab-pane fade">
-            <button type ="button" value="Completion %" name="val1" class="val">Completion %</button><br>
-            <button type ="button" value="First Down %" name="val1" class="val">First Down %</button><br>
-            <button type ="button" value="Intended Air Yards Per Attempt" name="val1" class="val">Intended Air Yards Per Attempt</button><br>
-            <button type ="button" value="Completed Air Yards Per Attempt" name="val1" class="val">Completed Air Yards Per Attempt</button><br>
-            <button type ="button" value="Drop Percentage" name="val1" class="val">Drop Percentage</button><br>
-            <button type ="button" value="Bad Throw Percentage" name="val1" class="val">Bad Throw Percentage</button><br>
-            <button type ="button" value="Sacked" name="val1" class="val">Sacked</button><br>
-            <button type ="button" value="Blitzed" name="val1" class="val">Blitzed</button><br>
-            <button type ="button" value="Hurried" name="val1" class="val">Hurried</button><br>
-            <button type ="button" value="Hit" name="val1" class="val">Hit</button><br>
-            <button type ="button" value="Pressure Percentage" name="val1" class="val">Pressure Percentage</button><br>
-            <button type ="button" value="Yards Per Scramble" name="val1" class="val">Yards Per Scramble</button><br>
+            <h5>QB data</h5>
+            
+            <div class="tab-pane fade">
             </div> 
             </div>
             </div>
-            </div>
-            </div>
+           
             {% comment %} <div class="row">
             <div class="col-md-4">
             <div class="prediction"> 
@@ -635,12 +581,7 @@
                });
          
             });
-            $('button[type="button"]').click(function(){
-               $(this).addClass('blue');
-            });
-            $('.val').click(function(){
-               $(this).prop("disabled",true);
-           });
+     
          
          
             $(document).ready(function(){
@@ -708,7 +649,7 @@
          //    });
          //  {% endcomment %}
 
-            tags = new Array();
+            {% comment %} tags = new Array();
             $(".val").click(function () {
             
             var rowId = $(this).val();
@@ -729,7 +670,7 @@
             
                }
             });
-            });
+            }); {% endcomment %}
 
          
             $('.buildmodelbutton').on('click', function() {

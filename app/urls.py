@@ -34,14 +34,11 @@ urlpatterns = [
     path('buildmodel/status/',Signupviews.buildmodelStatus, name ="buildmodel-status"),
     path('buildmodel/remove/',Signupviews.buildmodelremove, name ="buildmodel-remove"),
     path('buildmodelbutton',Signupviews.buildmodelbutton, name ="buildmodel-button"),
-    path("reset",Signupviews.reset,name="reset"),
     path('register',Signupviews.create,name="register"),
     path('passwordchange/<int:id>',Loginviews.passwordchange, name ='passwordchange'),
-    # path('buildmodel/percent/',Signupviews.buildmodelpercent, name ="buildmodel-percent"),
     path('new',Signupviews.new,name="new"),
     
     path('downloadimg',Signupviews.send_file,name='downloadimg'),
-    path("select1",Signupviews.value_select,name='select1'),
 
 
 
@@ -51,7 +48,6 @@ urlpatterns = [
     path('stripe-checkout/', Paymentview.StripeCheckoutAPIView.as_view(), name = 'stripe_checkout'),
     path('stripe-checkout/success/',Paymentview.SuccessPayment.as_view(), name="success"),
     path('stripe-checkout/cancel/',Paymentview.cancel_subscription, name="cancel"),
-    # path('webhook/', Paymentview.stripe_webhook), # new
     path('activate/<uidb64>/<token>/',Signupviews.activate, name='activate'),
 
     path('account',Signupviews.account,name="account"),
