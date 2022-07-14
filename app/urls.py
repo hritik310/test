@@ -27,7 +27,7 @@ urlpatterns = [
     path('buildmodel3/', Signupviews.selectvariable, name='buildmodel3'),
     path('buildmodel4/', Signupviews.training, name='buildmodel4'),
     path('buildmodel5/', Signupviews.modelname, name='buildmodel5'),
-    path('download',Signupviews.download_file,name='download'),
+    # path('download',Signupviews.download_file,name='download'),
 
 
 
@@ -38,7 +38,7 @@ urlpatterns = [
     path('passwordchange/<int:id>',Loginviews.passwordchange, name ='passwordchange'),
     path('new',Signupviews.new,name="new"),
     
-    path('downloadimg',Signupviews.send_file,name='downloadimg'),
+    # path('downloadimg',Signupviews.send_file,name='downloadimg'),
 
 
 

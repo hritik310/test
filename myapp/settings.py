@@ -158,10 +158,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-CRONJOBS = [
-    ('30 15 * * *', 'app.cron.today'),
-    ('35 15 * * *', 'app.cron.gettoday'),
-]
+# CRONJOBS = [
+#     ('30 15 * * *', 'app.cron.today'),
+#     ('35 15 * * *', 'app.cron.gettoday'),
+# ]
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
