@@ -409,112 +409,141 @@
          <div class="row_section_grid">
          <h1>{{status}}</h1>
 
-         <div class="boxes-section d-flex flex-column w-100">
-   <div class="boxes-main">
-      <h2>Gaming Info</h2>
-      {% for i in df|slice:":4"  %}
-      <div class="col-md-2">
+         {% comment %} <div class="boxes-section d-flex flex-column w-100">
+
+            
+            <div class="boxes-main">
+               <h2>Gaming Info</h2>
+               {% for i in df|slice:":4"  %}
+         <div class="col-md-2">
          <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
-            <div class="Info-sign">
+         <div class="Info-sign">
+         <span class="glyphicon glyphicon-info-sign"></span> 
+         </div>
+         <div class="home_point">
+         <p>{{i}}</p>
+         
+         <span class="feature-importance"></span> 
+         </div> 
+         <div class="input-group section_number">
+         <span class="input-group-btn">
+         <button type="button" id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default  btn-number build1" data-type="minus"data-field="quant[1]" data="{{i}}">
+         <span class="glyphicon remove glyphicon-minus" rem="{{forloop.counter}}"></span>
+         </button>
+         </span>
+
+         <span class="input-group-btn"> 
+         <button type="button" id="id_quant_{{forloop.counter}}" date-id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id="{{i}}">
+         <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
+         </button>
+         </span>
+         </div>
+         </div>
+         </div>
+         {% endfor %} 
+         </div>
+         </div>
+         </div>
+       
+            <div class="boxes-main">
+               <h2>Team Stats</h2>
+               {% for i in df|slice:"4:31"  %}
+               <div class="col-md-2">
+               <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
+               <div class="Info-sign">
                <span class="glyphicon glyphicon-info-sign"></span> 
-            </div>
-            <div class="home_point">
+               </div>
+               <div class="home_point">
                <p>{{i}}</p>
-               {% comment %} <input type="number" {%for z in all %} {%if  i in z.title  %} value="{{z.percent_value}}" {%endif%}{%endfor%} min="0" max="10"class="input-box"name="percent" id ="block_{{forloop.counter}}"> {% endcomment %}
+              
                <span class="feature-importance"></span> 
-            </div>
-            <div class="input-group section_number">
+               </div> 
+               <div class="input-group section_number">
                <span class="input-group-btn">
                <button type="button" id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default  btn-number build1" data-type="minus"data-field="quant[1]" data="{{i}}">
                <span class="glyphicon remove glyphicon-minus" rem="{{forloop.counter}}"></span>
                </button>
                </span>
-               <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
-               {% comment %} {%if status == 1%} {% endcomment %}
+   
                <span class="input-group-btn"> 
                <button type="button" id="id_quant_{{forloop.counter}}" date-id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id="{{i}}">
                <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
                </button>
                </span>
+               </div>
+               </div>
+               </div>
+               {% endfor %} 
+               </div>
+               </div>
+               </div>
+               
+            <div class="boxes-main">
+               <h2>QB Data</h2>
+             
+               {% for i in df|slice:"31:"  %}
+               <div class="col-md-2">
+               <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
+               <div class="Info-sign">
+               <span class="glyphicon glyphicon-info-sign"></span> 
+               </div>
+               <div class="home_point">
+               <p>{{i}}</p>
+               
+               <span class="feature-importance"></span> 
+               </div> 
+               <div class="input-group section_number">
+               <span class="input-group-btn">
+               <button type="button" id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default  btn-number build1" data-type="minus"data-field="quant[1]" data="{{i}}">
+               <span class="glyphicon remove glyphicon-minus" rem="{{forloop.counter}}"></span>
+               </button>
+               </span>
+   
+               <span class="input-group-btn"> 
+               <button type="button" id="id_quant_{{forloop.counter}}" date-id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id="{{i}}">
+               <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
+               </button>
+               </span>
+               </div>
+               </div>
+               </div>
+               {% endfor %} 
+               </div>
+               </div>
+               </div>
+               
+               </div>
             </div>
-         </div>
-      </div>
-      {% endfor %} 
-   </div>
-</div>
-</div>
-<div class="boxes-main">
-   <h2>Team Stats</h2>
-   {% for i in df|slice:"4:31"  %}
-   <div class="col-md-2">
-      <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
-         <div class="Info-sign">
-            <span class="glyphicon glyphicon-info-sign"></span> 
-         </div>
-         <div class="home_point">
-            <p>{{i}}</p>
-            {% comment %} <input type="number" {%for z in all %} {%if  i in z.title  %} value="{{z.percent_value}}" {%endif%}{%endfor%} min="0" max="10"class="input-box"name="percent" id ="block_{{forloop.counter}}"> {% endcomment %}
-            <span class="feature-importance"></span> 
-         </div>
-         <div class="input-group section_number">
-            <span class="input-group-btn">
-            <button type="button" id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default  btn-number build1" data-type="minus"data-field="quant[1]" data="{{i}}">
-            <span class="glyphicon remove glyphicon-minus" rem="{{forloop.counter}}"></span>
-            </button>
-            </span>
-            <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
-            {% comment %} {%if status == 1%} {% endcomment %}
-            <span class="input-group-btn"> 
-            <button type="button" id="id_quant_{{forloop.counter}}" date-id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id="{{i}}">
-            <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
-            </button>
-            </span>
-         </div>
-      </div>
-   </div>
-   {% endfor %} 
-</div>
-</div>
-</div>
-<div class="boxes-main">
-   <h2>QB Data</h2>
-   {% for i in df|slice:"31:"  %}
-   <div class="col-md-2">
-      <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
-         <div class="Info-sign">
-            <span class="glyphicon glyphicon-info-sign"></span> 
-         </div>
-         <div class="home_point">
-            <p>{{i}}</p>
-            {% comment %} <input type="number" {%for z in all %} {%if  i in z.title  %} value="{{z.percent_value}}" {%endif%}{%endfor%} min="0" max="10"class="input-box"name="percent" id ="block_{{forloop.counter}}"> {% endcomment %}
-            <span class="feature-importance"></span> 
-         </div>
-         <div class="input-group section_number">
-            <span class="input-group-btn">
-            <button type="button" id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default  btn-number build1" data-type="minus"data-field="quant[1]" data="{{i}}">
-            <span class="glyphicon remove glyphicon-minus" rem="{{forloop.counter}}"></span>
-            </button>
-            </span>
-            <!--   <input type="text" name="quant[1]"  class="form-control input-number" value="1" min="1" max="10"> -->
-            {% comment %} {%if status == 1%} {% endcomment %}
-            <span class="input-group-btn"> 
-            <button type="button" id="id_quant_{{forloop.counter}}" date-id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id="{{i}}">
-            <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
-            </button>
-            </span>
-         </div>
-      </div>
-   </div>
-   {% endfor %} 
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+         </div>  {% endcomment %}
 
 
+
+         {% for i in df %}
+         <div class="col-md-2">
+         <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
+         <div class="Info-sign">
+         <span class="glyphicon glyphicon-info-sign"></span> 
+         </div>
+         <div class="home_point">
+         <p>{{i}}</p>
+         <span class="feature-importance"></span> 
+         </div> 
+         <div class="input-group section_number">
+         <span class="input-group-btn">
+         <button type="button" id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default  btn-number build1" data-type="minus"data-field="quant[1]" data="{{i}}">
+         <span class="glyphicon remove glyphicon-minus" rem="{{forloop.counter}}"></span>
+         </button>
+         </span>
   
+         <span class="input-group-btn"> 
+         <button type="button" id="id_quant_{{forloop.counter}}" date-id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id="{{i}}">
+         <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
+         </button>
+         </span>
+         </div>
+         </div>
+         </div>
+         {% endfor %}
          </div>
          </div>
          </div>
