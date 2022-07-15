@@ -171,129 +171,75 @@ def buildmodel(request,id):
     membership=list(st)
     print(membership)
     if 1 in membership:
-        if not req:
-            req = "nba"
-        if req == 'ncaab':
-            df = pd.read_csv('totalcsv/mainDSNCAAB.csv')
-            # In[19]:
-
-
-            #sometimes my scripts I run daily have some errors so there are some 
-            #nulls that need to be dropped
-            #df = df.dropna()
-
-
-            # In[20]:
-
-
-            #i always have trouble with the predictions if I dont have this 
-            #In there so I add this
-            df['num'] = 1
-
-
-            # In[21]:
-
-
-            df.columns
-
-
-            # In[22]:
-
-
-            #select columns to keep
-            #some are needed for building ml. We will offer those
-            #some are needed to back test models and test accuracy
-            #probably dont need all of these but these will be good to start
-            df_away = df[['joinValue', 'homeRank', 'awayRank', 'homeScore',
-                'awayScore', 'awayMP', 'awayFG', 'awayFGA', 'awayFGperc', 'away2P',
-                'away2PA', 'away2Pperc', 'away3P', 'away3PA', 'away3Pperc', 'awayFT',
-                'awayFTA', 'awayFTperc', 'awayORB', 'awayDRB', 'awayTRB', 'awayAST',
-                'awaySTL', 'awayBLK', 'awayTOV', 'awayPF', 'awayPTS', 'homeMP',
-                'homeFG', 'homeFGA', 'homeFGperc', 'home2P', 'home2PA', 'home2Pperc',
-                'home3P', 'home3PA', 'home3Pperc', 'homeFT', 'homeFTA', 'homeFTperc',
-                'homeORB', 'homeDRB', 'homeTRB', 'homeAST', 'homeSTL', 'homeBLK',
-                'homeTOV', 'homePF', 'homePTS']]
-
-
-            # In[23]:
-
-
-          
-            amountOfGames = df.shape[0]
-            print(amountOfGames)
-
-
-
+            
+        all=Modelvar.objects.all()
+        a=Modelvar.objects.filter(created_by=request.user.id).values_list("title",flat="True")
+        if Modelvar.objects.filter(created_by=request.user.id).exists():
+            status=a
+            # print("s",status)
         else:
-           
-            all=Modelvar.objects.all()
-            a=Modelvar.objects.filter(created_by=request.user.id).values_list("title",flat="True")
-            if Modelvar.objects.filter(created_by=request.user.id).exists():
-                status=a
-                # print("s",status)
-            else:
-                
-                status=0
-            var = Modelvar.objects.filter(created_by = request.user.id).values_list("title",flat=True)
+            
+            status=0
+        var = Modelvar.objects.filter(created_by = request.user.id).values_list("title",flat=True)
 
-            car = len(var)
+        car = len(var)
 
-            answers_list = list(var)
-            print("answer",answers_list)
-            df = pd.read_csv('totalcsv/finalDS.csv')
-            co = len(df.columns)
-            print("dhfjd",co)
+        answers_list = list(var)
+        print("answer",answers_list)
+        df = pd.read_csv('totalcsv/finalDS.csv')
+        co = len(df.columns)
+        print("dhfjd",co)
 
-     
+    
 
 
-            df_away=["Indoor/Outdoor",
-                "Temperature",
-                "Humidity",
-                "Wind",	
-                "First Downs",	
-                "Rush Attempts",	
-                "Rush Yards",	
-                "Rush Yards Per Attempt",	
-                "Rush TD",	
-                "Completions",	
-                "Attempts",
-                "Pass Yards",	
-                "Pass Yards Per Attempt",	
-                "Pass Touchdowns",	
-                "Interceptions",	
-                "Sacked",
-                "Sacked Yards",	
-                "Net Pass Yards",	
-                "Total Yards",	
-                "Fumbles",	
-                "Fumbles Lost",	
-                "Turnovers",
-                "Penalties",	
-                "Penalty Yards",	
-                "Third Downs Converted",	
-                "Third Downs Attempted",	
-                "Third Down Percentage",	
-                "Fourth Downs Converted",	
-                "Fourth Downs Attempted",	
-                "Fourth Downs Converted",	
-                "Time Of Possesion",		
-                "QB CAY_PA",	
-                "QB Drop Perc",	
-                "QB Bad Throw Perc",
-                "QB Blitzed",	
-                "QB Hurried",	
-                "QB Hit",	
-                "QB Pressured Perc",	
-                "QB Yards Per Scramble"]
+        df_away=["Indoor/Outdoor",
+            "Temperature",
+            "Humidity",
+            "Wind",	
+            "First Downs",	
+            "Rush Attempts",	
+            "Rush Yards",	
+            "Rush Yards Per Attempt",	
+            "Rush TD",	
+            "Completions",	
+            "Attempts",
+            "Pass Yards",	
+            "Pass Yards Per Attempt",	
+            "Pass Touchdowns",	
+            "Interceptions",	
+            "Sacked",
+            "Sacked Yards",	
+            "Net Pass Yards",	
+            "Total Yards",	
+            "Fumbles",	
+            "Fumbles Lost",	
+            "Turnovers",
+            "Penalties",	
+            "Penalty Yards",	
+            "Third Downs Converted",	
+            "Third Downs Attempted",	
+            "Third Down Percentage",	
+            "Fourth Downs Converted",	
+            "Fourth Downs Attempted",	
+            "Fourth Downs Converted",	
+            "Time Of Possesion",		
+            "QB CAY_PA",	
+            "QB Drop Perc",	
+            "QB Bad Throw Perc",
+            "QB Blitzed",	
+            "QB Hurried",	
+            "QB Hit",	
+            "QB Pressured Perc",	
+            "QB Yds Per Scram"]
 
 
         
 
 
-            #getting shape. We will use this for back testing / training
-            amountOfGames = df.shape[0]
-            print("dgdg",amountOfGames)
+        #getting shape. We will use this for back testing / training
+        amountOfGames = df.shape[0]
+        print("dgdg",amountOfGames)
 
 
 
@@ -397,162 +343,246 @@ def buildmodelbutton(request):
     
     print(homeModel.fit(home_X,home_Y))
     print(awayModel.fit(away_X,away_Y))
-    # backTest = [10,25,50,100]
-    # for i in backTest:
-    #     seenAverages = df[:-i]
-    #     predictionGames = df[-i:]
+    backTest = [10,25,50,100]
+    gameinfo =[]
+    for i in backTest:
+        seenAverages = df[:-i]
+        predictionGames = df[-i:]
 
         
-    #     spreadWins = 0
-    #     spreadLosses = 0
-    #     spreadTies = 0
+        spreadWins = 0
+        spreadLosses = 0
+        spreadTies = 0
         
-    #     overUnderWins = 0
-    #     overUnderLosses = 0
-    #     overUnderTies = 0
+        overUnderWins = 0
+        overUnderLosses = 0
+        overUnderTies = 0
         
-    #     moneylineWins = 0
-    #     moneylineLosses = 0
-    #     moneylineTies = 0
+        moneylineWins = 0
+        moneylineLosses = 0
+        moneylineTies = 0
         
         
-    #     for index,row in predictionGames.iterrows():
-    #         homeTeamPlaying = row['Home Team']
-    #         awayTeamPlaying = row['Away Team']
+        for index,row in predictionGames.iterrows():
+            homeTeamPlaying = row['Home Team']
+            awayTeamPlaying = row['Away Team']
             
-    #         homeTeamActualPoints = row['Home Total']
-    #         awayTeamActualPoints = row['Away Total']
+            homeTeamActualPoints = row['Home Total']
+            awayTeamActualPoints = row['Away Total']
 
-    #         totalActualPoints = row['Total Points']
+            totalActualPoints = row['Total Points']
             
-    #         favoriteTeam = row['Favorite']
-    #         spreadLine = row['Spread Amount']
-    #         totalLine = row['Total Line']
+            favoriteTeam = row['Favorite']
+            spreadLine = row['Spread Amount']
+            totalLine = row['Total Line']
             
-    #         homeTeamStats = df.loc[df['Home Team'] == homeTeamPlaying]
-    #         homeTeamStatsAvg = homeTeamStats.mean()
+            homeTeamStats = df.loc[df['Home Team'] == homeTeamPlaying]
+            homeTeamStatsAvg = homeTeamStats.mean()
             
-    #         awayTeamStats = df.loc[df['Away Team'] == awayTeamPlaying]
-    #         awayTeamStatsAvg = awayTeamStats.mean()
-            
-            
-    #         #USE HOME DATA VARS
-    #         homeData =[]
-    #         for i in home_list:
-    #             homeData.append(homeTeamStatsAvg[i])
-    #             # homeTeamStatsAvg['Home Pass Touchdowns'],
-    #             # homeTeamStatsAvg['Home Total']
-
+            awayTeamStats = df.loc[df['Away Team'] == awayTeamPlaying]
+            awayTeamStatsAvg = awayTeamStats.mean()
             
             
-    #         #USE AWAY DATA VARS
-    #         awayData =[]
-    #         for j in away_list:
-    #             awayData.append(awayTeamStatsAvg[j])
-        
-            
-    #         homeVarsList = np.asarray([homeData])
-    #         awayVarsList = np.asarray([awayData])
-            
-    #         homePrediction = homeModel.predict(homeVarsList)
-    #         awayPrediction = awayModel.predict(awayVarsList)
-    #         predictionDifference = homePrediction[0]-awayPrediction[0]
-    #         predictionTotal = homePrediction[0]+awayPrediction[0]
-            
+            #USE HOME DATA VARS
+            homeData =[]
+            for q in home_list:
+                homeData.append(homeTeamStatsAvg[q])
+                # homeTeamStatsAvg['Home Pass Touchdowns'],
+                # homeTeamStatsAvg['Home Total']
 
             
-    #         if homeTeamPlaying == favoriteTeam and predictionDifference >= spreadLine:
-    #             #print('home team favorite and predicted home to cover')
-    #             if (homeTeamActualPoints - awayTeamActualPoints) > spreadLine:
-    #                 spreadWins = spreadWins + 1
-    #             elif (homeTeamActualPoints - awayTeamActualPoints) == spreadLine:
-    #                 spreadTies = spreadTies + 1
-    #             else:
-    #                 spreadLosses = spreadLosses + 1
+            
+            #USE AWAY DATA VARS
+            awayData =[]
+            for j in away_list:
+                awayData.append(awayTeamStatsAvg[j])
+        
+            
+            homeVarsList = np.asarray([homeData])
+            awayVarsList = np.asarray([awayData])
+            
+            homePrediction = homeModel.predict(homeVarsList)
+            awayPrediction = awayModel.predict(awayVarsList)
+            predictionDifference = homePrediction[0]-awayPrediction[0]
+            predictionTotal = homePrediction[0]+awayPrediction[0]
+            
+
+            
+            if homeTeamPlaying == favoriteTeam and predictionDifference >= spreadLine:
+                #print('home team favorite and predicted home to cover')
+                if (homeTeamActualPoints - awayTeamActualPoints) > spreadLine:
+                    spreadWins = spreadWins + 1
+                elif (homeTeamActualPoints - awayTeamActualPoints) == spreadLine:
+                    spreadTies = spreadTies + 1
+                else:
+                    spreadLosses = spreadLosses + 1
                 
                 
-    #         elif homeTeamPlaying == favoriteTeam and predictionDifference <= spreadLine:
-    #             #print('home team favorite and predicted away to cover')
-    #             if (homeTeamActualPoints - awayTeamActualPoints) < spreadLine:
-    #                 spreadWins = spreadWins + 1
-    #             elif (homeTeamActualPoints - awayTeamActualPoints) == spreadLine:
-    #                 spreadTies = spreadTies + 1
-    #             else:
-    #                 spreadLosses = spreadLosses + 1
+            elif homeTeamPlaying == favoriteTeam and predictionDifference <= spreadLine:
+                #print('home team favorite and predicted away to cover')
+                if (homeTeamActualPoints - awayTeamActualPoints) < spreadLine:
+                    spreadWins = spreadWins + 1
+                elif (homeTeamActualPoints - awayTeamActualPoints) == spreadLine:
+                    spreadTies = spreadTies + 1
+                else:
+                    spreadLosses = spreadLosses + 1
                 
                 
-    #         elif awayTeamPlaying == favoriteTeam and abs(predictionDifference) >= spreadLine:
-    #             #print('away team favorite and predicted away to cover')
-    #             if (awayTeamActualPoints - homeTeamActualPoints) > spreadLine:
-    #                 spreadWins = spreadWins + 1
-    #             elif (awayTeamActualPoints - homeTeamActualPoints) == spreadLine:
-    #                 spreadTies = spreadTies + 1
-    #             else:
-    #                 spreadLosses = spreadLosses + 1
+            elif awayTeamPlaying == favoriteTeam and abs(predictionDifference) >= spreadLine:
+                #print('away team favorite and predicted away to cover')
+                if (awayTeamActualPoints - homeTeamActualPoints) > spreadLine:
+                    spreadWins = spreadWins + 1
+                elif (awayTeamActualPoints - homeTeamActualPoints) == spreadLine:
+                    spreadTies = spreadTies + 1
+                else:
+                    spreadLosses = spreadLosses + 1
                 
                 
-    #         elif awayTeamPlaying == favoriteTeam and abs(predictionDifference) <= spreadLine:
-    #             #print('away team favorite and predicted home to cover')
-    #             if (awayTeamActualPoints - homeTeamActualPoints) < spreadLine:
-    #                 spreadWins = spreadWins + 1
-    #             elif (awayTeamActualPoints - homeTeamActualPoints) == spreadLine:
-    #                 spreadTies = spreadTies + 1
-    #             else:
-    #                 spreadLosses = spreadLosses + 1
+            elif awayTeamPlaying == favoriteTeam and abs(predictionDifference) <= spreadLine:
+                #print('away team favorite and predicted home to cover')
+                if (awayTeamActualPoints - homeTeamActualPoints) < spreadLine:
+                    spreadWins = spreadWins + 1
+                elif (awayTeamActualPoints - homeTeamActualPoints) == spreadLine:
+                    spreadTies = spreadTies + 1
+                else:
+                    spreadLosses = spreadLosses + 1
                     
 
-    #         if predictionTotal>totalLine:
-    #             if totalActualPoints>totalLine:
-    #                 overUnderWins = overUnderWins+1
-    #             elif totalActualPoints == totalLine:
-    #                 overUnderTies = overUnderTies+1
-    #             else:
-    #                 overUnderLosses = overUnderLosses + 1
-    #         elif predictionTotal<totalLine:
-    #             if totalActualPoints<totalLine:
-    #                 overUnderWins = overUnderWins+1
-    #             elif totalActualPoints == totalLine:
-    #                 overUnderTies = overUnderTies+1
-    #             else:
-    #                 overUnderLosses = overUnderLosses + 1
+            if predictionTotal>totalLine:
+                if totalActualPoints>totalLine:
+                    overUnderWins = overUnderWins+1
+                elif totalActualPoints == totalLine:
+                    overUnderTies = overUnderTies+1
+                else:
+                    overUnderLosses = overUnderLosses + 1
+            elif predictionTotal<totalLine:
+                if totalActualPoints<totalLine:
+                    overUnderWins = overUnderWins+1
+                elif totalActualPoints == totalLine:
+                    overUnderTies = overUnderTies+1
+                else:
+                    overUnderLosses = overUnderLosses + 1
             
             
             
             
-    #         if homePrediction > awayPrediction:
-    #             if homeTeamActualPoints-awayTeamActualPoints>0:
-    #                 moneylineWins = moneylineWins + 1
-    #             elif homeTeamActualPoints-awayTeamActualPoints==0:
-    #                 moneylineTies = moneylineTies + 1
-    #                 print(homePrediction[0])
-    #                 print(awayPrediction[0])
-    #                 # print(actualPointsDiff)
-    #             else:
-    #                 moneylineLosses = moneylineLosses + 1
+            if homePrediction > awayPrediction:
+                if homeTeamActualPoints-awayTeamActualPoints>0:
+                    moneylineWins = moneylineWins + 1
+                elif homeTeamActualPoints-awayTeamActualPoints==0:
+                    moneylineTies = moneylineTies + 1
+                    print(homePrediction[0])
+                    print(awayPrediction[0])
+                    # print(actualPointsDiff)
+                else:
+                    moneylineLosses = moneylineLosses + 1
             
-    #         elif homePrediction < awayPrediction:
-    #             if homeTeamActualPoints-awayTeamActualPoints<0:
-    #                 moneylineWins = moneylineWins + 1
-    #             elif homeTeamActualPoints-awayTeamActualPoints==0:
-    #                 moneylineTies = moneylineTies + 1
-    #             else:
-    #                 moneylineLosses = moneylineLosses + 1
+            elif homePrediction < awayPrediction:
+                if homeTeamActualPoints-awayTeamActualPoints<0:
+                    moneylineWins = moneylineWins + 1
+                elif homeTeamActualPoints-awayTeamActualPoints==0:
+                    moneylineTies = moneylineTies + 1
+                else:
+                    moneylineLosses = moneylineLosses + 1
+            
              
             
-            
-    #     print('spread wins: ' + str(spreadWins))
-    #     print('spread losses: ' + str(spreadLosses))
-    #     print('spread ties: ' + str(spreadTies))
+        spreadgames = 'Last ' + str(abs(i)) + ' games' 
+        spreadwins = str(spreadWins)
+        spreadloss = str(spreadLosses)
+        spreadties=str(spreadTies)
         
         
-    #     print('over/under wins: ' + str(overUnderWins))
-    #     print('over/under losses: ' + str(overUnderLosses))
-    #     print('over/under ties: ' + str(overUnderTies))
+        overunderwins=str(overUnderWins)
+        overunderloss = str(overUnderLosses)
+        overunderties = str(overUnderTies)
 
         
-    #     print('moneyline wins: ' + str(moneylineWins))
-    #     print('moneyline losses: ' + str(moneylineLosses))
-    #     print('moneyline ties: ' + str(moneylineTies))
+        moneylinewins =str(moneylineWins)
+        moneylineloss = str(moneylineLosses)
+        moneylineties =str(moneylineTies)
+        data={
+            "spreadgames":spreadgames,
+            'spreadwins':spreadwins,
+            'spreadloss':spreadloss,
+            'spreadties':spreadties,
+            'overunderwins':overunderwins,
+            'overunderloss':overunderloss,
+            'overunderties':overunderties,
+            'moneylinewins':moneylinewins,
+            'moneylineloss':moneylineloss,
+           'moneylineties':moneylineties
+        }
+
+        gameinfo.append(data)
+
+    upcomingGames = Boxscores(1, 2022)
+    # Prints a dictionary of all matchups for week 1 of 2017
+    upcomingGames = upcomingGames.games
+
+    dates = upcomingGames.keys()
+    keys = []
+    for key in dates:
+        keys.append(key)
+
+
+    homeName = []
+    awayName = []
+
+    for b in keys:
+        i = 0
+        while i < len(upcomingGames[b]):
+            homeName.append(upcomingGames[b][i]['home_name'])
+            awayName.append(upcomingGames[b][i]['away_name'])        
+            
+            
+            i = i + 1
+            
+    data = {
+        'Home Team':homeName,
+        'Away Team':awayName
+    }
+
+    thisWeeksGames = pd.DataFrame(data)
+
+    predict_list=[]
+    for index, row in thisWeeksGames.iterrows():
+        homeTeamPlaying = row['Home Team']
+        awayTeamPlaying = row['Away Team']
+        
+        homeTeamStats = df.loc[df['Home Team'] == homeTeamPlaying]
+        homeTeamStatsAvg = homeTeamStats.mean()
+            
+        awayTeamStats = df.loc[df['Away Team'] == awayTeamPlaying]
+        awayTeamStatsAvg = awayTeamStats.mean()
+        
+        #HOME VARS THAT USER SELECTS GOES HERE
+        
+        homeData =[]
+        for i in home_list:
+            homeData.append(homeTeamStatsAvg[i])
+            #USE AWAY DATA VARS
+        awayData=[]
+        for j in away_list:
+            awayData.append(awayTeamStatsAvg[j])
+            
+        homeVarsList = np.asarray([homeData])
+        awayVarsList = np.asarray([awayData])
+            
+        homePrediction = homeModel.predict(homeVarsList)
+        awayPrediction = awayModel.predict(awayVarsList)
+        
+        show=row['Home Team'] + ' ' + str(round(homePrediction[0])) + ' ' + row['Away Team'] + ' ' +  str(round(awayPrediction[0]))
+        predict_list.append(show)
+        
+   
+    data={
+        "status":"ok",
+        "gameinfo":gameinfo,
+        "team_stats": predict_list
+
+    }
+    return JsonResponse(data)
 
     # simulations.py
 
@@ -783,8 +813,7 @@ def buildmodelbutton(request):
             
             
 
-    data={"status":"ok"}
-    return JsonResponse(data)
+   
 
         
 

@@ -1,0 +1,241 @@
+{%include "header/header.html" %}
+
+
+<style>
+    
+    .step-container > div {
+        height:auto;
+        padding:20px;
+         background: #ccc
+      }
+      
+      .progressbar {
+            margin:20px;
+            counter-reset: step; 
+        }
+        .progressbar li {
+            list-style-type: none;
+            width: 16%;
+            float: left;
+            font-size: 12px;
+            position: relative;
+            text-align: center;
+            text-transform: uppercase;
+            color: #7d7d7d;
+        }
+        .progressbar li:before {
+            width: 15px;
+            height: 15px;
+            content: '';
+            line-height: 30px;
+            border: 2px solid #7d7d7d;
+            background-color: #7d7d7d;
+            display: block;
+            text-align: center;
+            margin: 0 auto 10px auto;
+            border-radius: 50%;
+            transition: all .8s;
+        }
+        .progressbar li:after {
+            width: 100%;
+            height: 2px;
+            content: '';
+            position: absolute;
+            background-color: #7d7d7d;
+            top: 7px;
+            left: -50%;
+            z-index: -1;
+            transition: all .8s;
+        }
+        .progressbar li:first-child:after {
+            content: none;
+        }
+        .progressbar li.active:before {
+          border-color: #69ade0;
+          background-color: #69ade0;
+          transition: all .8s;
+        }
+        .progressbar li.active:after {
+            background-color: #69ade0;
+            transition: all .8s;
+        }
+      
+      .backbtn{
+        background-color: #69ade0;
+        margin: 5px;
+        width: 75px;
+        color: white;
+      }
+      .backbtn:hover {
+        color: white; 
+      }
+      .backbtn:focus {
+        color: white;
+      }
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+      }
+
+      .prediction-box {
+        display: flex;
+        flex-direction: column;
+        background: rgb(255 255 255);
+        box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+        max-width: 600px;
+        margin: 40px auto 30px;
+        padding: 20px 0;
+        max-height: 350px;
+        overflow-y: scroll;
+      }
+
+      .prediction-box::-webkit-scrollbar {
+        width: 8px;
+        background-color: transparent;
+      }
+
+      .prediction-box::-webkit-scrollbar-thumb {
+        background-color: rgba(197, 197, 197, 1);
+        border-radius: 20px;
+      }
+
+      .prediction-box p {
+        border-bottom: 1px solid rgb(198 198 198);
+        padding: 0 20px 6px;
+    }
+
+    .prediction-box p:last-child {
+      padding-bottom: 0;
+      border: none;
+      margin-bottom: 0;
+    }
+
+    </style>
+<h1 style="text-align: center;">Week One Prediction</h1>
+<div class="prediction-box game">
+{%for i in show%}
+<p>{{i}}</p>
+{%endfor%}
+</div>
+
+
+
+<div class="container p-5">
+    <div class="row">
+       <div class="col-lg-1">
+          <a href="{% url 'buildmodel3' %}">
+             <button class="btn backbtn" id="back">Back</button>
+          </a>
+        </div>
+      <div class="col-lg-10 p-4">
+    <ul id="progress-bar" class="progressbar">
+   <li class="active">Step 1</li>
+   <li class="active">Step 2</li>
+   <li class="active">Step 3</li>
+   <li class="active">Step 4</li>
+   <li>Step 5</li>
+   <li>Step 6</li>
+</ul>
+      </div>
+      <div class="col-lg-1" style="padding:20px">                     
+    <a href="{% url 'buildmodel4' %}">
+        <button class="btn backbtn" id="next">Next</button>
+      </a>
+    {% comment %} <button class="action submit btn btn-success">Submit</button> {% endcomment %}
+      </div>
+  </div>
+    </div>
+
+<script>
+    $(document).ready(function(){
+      var x = localStorage.getItem("team_stats");
+      var data = JSON.parse(x)
+      var html = '';
+      let i = 0;
+      for (let index in data) {
+
+          html += `<p>${++i} ). ${data[index]}</p><br>`;
+      }
+      
+
+
+      $('.game').html(html);
+  
+
+        //steps ui
+        var progressBar = {
+        Bar : $('#progress-bar'),
+        Reset : function(){
+          
+        },
+        Next: function(){
+          $('#progress-bar li:not(.active):first').addClass('active');
+        },
+        Back: function(){
+          $('#progress-bar li.active:last').removeClass('active');
+        }
+      }
+        
+        var current = 1;
+          
+          widget      = $(".step");
+          btnnext     = $(".next");
+          btnback     = $(".back"); 
+          btnsubmit   = $(".submit");
+      
+          // Init buttons and UI
+          widget.not(':eq(0)').hide();
+          hideButtons(current);
+          setProgress(current);
+      
+          // Next button click action
+          btnnext.click(function(){
+              if(current < widget.length) { 			
+                  widget.show(); 			
+                  widget.not(':eq('+(current++)+')').hide();
+                    setProgress(current); 
+                  //alert("I was called from btnNext");
+              } 		
+             hideButtons(current); 
+          progressBar.Next();
+         });
+         
+        // Back button click action 	
+        btnback.click(function(){ 		
+            if(current > 1){
+                  current = current - 2;
+                  //btnnext.trigger('click'); why do you need this?
+              
+              }else{ //added an else here so the button hides only at the beginning step
+              hideButtons(current);
+            }
+              //hideButtons(current);
+          progressBar.Back();
+          });		
+      });
+      
+      // Change progress bar action
+      setProgress = function(currstep){
+          var percent = parseFloat(100 / widget.length) * currstep;
+          percent = percent.toFixed();
+          $(".progress-bar")
+              .css("width",percent+"%")
+              .html(percent+"%");		
+      }
+      
+      
+      // Hide buttons according to the current step
+      hideButtons = function(current){
+          var limit = parseInt(widget.length); 
+      
+          $(".action").hide();
+      
+          if(current < limit) btnnext.show(); 	
+        if(current > 1) btnback.show();
+          if(current == limit) { btnnext.hide(); btnsubmit.show(); }
+      }
+      
+    </script>

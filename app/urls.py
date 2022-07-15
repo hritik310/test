@@ -4,6 +4,7 @@ from app.Views import Loginviews
 from app.Views import Signupviews
 from app.Views import Paymentview
 from app.Views import  Paymentview
+from app.Views import Newprediction
 
 
  
@@ -28,6 +29,7 @@ urlpatterns = [
     path('buildmodel4/', Signupviews.training, name='buildmodel4'),
     path('buildmodel5/', Signupviews.modelname, name='buildmodel5'),
     # path('download',Signupviews.download_file,name='download'),
+    path('prediction', Newprediction.newprediction, name = 'prediction'),
 
 
 

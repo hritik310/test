@@ -407,23 +407,23 @@
             <div class="row">
             <div class="col-md-4">
             <div class="Games_box">
-            <h5>Game Information</h5>
-            <div class="tab-pane fade">
+            <h5>Spread Game Info</h5>
+            <div class="tab-pane game">
             </div>
             </div>
             </div>
             <div class="col-md-4">
             <div class="Games_box"> 
-            <h5>Team Stats</h5>
-            <div class="tab-pane fade">
+            <h5>Money line</h5>
+            <div class="tab-pane money">
             </div>
             </div>
             </div>
             <div class="col-md-4">
             <div class="Games_box"> 
-            <h5>QB data</h5>
+            <h5>Over/Under</h5>
             
-            <div class="tab-pane fade">
+            <div class="tab-pane over">
             </div> 
             </div>
             </div>
@@ -507,13 +507,13 @@
                  <li class="active">Step 1</li>
                  <li class="active">Step 2</li>
                  <li class="active">Step 3</li>
-                 <li class="active">Step 4</li>
+                 <li>Step 4</li>
                  <li>Step 5</li>
                  <li>Step 6</li>
               </ul>
                     </div>
                     <div class="col-lg-1" style="padding:20px">                     
-                  <a href="{% url 'buildmodel4' %}">
+                  <a href="{% url 'prediction' %}">
                       <button class="btn backbtn" id="next">Next</button>
                     </a>
                   {% comment %} <button class="action submit btn btn-success">Submit</button> {% endcomment %}
@@ -678,8 +678,6 @@
                $( ".Games_box" ).show();
                $( ".prediction" ).show();
          
-               console.log('manpreet');
-         
                $.ajax({
                  type:"GET",
                  url: '/buildmodelbutton',
@@ -690,112 +688,31 @@
          
                  },
                  //dataType: 'json',
-                 success: function (data1) {
-                    console.log(data1)
-                    console.log(data1.weight)
+                 success: function (data) {
+                    console.log(data)
+                    localStorage.setItem("team_stats", JSON.stringify(data.team_stats));
             
-                    if(data1.data == 'ncaab'){
                        var html = '';
                         var over_html= '';
                         var spread_html= '';
-                        var predict_html='';
                         
-                        $.each(data1.total, function(index, value) {
+                        $.each(data.gameinfo, function(index, value) {
          
          
-                        html += "<p>" + value.last_games +" : <span class='number'>"+value.wins+"-"+ value.loss +"</span></p>";
-                        over_html += "<p>" + value.last_games +" : <span class='number'>"+value.winoverunder+"-"+ value.lossoverunder +"-"+value.tiesoverunder+" "+value.overunder_percent+ "</span></p>";
-                        spread_html+= "<p>" + value.last_games +" : <span class='number'>"+value.winspread+"-"+ value.lossspread +"-"+value.tiesspread+" "+value.spread_percent+ "</span></p>";
-                     });
-                        $.each(data1.ncaab, function(index, predict) {
-                           predict_html+= "<p>"+predict.home+"</p>";
-            
-                     });
+                        html += "<p>" + value.spreadgames +" : <span class='number'>"+value.spreadwins+"-"+ value.spreadloss +"-"+ value.spreadties +"</span></p>";
+                        over_html += "<p>" + value.spreadgames +" : <span class='number'>"+value.moneylinewins+"-"+ value.moneylineloss +"-"+value.moneylineties+"</span></p>";
+                        spread_html+= "<p>" + value.spreadgames +" : <span class='number'>"+value.overunderwins+"-"+ value.overunderloss +"-"+value.overunderties+"</span></p>";
+                     })
          
                      // console.log(data1.totalagain);
                    
          
-                     // $(html).appendTo('.results');
-                     $('.results').html(html);
-                     $('.show').html(over_html);
-                     $('.spread').html( spread_html);
-                     $('.predict').html( predict_html);
+              
+                     $('.game').html(html);
+                     $('.money').html(over_html);
+                     $('.over').html( spread_html);
+          
                     
-         
-         
-                    }
-                    else{
-                       var html = '';
-                       var over_html= '';
-                       var spread_html= '';
-                        
-                        $.each(data1.total, function(index, value) {
-         
-                        html += "<p>" + value.ML_last_games +" : <span class='number'>"+value.ML_wins+"-"+ value.ML_loss +"-"+value.ML_ties+ "</span></p>";
-                        over_html += "<p>" + value.last_games +" : <span class='number'>"+value.wins+"-"+ value.loss +"-"+value.ties+" "+value.percent+ "</span></p>";
-                        spread_html+= "<p>" + value.spread_last_games +" : <span class='number'>"+value.spread_wins+"-"+ value.spread_loss +"-"+value.spread_ties+" "+value.spread_percent+"</span></p>";
-         
-                     });
-                     var predict_html='';
-                     var feature_html='';
-                     var weight = '';
-                     var cover = '';
-                     var total_gain = '';
-                     var total_cover = '';
-                     // console.log(data1.totalagain);
-                     $.each(data1.totalagain, function(index, predict) {
-                     predict_html+= "<p>"+predict.home+"</p>";
-         
-                     });
-                     var featureData = data1.feature
-                     console.log('featureData',featureData)
-         
-                     $.each(featureData, function(index, feats) {
-         
-                        console.log('feats',index,feats);
-                    
-         
-                        feature_html+= `<p>${index} : <span>${feats}%</span> </p>`;
-         
-                     });
-                     var featureD = data1.weight 
-                     $.each(featureD, function(index, feat) {
-                        weight+= `<p>${index} : <span>${feat}</span> </p>`;
-         
-                     });
-                     var featureD = data1.cover 
-                     $.each(featureD, function(index, feat) {
-                        cover+= `<p>${index} : <span>${feat}</span> </p>`;
-         
-                     }); 
-                     var featureD = data1.total_gain 
-                     $.each(featureD, function(index, feat) {
-                        total_gain+= `<p>${index} : <span>${feat}</span> </p>`;
-         
-                     }); 
-                     var featureD = data1.total_cover 
-                     $.each(featureD, function(index, feat) {
-                        total_cover+= `<p>${index} : <span>${feat}</span> </p>`;
-         
-                     });  
-         
-                  
-            
-         
-                     // $(html).appendTo('.results');
-                     $('.results').html(html);
-                     $('.show').html(over_html);
-                     $('.spread').html( spread_html);
-                     $('.predict').html( predict_html);
-                     $('.feats').html(feature_html);
-                     $('#menu1').html(weight);
-                     $('#menu2').html(cover);
-                     $('#menu3').html(total_gain);
-                     $('#menu4').html(total_cover);
-         
-         
-                    }             
-            
          
          
                  } 
