@@ -28,7 +28,8 @@ urlpatterns = [
     path('buildmodel3/', Signupviews.selectvariable, name='buildmodel3'),
     path('buildmodel4/', Signupviews.training, name='buildmodel4'),
     path('buildmodel5/', Signupviews.modelname, name='buildmodel5'),
-    # path('download',Signupviews.download_file,name='download'),
+    path('download',Signupviews.download_file,name='download'),
+    path('download/corr',Signupviews.download_corr_file,name='download/corr'),
     path('prediction', Newprediction.newprediction, name = 'prediction'),
     path('simulation', Newprediction.simulation, name = 'simulation'),
 

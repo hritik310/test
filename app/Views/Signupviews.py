@@ -35,7 +35,6 @@ import xgboost as xgb
 from sklearn.model_selection import train_test_split
 from math import sqrt
 from sklearn.metrics import mean_pinball_loss, mean_squared_error
-from numpy import asarray
 from pysbr import *
 import json
 import seaborn as sb
@@ -49,7 +48,7 @@ from sportsipy.nfl.boxscore import Boxscores
 
 stripe.api_key = settings.SECTRET_KEY # new
 
-# print(stripe.api_key)
+#   (stripe.api_key)
 
 
 def index(request):
@@ -65,14 +64,11 @@ def create(request):
     if request.method == 'POST':
         accountform = AddCreateForm(request.POST)
         if accountform.is_valid():
-            print("True")
 
             name=request.POST.get("username")
-            print(name)
             unique_id = get_random_string(length=5)
             uniqueName=name + unique_id
-            accountform.username=uniqueName
-            print("accountform",accountform.username)    
+            accountform.username=uniqueName   
             new_user = accountform.save(commit=False)
             new_user.is_active = False
             new_user.save()
@@ -102,14 +98,14 @@ def create(request):
            
 
             a=accountform.save()
-            print(a.id)
+      
             email.send()
             messages.success(request,"Thanks for registering with us.Please confirm your email address to complete the registration.",extra_tags='logout')
             return redirect('signup')
               
 
         else:
-            print("False")
+           
             #return HttpResponseRedirect(request.path_info,{'form':accountform})
 
             return render(request,"signup/signup.html",{'form':accountform,"context":context})
@@ -124,12 +120,10 @@ def activate(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
         users = User.objects.get(id=uid)
-        print("hritik")
-        print("user",users)
+       
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         users = None
-        print("hritik")
-        print("user",users)
+       
     if users is not None and account_activation_token.check_token(users, token):
         users.is_active = user.objects.filter(id=uid).update(is_active=True)
         login(request, users)
@@ -166,10 +160,10 @@ def updateprofile(request,id):
 def buildmodel(request,id):
     all=Modelvar.objects.all()
     req = request.GET.get('cars')
-    print("Request",req)
+   
     st = StripeCustomer.objects.filter(stripeCustomerId = request.user.id).values_list("membershipstatus",flat=True)
     membership=list(st)
-    print(membership)
+    
     if 1 in membership:
             
         all=Modelvar.objects.all()
@@ -185,10 +179,9 @@ def buildmodel(request,id):
         car = len(var)
 
         answers_list = list(var)
-        print("answer",answers_list)
+  
         df = pd.read_csv('totalcsv/finalDS.csv')
         co = len(df.columns)
-        print("dhfjd",co)
 
     
 
@@ -239,7 +232,7 @@ def buildmodel(request,id):
 
         #getting shape. We will use this for back testing / training
         amountOfGames = df.shape[0]
-        print("dgdg",amountOfGames)
+     
 
 
 
@@ -256,7 +249,7 @@ def buildmodel(request,id):
 def buildmodelStatus(request):
     build = Modelvar()
     build.title=request.GET.get('id')
-    print("build",build.title)
+
     build.created_by = request.user.id
     build.save()
     data = {
@@ -271,7 +264,7 @@ def buildmodelStatus(request):
 def buildmodelremove(request):
 
     b = Modelvar.objects.filter(title =request.GET.get('id'))
-    print(b)
+
     b.delete()
   
     data = {
@@ -291,18 +284,18 @@ def buildmodelbutton(request):
     away_list=[]
     df_col=df.columns
     var = Modelvar.objects.filter(created_by = request.user.id).values_list("title",flat=True)
-    print("variable",var)
+   
     car = len(var)
 
     answers_list = list(var)
-    print("answer",answers_list)
+
   
     # print(value1)
     for z in answers_list:
         for  i in df_col:  
             if "Home "+z == i or "Away "+z ==i or z ==  i:
                 value_in.append(i)
-    print(value_in)
+   
     for i in value_in: 
         if i.startswith("Home"):
             home_list.append(i)
@@ -313,8 +306,6 @@ def buildmodelbutton(request):
     
             home_list.append(i)
             away_list.append(i)
-    print(home_list)
-    print(away_list)
 
             
     
@@ -323,15 +314,18 @@ def buildmodelbutton(request):
     
 
     home_X = np.asarray(df[home_list])
-    print(home_X)
+    
+  
+   
 
     #STAYS THE SAME
     home_Y = np.asarray(df[['Home Total']])
+   
+  
     
     #away model
     #INSERT AWAY VARIABLES INTO HERE 
     away_X = np.asarray(df[away_list])
-    print(away_X)
     
     #STAYS THE SAME
     away_Y = np.asarray(df[[
@@ -341,8 +335,9 @@ def buildmodelbutton(request):
     awayModel = xgb.XGBRegressor()
 
     
-    print(homeModel.fit(home_X,home_Y))
-    print(awayModel.fit(away_X,away_Y))
+    homeModel.fit(home_X,home_Y)
+    awayModel.fit(away_X,away_Y)
+
     backTest = [10,25,50,100]
     gameinfo =[]
     for i in backTest:
@@ -471,8 +466,8 @@ def buildmodelbutton(request):
                     moneylineWins = moneylineWins + 1
                 elif homeTeamActualPoints-awayTeamActualPoints==0:
                     moneylineTies = moneylineTies + 1
-                    print(homePrediction[0])
-                    print(awayPrediction[0])
+                    # print(homePrediction[0])
+                    # print(awayPrediction[0])
                     # print(actualPointsDiff)
                 else:
                     moneylineLosses = moneylineLosses + 1
@@ -752,90 +747,25 @@ def buildmodelbutton(request):
     }
     return JsonResponse(data)
 
-    # simulations.py
-
-    
-    
-   # newpredictions.py 
-
-
-    # upcomingGames = Boxscores(1, 2022)
-    # # Prints a dictionary of all matchups for week 1 of 2017
-    # upcomingGames = upcomingGames.games
-
-    # dates = upcomingGames.keys()
-    # keys = []
-    # for key in dates:
-    #     keys.append(key)
+           
+def download_file(request):
+    filename = "totalcsv/variableStats.csv"
+    download_name ="variableStats.csv"
+    with open(filename, 'r') as f:
+        file_data = f.read()
+    response = HttpResponse(file_data, content_type='text/csv')
+    response['Content-Disposition'] = "attachment; filename=%s"%download_name
+    return response
 
 
-    # homeName = []
-    # awayName = []
-
-    # for b in keys:
-    #     i = 0
-    #     while i < len(upcomingGames[b]):
-    #         homeName.append(upcomingGames[b][i]['home_name'])
-    #         awayName.append(upcomingGames[b][i]['away_name'])        
-            
-            
-    #         i = i + 1
-            
-    # data = {
-    #     'Home Team':homeName,
-    #     'Away Team':awayName
-    # }
-
-    # thisWeeksGames = pd.DataFrame(data)
-
-
-    # for index, row in thisWeeksGames.iterrows():
-    #     homeTeamPlaying = row['Home Team']
-    #     awayTeamPlaying = row['Away Team']
-        
-    #     homeTeamStats = df.loc[df['Home Team'] == homeTeamPlaying]
-    #     homeTeamStatsAvg = homeTeamStats.mean()
-            
-    #     awayTeamStats = df.loc[df['Away Team'] == awayTeamPlaying]
-    #     awayTeamStatsAvg = awayTeamStats.mean()
-        
-    #     #HOME VARS THAT USER SELECTS GOES HERE
-    #     homeData =[]
-    #     for i in home_list:
-    #         homeData.append(homeTeamStatsAvg[i])
-    #             # homeTeamStatsAvg['Home Pass Touchdowns'],
-    #             # homeTeamStatsAvg['Home Total']
-
-            
-            
-    #     #USE AWAY DATA VARS
-    #     awayData =[]
-    #     for j in away_list:
-    #         awayData.append(awayTeamStatsAvg[j])
-            
-    #     homeVarsList = np.asarray([homeData])
-    #     awayVarsList = np.asarray([awayData])
-            
-    #     homePrediction = homeModel.predict(homeVarsList)
-    #     awayPrediction = awayModel.predict(awayVarsList)
-        
-    #     print(row['Home Team'] + ' ' + str(round(homePrediction[0])) + ' ' + row['Away Team'] + ' ' +  str(round(awayPrediction[0])))
-
-
-            
-            
-              
-# def download_file(request):
-#     filename = "totalcsv/output.csv"
-#     download_name ="example.csv"
-#     with open(filename, 'r') as f:
-#         file_data = f.read()
-#     response = HttpResponse(file_data, content_type='text/csv')
-#     response['Content-Disposition'] = "attachment; filename=%s"%download_name
-#     return response
-
-
-
+def download_corr_file(request):
+    filename = "totalcsv/correlation.csv"
+    download_name ="correlation.csv"
+    with open(filename, 'r') as f:
+        file_data = f.read()
+    response = HttpResponse(file_data, content_type='text/csv')
+    response['Content-Disposition'] = "attachment; filename=%s"%download_name
+    return response
 
 
 
@@ -843,9 +773,10 @@ def new(request):
     return render(request,"signup/new.html")
 
 
-
 def selectvariable(request):
     return render(request,"signup/buildmodel3.html")
+
+
 def training(request):
     return render(request,"signup/buildmodel4.html")
 
@@ -915,13 +846,16 @@ def heatmap(request):
 
             answers_list = list(var)
             df = pd.read_csv('mainDSNCAAB.csv')
+   
+            
+
            
             hriti = df.corr()
             top_ten="" 
             for j in answers_list:
-                print("////////////////////////",hriti[j].sort_values(ascending=False)[:10])
+                # print("////////////////////////",hriti[j].sort_values(ascending=False)[:10])
                 top_ten=hriti[j].sort_values(ascending=False)[:10]
-                print("toppppp_tennnnn",top_ten)
+                # print("toppppp_tennnnn",top_ten)
 
 
             #sometimes my scripts I run daily have some errors so there are some 
@@ -1074,6 +1008,11 @@ def heatmap(request):
             #getting shape. We will use this for back testing / training
             amountOfGames = df.shape[0]
             print(amountOfGames)
+            describe=df.describe()
+            corr= df.corr()
+            corr.to_csv('totalcsv//correlation.csv')
+            describe.to_csv('totalcsv//variableStats.csv')
+
 
     else:
         return redirect('membership') 

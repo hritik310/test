@@ -440,7 +440,7 @@ div.top_ten_text {
       <div class ="col">
          <div class="container-fluid padding_cont">
             <div class="map-download">
-               <a href="#"> <button type="button" class="btn btn-primary map-downloadbtn">Download Variable Statistics</button></a>
+               <a href="{%url 'download' %}"> <button type="button" class="btn btn-primary map-downloadbtn">Download Variable Statistics</button></a>
             </div>
 
             <div class="container text-center tabdiv">
@@ -454,7 +454,7 @@ div.top_ten_text {
              </div>
              <div class="row btn_section"> 
               <div>
-                 <a href="#"><button type="button" class="btn btn-primary ModelButton">Correlations</button></a>
+                 <a href="{% url 'download/corr'%}"><button type="button" class="btn btn-primary ModelButton">Correlations</button></a>
               </div>
             
            </div>
