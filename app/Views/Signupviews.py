@@ -576,10 +576,178 @@ def buildmodelbutton(request):
         predict_list.append(show)
         
    
+    games2022 = Boxscores(1,2022,18)
+
+    games2022 = games2022.games
+
+    dates2022 = games2022.keys()
+    keys2022 = []
+    for key in dates2022:
+        keys2022.append(key)
+
+
+    homeName2022 = []
+    awayName2022 = []
+
+    for b in keys2022:
+        i = 0
+        while i < len(games2022[b]):
+            homeName2022.append(games2022[b][i]['home_name'])
+            awayName2022.append(games2022[b][i]['away_name'])        
+            
+            
+            i = i + 1
+            
+    data2022 = {
+        'Home Team':homeName2022,
+        'Away Team':awayName2022
+    }
+
+    seasonGames2022 = pd.DataFrame(data2022)
+
+
+
+    homeTeam2022 = []
+    awayTeam2022 = []
+    homePred2022 = []
+    awayPred2022 = []
+    for index, row in seasonGames2022.iterrows():
+        homeTeamPlaying = row['Home Team']
+        awayTeamPlaying = row['Away Team']
+        
+        homeTeamStats = df.loc[df['Home Team'] == homeTeamPlaying]
+        homeTeamStatsAvg = homeTeamStats.mean()
+            
+        awayTeamStats = df.loc[df['Away Team'] == awayTeamPlaying]
+        awayTeamStatsAvg = awayTeamStats.mean()
+        
+        
+        #USE HOME DATA VARS
+        homeData =[]
+        for i in home_list:
+            homeData.append(homeTeamStatsAvg[i])
+                # homeTeamStatsAvg['Home Pass Touchdowns'],
+                # homeTeamStatsAvg['Home Total']
+
+            
+            
+            #USE AWAY DATA VARS
+        awayData =[]
+        for j in away_list:
+            awayData.append(awayTeamStatsAvg[j])
+            
+        homeVarsList = np.asarray([homeData])
+        awayVarsList = np.asarray([awayData])
+            
+        homePrediction = homeModel.predict(homeVarsList)
+        awayPrediction = awayModel.predict(awayVarsList)
+        
+        # print(row['Home Team'] + '' + str(homePrediction))
+        # print(row['Away Team'] + '' + str(awayPrediction))
+        
+        
+        homeTeam2022.append(row['Home Team'])
+        awayTeam2022.append(row['Away Team'])
+        homePred2022.append(homePrediction[0])
+        awayPred2022.append(awayPrediction[0])
+
+
+    seasonPred2022 = {
+        'Home Team':homeTeam2022,
+        'Away Team':awayTeam2022,
+        'Home Pred':homePred2022,
+        'Away Pred':awayPred2022
+    }
+
+
+    seasonPredResults2022 = pd.DataFrame(seasonPred2022)
+
+
+    winner = []
+    for index, row in seasonPredResults2022.iterrows():
+        if row['Home Pred']>row['Away Pred']:
+            winner.append(row['Home Team'])
+        else:
+            winner.append(row['Away Team'])
+
+    loser = []
+    for index, row in seasonPredResults2022.iterrows():
+        if row['Home Pred']>row['Away Pred']:
+            loser.append(row['Away Team'])
+        else:
+            loser.append(row['Home Team'])
+
+
+    teams = seasonPredResults2022['Home Team'].unique()
+
+
+    from collections import Counter
+    homeWins = []
+    homeWinsTeam = []
+    for i in teams:
+        homeWinsTeam.append(i)
+        counts = Counter(winner)
+        homeWins.append(counts[i])
+
+    homeLosses = []
+    homeLossesTeam = []
+    for i in teams:
+        homeLossesTeam.append(i)
+        counts = Counter(loser)
+        homeLosses.append(counts[i])
+
+
+
+
+
+    recordWins2022Data = {
+    'homeWinsTeam':homeWinsTeam,
+    'homeWins':homeWins
+    }
+
+
+    recordWins2022 = pd.DataFrame(recordWins2022Data)
+
+
+    recordLosses2022Data = {
+    'homeLossesTeam':homeLossesTeam,
+    'homeLosses':homeLosses
+    }
+
+
+    recordLosses2022 = pd.DataFrame(recordLosses2022Data)
+
+
+
+    records2022Pred = recordWins2022.merge(recordLosses2022, left_on='homeWinsTeam',right_on='homeLossesTeam')
+
+
+
+    records2022Pred = records2022Pred.drop('homeLossesTeam',axis=1)
+
+
+    records2022Pred.columns = ['Team','Wins','Losses']
+
+
+
+    z=records2022Pred.sort_values(by='Wins',ascending=False)
+    final_simulation=z.to_dict() 
+    team=final_simulation["Team"]
+    wins=final_simulation["Wins"]
+    loss=final_simulation["Losses"]
+    team_list=list(team.values())
+    wins_list=list(wins.values())
+    loss_list=list(loss.values())
+    
+    
     data={
         "status":"ok",
         "gameinfo":gameinfo,
-        "team_stats": predict_list
+        "team_stats": predict_list,
+        "simulation":team_list,
+        "wins":wins_list,
+        "loss":loss_list
+       
 
     }
     return JsonResponse(data)
@@ -587,162 +755,7 @@ def buildmodelbutton(request):
     # simulations.py
 
     
-    # games2022 = Boxscores(1,2022,18)
-
-    # games2022 = games2022.games
-
-    # dates2022 = games2022.keys()
-    # keys2022 = []
-    # for key in dates2022:
-    #     keys2022.append(key)
-
-
-    # homeName2022 = []
-    # awayName2022 = []
-
-    # for b in keys2022:
-    #     i = 0
-    #     while i < len(games2022[b]):
-    #         homeName2022.append(games2022[b][i]['home_name'])
-    #         awayName2022.append(games2022[b][i]['away_name'])        
-            
-            
-    #         i = i + 1
-            
-    # data2022 = {
-    #     'Home Team':homeName2022,
-    #     'Away Team':awayName2022
-    # }
-
-    # seasonGames2022 = pd.DataFrame(data2022)
-
-
-
-    # homeTeam2022 = []
-    # awayTeam2022 = []
-    # homePred2022 = []
-    # awayPred2022 = []
-    # for index, row in seasonGames2022.iterrows():
-    #     homeTeamPlaying = row['Home Team']
-    #     awayTeamPlaying = row['Away Team']
-        
-    #     homeTeamStats = df.loc[df['Home Team'] == homeTeamPlaying]
-    #     homeTeamStatsAvg = homeTeamStats.mean()
-            
-    #     awayTeamStats = df.loc[df['Away Team'] == awayTeamPlaying]
-    #     awayTeamStatsAvg = awayTeamStats.mean()
-        
-        
-    #     #USE HOME DATA VARS
-    #     homeData =[]
-    #     for i in home_list:
-    #         homeData.append(homeTeamStatsAvg[i])
-    #             # homeTeamStatsAvg['Home Pass Touchdowns'],
-    #             # homeTeamStatsAvg['Home Total']
-
-            
-            
-    #         #USE AWAY DATA VARS
-    #     awayData =[]
-    #     for j in away_list:
-    #         awayData.append(awayTeamStatsAvg[j])
-            
-    #     homeVarsList = np.asarray([homeData])
-    #     awayVarsList = np.asarray([awayData])
-            
-    #     homePrediction = homeModel.predict(homeVarsList)
-    #     awayPrediction = awayModel.predict(awayVarsList)
-        
-    #     print(row['Home Team'] + '' + str(homePrediction))
-    #     print(row['Away Team'] + '' + str(awayPrediction))
-        
-        
-    #     homeTeam2022.append(row['Home Team'])
-    #     awayTeam2022.append(row['Away Team'])
-    #     homePred2022.append(homePrediction[0])
-    #     awayPred2022.append(awayPrediction[0])
-
-
-    # seasonPred2022 = {
-    #     'Home Team':homeTeam2022,
-    #     'Away Team':awayTeam2022,
-    #     'Home Pred':homePred2022,
-    #     'Away Pred':awayPred2022
-    # }
-
-
-    # seasonPredResults2022 = pd.DataFrame(seasonPred2022)
-
-
-    # winner = []
-    # for index, row in seasonPredResults2022.iterrows():
-    #     if row['Home Pred']>row['Away Pred']:
-    #         winner.append(row['Home Team'])
-    #     else:
-    #         winner.append(row['Away Team'])
-
-    # loser = []
-    # for index, row in seasonPredResults2022.iterrows():
-    #     if row['Home Pred']>row['Away Pred']:
-    #         loser.append(row['Away Team'])
-    #     else:
-    #         loser.append(row['Home Team'])
-
-
-    # teams = seasonPredResults2022['Home Team'].unique()
-
-
-    # from collections import Counter
-    # homeWins = []
-    # homeWinsTeam = []
-    # for i in teams:
-    #     homeWinsTeam.append(i)
-    #     counts = Counter(winner)
-    #     homeWins.append(counts[i])
-
-    # homeLosses = []
-    # homeLossesTeam = []
-    # for i in teams:
-    #     homeLossesTeam.append(i)
-    #     counts = Counter(loser)
-    #     homeLosses.append(counts[i])
-
-
-
-
-
-    # recordWins2022Data = {
-    # 'homeWinsTeam':homeWinsTeam,
-    # 'homeWins':homeWins
-    # }
-
-
-    # recordWins2022 = pd.DataFrame(recordWins2022Data)
-
-
-    # recordLosses2022Data = {
-    # 'homeLossesTeam':homeLossesTeam,
-    # 'homeLosses':homeLosses
-    # }
-
-
-    # recordLosses2022 = pd.DataFrame(recordLosses2022Data)
-
-
-
-    # records2022Pred = recordWins2022.merge(recordLosses2022, left_on='homeWinsTeam',right_on='homeLossesTeam')
-
-
-
-    # records2022Pred = records2022Pred.drop('homeLossesTeam',axis=1)
-
-
-    # records2022Pred.columns = ['Team','Wins','Losses']
-
-
-
-    # records2022Pred.sort_values(by='Wins',ascending=False)
-
+    
    # newpredictions.py 
 
 
@@ -811,14 +824,7 @@ def buildmodelbutton(request):
 
             
             
-            
-
-   
-
-        
-
-        
-       
+              
 # def download_file(request):
 #     filename = "totalcsv/output.csv"
 #     download_name ="example.csv"

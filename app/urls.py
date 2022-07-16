@@ -30,6 +30,7 @@ urlpatterns = [
     path('buildmodel5/', Signupviews.modelname, name='buildmodel5'),
     # path('download',Signupviews.download_file,name='download'),
     path('prediction', Newprediction.newprediction, name = 'prediction'),
+    path('simulation', Newprediction.simulation, name = 'simulation'),
 
 
 

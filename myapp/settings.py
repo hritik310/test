@@ -42,9 +42,8 @@ MESSAGE_TAGS = {
         messages.ERROR: 'alert-danger',
  }
 
-
 ALLOWED_HOSTS = ['3.86.247.236']    
-# ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
 
 # Application definition        
 
@@ -138,7 +137,8 @@ DATABASES = {
              
 #          }
 #     }
-#  }    
+#  }   
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 

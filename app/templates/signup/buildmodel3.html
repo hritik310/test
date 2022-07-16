@@ -240,7 +240,10 @@
 
 .progressbar {
       margin:20px;
-      counter-reset: step; 
+      counter-reset: step;
+      display: flex;
+      align-items: center;
+      justify-content: center;
   }
   .progressbar li {
       list-style-type: none;
@@ -496,7 +499,7 @@
         </div> -->
       </div>
       <div class="container p-5">
-                  <div class="row">
+                  <div class="row align-items-center">
                      <div class="col-lg-1">
                         <a href="{% url 'buildmodel1' %}">
                            <button class="btn backbtn" id="back">Back</button>
@@ -510,6 +513,7 @@
                  <li>Step 4</li>
                  <li>Step 5</li>
                  <li>Step 6</li>
+                 <li>Step 7</li>
               </ul>
                     </div>
                     <div class="col-lg-1" style="padding:20px">                     
@@ -691,6 +695,9 @@
                  success: function (data) {
                     console.log(data)
                     localStorage.setItem("team_stats", JSON.stringify(data.team_stats));
+                    localStorage.setItem("team", JSON.stringify(data.simulation));
+                    localStorage.setItem("wins", JSON.stringify(data.wins));
+                    localStorage.setItem("loss", JSON.stringify(data.loss));
             
                        var html = '';
                         var over_html= '';

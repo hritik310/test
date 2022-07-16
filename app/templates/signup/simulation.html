@@ -116,20 +116,78 @@
       margin-bottom: 0;
     }
 
-    </style>
-<h1 style="text-align: center;">Week One Prediction</h1>
-<div class="prediction-box game">
-{%for i in show%}
-<p>{{i}}</p>
-{%endfor%}
-</div>
+    table {
+      font-family: arial, sans-serif;
+      
+      width: 50%;
 
+    }
+
+    .table-wrapper-scroll-y.my-custom-scrollbar {
+      width: 50%;
+      max-width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    table.center {
+      width: 100%;  
+      
+      }
+    
+    td, th {
+      border: 2px solid black;
+      text-align: left;
+      padding: 8px;
+    }
+
+
+    .game{
+      background-color: #dddddd;
+    }
+
+    .loss{
+      background-color: #dddddd;
+    }
+
+    .my-custom-scrollbar {
+      position: relative;
+      height: 400px;
+      overflow: auto;
+      }
+      .center {
+        position: sticky;
+        top: 0;
+        width: 50%;
+  
+    }
+    </style>
+
+
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+  <table class="center">
+    <tr>
+      <th>Team</th>
+      <th>Wins</th>
+      <th>Losses</th>
+    </tr>
+
+    <tr>
+      <td class ="game"></td>
+      <td class="wins"></td>
+      <td class="loss"></td>
+
+    </tr>
+
+  </table>
+</div>
 
 
 <div class="container p-5">
     <div class="row align-items-center">
        <div class="col-lg-1">
-          <a href="{% url 'buildmodel3' %}">
+          <a href="{% url 'prediction' %}">
              <button class="btn backbtn" id="back">Back</button>
           </a>
         </div>
@@ -139,13 +197,13 @@
    <li class="active">Step 2</li>
    <li class="active">Step 3</li>
    <li class="active">Step 4</li>
-   <li>Step 5</li>
+   <li class="active">Step 5</li>
    <li>Step 6</li>
    <li>Step 7</li>
 </ul>
       </div>
       <div class="col-lg-1" style="padding:20px">                     
-    <a href="{% url 'simulation' %}">
+    <a href="{% url 'buildmodel4' %}">
         <button class="btn backbtn" id="next">Next</button>
       </a>
     {% comment %} <button class="action submit btn btn-success">Submit</button> {% endcomment %}
@@ -155,19 +213,37 @@
 
 <script>
     $(document).ready(function(){
-      var x = localStorage.getItem("team_stats");
+      var x = localStorage.getItem("team");
+      var wins = localStorage.getItem("wins");
+      var loss = localStorage.getItem("loss");
       var data = JSON.parse(x)
+      var wins_data = JSON.parse(wins)
+      var loss_data = JSON.parse(loss)
       var html = '';
+      var wins= '';
+      var loss = '';
+
       let i = 0;
+  
       for (let index in data) {
 
-          html += `<p>${++i} ). ${data[index]}</p><br>`;
+          html += `<p>${data[index]}</p>`;
       }
       
+      for (let index in wins_data) {
+
+        wins += `<p>${wins_data[index]}</p>`;
+      }
+
+      for (let index in loss_data) {
+
+        loss += `<p>${loss_data[index]}</p>`;
+      }
 
 
       $('.game').html(html);
-  
+      $('.wins').html(wins);
+      $('.loss').html(loss);
 
         //steps ui
         var progressBar = {

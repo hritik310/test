@@ -15,3 +15,8 @@ from django.shortcuts import render
 def newprediction(request):
               
     return render(request,"signup/prediction.html")
+
+
+def simulation(request):
+     return render(request,"signup/simulation.html")
+
