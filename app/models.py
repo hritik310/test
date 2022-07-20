@@ -54,6 +54,11 @@ class StripeCustomer(models.Model):
 class Modelvar(models.Model):
     title = models.CharField(max_length=255,default="")
     created_by = models.IntegerField(null=True)
+    modelname_id = models.CharField(max_length=255,default="")
+    status = models.BooleanField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
+    updated_at =  models.DateTimeField(auto_now=True)
+
     # percent_value = models.IntegerField(null=True)
 
 
@@ -62,6 +67,8 @@ class Modelvar(models.Model):
 class Modelname(models.Model):
     modelname = models.CharField(max_length=255,null=True,unique=True)
     user=models.ForeignKey(user,on_delete=models.CASCADE,null=True)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
+    updated_at =  models.DateTimeField(auto_now=True)
 
 
 class Var(models.Model):

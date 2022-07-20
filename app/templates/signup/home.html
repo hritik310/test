@@ -286,6 +286,72 @@ button.btn-xl.btn-primary.btn-wrap-text {
 
 /*contact_form_section section css end */
 
+/* Dropdown Menu */
+li.dropdown.nav-item button {
+  border: none;
+  box-shadow: none;
+}
+
+button.nav-link.home_list {
+  color: #8c918f;
+  font-weight: bold;
+}
+
+.dropdown-sub-menu li.sub-li {
+  position: relative;
+  transition: .3s ease-in-out;
+}
+
+.dropdown-sub-menu li.sub-li:before {
+  content: '';
+  position: absolute;
+  right: 40px;
+  top: 7px;
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid #a9a9a9;
+}
+
+.dropdown-sub-menu .dropdown-sub {
+  display: none;
+  background-color: #fff;
+  height: fit-content;
+  position: absolute;
+  right: -70%;
+  border: 1px solid #a9a9a9;
+  transition: .3s ease-in-out;
+  min-width: 110px;
+}
+
+.dropdown-sub-menu li.sub-li:hover .dropdown-sub {
+  display: flex;
+  flex-direction: column;
+  transition: .3s ease-in-out;
+}
+
+button.nav-link.home_list {
+  background: none;
+  background-color: transparent;
+}
+
+@media only screen and (min-width: 768px) {
+
+  a.nav-link.home_list,
+  button.nav-link.home_list{
+    font-size: 10px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+
+  a.nav-link.home_list,
+  button.nav-link.home_list {
+    font-size: 16px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -314,6 +380,32 @@ button.btn-xl.btn-primary.btn-wrap-text {
       
       <li class="nav-item">
         <a class="nav-link home_list" href="{% url 'mymodel' %}">My Models</a>
+      </li>
+      <li class="dropdown nav-item">
+        <button class="nav-link home_list dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+          Analytics
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Twitter analysis</a>
+          <a class="dropdown-item" href="#">Elo Rankings</a>
+          <a class="dropdown-item" href="#">Articles</a>
+          <ul class="dropdown-sub-menu m-0 p-0">
+            <li class="sub-li nav-item d-flex">
+              <a class="dropdown-item" href="#">Sports</a>
+              <ul class="dropdown-sub m-0 p-0">
+                <li class="nav-item d-flex">
+                  <a class="dropdown-item" href="#">NFL</a>
+                </li>
+                <li class="nav-item d-flex">
+                  <a class="dropdown-item" href="#">NCAAF</a>
+                </li>
+                <li class="nav-item d-flex">
+                  <a class="dropdown-item" href="#">MLB</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </li>
       
       <li class="nav-item">

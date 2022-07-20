@@ -417,7 +417,7 @@
                
                {% for i in df|slice:":4"  %}
          <div class="col-md-2">
-         <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="gaming_id_{{forloop.counter}}">
+         <div class="column  {%for z in all %}  {%if  i  in z.title  and z.status == 0 %} coloradd   {%endif%} {%endfor%}" id="gaming_id_{{forloop.counter}}">
          <div class="Info-sign">
          <span class="glyphicon glyphicon-info-sign"></span> 
          </div>
@@ -434,7 +434,8 @@
          </span>
 
          <span class="input-group-btn"> 
-         <button type="button" id="gaming_id_quant_{{forloop.counter}}" date-id="game_id{{forloop.counter}}" makes=gaming_id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id="{{i}}">
+         <button type="button" id="gaming_id_quant_{{forloop.counter}}" date-id="game_id{{forloop.counter}}" makes=gaming_id_{{forloop.counter}} class="btn btn-default btn-number build" {%for z in all%} {%if i in z.title and z.status == 0 %} disabled {%endif%} {%endfor%}
+         data-type="plus" data-field="quant[1]" data-id="{{i}}">
          <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
          </button>
          </span>
@@ -451,7 +452,7 @@
             <div class="boxes-main">
                {% for i in df|slice:"4:31"  %}
                <div class="col-md-2">
-               <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="id_{{forloop.counter}}">
+               <div class="column  {%for z in all %}  {%if  i  in z.title  and z.status == 0 %} coloradd   {%endif%} {%endfor%}" id="id_{{forloop.counter}}">
                <div class="Info-sign">
                <span class="glyphicon glyphicon-info-sign"></span> 
                </div>
@@ -468,7 +469,7 @@
                </span>
    
                <span class="input-group-btn"> 
-               <button type="button" id="id_quant_{{forloop.counter}}" date-id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id="{{i}}">
+               <button type="button" id="id_quant_{{forloop.counter}}" date-id="{{forloop.counter}}" makes=id_{{forloop.counter}} class="btn btn-default btn-number build"  {%for z in all%} {%if i in z.title and z.status == 0 %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id="{{i}}">
                <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
                </button>
                </span>
@@ -485,7 +486,7 @@
              
                {% for i in df|slice:"31:"  %}
                <div class="col-md-2">
-               <div class="column  {%for z in all %} {%if  i in z.title  %} coloradd   {%endif%} {%endfor%} " id="QB_id_{{forloop.counter}}">
+               <div class="column  {%for z in all %}  {%if  i  in z.title  and z.status == 0 %} coloradd   {%endif%} {%endfor%}" id="QB_id_{{forloop.counter}}">
                <div class="Info-sign">
                <span class="glyphicon glyphicon-info-sign"></span> 
                </div>
@@ -502,7 +503,7 @@
                </span>
    
                <span class="input-group-btn"> 
-               <button type="button" id="QB_id_quant_{{forloop.counter}}" date-id="QB_{{forloop.counter}}" makes=QB_id_{{forloop.counter}} class="btn btn-default btn-number build"   {%for z in all%}  {%if  i in z.title  %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id="{{i}}">
+               <button type="button" id="QB_id_quant_{{forloop.counter}}" date-id="QB_{{forloop.counter}}" makes=QB_id_{{forloop.counter}} class="btn btn-default btn-number build"  {%for z in all%} {%if i in z.title and z.status == 0 %} disabled {%endif%} {%endfor%} data-type="plus" data-field="quant[1]" data-id="{{i}}">
                <span class="glyphicon add glyphicon-plus" make="{{forloop.counter}}"></span>
                </button>
                </span>
@@ -544,7 +545,7 @@
          </span>
          </div>
          </div>
-         </div>
+         </div>   
          {% endfor %} {% endcomment %}
          </div>
          </div>
@@ -637,6 +638,9 @@
                <a href="{% url 'buildmodel1' %}">
                <button type="button" class="btn btn-secondary Secondarybtn">NEXT</button></div>
                </a>
+               <a href="{% url 'buildmodel5' %}">
+               <button type="button" class="btn btn-secondary Secondarybtn">last</button></div>
+               </a>
             </div>
          </div>
       </form>
@@ -666,7 +670,7 @@
                console.log("rowId",rowId)
          
          
-                  
+               
                $("#"+rowssId).prop("disabled",true);
                console.log("true")
               
@@ -683,6 +687,7 @@
                  },
                  dataType: 'json',
                  success: function (data) {
+                  
                   if (rowId == "home_field_goals")
                   {
                      $('#output').html(data.message)

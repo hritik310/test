@@ -14,7 +14,6 @@ from . import views
 urlpatterns = [
     path('', Signupviews.index, name='index'),
     path('signup/', Signupviews.create, name='signup'),
-    path('updateprofile/<int:id>',Signupviews.updateprofile, name ='updateprofile'),
     path('login', Loginviews.user_login, name='login'),
     path('logout',Loginviews.userLogout,name='logout'),
     path('sport',Loginviews.setting,name = 'sport'),
@@ -36,11 +35,14 @@ urlpatterns = [
 
 
     path('buildmodel/status/',Signupviews.buildmodelStatus, name ="buildmodel-status"),
+    path('buildmodel/update/',Signupviews.buildmodelUpdate, name ="buildmodel-update"),
     path('buildmodel/remove/',Signupviews.buildmodelremove, name ="buildmodel-remove"),
     path('buildmodelbutton',Signupviews.buildmodelbutton, name ="buildmodel-button"),
     path('register',Signupviews.create,name="register"),
     path('passwordchange/<int:id>',Loginviews.passwordchange, name ='passwordchange'),
-    path('new',Signupviews.new,name="new"),
+    path('updatemodel/<int:id>',Signupviews.update,name="updatemodel"),
+    path('delete/<int:id>',Signupviews.deletemodel,name="delete"),
+   
     
     # path('downloadimg',Signupviews.send_file,name='downloadimg'),
 

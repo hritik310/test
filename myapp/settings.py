@@ -43,7 +43,7 @@ MESSAGE_TAGS = {
  }
 
 ALLOWED_HOSTS = ['3.86.247.236']    
-#ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 # Application definition        
 
@@ -155,10 +155,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# CRONJOBS = [
-#     ('30 15 * * *', 'app.cron.today'),
-#     ('35 15 * * *', 'app.cron.gettoday'),
-# ]
+CRONJOBS = [
+    ('30 9 * * 2', 'app.cron.today'),
+    ('30 9 * * *', 'app.cron.gettoday')
+]
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 

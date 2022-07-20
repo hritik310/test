@@ -142,24 +142,13 @@ def membership(request):
 
     return render (request,"signup/buildacc.html")
 
-def updateprofile(request,id):
-    custom  = user.objects.get(id=id)
-    if request.method == "POST":
-
-        custom.username = request.POST.get('username')
-        custom.email = request.POST.get('email')
-        custom.phone_number= request.POST.get('phone_number')
-        custom.save()
-        return redirect('update')
-
-
-    return render(request,"signup/update.html",{'customer':custom})
 
 
 
 def buildmodel(request,id):
     all=Modelvar.objects.all()
-    req = request.GET.get('cars')
+    req = request.GET.get('cars') 
+    # print(newdata.query)
    
     st = StripeCustomer.objects.filter(stripeCustomerId = request.user.id).values_list("membershipstatus",flat=True)
     membership=list(st)
@@ -179,8 +168,7 @@ def buildmodel(request,id):
         car = len(var)
 
         answers_list = list(var)
-  
-        df = pd.read_csv('totalcsv/finalDS.csv')
+        df = pd.read_csv('totalcsv/finalDS1.csv')
         co = len(df.columns)
 
     
@@ -245,13 +233,60 @@ def buildmodel(request,id):
     return render(request,"signup/buildmodel.html",{'re':req,"df":list(df_away),"all":all,"amount":amountOfGames})
     # return render(request,"signup/buildmodel.html",{'H':data"df":list(df_away),'status':status,"all":all})
    
-
+import random
 def buildmodelStatus(request):
-    build = Modelvar()
-    build.title=request.GET.get('id')
+    build1=Modelvar()
+    n = random.randint(0,10000)
+    random_val="f" + str(n)
+    build = Modelvar.objects.all().last()   
+    if build:
+        if build.modelname_id.isnumeric(): 
+            build1.title=request.GET.get('id')
+            build1.modelname_id=random_val
+            build1.created_by = request.user.id
+            build1.save()  
+        else:   
+            build1.title=request.GET.get('id')
+            build1.created_by = request.user.id
+            build1.modelname_id=random_val
+            build1.save() 
+    else:
+        build1.title=request.GET.get('id')
+        build1.created_by = request.user.id
+        build1.modelname_id=random_val
+        build1.save() 
 
-    build.created_by = request.user.id
-    build.save()
+    data = {
+    "status":"OK",
+    "messages":"You have selected the item",
+    "message":"You have Selected the item",
+    "value":0,
+    }
+
+    return JsonResponse(data)
+
+def buildmodelremove(request):
+
+    b = Modelvar.objects.filter(title =request.GET.get('id'))
+
+    b.delete()
+  
+    data = {
+    "status":"OK",
+    }
+
+    return JsonResponse(data)
+
+def buildmodelUpdate(request):
+    build1=Modelvar()
+
+       
+    build1.title=request.GET.get('id')
+    build1.created_by = request.user.id
+    build1.modelname_id=request.GET.get('modelname_id')
+    build1.status = 1
+    build1.save() 
+
     data = {
     "status":"OK",
     "messages":"You have selected the item",
@@ -278,7 +313,7 @@ def buildmodelremove(request):
 
 
 def buildmodelbutton(request):
-    df = pd.read_csv('totalcsv/finalDS.csv')
+    df = pd.read_csv('totalcsv/finalDS1.csv')
     value_in=[]
     home_list=[]
     away_list=[]
@@ -769,8 +804,14 @@ def download_corr_file(request):
 
 
 
-def new(request):
-    return render(request,"signup/new.html")
+def deletemodel(request,id):
+    var_get=Modelvar.objects.filter(modelname_id=id)
+    
+    var_del = Modelname.objects.get(id=id)
+    var_del.delete()
+    var_get.delete()
+
+    return redirect('mymodel')
 
 
 def selectvariable(request):
@@ -781,18 +822,18 @@ def training(request):
     return render(request,"signup/buildmodel4.html")
 
 def modelname(request):
+    two = Modelname.objects.all()
     if request.method == "POST":
         name = Modelname()  
         name.modelname = request.POST.get("modelname")
         name.user_id=request.user.id
         len_model=Modelname.objects.filter(user_id=request.user.id)
-        if len(len_model)<=2:
-            name.save()
-            return redirect('mymodel')
-        else:
-            print("you can only create 3 model")
-
-    return render(request,"signup/buildmodel5.html")
+        name.save() 
+        name1 = Modelvar.objects.filter(modelname_id__startswith ='f').update(modelname_id=name.id,status =1)
+    
+        return redirect('mymodel')
+   
+    return render(request,"signup/buildmodel5.html",{'two':two})
 
 def mymodel(request):
     val=Modelname.objects.filter(user_id=request.user.id)
@@ -803,6 +844,96 @@ def mymodel(request):
         return render(request,"signup/mymodel.html")
 
     return render(request,"signup/mymodel.html",{"model_name":val})
+
+def update(request,id):
+  
+    all1=Modelvar.objects.filter(modelname_id=id)
+    print("Show",all1)
+    req = request.GET .get('cars') 
+    # print(newdata.query)
+   
+    st = StripeCustomer.objects.filter(stripeCustomerId = request.user.id).values_list("membershipstatus",flat=True)
+    membership=list(st)
+    
+    if 1 in membership:
+            
+        all=Modelvar.objects.all()
+        a=Modelvar.objects.filter(created_by=request.user.id).values_list("title",flat="True")
+        if Modelvar.objects.filter(created_by=request.user.id).exists():
+            status=a
+            # print("s",status)
+        else:
+            
+            status=0
+        var = Modelvar.objects.filter(created_by = request.user.id).values_list("title",flat=True)
+
+        car = len(var)
+
+        answers_list = list(var)
+        df = pd.read_csv('totalcsv/finalDS1.csv')
+        co = len(df.columns)
+
+    
+
+
+        df_away=["Indoor/Outdoor",
+            "Temperature",
+            "Humidity",
+            "Wind",	
+            "First Downs",	
+            "Rush Attempts",	
+            "Rush Yards",	
+            "Rush Yards Per Attempt",	
+            "Rush TD",	
+            "Completions",	
+            "Attempts",
+            "Pass Yards",	
+            "Pass Yards Per Attempt",	
+            "Pass Touchdowns",	
+            "Interceptions",	
+            "Sacked",
+            "Sacked Yards",	
+            "Net Pass Yards",	
+            "Total Yards",	
+            "Fumbles",	
+            "Fumbles Lost",	
+            "Turnovers",
+            "Penalties",	
+            "Penalty Yards",	
+            "Third Downs Converted",	
+            "Third Downs Attempted",	
+            "Third Down Percentage",	
+            "Fourth Downs Converted",	
+            "Fourth Downs Attempted",	
+            "Fourth Downs Converted",	
+            "Time Of Possesion",		
+            "QB CAY_PA",	
+            "QB Drop Perc",	
+            "QB Bad Throw Perc",
+            "QB Blitzed",	
+            "QB Hurried",	
+            "QB Hit",	
+            "QB Pressured Perc",	
+            "QB Yds Per Scram"]
+
+
+        
+
+
+        #getting shape. We will use this for back testing / training
+        amountOfGames = df.shape[0]
+     
+
+
+
+
+        
+    else:
+        return redirect('membership') 
+
+
+    return render(request,"signup/update.html",{'re':req,"df":list(df_away),"all":all1,"amount":amountOfGames,'id':id})
+
 
 
 
@@ -895,7 +1026,7 @@ def heatmap(request):
 
             answers_lists = list(var)
             print("answer",answers_lists)
-            df = pd.read_csv('totalcsv/finalDS.csv')
+            df = pd.read_csv('totalcsv/finalDS1.csv')
             # man=df[df.columns[1:]].corr()['home_steals'].sort_values(ascending=False)[:10]
             # print(man)
            
@@ -1022,7 +1153,7 @@ def minmax(request):
     
     req = request.POST.getlist('minvalue[]')
     print("ss",req)
-    df = pd.read_csv('totalcsv/finalDS.csv')
+    df = pd.read_csv('totalcsv/finalDS1.csv')
 
     start = 0
     newdata = []
