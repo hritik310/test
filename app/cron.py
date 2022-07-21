@@ -20,14 +20,14 @@ import matplotlib.pyplot as plt
 
 # In[117]:
 def today():
-    df = pd.read_csv('/home/ubuntu/datasport/totalcsv/finalDS1.csv') 
+    df = pd.read_csv('totalcsv/finalDS1.csv') 
     df = df[(df.Season == 2021)] 
     df=df[['IndexRow',"Home Team","Away Team","Home Total","Away Total"]].sort_values(by='IndexRow').dropna()
     
 
     # In[118]:
 
-        
+
     def expected_result(loc,aw):
         dr=loc-aw
         we=(1/(10**(-dr/400)+1))
@@ -136,7 +136,7 @@ def today():
     # In[127]:
 
      
-    eloDF.to_csv('/home/ubuntu/datasport/totalcsv/eloDF.csv',index=False)
+    eloDF.to_csv('totalcsv/eloDF.csv',index=False)
 
     # for local  
     # eloDF.to_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/eloDF.csv',index=False)
