@@ -27,7 +27,7 @@ def today():
 
     # In[118]:
 
-
+        
     def expected_result(loc,aw):
         dr=loc-aw
         we=(1/(10**(-dr/400)+1))
