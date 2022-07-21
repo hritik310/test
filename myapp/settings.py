@@ -156,8 +156,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 CRONJOBS = [
-    # ('30 9 * * 2', 'app.cron.today'),
-    ('* * * * *', 'app.cron.today'),
+    ('30 9 * * 2', 'app.cron.today'),
+    # ('* * * * *', 'app.cron.today'),
     ('30 9 * * *', 'app.cron.gettoday')
 ]
 # Internationalization

@@ -20,9 +20,35 @@
       <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> -->
       <style>
          body{
+           
          /*line-height:0;
          background: #ebeded;*/
          }
+         .tooltips {
+            position: relative;
+            display: inline-block;
+     
+          }
+          
+          .tooltips .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            top: -5px;
+            left: 105%;
+          }
+          
+          .tooltips:hover .tooltiptext {
+            visibility: visible;
+          }
          nav.navbar.navbar-inverse.background {
          background-color: #fff;
          border-color: #ffffff;
@@ -363,6 +389,10 @@
 }
 
 
+
+ 
+
+
       </style>
    </head>
    <body>
@@ -415,12 +445,17 @@
             
             <div class="boxes-main">
                
-               {% for i in df|slice:":4"  %}
+            {% for i,j in game_info.items %}
+           
+    
          <div class="col-md-2">
          <div class="column  {%for z in all %}  {%if  i  in z.title  and z.status == 0 %} coloradd   {%endif%} {%endfor%}" id="gaming_id_{{forloop.counter}}">
-         <div class="Info-sign">
-         <span class="glyphicon glyphicon-info-sign"></span> 
+         <div class="Info-sign tooltips">
+         <img style="width:18% !important;height:59% !important;float:right" src="/static/image/plus.png" >
+         <span class="tooltiptext">{{j}}</span> 
          </div>
+      
+       
          <div class="home_point">
          <p>{{i}}</p>
          
@@ -450,11 +485,12 @@
          <h2>Team Stats</h2>
        
             <div class="boxes-main">
-               {% for i in df|slice:"4:31"  %}
+               {% for i,j in team_stats.items  %}
                <div class="col-md-2">
                <div class="column  {%for z in all %}  {%if  i  in z.title  and z.status == 0 %} coloradd   {%endif%} {%endfor%}" id="id_{{forloop.counter}}">
-               <div class="Info-sign">
-               <span class="glyphicon glyphicon-info-sign"></span> 
+               <div class="Info-sign tooltips">
+               <img style="width:18% !important;height:59% !important;float:right" src="/static/image/plus.png" >
+               <span class="tooltiptext">{{j}}</span> 
                </div>
                <div class="home_point">
                <p>{{i}}</p>
@@ -484,11 +520,12 @@
                <h2>QB Data</h2>
             <div class="boxes-main">
              
-               {% for i in df|slice:"31:"  %}
+               {% for i,j in qb_data.items %}
                <div class="col-md-2">
                <div class="column  {%for z in all %}  {%if  i  in z.title  and z.status == 0 %} coloradd   {%endif%} {%endfor%}" id="QB_id_{{forloop.counter}}">
-               <div class="Info-sign">
-               <span class="glyphicon glyphicon-info-sign"></span> 
+               <div class="Info-sign tooltips">
+               <img style="width:18% !important;height:59% !important;float:right" src="/static/image/plus.png" >
+               <span class="tooltiptext">{{j}}</span> 
                </div>
                <div class="home_point">
                <p>{{i}}</p>
