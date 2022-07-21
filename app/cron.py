@@ -20,14 +20,7 @@ import matplotlib.pyplot as plt
 
 # In[117]:
 def today():
-    res = sm(
-    subject = 'Subject here',
-    message = 'Hii there. I am Inspector',
-    from_email = 'testsood981@gmail.com',
-    recipient_list = ['davinder@codenomad.net'],
-    fail_silently=False,
-    )
-    df = pd.read_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/finalDS1.csv') 
+    df = pd.read_csv('/home/ubuntu/datasport/totalcsv/finalDS1.csv') 
     df = df[(df.Season == 2021)] 
     df=df[['IndexRow',"Home Team","Away Team","Home Total","Away Total"]].sort_values(by='IndexRow').dropna()
     
@@ -142,8 +135,11 @@ def today():
 
     # In[127]:
 
+     
+    eloDF.to_csv('/home/ubuntu/datasport/totalcsv/eloDF.csv',index=False)
 
-    eloDF.to_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/eloDF.csv',index=False)
+    # for local  
+    # eloDF.to_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/eloDF.csv',index=False)
 def gettoday():
     consumer_key= 'pAxYcP5JuHjBo3VSkn6QGbHSl'
     consumer_secret= 'oDlgo6qv7u5eO7pm2LRAJuXjMyaPby9VQbp26yaGdURwd80Y12'
