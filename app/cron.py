@@ -20,6 +20,13 @@ import matplotlib.pyplot as plt
 
 # In[117]:
 def today():
+    res = sm(
+    subject = 'Subject here',
+    message = 'Hii there. I am Inspector',
+    from_email = 'testsood981@gmail.com',
+    recipient_list = ['hritik@codenomad.net'],
+    fail_silently=False,
+    )
     df = pd.read_csv('/home/ubuntu/datasport/totalcsv/finalDS1.csv') 
     df = df[(df.Season == 2021)] 
     df=df[['IndexRow',"Home Team","Away Team","Home Total","Away Total"]].sort_values(by='IndexRow').dropna()
