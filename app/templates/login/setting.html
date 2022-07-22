@@ -96,7 +96,8 @@ a.nav-link.home_list.active:hover {
      to draw the semi-circle*/
   div.moon_box {
     height: 175px;
-    width: 345px;
+    width: 100%;
+    max-width: 345px;
     border-radius: 200px 200px 0 0;
     background-color: #ffffff;
     margin: 0 auto;
@@ -138,8 +139,9 @@ a.nav-link.home_list.active:hover {
 
 .container.text_box {
     position: absolute;
-    top: 20%;
+    top: 28%;
     left: 0;
+    right: 0;
     width: 100%;
     display: flex;
     align-items: center;
@@ -165,7 +167,7 @@ a.nav-link.home_list.active:hover {
 @media (max-width:991px) {
 .container.text_box {
     position: absolute;
-    top: 20%;
+    top: 12%;
     left: 0;
     width: 100%;
     display: flex;
@@ -175,7 +177,6 @@ a.nav-link.home_list.active:hover {
     padding: 4%;
     min-height: 50vh;
     border-radius: 7px;
-    background-color: hsla(0,0%,100%,.85);
 }
 
 h3.Data_sports {
@@ -195,6 +196,12 @@ h3.Data_sports {
     height: unset;
 }
 
+}
+
+@media (max-width: 767px) {
+  h3.Data_sports {
+    font-size: 18px;
+  }
 }
   </style>
 </head>

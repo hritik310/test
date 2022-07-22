@@ -65,7 +65,7 @@ class Modelvar(models.Model):
     # status=models.IntegerField(default=0)
 
 class Modelname(models.Model):
-    modelname = models.CharField(max_length=255,null=True,unique=True)
+    modelname = models.CharField(max_length=255,null=True)
     user=models.ForeignKey(user,on_delete=models.CASCADE,null=True)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at =  models.DateTimeField(auto_now=True)

@@ -171,48 +171,6 @@ def buildmodel(request,id):
         df = pd.read_csv('totalcsv/finalDS1.csv')
         co = len(df.columns)
 
-    
-
-
-        df_away=["Indoor/Outdoor",
-            "Temperature",
-            "Humidity",
-            "Wind",	
-            "First Downs",	
-            "Rush Attempts",	
-            "Rush Yards",	
-            "Rush Yards Per Attempt",	
-            "Rush TD",	
-            "Completions",	
-            "Attempts",
-            "Pass Yards",	
-            "Pass Yards Per Attempt",	
-            "Pass Touchdowns",	
-            "Interceptions",	
-            "Sacked",
-            "Sacked Yards",	
-            "Net Pass Yards",	
-            "Total Yards",	
-            "Fumbles",	
-            "Fumbles Lost",	
-            "Turnovers",
-            "Penalties",	
-            "Penalty Yards",	
-            "Third Downs Converted",	
-            "Third Downs Attempted",	
-            "Third Down Percentage",	
-            "Fourth Downs Converted",	
-            "Fourth Downs Attempted",	
-            "Fourth Downs Percentage",	
-            "Time Of Possesion",		
-            "QB CAY_PA",	
-            "QB Drop Perc",	
-            "QB Bad Throw Perc",
-            "QB Blitzed",	
-            "QB Hurried",	
-            "QB Hit",	
-            "QB Pressured Perc",	
-            "QB Yds Per Scram"]
 
         game_info={"Indoor/Outdoor":"Was the game played indoors or outdoors",
         "Temperature":"Temperature at the time of kickoff",
@@ -271,7 +229,7 @@ def buildmodel(request,id):
         return redirect('membership') 
 
 
-    return render(request,"signup/buildmodel.html",{'re':req,"df":list(df_away),"all":all,"amount":amountOfGames,
+    return render(request,"signup/buildmodel.html",{'re':req,"all":all,"amount":amountOfGames,
     "game_info":game_info,"team_stats":team_stats,"qb_data":qb_data})
     # return render(request,"signup/buildmodel.html",{'H':data"df":list(df_away),'status':status,"all":all})
    
@@ -860,9 +818,6 @@ def selectvariable(request):
     return render(request,"signup/buildmodel3.html")
 
 
-def training(request):
-    return render(request,"signup/buildmodel4.html")
-
 def modelname(request):
     two = Modelname.objects.all()
     if request.method == "POST":
@@ -1209,11 +1164,20 @@ def minmax(request):
     if newdata:
         newlist = sum(newdata)
     else:
-        newlist=1100
+        newlist=1088
 
     data = {
     "status":"OK",
     "dataset":newlist
     }
     return JsonResponse(data)
+    
+def download_var(request):
+    filename = "totalcsv/variable_define.csv"
+    download_name ="variable_definitions.csv"
+    with open(filename, 'r') as f:
+        file_data = f.read()
+    response = HttpResponse(file_data, content_type='text/csv')
+    response['Content-Disposition'] = "attachment; filename=%s"%download_name
+    return response
 

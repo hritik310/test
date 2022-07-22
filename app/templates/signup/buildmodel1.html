@@ -444,13 +444,8 @@ div.top_ten_text {
             </div>
 
             <div class="container text-center tabdiv">
-               <a href="#"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Variable Definitions</button></a>
-               <div id="demo" class="collapse container-box">
-                <div class="top_ten_text"> 
-                  {{top_ten}}
-                  </div>
-                
-               </div>
+               <a href="{% url 'download/var'%}">
+                 <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Variable Definitions</button></a>
              </div>
              <div class="row btn_section"> 
               <div>
@@ -496,7 +491,6 @@ div.top_ten_text {
                    <li>Step 4</li>
                    <li>Step 5</li>
                    <li>Step 6</li>
-                   <li>Step 7</li>
                 </ul>
                       </div>
                       <div class="col-lg-1">
