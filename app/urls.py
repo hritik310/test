@@ -6,6 +6,7 @@ from app.Views import Paymentview
 from app.Views import  Paymentview
 from app.Views import Newprediction
 from app.Views import NFLview
+from app.Views import TwitterView
 
 
 
@@ -69,6 +70,13 @@ urlpatterns = [
     # NFL View
 
     path('NFL', NFLview.nfl, name = 'NFL'),
+    
+    # TwitterView
+
+    path('tweets', TwitterView.tweetshow, name = 'tweets'),
+    path('perctweets', TwitterView.Perctweets, name = 'perctweets'),
+    path('plot2', TwitterView.Plot2, name = 'plot2'),
+    path('plot3', TwitterView.Plot3, name = 'plot3'),
 
 
 
