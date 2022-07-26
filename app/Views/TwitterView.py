@@ -20,7 +20,8 @@ from sklearn.metrics import accuracy_score,precision_score,recall_score,confusio
 from sklearn.metrics import plot_confusion_matrix
 from django.http import JsonResponse
 import time
-
+import os
+directory = os.getcwd()
 
 # In[164]:
 
@@ -122,7 +123,7 @@ def Perctweets(request):
 
 
     from matplotlib import pyplot as plt
-    import os
+    
 
 
     # Plot bar chart with data points
@@ -131,7 +132,14 @@ def Perctweets(request):
     plt.title("Percentage of tweets that are positive")
     plt.xlabel('Team') 
     plt.ylabel('Percentage %')
-    hom = plt.show()
+    filepath = directory + '/app/static/image/plot1.png'
+    if os.path.isfile(filepath):
+        os.remove(filepath) 
+    # plt.figure(figsize=(15,13)) 
+    plt.savefig(filepath)
+    plt.close()
+
+
 
     # directory = os.getcwd()
     # filepath = directory + '/app/static/image/plot1.png'
@@ -198,12 +206,12 @@ def Perctweets(request):
     # # plt.savefig(filepath)
     # return render(request,"twitter/tweets.html")
 
-
+    
     # In[ ]:
 
     data = {
     "status":"OK",
-    "data1":hom,
+    "data1":"/static/image/plot1.png",
     }
 
     return JsonResponse(data)
@@ -305,8 +313,6 @@ def Plot2(request):
     # In[169]:
 
 
-    from matplotlib import pyplot as plt
-    import os
 
 
    
@@ -326,15 +332,17 @@ def Plot2(request):
     plt.title("Avg score for every tweet -1(negative) to 1(positive)")
     plt.xlabel('Team') 
     plt.ylabel('Avg Sentiment Score') 
-    aga = plt.show()
-    # # # Display the plot
-    # # # filepath = directory + '/app/static/image/plot2.png'
-    # # # if os.path.isfile(filepath):
-    # # #     os.remove(filepath)  
-    # # # plt.savefig(filepath)
+    filepath = directory + '/app/static/image/plot2.png'
+    if os.path.isfile(filepath):
+        os.remove(filepath) 
+    # plt.figure(figsize=(15,13)) 
+    plt.savefig(filepath)
+    plt.close()
+
 
     data = {
     "status":"OK",
+    "image":"/static/image/plot2.png",
     }
 
     return JsonResponse(data)
@@ -434,9 +442,6 @@ def Plot3(request):
     # In[169]:
 
 
-    from matplotlib import pyplot as plt
-    import os
-
 
     tweetCount = tweetCount.sort_values('tweet count',ascending=False)
 
@@ -451,12 +456,17 @@ def Plot3(request):
     plt.xlabel('Team') 
     plt.ylabel('Tweets') 
     # Display the plot
-    baga =plt.show()
-
+    filepath = directory + '/app/static/image/plot3.png'
+    if os.path.isfile(filepath):
+        os.remove(filepath) 
+    # plt.figure(figsize=(15,13)) 
+    plt.savefig(filepath)
+    plt.close()
    
 
     data = {
     "status":"OK",
+    "image":"/static/image/plot3.png",
     }
 
     return JsonResponse(data)

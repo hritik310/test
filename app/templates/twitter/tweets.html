@@ -131,6 +131,9 @@
     body.loading .modal {
     display: block;
     }
+  img[src=""] {
+      display: none;
+  }
 
 @media (max-width:991px) {
 .container.text_box {
@@ -184,11 +187,15 @@ h3.Data_sports {
 
       <button type="button" id ="btn1" class="btn btn-primary center_btn" >Positive tweets</button>
       </div>
+  
+      <img src = "" id="target">
+ 
     </div>
     <div class="col-md-4">
       <div class="moon_box">
       <button type="button" id ="btn2" class="btn btn-primary center_btn">Avg -ve to +ve</button>
       </div>
+      <img src = "" id="target2">
     </div>
     <div class="col-md-4">
       <div class="moon_box">
@@ -196,6 +203,7 @@ h3.Data_sports {
       <button type="button" id ="btn3" class="btn btn-primary center_btn">Tweet Traffic</button>
 
       </div>
+      <img src = "" id="target3">
     </div>
   </div>
 </div>
@@ -214,6 +222,7 @@ h3.Data_sports {
                 dataType: 'json',
                 success: function (data) {   
                     console.log(data) 
+                    $("#target").attr("src",data.data1);
                 
                 }
             });
@@ -229,7 +238,8 @@ h3.Data_sports {
                 },
                 dataType: 'json',
                 success: function (data) {   
-                    console.log(data) 
+                    console.log(data)
+                    $("#target2").attr("src",data.image); 
                 
                 }
             });
@@ -245,7 +255,8 @@ h3.Data_sports {
                 },
                 dataType: 'json',
                 success: function (data) {   
-                    console.log(data) 
+                    console.log(data)
+                    $("#target3").attr("src",data.image); 
                 
                 }
             });
