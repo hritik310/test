@@ -137,7 +137,6 @@ def Perctweets(request):
         os.remove(filepath) 
     # plt.figure(figsize=(15,13)) 
     plt.savefig(filepath)
-    plt.close()
 
 
 
@@ -337,7 +336,6 @@ def Plot2(request):
         os.remove(filepath) 
     # plt.figure(figsize=(15,13)) 
     plt.savefig(filepath)
-    plt.close()
 
 
     data = {
