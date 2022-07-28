@@ -5,6 +5,9 @@ from app.Views import Signupviews
 from app.Views import Paymentview
 from app.Views import  Paymentview
 from app.Views import Newprediction
+from app.Views import NFLview
+from app.Views import TwitterView
+
 
 
  
@@ -23,9 +26,7 @@ urlpatterns = [
  # build model urls
     path('buildmodel/<int:id>', Signupviews.buildmodel, name ='buildmodel'),
     path('buildmodel1/', Signupviews.heatmap, name ='buildmodel1'),
-    # path('buildmodel2/', Signupviews.selectml, name='buildmodel2'),
     path('buildmodel3/', Signupviews.selectvariable, name='buildmodel3'),
-    path('buildmodel4/', Signupviews.training, name='buildmodel4'),
     path('buildmodel5/', Signupviews.modelname, name='buildmodel5'),
     path('download',Signupviews.download_file,name='download'),
     path('download/corr',Signupviews.download_corr_file,name='download/corr'),
@@ -43,7 +44,9 @@ urlpatterns = [
     path('updatemodel/<int:id>',Signupviews.update,name="updatemodel"),
     path('delete/<int:id>',Signupviews.deletemodel,name="delete"),
    
-    
+    path('download/var',Signupviews.download_var,name='download/var'),
+
+
     # path('downloadimg',Signupviews.send_file,name='downloadimg'),
 
 
@@ -62,6 +65,19 @@ urlpatterns = [
 
 
     path("minmax",Signupviews.minmax,name="minmax"),
+
+
+    # NFL View
+
+    path('NFL', NFLview.nfl, name = 'NFL'),
+    
+    # TwitterView
+
+    path('tweets', TwitterView.tweetshow, name = 'tweets'),
+    path('perctweets', TwitterView.Perctweets, name = 'perctweets'),
+    path('plot2', TwitterView.Plot2, name = 'plot2'),
+    path('plot3', TwitterView.Plot3, name = 'plot3'),
+
 
 
 ]

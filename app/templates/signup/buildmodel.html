@@ -20,9 +20,35 @@
       <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> -->
       <style>
          body{
+           
          /*line-height:0;
          background: #ebeded;*/
          }
+         .tooltips {
+            position: relative;
+            display: inline-block;
+     
+          }
+          
+          .tooltips .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            top: -5px;
+            left: 105%;
+          }
+          
+          .tooltips:hover .tooltiptext {
+            visibility: visible;
+          }
          nav.navbar.navbar-inverse.background {
          background-color: #fff;
          border-color: #ffffff;
@@ -307,12 +333,6 @@
    font-size: 18px;
 }
 
-.boxes-main {
-   max-height: 350px;
-   overflow: hidden;
-   overflow-y: scroll;
-}
-
 .boxes-main::-webkit-scrollbar {
    width: 10px;
    background-color: transparent;
@@ -321,6 +341,16 @@
 .boxes-main::-webkit-scrollbar-thumb {
    border-radius: 20px;
    background-color: #d6d6d6;
+}
+
+.boxes-heading {
+   display: flex;
+   width: 100%;
+}
+
+span.tooltiptext {
+   top: -33px !important;
+   left: 13% !important;
 }
 
 @media only screen and (min-width: 768px) {
@@ -361,6 +391,10 @@
       }
 
 }
+
+
+
+ 
 
 
       </style>
@@ -415,12 +449,18 @@
             
             <div class="boxes-main">
                
-               {% for i in df|slice:":4"  %}
-         <div class="col-md-2">
-         <div class="column  {%for z in all %}  {%if  i  in z.title  and z.status == 0 %} coloradd   {%endif%} {%endfor%}" id="gaming_id_{{forloop.counter}}">
-         <div class="Info-sign">
-         <span class="glyphicon glyphicon-info-sign"></span> 
+            {% for i,j in game_info.items %}
+           
+    
+         
+            <div class="col-md-2">
+            <div class="column  {%for z in all %}  {%if  i  in z.title  and z.status == 0 %} coloradd   {%endif%} {%endfor%}" id="gaming_id_{{forloop.counter}}">
+            <div class="Info-sign tooltips">
+            <img style="width:18% !important;height:59% !important;float:right" src="/static/image/plus1.jpg" >
+            <span class="tooltiptext">{{j}}</span> 
          </div>
+      
+       
          <div class="home_point">
          <p>{{i}}</p>
          
@@ -447,14 +487,15 @@
          </div>
          </div>
 
-         <h2>Team Stats</h2>
+         <h2 class="boxes-heading">Team Stats</h2>
        
             <div class="boxes-main">
-               {% for i in df|slice:"4:31"  %}
+               {% for i,j in team_stats.items  %}
                <div class="col-md-2">
                <div class="column  {%for z in all %}  {%if  i  in z.title  and z.status == 0 %} coloradd   {%endif%} {%endfor%}" id="id_{{forloop.counter}}">
-               <div class="Info-sign">
-               <span class="glyphicon glyphicon-info-sign"></span> 
+               <div class="Info-sign tooltips">
+               <img style="width:18% !important;height:59% !important;float:right" src="/static/image/plus1.jpg" >
+               <span class="tooltiptext">{{j}}</span> 
                </div>
                <div class="home_point">
                <p>{{i}}</p>
@@ -481,14 +522,15 @@
                </div>
                </div>
                
-               <h2>QB Data</h2>
+               <h2 class="boxes-heading">QB Data</h2>
             <div class="boxes-main">
              
-               {% for i in df|slice:"31:"  %}
+               {% for i,j in qb_data.items %}
                <div class="col-md-2">
                <div class="column  {%for z in all %}  {%if  i  in z.title  and z.status == 0 %} coloradd   {%endif%} {%endfor%}" id="QB_id_{{forloop.counter}}">
-               <div class="Info-sign">
-               <span class="glyphicon glyphicon-info-sign"></span> 
+               <div class="Info-sign tooltips">
+               <img style="width:18% !important;height:59% !important;float:right" src="/static/image/plus1.jpg" >
+               <span class="tooltiptext">{{j}}</span> 
                </div>
                <div class="home_point">
                <p>{{i}}</p>
@@ -841,7 +883,7 @@
                      });
          
                      // console.log(data1.totalagain);
-                   
+                  
          
                      // $(html).appendTo('.results');
                      $('.results').html(html);

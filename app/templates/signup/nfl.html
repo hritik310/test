@@ -1,0 +1,78 @@
+{%include "header/header.html"%}
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        
+        width: 50%;
+  
+      }
+  
+      .table-wrapper-scroll-y.my-custom-scrollbar {
+        width: 50%;
+        max-width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+  
+      table.center {
+        width: 100%;  
+        
+        }
+      
+      td, th {
+        border: 2px solid black;
+        text-align: left;
+        padding: 8px;
+      }
+  
+  
+      .game{
+        background-color: #dddddd;
+      }
+
+  
+      .my-custom-scrollbar {
+        position: relative;
+        height: 400px;
+        overflow: auto;
+        }
+        .center {
+          position: sticky;
+          top: 0;
+          width: 50%;
+    
+      }
+</style>
+
+
+
+<center><h1>NFL ELO RATING</h1></center>
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+    <table class="center">
+        <tr>
+          <th>Team</th>
+          <th>ELO Rating</th>
+        </tr>
+        
+      <tr>
+        
+        <td class ="game">
+        {%for i in team_list%}
+        {{i}}<br><br>
+        {%endfor%}
+        </td>
+      
+        <td class="wins">
+            {%for i in rating_list%}
+            {{i}}<br><br>
+            {%endfor%}
+
+        </td>
+      
+  
+      </tr>
+  
+    </table>
+  </div>

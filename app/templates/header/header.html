@@ -134,7 +134,7 @@ button.nav-link.home_list {
 
   a.nav-link.home_list,
   button.nav-link.home_list{
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .section_first .row_section_grid {
@@ -195,8 +195,8 @@ button.nav-link.home_list {
           Analytics
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Twitter analysis</a>
-          <a class="dropdown-item" href="#">Elo Rankings</a>
+          <a class="dropdown-item" href="{% url 'tweets' %}">Twitter analysis</a>
+          <a class="dropdown-item" href="{% url 'NFL' %}">Elo Rankings</a>
           <a class="dropdown-item" href="#">Articles</a>
           <ul class="dropdown-sub-menu m-0 p-0">
             <li class="sub-li nav-item d-flex">

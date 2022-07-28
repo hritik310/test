@@ -171,48 +171,47 @@ def buildmodel(request,id):
         df = pd.read_csv('totalcsv/finalDS1.csv')
         co = len(df.columns)
 
-    
 
+        game_info={"Indoor/Outdoor":"Was the game played indoors or outdoors",
+        "Temperature":"Temperature at the time of kickoff",
+        "Humidity":"% of humiditiy at the time of kickoff",
+        "Wind":"MPH of wind at the time of kickoff"}
+        team_stats={"First Downs":"First Downs Gained",
+        "Rush Attempts":"# of rushing attempts",
+        "Rush Yards":"# of total rushing yards",
+        "Rush Yards Per Attempt":"Rushing Yards Per Attempt (Rush Yards/Rush Attempts)",
+        "Rush TD":"Rush Touchdowns",
+        "Completions":"Passing Completions",
+        "Attempts":"Passing Attempts",
+        "Pass Yards":"Passing Yards",
+        "Pass Yards Per Attempt":"Passing Yards Per Attempts (Passing Yards/Passing Attempts)",
+        "Pass Touchdowns":"Passing Touchdowns",
+        "Interceptions":"Interceptions Thrown",
+        "Sacked":"Times Sacked",
+        "Sacked Yards":"Amount of negative yards sacks caused",
+        "Net Pass Yards":"Net Pass Yards (Home Pass Yards-Sacked Yards)/Passing Attempts",
+        "Total Yards":"Total Yards Offense Gained",
+        "Fumbles":"# of fumbles",
+        "Fumbles Lost":"# of fumbles team lost",
+        "Turnovers":"# of turnovers ",
+        "Penalties":"# of penalities called",
+        "Penalty Yards":"Total number of yards penalties caused",
+        "Third Downs Converted":"Third Down % Percentage (Third Down Conversions/Third Down Attempts)",
+        "Third Downs Attempted":"Third Down % Percentage (Third Down Conversions/Third Down Attempts)",
+        "Third Down Percentage":"Third Down % Percentage (Third Down Conversions/Third Down Attempts)",
+        "Fourth Downs Converted":"Fourth Down % Percentage (Fourth Down Conversions/Fourth Down Attempts)",
+        "Fourth Downs Attempted":"Fourth Down % Percentage (Fourth Down Conversions/Fourth Down Attempts)",
+        "Fourth Downs Percentage":"Fourth Down % Percentage (Fourth Down Conversions/Fourth Down Attempts)",
+        "Time Of Possesion":"Amount of time the ball was possessed"}
 
-        df_away=["Indoor/Outdoor",
-            "Temperature",
-            "Humidity",
-            "Wind",	
-            "First Downs",	
-            "Rush Attempts",	
-            "Rush Yards",	
-            "Rush Yards Per Attempt",	
-            "Rush TD",	
-            "Completions",	
-            "Attempts",
-            "Pass Yards",	
-            "Pass Yards Per Attempt",	
-            "Pass Touchdowns",	
-            "Interceptions",	
-            "Sacked",
-            "Sacked Yards",	
-            "Net Pass Yards",	
-            "Total Yards",	
-            "Fumbles",	
-            "Fumbles Lost",	
-            "Turnovers",
-            "Penalties",	
-            "Penalty Yards",	
-            "Third Downs Converted",	
-            "Third Downs Attempted",	
-            "Third Down Percentage",	
-            "Fourth Downs Converted",	
-            "Fourth Downs Attempted",	
-            "Fourth Downs Converted",	
-            "Time Of Possesion",		
-            "QB CAY_PA",	
-            "QB Drop Perc",	
-            "QB Bad Throw Perc",
-            "QB Blitzed",	
-            "QB Hurried",	
-            "QB Hit",	
-            "QB Pressured Perc",	
-            "QB Yds Per Scram"]
+        qb_data={"QB CAY_PA":"% of times a first down is converted on a pass attempt",
+        "QB Drop Perc":"% of quarterback throws that are dropped",
+        "QB Bad Throw Perc":"% of quarterback throws that are considered bad",
+        "QB Blitzed":"# of times the quarterback was blitzed",
+        "QB Hurried":"# of timeds the quarterback was hurried",
+        "QB Hit":"# of timeds the quarterback was hit",
+        "QB Pressured Perc":"% of passing attempts where the quarterback was pressured",
+        "QB Yds Per Scram":"Avg yards gained per QB scramble"}
 
 
         
@@ -230,7 +229,8 @@ def buildmodel(request,id):
         return redirect('membership') 
 
 
-    return render(request,"signup/buildmodel.html",{'re':req,"df":list(df_away),"all":all,"amount":amountOfGames})
+    return render(request,"signup/buildmodel.html",{'re':req,"all":all,"amount":amountOfGames,
+    "game_info":game_info,"team_stats":team_stats,"qb_data":qb_data})
     # return render(request,"signup/buildmodel.html",{'H':data"df":list(df_away),'status':status,"all":all})
    
 import random
@@ -818,9 +818,6 @@ def selectvariable(request):
     return render(request,"signup/buildmodel3.html")
 
 
-def training(request):
-    return render(request,"signup/buildmodel4.html")
-
 def modelname(request):
     two = Modelname.objects.all()
     if request.method == "POST":
@@ -905,7 +902,7 @@ def update(request,id):
             "Third Down Percentage",	
             "Fourth Downs Converted",	
             "Fourth Downs Attempted",	
-            "Fourth Downs Converted",	
+            "Fourth Downs Percentage",	
             "Time Of Possesion",		
             "QB CAY_PA",	
             "QB Drop Perc",	
@@ -1083,7 +1080,7 @@ def heatmap(request):
             "Home Third Down Percentage",	
             "Home Fourth Downs Converted",	
             "Home Fourth Downs Attempted",	
-            "Home Fourth Downs Converted",	
+            "Home Fourth Downs Percentage",	
             "Home Time Of Possesion",	
             "Away First Downs",	
             "Away Rush Attempts",	
@@ -1167,11 +1164,20 @@ def minmax(request):
     if newdata:
         newlist = sum(newdata)
     else:
-        newlist=1100
+        newlist=1088
 
     data = {
     "status":"OK",
     "dataset":newlist
     }
     return JsonResponse(data)
+    
+def download_var(request):
+    filename = "totalcsv/variable_define.csv"
+    download_name ="variable_definitions.csv"
+    with open(filename, 'r') as f:
+        file_data = f.read()
+    response = HttpResponse(file_data, content_type='text/csv')
+    response['Content-Disposition'] = "attachment; filename=%s"%download_name
+    return response
 
