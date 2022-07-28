@@ -43,12 +43,14 @@
          font-weight: 700;
          }
         
-        
          .navbar-inverse .navbar-nav>li:hover {
          margin-left: 10px;
          background: #69ace0;
          border-radius: 30px;
          }
+
+         <button class="btn backbtn" id="back">Back</button>
+         </a>
          .container-fluid.padding_cont {
          padding: 30px;
          background: #ebeded;
@@ -121,7 +123,7 @@
          display: flex;
          align-items: center;
          justify-content: center;
-         {% comment %} margin-top: 20px; {% endcomment %}
+         margin-top: 20px;
          }
          button.btn.btn-primary.ModelButton {
          margin: 10px;
@@ -231,7 +233,7 @@
 
 
 
-        /* buildmodel1 page css start */
+        /* buildmodel2 page css start */
 
 
         .map-download {
@@ -241,12 +243,16 @@
          .container.tabdiv {
             padding: 40px;
          }
-         .container-box {
-            border: 2px solid black;
-            margin-top: 30px !important;
-            width: 50%;
-            height: auto;
+         .container-box {   
+            {% comment %} margin-top: 30px !important; {% endcomment %}
+            width: 30%;
+            /* height: 200px; */
             margin: 0 auto;
+            text-align: center;
+         }
+
+         .container-fluid .container:nth-child(3) {
+            margin-top: 30px;
          }
 
          button.map-downloadbtn {
@@ -263,6 +269,35 @@
          border: 1px solid #69ade0;
          background: #69ade0;
       }
+
+
+      .Modelbox_div {
+        width: 100%;
+        border: 1px solid black;
+        margin-top: 20px;
+        padding: 10px;
+        height: 100px;
+    }
+
+    button.btn_second {
+    font-weight: 600;
+    background: #69ade0;
+    font-size: 16px;
+    padding: 10px 30px;
+    border-radius: 30px;
+}
+
+button.btn_second:hover{
+    color:#ffffff;
+}
+
+
+
+.btn:focus {
+    color: #ffffff !important;
+    text-decoration: none;
+    background-color: #69ade0 !important;
+}
        /* progress-bar css start */
 
        .step-container > div {
@@ -280,7 +315,7 @@
   }
   .progressbar li {
       list-style-type: none;
-      width: 25%;
+      width: 16%;
       float: left;
       font-size: 12px;
       position: relative;
@@ -325,92 +360,16 @@
       transition: all .8s;
   }
 
-/* .btn {
-  background-color: #55b776;
+.backbtn{
+  background-color: #69ade0;
   margin: 5px;
   width: 75px;
   color: white;
 }
-.btn:hover {
+.backbtn:hover {
   color: white; 
 }
-.btn:focus {
-  color: white;
-} */
-.btn-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
-.step-container > div {
-  height:auto;
-  padding:20px;
-   background: #ccc
-}
-
-.progressbar {
-      margin:20px;
-      counter-reset: step; 
-  }
-  .progressbar li {
-      list-style-type: none;
-      width: 16%;
-      float: left;
-      font-size: 12px;
-      position: relative;
-      text-align: center;
-      text-transform: uppercase;
-      color: #7d7d7d;
-  }
-  .progressbar li:before {
-      width: 15px;
-      height: 15px;
-      content: '';
-      line-height: 30px;
-      border: 2px solid #7d7d7d;
-      background-color: #7d7d7d;
-      display: block;
-      text-align: center;
-      margin: 0 auto 10px auto;
-      border-radius: 50%;
-      transition: all .8s;
-  }
-  .progressbar li:after {
-      width: 100%;
-      height: 2px;
-      content: '';
-      position: absolute;
-      background-color: #7d7d7d;
-      top: 7px;
-      left: -50%;
-      z-index: -1;
-      transition: all .8s;
-  }
-  .progressbar li:first-child:after {
-      content: none;
-  }
-  .progressbar li.active:before {
-    border-color: #69ade0;
-    background-color: #69ade0;
-      transition: all .8s;
-  }
-  .progressbar li.active:after {
-      background-color: #69ade0;
-      transition: all .8s;
-  }
-
-.backbtn {
-  background-color: #69ade0;
-  {% comment %} margin: 5px;
-  width: 75px; {% endcomment %}
-  color: white;
-}
-.backbtn :hover {
-  color: white; 
-}
-.backbtn :focus {
+.backbtn:focus {
   color: white;
 }
 .btn-container {
@@ -420,46 +379,89 @@
   position: absolute;
   bottom: 0;
 }
-div.top_ten_text {
-  -webkit-user-modify: read-write-plaintext-only;
-  margin-bottom: 12px;
-}
 
-
-{% comment %} .section-progressbar {
-  margin-top: 60px;
-} {% endcomment %}
         /* progress-bar css end*/
-
-        
  /* buildmodel1 page css end */
+
+ @media only screen and (max-width: 600px) {
+
+
+.container-box {
+    margin-top: 10px !important;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.container.tabdiv {
+    padding: 0px;
+}
+button.btn.btn-info {
+    width: 100%;
+}
+
+button.btn_second {
+    width: 100%;
+}
+
+}
+
 
       </style>
    </head>
    <body>
       <div class ="col">
          <div class="container-fluid padding_cont">
-            <div class="map-download">
-               <a href="{%url 'download' %}"> <button type="button" class="btn btn-primary map-downloadbtn">Download Variable Statistics</button></a>
-            </div>
-
-            <div class="container text-center tabdiv">
-               <a href="#"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Variable Definitions</button></a>
-               <div id="demo" class="collapse container-box">
-                <div class="top_ten_text"> 
-                  {{top_ten}}
-                  </div>
-                
-               </div>
-             </div>
-             <div class="row btn_section"> 
-              <div>
-                 <a href="{% url 'download/corr'%}"><button type="button" class="btn btn-primary ModelButton">Correlations</button></a>
+                <div class="container text-center tabdiv">
+                <a href="#"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Training Metrics</button></a>
+                <div id="demo" class="collapse container-box">
+                    <div class="prediction" style="display: block;"> 
+                        <h5> Variable Importance</h5>
+                        <div class="row para-sec feats ">
+                            <p>Mean Absolute Error: <span>30%</span> </p>
+                            <p>Mean Squared Error: <span>37%</span> </p>
+                            <p>Root Mean Squared Error: <span>33%</span> </p>
+                            <p>R2: <span>33%</span> </p>
+                        </div> 
+                    </div> 
+                </div>
               </div>
-            
-           </div>
+
+
+              <div class="container">
+                <div class="row"> 
+                    <div class="container-box">
+                         <button type="button" class="btn btn-secondary btn_second">Variable list</button>
+                    </div>
+                </div>
+              
+             </div>
+             <div class="container">
+                <div class="row"> 
+                    <div class="container-box">
+                         <button type="button" class="btn btn-secondary btn_second">Past Records</button>
+                    </div>
+                </div>
+              
+             </div>
+
          </div>
-       
+         <!-- <div class="container">
+            <div class="row"> 
+                <div class="container-box">
+                     <button type="button" class="btn btn-secondary btn_second">Variable list</button>
+                </div>
+            </div>
+          
+         </div>
+         <div class="container">
+            <div class="row"> 
+                <div class="container-box">
+                     <button type="button" class="btn btn-secondary btn_second">Past Records</button>
+                </div>
+            </div>
+          
+         </div> -->
 
 
          <!-- progress-bar html start -->
@@ -473,37 +475,36 @@ div.top_ten_text {
                     <div class="step">Step 3</div>
                     <div class="step">Step 4</div>
                     <div class="step">Step 5</div>
-                    <div class="step">Step 6</div>
+                    <div class="step">Step 4</div>
                   
                   
                 </div>
           </div> -->
         </div>
         <div class="container p-5">
-                    <div class="row">
-
-                      <div class="col-lg-1">
-                        <a href="{% url 'buildmodel' request.user.id%}">
-                      <button class="btn backbtn" id="back">Back</button>
-                        </a>
+                    <div class="row align-items-center">
+                     <div class="col-lg-1">
+                        <a href="{% url 'simulation' %}">
+                           <button class="btn backbtn" id="next">Back</button>
+                       </a>
                       </div>
-
-                      <div class="col-lg-10 p-4 section-progressbar">
+                      <div class="col-lg-10 p-4">
                     <ul id="progress-bar" class="progressbar">
                    <li class="active">Step 1</li>
                    <li class="active">Step 2</li>
-                   <li>Step 3</li>
-                   <li>Step 4</li>
-                   <li>Step 5</li>
-                   <li>Step 6</li>
+                   <li class="active">Step 3</li>
+                   <li class="active">Step 4</li>
+                   <li class="active">Step 5</li>
+                   <li class="active">Step 6</li>
                    <li>Step 7</li>
                 </ul>
                       </div>
-                      <div class="col-lg-1">
-                        <a href="{% url 'buildmodel3' %}">
-                         <button class="btn backbtn" id="next">Next</button>
-                        </a>
-                      <button class="action submit btn btn-success">Submit</button> 
+                      <div class="col-lg-1" style="padding:20px">
+                        
+                    <a href="{% url 'buildmodel5' %}">
+                        <button class="btn backbtn" id="next">Next</button>
+                    </a>
+                    <button class="action submit btn btn-success">Submit</button>
                       </div>
                   </div>
                     </div>

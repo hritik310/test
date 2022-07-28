@@ -28,7 +28,7 @@
          .navbar-inverse .navbar-nav>li{
          margin-left: 10px;
          }
-        
+    
          .navbar-inverse.background .navbar-toggle {
          border-color: #333;
          background: #000000;
@@ -43,7 +43,7 @@
          font-weight: 700;
          }
         
-        
+       
          .navbar-inverse .navbar-nav>li:hover {
          margin-left: 10px;
          background: #69ace0;
@@ -121,7 +121,7 @@
          display: flex;
          align-items: center;
          justify-content: center;
-         {% comment %} margin-top: 20px; {% endcomment %}
+         margin-top: 20px;
          }
          button.btn.btn-primary.ModelButton {
          margin: 10px;
@@ -231,120 +231,9 @@
 
 
 
-        /* buildmodel1 page css start */
+        /* buildmodel2 page css start */
 
-
-        .map-download {
-            text-align: center;
-         }
-
-         .container.tabdiv {
-            padding: 40px;
-         }
-         .container-box {
-            border: 2px solid black;
-            margin-top: 30px !important;
-            width: 50%;
-            height: auto;
-            margin: 0 auto;
-         }
-
-         button.map-downloadbtn {
-         font-size: 16px;
-         padding: 10px 20px;
-         border-radius: 30px;
-         background: #69ade0;
-         border: 1px solid #69ade0;
-         }
-         button.btn.btn-info {
-         padding: 10px 30px;
-         border-radius: 30px;
-         font-size: 16px;
-         border: 1px solid #69ade0;
-         background: #69ade0;
-      }
-       /* progress-bar css start */
-
-       .step-container > div {
-  height:auto;
-  padding:20px;
-   background: #ccc
-}
-
-.progressbar {
-      margin:20px;
-      counter-reset: step;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
-  .progressbar li {
-      list-style-type: none;
-      width: 25%;
-      float: left;
-      font-size: 12px;
-      position: relative;
-      text-align: center;
-      text-transform: uppercase;
-      color: #7d7d7d;
-  }
-  .progressbar li:before {
-      width: 15px;
-      height: 15px;
-      content: '';
-      line-height: 30px;
-      border: 2px solid #7d7d7d;
-      background-color: #7d7d7d;
-      display: block;
-      text-align: center;
-      margin: 0 auto 10px auto;
-      border-radius: 50%;
-      transition: all .8s;
-  }
-  .progressbar li:after {
-      width: 100%;
-      height: 2px;
-      content: '';
-      position: absolute;
-      background-color: #7d7d7d;
-      top: 7px;
-      left: -50%;
-      z-index: -1;
-      transition: all .8s;
-  }
-  .progressbar li:first-child:after {
-      content: none;
-  }
-  .progressbar li.active:before {
-      border-color: #69ade0;
-      background-color: #69ade0;
-      transition: all .8s;
-  }
-  .progressbar li.active:after {
-      background-color: #69ade0;
-      transition: all .8s;
-  }
-
-/* .btn {
-  background-color: #55b776;
-  margin: 5px;
-  width: 75px;
-  color: white;
-}
-.btn:hover {
-  color: white; 
-}
-.btn:focus {
-  color: white;
-} */
-.btn-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
-.step-container > div {
+        .step-container > div {
   height:auto;
   padding:20px;
    background: #ccc
@@ -394,23 +283,23 @@
   .progressbar li.active:before {
     border-color: #69ade0;
     background-color: #69ade0;
-      transition: all .8s;
+    transition: all .8s;
   }
   .progressbar li.active:after {
       background-color: #69ade0;
       transition: all .8s;
   }
 
-.backbtn {
+.backbtn{
   background-color: #69ade0;
-  {% comment %} margin: 5px;
-  width: 75px; {% endcomment %}
+  margin: 5px;
+  width: 75px;
   color: white;
 }
-.backbtn :hover {
+.backbtn:hover {
   color: white; 
 }
-.backbtn :focus {
+.backbtn:focus {
   color: white;
 }
 .btn-container {
@@ -420,90 +309,180 @@
   position: absolute;
   bottom: 0;
 }
-div.top_ten_text {
-  -webkit-user-modify: read-write-plaintext-only;
-  margin-bottom: 12px;
+
+        /* progress-bar css end*/
+ /* buildmodel1 page css end */
+
+
+
+ @media only screen and (max-width: 600px) {
+  .dropdown_section{
+    width: 100%;
+    margin: 0 auto;
+     padding: 0px;
 }
 
 
-{% comment %} .section-progressbar {
-  margin-top: 60px;
-} {% endcomment %}
-        /* progress-bar css end*/
+textarea#w3review{
+    width: 100%;
+     margin-bottom: 15px;
+}
 
-        
- /* buildmodel1 page css end */
+.dropdown_section {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0px;
+}
+
+.container.tabdiv {
+    padding: 0px;
+}
+}
+
+
+
+
+.Modelbox_div p {
+  margin: 0 !important;
+}
+.Modelbox_div {
+  border: 2px solid black;
+  text-align: center;
+  padding: 20px;
+}
+
+select#drop_section {
+  padding: 15px;
+  margin-top: 30px;
+}
+.row.boxmoddle {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 
       </style>
    </head>
    <body>
       <div class ="col">
          <div class="container-fluid padding_cont">
-            <div class="map-download">
-               <a href="{%url 'download' %}"> <button type="button" class="btn btn-primary map-downloadbtn">Download Variable Statistics</button></a>
+            <div class="row btn_section">
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <textarea id="w3review" class="textarea-box"  placeholder="Training Set" name="w3review" rows="" cols="30"></textarea>
+                    <!-- <input type="text" class="text-input-box" id="lname" placeholder="Training Set" name="lname"> -->
+                </div>
+                <div class="col-md-3">
+                    <textarea id="w3review" class="textarea-box" placeholder="Test Size" name="w3review" rows="" cols="30"></textarea>
+                    <!-- <input type="text" class="text-input-box"  id="lname" placeholder="Test Size" name="lname"> -->
+                </div>
+                <div class="col-md-3"></div>
+       
             </div>
 
             <div class="container text-center tabdiv">
-               <a href="#"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Variable Definitions</button></a>
-               <div id="demo" class="collapse container-box">
-                <div class="top_ten_text"> 
-                  {{top_ten}}
-                  </div>
-                
-               </div>
+                <div class="dropdown_section">
+                    <form action="" method="GET">
+                    <select name="cars" id="drop_section">
+                      <option value="" selected disabled hidden>Select Machine learning </option>    
+                      <option value="total" >Xgboost</option>
+                     
+                    </select>
+                    </form>
+                 </div>
              </div>
-             <div class="row btn_section"> 
-              <div>
-                 <a href="{% url 'download/corr'%}"><button type="button" class="btn btn-primary ModelButton">Correlations</button></a>
+
+
+
+             <div class="container">
+              <div class="row boxmoddle"> 
+                  <div class="col-md-3">
+                      <div class="Modelbox_div">
+                           <p> Offensive Emphasized Model.</p>
+                      </div>
+                  </div>
+                      <div class="col-md-3">
+                          <div class="Modelbox_div">
+                               <p> Defense Emphasized Model.</p>
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                          <div class="Modelbox_div">
+                              <p> Pace Emphasized Model.</p>
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                          <div class="Modelbox_div">
+                            <p> Start from scratch.</p>
+                          </div>
+                      </div>
+                  
+                  </div>
               </div>
-            
-           </div>
+
+
+
+
+
+
+
          </div>
-       
+         {% comment %} <div class="container">
+            <div class="row"> 
+                <div class="col-md-3">
+                    <div  class="Modelbox_div">
+                         <p> Offensive Emphasized Model.</p>
+                    </div>
+                </div>
+                    <div class="col-md-3">
+                        <div  class="Modelbox_div">
+                             <p> Defense Emphasized Model.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div  class="Modelbox_div">
+                            <p> Pace Emphasized Model.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div  class="Modelbox_div">
+                          <p> Start from scratch.</p>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+          
+         </div> {% endcomment %}
 
 
          <!-- progress-bar html start -->
 
-         <div class="container p-5">
-          <!-- <div class="row">
-                <div class="col-md-12 step-container">
-                  
-                    <div class="step">Step 1</div>
-                    <div class="step">Step 2</div>
-                    <div class="step">Step 3</div>
-                    <div class="step">Step 4</div>
-                    <div class="step">Step 5</div>
-                    <div class="step">Step 6</div>
-                  
-                  
-                </div>
-          </div> -->
-        </div>
+         
         <div class="container p-5">
                     <div class="row">
-
                       <div class="col-lg-1">
-                        <a href="{% url 'buildmodel' request.user.id%}">
-                      <button class="btn backbtn" id="back">Back</button>
-                        </a>
+                        <a href="{% url 'buildmodel1' %}">
+                          <button class="btn backbtn" id="back">Back</button>
+                         </a>
                       </div>
-
-                      <div class="col-lg-10 p-4 section-progressbar">
+                      <div class="col-lg-10 p-4">
                     <ul id="progress-bar" class="progressbar">
                    <li class="active">Step 1</li>
                    <li class="active">Step 2</li>
-                   <li>Step 3</li>
+                   <li class="active">Step 3</li>
                    <li>Step 4</li>
                    <li>Step 5</li>
                    <li>Step 6</li>
-                   <li>Step 7</li>
+                   
                 </ul>
                       </div>
-                      <div class="col-lg-1">
-                        <a href="{% url 'buildmodel3' %}">
-                         <button class="btn backbtn" id="next">Next</button>
-                        </a>
-                      <button class="action submit btn btn-success">Submit</button> 
+                      <div class="col-lg-1" style="padding:20px">
+                      
+                    <a href="{% url 'buildmodel3' %}">
+                      <button class="btn backbtn" id="next">Next</button>
+                    </a>
+                    <button class="action submit btn btn-success">Submit</button>
                       </div>
                   </div>
                     </div>
@@ -630,143 +609,9 @@ div.top_ten_text {
          //   {% endcomment %}
            
          
-            $('.buildmodelbutton').on('click', function() {
-               var prev = $(this).attr('predict');
-               console.log(prev)
-         
-               $( ".Games_box" ).show();
-               $( ".prediction" ).show();
-         
-               console.log('manpreet');
-         
-               $.ajax({
-                 type:"GET",
-                 url: '/buildmodelbutton',
-                 data: {
-         
-                     'id':prev
-                   
-         
-                 },
-                 //dataType: 'json',
-                 success: function (data1) {
-                    console.log(data1)
-                    console.log(data1.weight)
-            
-                    if(data1.data == 'ncaab'){
-                       var html = '';
-                        var over_html= '';
-                        var spread_html= '';
-                        var predict_html='';
-                        
-                        $.each(data1.total, function(index, value) {
-         
-         
-                        html += "<p>" + value.last_games +" : <span class='number'>"+value.wins+"-"+ value.loss +"</span></p>";
-                        over_html += "<p>" + value.last_games +" : <span class='number'>"+value.winoverunder+"-"+ value.lossoverunder +"-"+value.tiesoverunder+" "+value.overunder_percent+ "</span></p>";
-                        spread_html+= "<p>" + value.last_games +" : <span class='number'>"+value.winspread+"-"+ value.lossspread +"-"+value.tiesspread+" "+value.spread_percent+ "</span></p>";
-                     });
-                        $.each(data1.ncaab, function(index, predict) {
-                           predict_html+= "<p>"+predict.home+"</p>";
-            
-                     });
-         
-                     // console.log(data1.totalagain);
-                   
-         
-                     // $(html).appendTo('.results');
-                     $('.results').html(html);
-                     $('.show').html(over_html);
-                     $('.spread').html( spread_html);
-                     $('.predict').html( predict_html);
-                    
-         
-         
-                    }
-                    else{
-                       var html = '';
-                       var over_html= '';
-                       var spread_html= '';
-                        
-                        $.each(data1.total, function(index, value) {
-         
-                        html += "<p>" + value.ML_last_games +" : <span class='number'>"+value.ML_wins+"-"+ value.ML_loss +"-"+value.ML_ties+ "</span></p>";
-                        over_html += "<p>" + value.last_games +" : <span class='number'>"+value.wins+"-"+ value.loss +"-"+value.ties+" "+value.percent+ "</span></p>";
-                        spread_html+= "<p>" + value.spread_last_games +" : <span class='number'>"+value.spread_wins+"-"+ value.spread_loss +"-"+value.spread_ties+" "+value.spread_percent+"</span></p>";
-         
-                     });
-                     var predict_html='';
-                     var feature_html='';
-                     var weight = '';
-                     var cover = '';
-                     var total_gain = '';
-                     var total_cover = '';
-                     // console.log(data1.totalagain);
-                     $.each(data1.totalagain, function(index, predict) {
-                     predict_html+= "<p>"+predict.home+"</p>";
-         
-                     });
-                     var featureData = data1.feature
-                     console.log('featureData',featureData)
-         
-                     $.each(featureData, function(index, feats) {
-         
-                        console.log('feats',index,feats);
-                    
-         
-                        feature_html+= `<p>${index} : <span>${feats}%</span> </p>`;
-         
-                     });
-                     var featureD = data1.weight 
-                     $.each(featureD, function(index, feat) {
-                        weight+= `<p>${index} : <span>${feat}</span> </p>`;
-         
-                     });
-                     var featureD = data1.cover 
-                     $.each(featureD, function(index, feat) {
-                        cover+= `<p>${index} : <span>${feat}</span> </p>`;
-         
-                     }); 
-                     var featureD = data1.total_gain 
-                     $.each(featureD, function(index, feat) {
-                        total_gain+= `<p>${index} : <span>${feat}</span> </p>`;
-         
-                     }); 
-                     var featureD = data1.total_cover 
-                     $.each(featureD, function(index, feat) {
-                        total_cover+= `<p>${index} : <span>${feat}</span> </p>`;
-         
-                     });  
-         
-                  
             
          
-                     // $(html).appendTo('.results');
-                     $('.results').html(html);
-                     $('.show').html(over_html);
-                     $('.spread').html( spread_html);
-                     $('.predict').html( predict_html);
-                     $('.feats').html(feature_html);
-                     $('#menu1').html(weight);
-                     $('#menu2').html(cover);
-                     $('#menu3').html(total_gain);
-                     $('#menu4').html(total_cover);
-         
-         
-                    }             
-            
-         
-         
-                 } 
-               });
-         
-               
-            });
-         
-            $("#drop").on('change',function() {
-               this.form.submit();
-            });
-         
+
             $(".build").on('click',function () {
                console.log('addd');
                var ro = $(this).attr('makes');
