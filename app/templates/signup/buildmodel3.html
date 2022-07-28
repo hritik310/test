@@ -403,10 +403,10 @@
             </div>
             </div>
             <div class="modal"><!-- Place at bottom of page --></div>
-            <div class="text-center">
+            {% comment %} <div class="text-center">
             <a>
-            <button type="button" class="btn btn-primary buildmodelbutton" predict={{re}}>Train Model</button></a>
-            </div>
+            <button type="button" class="btn btn-primary buildmodelbutton">Train Model</button></a>
+            </div> {% endcomment %}
             <div class="row">
             <div class="col-md-4">
             <div class="Games_box">
@@ -674,10 +674,10 @@
             }); {% endcomment %}
 
          
-            $('.buildmodelbutton').on('click', function() {
-               var prev = $(this).attr('predict');
-               console.log(prev)
-         
+            //$('.buildmodelbutton').on('click', function() {
+              // var prev = $(this).attr('predict');
+              $body = $("body");
+              $body.addClass("loading");
                $( ".Games_box" ).show();
                $( ".prediction" ).show();
          
@@ -686,17 +686,21 @@
                  url: '/buildmodelbutton',
                  data: {
          
-                     'id':prev
+                     'id':''
                    
          
                  },
                  //dataType: 'json',
                  success: function (data) {
+                  $body.removeClass("loading");
                     console.log(data)
                     localStorage.setItem("team_stats", JSON.stringify(data.team_stats));
                     localStorage.setItem("team", JSON.stringify(data.simulation));
                     localStorage.setItem("wins", JSON.stringify(data.wins));
                     localStorage.setItem("loss", JSON.stringify(data.loss));
+
+                    
+
             
                        var html = '';
                         var over_html= '';
@@ -725,7 +729,7 @@
                });
          
                
-            });
+            //});
          
             $("#drop").on('change',function() {
                this.form.submit();

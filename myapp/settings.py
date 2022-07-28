@@ -157,6 +157,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CRONJOBS = [
     ('30 9 * * 2', 'app.cron.today'),
+    ('25 16 * * *', 'app.cron.Perctweets'),
+    ('32 16 * * *', 'app.cron.Plot2'),
+    ('39 16 * * *', 'app.cron.Plot3'),
     # ('* * * * *', 'app.cron.today'),
     ('30 9 * * *', 'app.cron.gettoday')
 ]
@@ -177,16 +180,16 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-PUBLISH_KEY = 'pk_test_51KRAVuSAx8Z22VypAjVaLYRlBICJiZXfBjQIAQRuZ264VoiG4pE8P4qjSVvAIQ1I52Wlh3ZLaZzKL2Z17ZPnHMKb00hjxpUo5M'
-SECTRET_KEY = 'sk_test_51KRAVuSAx8Z22VypxLp1N9Y1zJAfWclo7M0RuGsU0aIW5M6W4FF7MtXelcUisjXIVF1E7GQObFiCD3lvMYGK7n2D00eudT2Hql'
+PUBLISH_KEY = 'pk_test_51LQQORSHezEwh3fj8no0ejFxZUVrfsxbjbibZO2tuEBair1XJfLpSFhkLcRZua9F9DpzERfIfbseOr2Mb8L7CotT003Qrsy9bF'
+SECTRET_KEY = 'sk_test_51LQQORSHezEwh3fjTYtZtghPdr48ldiMmMchwGc2bq4Pv1ynH6sH1QtsKAPuySVnAxX1jpgei6aYa3Dh3Z4h0QMb00cuWPActd'
 STRIPE_SIGNING_SECRET='whsec_41b779a2f382cc951f9705c8ca00a473f31201319eab5416d1ae614fe63007eb'
 
 
 
-BASIC_PRICE_ID = 'price_1KTJNlSF4o4pBHwpoV9oCZ3J'
+BASIC_PRICE_ID = 'price_1LQQQ7SHezEwh3fjnpLaszeY'
 # PROF_PRICE_ID = 'price_1KTJMvSF4o4pBHwpvI4g7UJP'    
 # DAILY_PRICE_ID="price_1KTJMGSF4o4pBHwpBywN1s7q"
-MONTHLY_PRICE_ID="price_1Kdvo5SAx8Z22Vyp1xuMYnu8"
+MONTHLY_PRICE_ID="price_1LQQQ7SHezEwh3fjnpLaszeY"
 # PROFE_PRICE_ID = 'price_1KTP23SF4o4pBHwpzwN3GQrE'
 
 

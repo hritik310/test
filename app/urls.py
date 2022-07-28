@@ -74,10 +74,6 @@ urlpatterns = [
     # TwitterView
 
     path('tweets', TwitterView.tweetshow, name = 'tweets'),
-    path('perctweets', TwitterView.Perctweets, name = 'perctweets'),
-    path('plot2', TwitterView.Plot2, name = 'plot2'),
-    path('plot3', TwitterView.Plot3, name = 'plot3'),
-
 
 
 ]

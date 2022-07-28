@@ -18,13 +18,11 @@ class AddCreateForm(ModelForm):
     email = forms.CharField(required = True,widget=forms.TextInput(
         attrs={
         'class':'form-control',
-        'placeholder':'Enter your Email address'
         }
     ))
     username = forms.CharField(label="Username",required = True,widget=forms.TextInput(
         attrs={
         'class':'form-control',
-        'placeholder':'Enter your name',
         
         
         }
@@ -36,7 +34,6 @@ class AddCreateForm(ModelForm):
 
     password=forms.CharField(widget=forms.PasswordInput( attrs={
          'class':'form-control',
-         'placeholder':'Enter your Password',
         }),validators=[validate_password])
     # password = forms.CharField(required = True,widget=forms.PasswordInput(
     #     attrs={
@@ -48,7 +45,6 @@ class AddCreateForm(ModelForm):
     first_name= forms.CharField(label="Firstname",required = True,widget=forms.TextInput(
         attrs={
         'class':'form-control',
-        'placeholder':'Enter your Firstname',
         
         }
     ))
@@ -56,7 +52,6 @@ class AddCreateForm(ModelForm):
     last_name = forms.CharField(label="Lastname",required = True,widget=forms.TextInput(
         attrs={
         'class':'form-control',
-        'placeholder':'Enter your Lastname',
         
         }
     ))
@@ -65,7 +60,6 @@ class AddCreateForm(ModelForm):
         attrs={
         'max_length':10,
         'class':'form-control',
-        'placeholder':'Enter Phone number',
         'type':'number'
         
         }

@@ -91,6 +91,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    text-align:center;
     justify-content: center;
 }
 .this_example {
@@ -134,6 +135,13 @@
   img[src=""] {
       display: none;
   }
+.page-twitter {
+    text-align: center;
+}
+  img.avg-score {
+    max-width: 589px;
+    padding: 28px 0;
+}
 
 @media (max-width:991px) {
 .container.text_box {
@@ -166,6 +174,9 @@ h3.Data_sports {
 .this_example {
     height: unset;
 }
+#dropdownMenuButton {
+  padding-top: 2px;
+}
 
 }
 
@@ -177,11 +188,13 @@ h3.Data_sports {
   </style>
 </head>
 <body>
-
+<div class="page-twitter">
 <div class="container">
-
-    <div class="col-md-4">
-      <div class="moon_box">
+<center><h1>NFL Twitter Data</h1></center>
+<img src="/static/image/plot1.png" class="avg-score">
+<img src="/static/image/plot2.png" class="avg-score"> 
+<img src="/static/image/plot3.png" class="avg-score">
+      {% comment %} <div class="moon_box">
 
         <div class="modal"><!-- Place at bottom of page --></div>
 
@@ -205,65 +218,13 @@ h3.Data_sports {
       </div>
       <img src = "" id="target3">
     </div>
-  </div>
+  </div> {% endcomment %}
+</div> 
 </div>
-
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#btn1").click(function () {
-            console.log("hello")
-            $.ajax({
-                type:"GET",
-                url: '/perctweets',
-                data: {
-
-                },
-                dataType: 'json',
-                success: function (data) {   
-                    console.log(data) 
-                    $("#target").attr("src",data.data1);
-                
-                }
-            });
-
-        });
-        $("#btn2").click(function () {
-            console.log("hello")
-            $.ajax({
-                type:"GET",
-                url: '/plot2',
-                data: {
-
-                },
-                dataType: 'json',
-                success: function (data) {   
-                    console.log(data)
-                    $("#target2").attr("src",data.image); 
-                
-                }
-            });
-
-        });
-        $("#btn3").click(function () {
-            console.log("hello")
-            $.ajax({
-                type:"GET",
-                url: '/plot3',
-                data: {
-
-                },
-                dataType: 'json',
-                success: function (data) {   
-                    console.log(data)
-                    $("#target3").attr("src",data.image); 
-                
-                }
-            });
-
-        });
-
-
+        
     })
     $body = $("body");
     $(document).on({
