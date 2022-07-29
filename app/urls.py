@@ -47,7 +47,7 @@ urlpatterns = [
     path('download/var',Signupviews.download_var,name='download/var'),
 
 
-    # path('downloadimg',Signupviews.send_file,name='downloadimg'),
+    path('reset/<int:id>',Signupviews.reset,name='reset'),
 
 
 

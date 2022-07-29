@@ -1191,3 +1191,10 @@ def download_var(request):
     response['Content-Disposition'] = "attachment; filename=%s"%download_name
     return response
 
+
+def reset(request,id):
+    var = Modelvar.objects.filter(Q(created_by = request.user.id) & Q(status = 0))
+    var.delete()
+
+    return redirect('buildmodel',id =id)
+
