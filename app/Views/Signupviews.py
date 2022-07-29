@@ -100,7 +100,7 @@ def create(request):
             a=accountform.save()
       
             email.send()
-            messages.success(request,"Thanks for registering with us.Please confirm your email address to complete the registration.",extra_tags='logout')
+            messages.success(request,"Thanks for registering with us.Please confirm your email address in your inbox or spam to complete the registration.",extra_tags='logout')
             return redirect('signup')
               
 
