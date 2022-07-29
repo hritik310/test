@@ -190,7 +190,9 @@ h3.Data_sports {
 <body>
 <div class="page-twitter">
 <div class="container">
-<center><h1>NFL Twitter Data</h1></center>
+
+
+<center><h1>NFL Twitter Data for  <span id='date-time'></span></h1></center>
 <img src="/static/image/plot1.png" class="avg-score">
 <img src="/static/image/plot2.png" class="avg-score"> 
 <img src="/static/image/plot3.png" class="avg-score">
@@ -232,6 +234,21 @@ h3.Data_sports {
          ajaxStop: function() { $body.removeClass("loading"); }    
     });
 
+    function getYesterdayDate() {
+      
+      date= new Date(new Date().getTime() - 24*60*60*1000);
+      year = date.getFullYear();
+      month = date.getMonth() + 1;
+      day = date.getDate();
+
+    }
+    
+    console.log(getYesterdayDate());
+    document.getElementById('date-time').innerHTML=month + "/" + day + "/" + year;
+
+
+
+    
 </script>
 </body>
 </html>
