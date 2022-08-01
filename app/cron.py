@@ -336,7 +336,8 @@ def Perctweets():
     filepath = '/home/codenomad/Documents/GitHub/datasport/app/static/image/plot1.png'
     if os.path.isfile(filepath):
         os.remove(filepath) 
-    # plt.figure(figsize=(15,13)) 
+    # plt.figure(figsize=(15,13))
+    plt.tight_layout() 
     plt.savefig(filepath)
     plt.close()
 
@@ -465,6 +466,7 @@ def Plot2():
     if os.path.isfile(filepath):
         os.remove(filepath) 
     # plt.figure(figsize=(15,13)) 
+    plt.tight_layout()
     plt.savefig(filepath)
     plt.close()
 
@@ -588,6 +590,7 @@ def Plot3():
     if os.path.isfile(filepath):
         os.remove(filepath) 
     # plt.figure(figsize=(15,13)) 
+    plt.tight_layout()
     plt.savefig(filepath)
     plt.close()
    
