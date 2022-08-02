@@ -230,13 +230,13 @@ def Perctweets():
     lm = WordNetLemmatizer()
 
     def text_transformation(df_col):
-        res = sm(
-        subject = 'Subject here',
-        message = 'Hii there. I am in function',
-        from_email = 'testsood981@gmail.com',
-        recipient_list = ['hritik@codenomad.net'],
-        fail_silently=False,
-        )
+        # res = sm(
+        # subject = 'Subject here',
+        # message = 'Hii there. I am in function',
+        # from_email = 'testsood981@gmail.com',
+        # recipient_list = ['hritik@codenomad.net'],
+        # fail_silently=False,
+        # )
 
         corpus = []
         for item in df_col:

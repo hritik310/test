@@ -56,21 +56,13 @@ def index(request):
     if request.method =="POST":
         name = request.POST.get('name')
         email = request.POST.get('email')
-        comment = request.POST.get('comment')
-        mail_subject = 'Contact us.'
-        message = render_to_string('header/contact.html', {
-            'name': name,
-            'email': email,
-            'comment':comment,     
-        
-        })
-        to_email = settings.EMAIL_HOST_USER
-        email = EmailMessage(
-                    mail_subject, 
-                    message, 
-                    to=[to_email]
-        )    
-        email.send()
+        comment = request.POST.get('comment')                                
+        subject, from_email, to = 'Contact us.', 'info@datasportslab.com','info@datasportslab.com',
+        text_content = 'This is an important message.'
+        html_content = render_to_string('header/contact.html',{"name":name,'comment':comment,'email': email})
+        msg = EmailMultiAlternatives(subject,text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
         messages.success(request,"Contact request submitted successfully")
     return render(request,"signup/home.html",{"context":context}) 
 
