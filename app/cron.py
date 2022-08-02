@@ -248,13 +248,13 @@ def Perctweets():
         return corpus
 
     def Average(lst):
-        res = sm(
-        subject = 'Subject here',
-        message = 'Hii there. I am in function average',
-        from_email = 'testsood981@gmail.com',
-        recipient_list = ['hritik@codenomad.net'],
-        fail_silently=False,
-        )
+        # res = sm(
+        # subject = 'Subject here',
+        # message = 'Hii there. I am in function average',
+        # from_email = 'testsood981@gmail.com',
+        # recipient_list = ['hritik@codenomad.net'],
+        # fail_silently=False,
+        # )
         return sum(lst) / len(lst)
     
     # Driver Code
@@ -342,13 +342,7 @@ def Perctweets():
     plt.close()
 
 def Plot2():
-    res = sm(
-    subject = 'Subject here',
-    message = 'Hii there. I am Inspector2',
-    from_email = 'testsood981@gmail.com',
-    recipient_list = ['hritik@codenomad.net'],
-    fail_silently=False,
-    )
+  
 
 
     tweetCount = pd.read_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/tweetCount.csv')
@@ -471,13 +465,6 @@ def Plot2():
     plt.close()
 
 def Plot3():
-    res = sm(
-    subject = 'Subject here',
-    message = 'Hii there. I am Inspector3',
-    from_email = 'testsood981@gmail.com',
-    recipient_list = ['hritik@codenomad.net'],
-    fail_silently=False,
-    )
 
 
     tweetCount = pd.read_csv('/home/codenomad/Documents/GitHub/datasport/totalcsv/tweetCount.csv')

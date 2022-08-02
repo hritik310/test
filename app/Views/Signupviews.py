@@ -39,7 +39,7 @@ from pysbr import *
 import json
 import seaborn as sb
 import matplotlib.pyplot as mp
-from django.core.mail import send_mail 
+from django.core.mail import send_mail as sm
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -52,9 +52,25 @@ stripe.api_key = settings.SECTRET_KEY # new
 
 
 def index(request):
-   
-    context = user.objects.all()
+    context = user.objects.all()  
     if request.method =="POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        comment = request.POST.get('comment')
+        mail_subject = 'Contact us.'
+        message = render_to_string('header/contact.html', {
+            'name': name,
+            'email': email,
+            'comment':comment,     
+        
+        })
+        to_email = settings.EMAIL_HOST_USER
+        email = EmailMessage(
+                    mail_subject, 
+                    message, 
+                    to=[to_email]
+        )    
+        email.send()
         messages.success(request,"Contact request submitted successfully")
     return render(request,"signup/home.html",{"context":context}) 
 
