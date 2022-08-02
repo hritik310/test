@@ -42,7 +42,7 @@ MESSAGE_TAGS = {
         messages.ERROR: 'alert-danger',
  }
 
-ALLOWED_HOSTS = ['3.86.247.236','www.datasportslab.com']    
+ALLOWED_HOSTS = ['3.86.247.236','www.datasportslab.com','datasportslab.com']    
 # ALLOWED_HOSTS = [ ]    
 
 # Application definition        
