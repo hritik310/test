@@ -208,5 +208,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_HOST_PASSWORD = 'jivyydbevbsscuoi'
 EMAIL_HOST_USER = 'info@datasportslab.com'
 EMAIL_HOST_PASSWORD = 'fznrlxilcrkuijem'
-# EMAIL_PORT = 587
-URL='http://datasportslab.com/',
+EMAIL_PORT = 2525
+
