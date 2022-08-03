@@ -201,13 +201,18 @@ MONTHLY_PRICE_ID="price_1LQQQ7SHezEwh3fjnpLaszeY"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_USE_TLS = True
+# # EMAIL_USE_SSL = True
+# EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
+# EMAIL_HOST_USER = 'testsood981@gmail.com'
+# EMAIL_HOST_PASSWORD = 'jivyydbevbsscuoi'
+# # EMAIL_HOST_USER = 'info@datasportslab.com'
+# # EMAIL_HOST_PASSWORD = 'fznrlxilcrkuijem'
+# EMAIL_PORT = 587
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'info@datasportslab.com'
+EMAIL_HOST_PASSWORD = 'fznrlxilcrkuijem'
 EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
-EMAIL_HOST_USER = 'testsood981@gmail.com'
-EMAIL_HOST_PASSWORD = 'jivyydbevbsscuoi'
-# EMAIL_HOST_USER = 'info@datasportslab.com'
-# EMAIL_HOST_PASSWORD = 'fznrlxilcrkuijem'
-EMAIL_PORT = 587
-
+EMAIL_PORT = 2587
+EMAIL_USE_TLS = True
