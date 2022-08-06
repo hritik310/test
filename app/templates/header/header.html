@@ -126,6 +126,11 @@ button.nav-link.home_list {
   background: none;
   background-color: transparent;
 }
+@media only screen and (max-width: 767px) {
+  ul#MainMenu li a {
+    padding-top:8px;
+}
+}
 
 @media only screen and (min-width: 768px) {
   .navbar-nav>li {
@@ -154,6 +159,16 @@ button.nav-link.home_list {
   }
 }
 
+@media only screen and (max-width: 1199px) {
+  ul#MainMenu li a {
+    margin-left: 0px;
+}
+}
+@media only screen and (max-width: 1024px) {
+  ul#MainMenu li a {
+    margin-left: 0px;
+}
+}
   </style>
 </head>
 <body>
@@ -164,7 +179,7 @@ button.nav-link.home_list {
 		 <a class="navbar-brand logo_name" href="{% url 'index' %}"><img src="/static/image/logo-1.jpg"></a>
 	  </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
+    <i class="fa-solid fa-bars"></i>
   </button>
   <div class="collapse navbar-collapse navigation_menu" id="collapsibleNavbar">
     {% load active_link_tags %}
@@ -197,6 +212,7 @@ button.nav-link.home_list {
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="{% url 'tweets' %}">Twitter analysis</a>
           <a class="dropdown-item" href="{% url 'NFL' %}">Elo Rankings</a>
+          <a class="dropdown-item" href="{% url 'contactinfo' %}">Analysis Request</a>
           <a class="dropdown-item" href="#">Articles</a>
           <ul class="dropdown-sub-menu m-0 p-0">
             <li class="sub-li nav-item d-flex">
@@ -278,7 +294,7 @@ button.nav-link.home_list {
 
 </script>
  
-
+<script src="https://kit.fontawesome.com/3ad9d71c5b.js" crossorigin="anonymous"></script>
   
   
 

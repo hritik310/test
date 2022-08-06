@@ -693,6 +693,7 @@
                  //dataType: 'json',
                  success: function (data) {
                   $body.removeClass("loading");
+                  
                     console.log(data)
                     localStorage.setItem("team_stats", JSON.stringify(data.team_stats));
                     localStorage.setItem("team", JSON.stringify(data.simulation));

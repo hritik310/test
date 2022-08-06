@@ -1,0 +1,38 @@
+{%include "header/header.html" %}
+<style>
+.iner-contact form {
+    max-width: 487px;
+    margin: auto;
+}
+h1.py-2.text-center {
+    color: #8c908f;
+    font-weight: 700;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+</style>
+{% comment %} <h6>As a member of Data Sports Lab, we allow users to send in sports analytics/betting questions and we produce the analysis for you.<h6> {% endcomment %}
+<div class= "col-md-12 iner-contact">
+    <h1 class="py-2 text-center"> Contact Us</h1>
+    <form action="" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="usr">Name:</label>
+        <input type="text"  name="name" class="form-control" id="usr" required>
+    </div>
+    <div class="form-group">
+        <label for="usr">Email</label>
+        <input type="email" name="email" class="form-control" id="email" required>
+    </div>
+    <div class="form-group">
+        <label for="comment">Question:</label>
+        <textarea class="form-control"  name ="comment" rows="5" id="comment" required></textarea>
+        <h6>Hint:<br>
+        1.How profitable is betting every game on the Minnesota Twins to score in the first innings?</h6>
+        2.Last season if i bet the New York Yankees to cover 1.5 what would my win percentage have been ,and would it have been profitable?</h6>
+    </div>
+      
+    <button type="submit" name="commit" value="" class="btn-xl btn-primary btn-wrap-text" />Submit</button>
+       
+    </form>
+</div>
