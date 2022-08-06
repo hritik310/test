@@ -43,8 +43,8 @@ MESSAGE_TAGS = {
  }
 
 # ALLOWED_HOSTS = ['3.86.247.236']    
-ALLOWED_HOSTS = ['3.86.247.236','www.datasportslab.com','datasportslab.com']    
-#   ALLOWED_HOSTS = [ ]    
+ALLOWED_HOSTS = ['35.172.245.5','www.datasportslab.com','datasportslab.com']    
+# ALLOWED_HOSTS = [ ]    
 
 # Application definition        
 
@@ -213,6 +213,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_USER = 'info@datasportslab.com'
 EMAIL_HOST_PASSWORD = 'fznrlxilcrkuijem'
-EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
-EMAIL_PORT = 2587
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
