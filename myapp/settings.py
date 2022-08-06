@@ -105,37 +105,37 @@ DATABASES = {
     }
 }
 
-DATABASES = {
-    'default': {
-       'ENGINE': 'django.db.backends.mysql', 
-       'NAME': 'myapp',
-       'HOST': 'localhost',
-       'PORT': '3306',
-       'USER': 'root',
-       'PASSWORD': 'AdMiN@12345',
-       'OPTIONS': {
-            'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
-                     
-        }
-    }
-}
-
-
 # DATABASES = {
-#     'default': {
-#        'ENGINE': 'django.db.backends.mysql',   
+#     'default': {    
+#        'ENGINE': 'django.db.backends.mysql', 
 #        'NAME': 'myapp',
-#        'HOST': 'localhost',   
+#        'HOST': 'localhost',
 #        'PORT': '3306',
 #        'USER': 'root',
-#        'PASSWORD': '',
+#        'PASSWORD': 'AdMiN@12345',
 #        'OPTIONS': {
 #             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
+                     
+#         }
+#     }
+# }
+
+
+DATABASES = {
+    'default': {
+       'ENGINE': 'django.db.backends.mysql',   
+       'NAME': 'myapp',
+       'HOST': 'localhost',   
+       'PORT': '3306',
+       'USER': 'root',
+       'PASSWORD': '',
+       'OPTIONS': {
+            'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
             
              
-#          }
-#     }
-#  }   
+         }
+    }
+ }   
 
 
 

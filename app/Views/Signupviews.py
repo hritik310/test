@@ -1,6 +1,5 @@
 
-from django.shortcuts import redirect
-from django.shortcuts import render
+from django.shortcuts import redirect,render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from pymysql import NULL
@@ -21,7 +20,6 @@ from django.contrib.auth import login, authenticate
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes,force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
 from .token import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage

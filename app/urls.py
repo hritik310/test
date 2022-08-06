@@ -7,6 +7,7 @@ from app.Views import  Paymentview
 from app.Views import Newprediction
 from app.Views import NFLview
 from app.Views import TwitterView
+from app.Views import ContactView
 
 
 
@@ -68,12 +69,15 @@ urlpatterns = [
 
 
     # NFL View
-
     path('NFL', NFLview.nfl, name = 'NFL'),
     
-    # TwitterView
-
+    # TwitterView urls
     path('tweets', TwitterView.tweetshow, name = 'tweets'),
+
+
+    # ContactView urls
+    path('contactinfo', ContactView.contact, name='contactinfo'),
+
 
 
 ]

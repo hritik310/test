@@ -388,6 +388,7 @@ button.nav-link.home_list {
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="{% url 'tweets' %}">Twitter analysis</a>
           <a class="dropdown-item" href="{% url 'NFL' %}">Elo Rankings</a>
+          <a class="dropdown-item" href="{% url 'contactinfo' %}">Analysis Request</a>
           <a class="dropdown-item" href="#">Articles</a>
           <ul class="dropdown-sub-menu m-0 p-0">
             <li class="sub-li nav-item d-flex">
@@ -530,8 +531,14 @@ button.nav-link.home_list {
     {% csrf_token %}
   <div class="form-group">
     <label for="usr">Name:</label>
-    <input type="text" class="form-control" id="name" name="name" required>
+    <input type="text"  name="name" class="form-control" id="usr" required>
   </div>
+
+  <div class="form-group">
+    <label for="usr">Email</label>
+    <input type="email" name="email" class="form-control" id="email" required>
+  </div>
+  
   
     
   <div class="form-group">

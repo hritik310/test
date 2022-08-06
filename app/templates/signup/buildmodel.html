@@ -169,13 +169,21 @@
          border-radius: 30px;
          }
          .dropdown_section {
-            width: 20%;
-            margin: 0 auto;
-            padding: 20px;
+            margin: auto;
+            max-width: 124px !important; 
+            height: 41px;
+            background: #69ade0;
+            margin-top: 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            margin-bottom: 29px;
+            justify-content: center;
          }
-
-         
-
+         .dropdown_section option {
+            text-align: center;
+            font-size: 18px;
+        }
          .droping {
          color: #fff;
          background-color: #69ade0;
@@ -356,7 +364,16 @@ span.tooltiptext {
    top: -33px !important;
    left: 13% !important;
 }
+.row.row-data {
+   justify-content: space-around;
+}
+@media only screen and (max-width: 767px) {
+  .row.row-data {
+    max-width: 258px;
+    margin: auto;
+}
 
+}
 @media only screen and (min-width: 768px) {
    .dropdown_section form {
       width: 100%;
@@ -393,13 +410,14 @@ span.tooltiptext {
       .row-data .col-md-4 {
          max-width: 400px;
       }
-
-}
-
-
-
- 
-
+      .section-main {
+         text-align: center;
+     }
+     .row.row-data {
+      justify-content: space-around;
+      margin-top: 29px;
+  }
+   }
 
       </style>
    </head>
@@ -410,9 +428,10 @@ span.tooltiptext {
 
 
          <div class="container-fluid padding_cont">
+            <div class="section-main">
             <div class="dropdown_section">
                <form action="" method="GET">
-                  <select name="cars" class="droping" id="drop"> 
+             
                   <option value="nba"{% if re == 'nba' %} selected {% endif %}>NFL</option>
                   {% comment %} <option value="ncaab"{% if re == 'ncaab' %} selected {% endif %}>NCAAB</option> {% endcomment %}
                   </select>
@@ -443,8 +462,8 @@ span.tooltiptext {
                <a href="{% url 'reset' request.user.id %}">
                <button type="button" class="btn btn-primary ModelButton">Reset</button></a>
             </div>
-
-
+         </div>
+          
          </div>
          <div class="bildmoddal-sec">
          <div id="output">
