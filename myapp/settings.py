@@ -45,7 +45,7 @@ MESSAGE_TAGS = {
 ALLOWED_HOSTS = ['35.172.245.5','www.datasportslab.com','datasportslab.com']    
 # ALLOWED_HOSTS = [ ]    
 
-# Application definition        
+# Application definition            
 
 INSTALLED_APPS = [
     'django.contrib.admin', 

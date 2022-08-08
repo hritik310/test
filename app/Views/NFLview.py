@@ -2,10 +2,15 @@ from django.shortcuts import render, redirect
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from django.views.decorators.csrf import csrf_exempt
+
+
+
+
 
 
 # In[117]:
-
+@csrf_exempt
 def nfl(request):
     df = pd.read_csv('totalcsv/eloDF.csv') 
     
