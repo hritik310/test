@@ -45,10 +45,10 @@ from django.core import mail
 from sportsipy.nfl.boxscore import Boxscores
 from django.db.models import Q
 stripe.api_key = settings.SECTRET_KEY # new
+from django.views.decorators.csrf import csrf_exempt
 
-#   (stripe.api_key)
 
-
+@csrf_exempt
 def index(request):
     context = user.objects.all()  
     if request.method =="POST":
@@ -64,6 +64,8 @@ def index(request):
         messages.success(request,"Contact request submitted successfully")
     return render(request,"signup/home.html",{"context":context}) 
 
+
+@csrf_exempt
 def create(request):
    
     context=user.objects.all()
@@ -120,6 +122,8 @@ def create(request):
     return render(request,"signup/signup.html",{'form':form,"context":context})
 
 
+
+@csrf_exempt
 def activate(request, uidb64, token):
     User=get_user_model()
     
@@ -139,18 +143,20 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')
 
+
+@csrf_exempt
 def account(request):
   
     return render (request,"signup/account.html")
 
-
+@csrf_exempt
 def membership(request):
 
     return render (request,"signup/buildacc.html")
 
 
 
-
+@csrf_exempt
 def buildmodel(request,id):
     all=Modelvar.objects.all()
     # print(newdata.query)
@@ -282,6 +288,8 @@ def buildmodelremove(request):
 
     return JsonResponse(data)
 
+
+@csrf_exempt
 def buildmodelUpdate(request):
     build1=Modelvar()
 
@@ -301,6 +309,7 @@ def buildmodelUpdate(request):
 
     return JsonResponse(data)
 
+@csrf_exempt
 def buildmodelremove(request):
 
     b = Modelvar.objects.filter(title =request.GET.get('id'))
@@ -316,7 +325,7 @@ def buildmodelremove(request):
 
 
 
-
+@csrf_exempt
 def buildmodelbutton(request):
     df = pd.read_csv('totalcsv/finalDS1.csv')
     value_in=[]
@@ -798,7 +807,8 @@ def buildmodelbutton(request):
         }
 
         return JsonResponse(data)
-           
+   
+@csrf_exempt           
 def download_file(request):
     filename = "totalcsv/variableStats.csv"
     download_name ="variableStats.csv"
@@ -808,7 +818,7 @@ def download_file(request):
     response['Content-Disposition'] = "attachment; filename=%s"%download_name
     return response
 
-
+@csrf_exempt
 def download_corr_file(request):
     filename = "totalcsv/correlation.csv"
     download_name ="correlation.csv"
@@ -819,7 +829,7 @@ def download_corr_file(request):
     return response
 
 
-
+@csrf_exempt
 def deletemodel(request,id):
     var_get=Modelvar.objects.filter(modelname_id=id)
     
@@ -829,11 +839,11 @@ def deletemodel(request,id):
 
     return redirect('mymodel')
 
-
+@csrf_exempt
 def selectvariable(request):
     return render(request,"signup/buildmodel3.html")
 
-
+@csrf_exempt
 def modelname(request):
     two = Modelname.objects.all()
     if request.method == "POST":
@@ -848,6 +858,8 @@ def modelname(request):
    
     return render(request,"signup/buildmodel5.html",{'two':two})
 
+
+@csrf_exempt
 def mymodel(request):
     val=Modelname.objects.filter(user_id=request.user.id)
     print(val)
@@ -858,6 +870,8 @@ def mymodel(request):
 
     return render(request,"signup/mymodel.html",{"model_name":val})
 
+
+@csrf_exempt
 def update(request,id):
   
     all1=Modelvar.objects.filter(modelname_id=id)
@@ -959,6 +973,8 @@ def update(request,id):
 
 #     return response
 
+
+@csrf_exempt
 def heatmap(request):
     all=Modelvar.objects.all()
     req = request.GET.get('cars')
@@ -1162,6 +1178,8 @@ def heatmap(request):
         return redirect('membership') 
     return render(request,"signup/buildmodel1.html",{'re':req,"df":list(df_away),"all":all,"amount":amountOfGames})
 
+
+@csrf_exempt
 def minmax(request):
     
     req = request.POST.getlist('minvalue[]')
@@ -1187,7 +1205,8 @@ def minmax(request):
     "dataset":newlist
     }
     return JsonResponse(data)
-    
+
+@csrf_exempt    
 def download_var(request):
     filename = "totalcsv/variable_define.csv"
     download_name ="variable_definitions.csv"

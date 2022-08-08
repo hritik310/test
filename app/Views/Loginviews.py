@@ -14,10 +14,9 @@ from app.forms.update import *
 from django.contrib.auth.hashers import make_password,check_password
 from django.contrib.auth import update_session_auth_hash
 import pandas as pd
+from django.views.decorators.csrf import csrf_exempt
 
-
-
-
+@csrf_exempt
 def user_login(request):
     
   
@@ -47,15 +46,16 @@ def user_login(request):
     return render(request,"signup/signup.html")
 
 
-
+@csrf_exempt
 def userLogout(request):
   auth.logout(request)
   return redirect('/signup')
 
-
+@csrf_exempt
 def setting(request):  
     return render(request,"login/setting.html",)
 
+@csrf_exempt
 def update(request,id):
   custom  = user.objects.get(id=id)
   print("custom",custom)
@@ -86,6 +86,8 @@ def update(request,id):
   
   return render (request,"login/update.html",{'show':owner_id,'customer':custom,'form':accountform})
 
+
+@csrf_exempt
 def passwordchange(request,id):
   custom = user.objects.get(id=id)
 
