@@ -24,7 +24,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 
-@csrf_exempt
 class StripeCheckoutAPIView(TemplateView):
   template_name = "payment/checkout.html"
   def get_context_data(self, **kwargs):
@@ -73,8 +72,6 @@ class StripeCheckoutAPIView(TemplateView):
               return redirect("/signup")
       
     
-    
-@csrf_exempt
 class SuccessPayment(TemplateView):
   template_name = 'payment/success.html'
   def get_context_data(self, **kwargs,):

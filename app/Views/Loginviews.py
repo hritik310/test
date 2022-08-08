@@ -87,7 +87,7 @@ def update(request,id):
   return render (request,"login/update.html",{'show':owner_id,'customer':custom,'form':accountform})
 
 
-@csrf_exem
+@csrf_exempt
 def passwordchange(request,id):
   custom = user.objects.get(id=id)
 
